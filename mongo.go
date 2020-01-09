@@ -12,9 +12,9 @@ import (
 //CLIENT mongo client
 var CLIENT *mongo.Client
 
-func connect() *mongo.Client {
+func connect(url string, port string) *mongo.Client {
 
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	clientOptions := options.Client().ApplyURI("mongodb://" + url + ":" + port)
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
@@ -28,7 +28,7 @@ func connect() *mongo.Client {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Connected to MongoDB!")
+	fmt.Println("Connected to MongoDB at " + url + ":" + port)
 
 	CLIENT = client
 	return client
