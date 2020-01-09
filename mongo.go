@@ -12,7 +12,7 @@ import (
 //CLIENT mongo client
 var CLIENT *mongo.Client
 
-func connect(url string, port string) *mongo.Client {
+func connectDB(url string, port string) *mongo.Client {
 
 	clientOptions := options.Client().ApplyURI("mongodb://" + url + ":" + port)
 
@@ -102,7 +102,7 @@ func delete(db string, collec string, deleteCriteria interface{}) {
 
 }
 
-func disconnect() {
+func disconnectDB() {
 
 	err := CLIENT.Disconnect(context.TODO())
 
