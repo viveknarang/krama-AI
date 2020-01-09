@@ -25,6 +25,7 @@ func main() {
 
 	r := mux.NewRouter()
 
+	r.HandleFunc("/customers/"+version+"/login", login).Methods(http.MethodPost)
 	r.HandleFunc(catalogPath+"/products/{SKU}", getProduct).Methods(http.MethodGet)
 	r.HandleFunc(catalogPath+"/products", postProduct).Methods(http.MethodPost)
 	r.HandleFunc(catalogPath+"/products", putProduct).Methods(http.MethodPut)

@@ -2,7 +2,7 @@ package main
 
 //PRODUCT document structure
 type PRODUCT struct {
-	SKU            string
+	sku            string
 	name           string
 	groupID        string
 	description    string
