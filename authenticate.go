@@ -8,6 +8,8 @@ import (
 
 func authenticate(tokenString string) bool {
 
+	var isValid bool
+
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -23,13 +25,15 @@ func authenticate(tokenString string) bool {
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 
 		fmt.Println(claims["foo"], claims["nbf"])
-		return true
+		isValid = true
 
 	} else {
 
 		fmt.Println(err)
-		return false
+		isValid = false
 
 	}
+
+	return isValid
 
 }
