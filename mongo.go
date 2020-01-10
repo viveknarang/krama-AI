@@ -35,20 +35,31 @@ func connectDB(url string, port string) *mongo.Client {
 
 }
 
-func find(db string, collec string, filter interface{}) interface{} {
+func find(db string, collec string, filter interface{}) []*interface{} {
 
-	var result interface{}
+	var result []*interface{}
 
 	collection := CLIENT.Database(db).Collection(collec)
 
-	err := collection.FindOne(context.TODO(), filter).Decode(&result)
+	cur, err := collection.Find(context.TODO(), filter)
 
 	if err != nil {
 		log.Fatal(err)
 		return nil
 	}
 
-	fmt.Printf("Found a single document: %+v\n", result)
+	for cur.Next(context.TODO()) {
+
+		var elem interface{}
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		result = append(result, &elem)
+	}
+
+	fmt.Printf("Found document(s): %+v\n", result)
 
 	return result
 

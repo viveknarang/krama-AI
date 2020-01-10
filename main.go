@@ -14,14 +14,17 @@ func main() {
 
 	p := properties.MustLoadFile(properyFile, properties.UTF8)
 
-	url := p.GetString("db.mongo.url", "localhost")
-	port := p.GetString("db.mongo.port", "27017")
+	mongoURL := p.GetString("db.mongo.url", "localhost")
+	mongoPort := p.GetString("db.mongo.port", "27017")
 	apiPort := p.GetString("api.listen.on", "9005")
 	catalogBasePath := p.GetString("api.catalog.base.path", "/catalog/")
 	version := p.GetString("api.version", "v1")
 	catalogPath := catalogBasePath + version
+	redisURL := p.GetString("redis.url", "localhost")
+	redisPort := p.GetString("redis.port", "6379")
 
-	connectDB(url, port)
+	connectDB(mongoURL, mongoPort)
+	connectRedis(redisURL, redisPort)
 
 	r := mux.NewRouter()
 
@@ -34,5 +37,6 @@ func main() {
 	log.Fatal(http.ListenAndServe(":"+apiPort, r))
 
 	disconnectDB()
+	disconnectRedis()
 
 }

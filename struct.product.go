@@ -2,22 +2,22 @@ package main
 
 //PRODUCT document structure
 type PRODUCT struct {
-	sku            string
-	name           string
-	groupID        string
-	description    string
-	regularPrice   float64
-	promotionPrice float64
-	images         []string
-	searchKeywords []string
-	quantity       int64
-	category       []string
-	color          string
-	brand          string
-	size           string
-	active         bool
-	attributes     map[string]string
-	isMain         bool
-	currency       string
-	updated        string
+	Sku            string            `json:"Sku"`
+	Name           string            `json:"Name"`
+	GroupID        string            `json:"GroupID"`
+	Description    string            `json:"Description"`
+	RegularPrice   float64           `json:"RegularPrice"`
+	PromotionPrice float64           `json:"PromotionPrice"`
+	Images         []string          `json:"Images"`
+	SearchKeywords []string          `json:"SearchKeywords"`
+	Quantity       int64             `json:"Quantity"`
+	Category       []string          `json:"Category"`
+	Color          string            `json:"Color"`
+	Brand          string            `json:"Brand"`
+	Size           string            `json:"Size"`
+	Active         bool              `json:"Active"`
+	Attributes     map[string]string `json:"Attributes"`
+	IsMain         bool              `json:"IsMain"`
+	Currency       string            `json:"Currency"`
+	Updated        string            `json:"Updated"`
 }
