@@ -21,12 +21,15 @@ func authenticate(tokenString string) bool {
 	})
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+
 		fmt.Println(claims["foo"], claims["nbf"])
 		return true
-	} else {
-		fmt.Println(err)
-	}
 
-	return false
+	} else {
+
+		fmt.Println(err)
+		return false
+
+	}
 
 }

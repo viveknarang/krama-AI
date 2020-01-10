@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/go-redis/redis"
 )
 
@@ -19,6 +21,7 @@ func connectRedis(url string, port string) {
 
 	if pong == "PONG" && err == nil {
 		REDISCLIENT = client
+		fmt.Println("Connected to Redis at " + url + ":" + port)
 	} else {
 		REDISCLIENT = nil
 	}

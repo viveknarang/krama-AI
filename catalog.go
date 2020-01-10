@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"net/http"
-	"time"
 )
 
 func pre(w http.ResponseWriter, r *http.Request) bool {
@@ -36,9 +35,6 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-
 	var p PRODUCT
 
 	err := json.NewDecoder(r.Body).Decode(&p)
@@ -50,17 +46,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	insert("test", "test", p)
 
-	var response RESPONSE
-
-	response.Code = "200"
-	response.Message = "Product Added ..."
-	response.Success = true
-	response.Time = time.Now().Unix()
-	response.Response = p
-
-	resp, err := json.Marshal(response)
-
-	w.Write([]byte(resp))
+	respondWith(w, r, nil, "Product Added ...", p, http.StatusCreated)
 
 }
 

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -35,7 +36,7 @@ func connectDB(url string, port string) *mongo.Client {
 
 }
 
-func find(db string, collec string, filter interface{}) []*interface{} {
+func find(db string, collec string, filter bson.M) []*interface{} {
 
 	var result []*interface{}
 
@@ -55,11 +56,8 @@ func find(db string, collec string, filter interface{}) []*interface{} {
 		if err != nil {
 			log.Fatal(err)
 		}
-
 		result = append(result, &elem)
 	}
-
-	fmt.Printf("Found document(s): %+v\n", result)
 
 	return result
 
