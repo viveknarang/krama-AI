@@ -17,7 +17,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&rx)
 
 	if err != nil {
-		respondWith(w, r, err, "Bad Request ...", nil, http.StatusBadRequest)
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
 		return
 	}
 
@@ -25,7 +25,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	if len(results) != 1 {
 
-		respondWith(w, r, nil, "Invalid Login ...", nil, http.StatusUnauthorized)
+		respondWith(w, r, nil, LoginFailedMessage, nil, http.StatusUnauthorized)
 
 	} else {
 
@@ -34,14 +34,14 @@ func login(w http.ResponseWriter, r *http.Request) {
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 		if err0 != nil {
-			respondWith(w, r, err0, "Internal Error ...", nil, http.StatusInternalServerError)
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
 			return
 		}
 
 		err1 := json.Unmarshal([]byte(j), &customer)
 
 		if err1 != nil {
-			respondWith(w, r, err1, "Internal Error ...", nil, http.StatusInternalServerError)
+			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
 			return
 		}
 
@@ -56,7 +56,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 		tokenString, err := token.SignedString([]byte("erjejkr48308dkfdjsfkldsj9048340958kjfklsdjf934403884309248ekjklfjflksjflkjklrjrjt485908539405kfjsdklfjsdklfjkljsfhghtrotu5turgmgf"))
 
-		respondWith(w, r, err, "Login Successful...", bson.M{"token": tokenString}, http.StatusOK)
+		respondWith(w, r, err, LoginSuccessMessage, bson.M{"token": tokenString}, http.StatusOK)
 
 	}
 

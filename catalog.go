@@ -24,13 +24,13 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&p)
 
 	if err != nil {
-		respondWith(w, r, err, "Bad Request ...", nil, http.StatusBadRequest)
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
 		return
 	}
 
 	insert("External", REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+".product", p)
 
-	respondWith(w, r, nil, "Product Added ...", p, http.StatusCreated)
+	respondWith(w, r, nil, ProductAddedMessage, p, http.StatusCreated)
 
 }
 

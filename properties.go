@@ -26,6 +26,21 @@ var RedisURL string
 //RedisPort redis port
 var RedisPort string
 
+//LoginSuccessMessage login success message
+var LoginSuccessMessage string
+
+//LoginFailedMessage login failed message
+var LoginFailedMessage string
+
+//ProductAddedMessage product added message
+var ProductAddedMessage string
+
+//HTTPBadRequestMessage bad request message
+var HTTPBadRequestMessage string
+
+//HTTPInternalServerErrorMessage internal server error message
+var HTTPInternalServerErrorMessage string
+
 func loadSystemProperties() {
 
 	p := properties.MustLoadFile(properyFile, properties.UTF8)
@@ -38,5 +53,10 @@ func loadSystemProperties() {
 	CatalogPath = CatalogBasePath + APIVersion
 	RedisURL = p.GetString("redis.url", "localhost")
 	RedisPort = p.GetString("redis.port", "6379")
+	LoginSuccessMessage = p.GetString("api.response.message.customer.login.success", "")
+	LoginFailedMessage = p.GetString("api.response.message.customer.login.failed", "")
+	ProductAddedMessage = p.GetString("api.response.message.product.added", "")
+	HTTPBadRequestMessage = p.GetString("api.response.code.message.badRequest", "")
+	HTTPInternalServerErrorMessage = p.GetString("api.response.code.message.InternalError", "")
 
 }
