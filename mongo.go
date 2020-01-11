@@ -100,7 +100,7 @@ func update(db string, collec string, filter interface{}, update interface{}) [2
 
 }
 
-func delete(db string, collec string, deleteCriteria interface{}) int64 {
+func deleteDocument(db string, collec string, deleteCriteria interface{}) int64 {
 
 	collection := CLIENT.Database(db).Collection(collec)
 

@@ -152,12 +152,32 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	sku := pth[len(pth)-1]
 
-	if delete(ExternalDB, dbcol, bson.M{"sku": sku}) == 1 {
+	results := find(ExternalDB, dbcol, bson.M{"sku": sku})
 
-		var p PRODUCT
-		p.Sku = sku
+	if len(results) != 1 {
+		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound)
+		return
+	}
 
-		if syncProductGroup(w, r, p) {
+	j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+	if err0 != nil {
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		return
+	}
+
+	var product PRODUCT
+
+	err1 := json.Unmarshal([]byte(j), &product)
+
+	if err1 != nil {
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		return
+	}
+
+	if deleteDocument(ExternalDB, dbcol, bson.M{"sku": sku}) == 1 {
+
+		if syncProductGroup(w, r, product) {
 
 			REDISCLIENT.Del(r.URL.Path)
 			respondWith(w, r, nil, ProductDeletedMessage, nil, http.StatusOK)
@@ -241,7 +261,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	if delete(ExternalDB, dbcol, bson.M{"groupid": pgid}) == 1 {
+	if deleteDocument(ExternalDB, dbcol, bson.M{"groupid": pgid}) == 1 {
 		REDISCLIENT.Del(r.URL.Path)
 		respondWith(w, r, nil, ProductGroupDeletedMessage, nil, http.StatusOK)
 	} else {

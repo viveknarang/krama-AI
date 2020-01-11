@@ -266,6 +266,119 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 	} else if r.Method == http.MethodDelete {
 
+		var productGroup PRODUCTGROUP
+
+		j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+		if err0 != nil {
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			return false
+		}
+
+		err1 := json.Unmarshal([]byte(j), &productGroup)
+
+		if err1 != nil {
+			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			return false
+		}
+
+		if len(productGroup.Products) == 1 {
+
+			delr := deleteDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
+
+			if delr == 1 {
+				response = true
+			} else {
+				response = false
+			}
+
+		} else {
+
+			delete(productGroup.Products, p.Sku)
+
+			nrpmin := math.MaxFloat64
+			var nrpmax float64
+			nppmin := math.MaxFloat64
+			var nppmax float64
+			active := false
+
+			setInit()
+
+			for key, value := range productGroup.Products {
+
+				if value.RegularPrice < nrpmin {
+					nrpmin = value.RegularPrice
+				}
+				if value.RegularPrice > nrpmax {
+					nrpmax = value.RegularPrice
+				}
+				if value.PromotionPrice < nppmin {
+					nppmin = value.PromotionPrice
+				}
+				if value.PromotionPrice > nppmax {
+					nppmax = value.PromotionPrice
+				}
+
+				if value.IsMain {
+					productGroup.Name = value.Name
+					productGroup.Description = value.Description
+					productGroup.Images = value.Images
+				}
+
+				active = active || value.Active
+				addInSet(key)
+
+			}
+
+			productGroup.Skus = append(productGroup.Skus, p.Sku)
+
+			productGroup.RegularPriceMin = nrpmin
+			productGroup.RegularPriceMax = nrpmax
+			productGroup.PromotionPriceMin = nppmin
+			productGroup.PromotionPriceMax = nppmax
+			productGroup.Active = active
+			productGroup.Skus = toArrayFromSet()
+
+			setInit()
+			for _, prd := range productGroup.Products {
+				addAllInSet(prd.SearchKeywords)
+			}
+			productGroup.SearchKeywords = toArrayFromSet()
+
+			setInit()
+			for _, prd := range productGroup.Products {
+				addInSet(prd.Size)
+			}
+			productGroup.Sizes = toArrayFromSet()
+
+			setInit()
+			for _, prd := range productGroup.Products {
+				addInSet(prd.Color)
+			}
+			productGroup.Colors = toArrayFromSet()
+
+			setInit()
+			for _, prd := range productGroup.Products {
+				addInSet(prd.Brand)
+			}
+			productGroup.Brands = toArrayFromSet()
+
+			setInit()
+			for _, prd := range productGroup.Products {
+				addAllInSet(prd.Category)
+			}
+			productGroup.Category = toArrayFromSet()
+
+			result := update(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
+
+			if result[0] == 1 && result[1] == 1 {
+				response = true
+			} else {
+				response = false
+			}
+
+		}
+
 	}
 
 	return response
