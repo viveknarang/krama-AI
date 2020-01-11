@@ -17,7 +17,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 
 	var jx []byte
 
-	redisC := REDISCLIENT.Get(r.Method + ":" + r.URL.Path)
+	redisC := REDISCLIENT.Get(r.URL.Path)
 
 	if redisC.Err() != redis.Nil {
 
@@ -44,7 +44,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 
 		jx = j
 
-		REDISCLIENT.Set(r.Method+":"+r.URL.Path, j, 0)
+		REDISCLIENT.Set(r.URL.Path, j, 0)
 
 	}
 
@@ -100,6 +100,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 	result := update(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductExtension, bson.M{"sku": p.Sku}, bson.M{"$set": p})
 
 	if result[0] == 1 && result[1] == 1 {
+		REDISCLIENT.Del(r.URL.Path)
 		respondWith(w, r, nil, ProductUpdatedMessage, p, http.StatusAccepted)
 	} else if result[0] == 1 && result[1] == 0 {
 		respondWith(w, r, nil, ProductNotUpdatedMessage, nil, http.StatusNotModified)
@@ -119,6 +120,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	sku := pth[len(pth)-1]
 
 	if delete(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductExtension, bson.M{"sku": sku}) == 1 {
+		REDISCLIENT.Del(r.URL.Path)
 		respondWith(w, r, nil, ProductDeletedMessage, nil, http.StatusOK)
 	} else {
 		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotModified)
