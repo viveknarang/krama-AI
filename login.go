@@ -54,7 +54,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 			"nbf": currentTime - 100,
 		})
 
-		tokenString, err := token.SignedString([]byte("erjejkr48308dkfdjsfkldsj9048340958kjfklsdjf934403884309248ekjklfjflksjflkjklrjrjt485908539405kfjsdklfjsdklfjkljsfhghtrotu5turgmgf"))
+		tokenString, err := token.SignedString([]byte(JWTSecret))
 
 		respondWith(w, r, err, LoginSuccessMessage, bson.M{"token": tokenString, "validForSeconds": LoginSessionDuration}, http.StatusOK)
 

@@ -18,7 +18,7 @@ func authenticate(tokenString string) bool {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
 
-		secret := []byte("erjejkr48308dkfdjsfkldsj9048340958kjfklsdjf934403884309248ekjklfjflksjflkjklrjrjt485908539405kfjsdklfjsdklfjkljsfhghtrotu5turgmgf")
+		secret := []byte(JWTSecret)
 
 		return secret, nil
 

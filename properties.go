@@ -47,6 +47,9 @@ var InvalidSessionMessage string
 //LoginSessionDuration login session duration
 var LoginSessionDuration int64
 
+//JWTSecret JWT Secret
+var JWTSecret string
+
 func loadSystemProperties() {
 
 	p := properties.MustLoadFile(properyFile, properties.UTF8)
@@ -66,5 +69,6 @@ func loadSystemProperties() {
 	HTTPInternalServerErrorMessage = p.GetString("api.response.code.message.InternalError", "")
 	InvalidSessionMessage = p.GetString("api.response.message.login.invalidSession", "")
 	LoginSessionDuration = p.GetInt64("api.login.session.duration", 80000)
+	JWTSecret = p.GetString("jwt.secret", "")
 
 }
