@@ -16,7 +16,7 @@ func pre(w http.ResponseWriter, r *http.Request) bool {
 
 	if !authenticate(r.Header.Get("x-access-token")) {
 
-		respondWith(w, r, nil, "Need to login first OR access token expired or invalid...", nil, http.StatusUnauthorized)
+		respondWith(w, r, nil, InvalidSessionMessage, nil, http.StatusUnauthorized)
 		return false
 
 	}

@@ -41,6 +41,9 @@ var HTTPBadRequestMessage string
 //HTTPInternalServerErrorMessage internal server error message
 var HTTPInternalServerErrorMessage string
 
+//InvalidSessionMessage invalid session message
+var InvalidSessionMessage string
+
 func loadSystemProperties() {
 
 	p := properties.MustLoadFile(properyFile, properties.UTF8)
@@ -58,5 +61,6 @@ func loadSystemProperties() {
 	ProductAddedMessage = p.GetString("api.response.message.product.added", "")
 	HTTPBadRequestMessage = p.GetString("api.response.code.message.badRequest", "")
 	HTTPInternalServerErrorMessage = p.GetString("api.response.code.message.InternalError", "")
+	InvalidSessionMessage = p.GetString("api.response.message.login.invalidSession", "")
 
 }
