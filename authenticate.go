@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 
+	"github.com/go-redis/redis"
+
 	"github.com/dgrijalva/jwt-go"
 )
 
@@ -24,7 +26,10 @@ func authenticate(tokenString string) bool {
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 
-		fmt.Println(claims["foo"], claims["nbf"])
+		if REDISCLIENT.Get(tokenString).Err() == redis.Nil {
+			REDISCLIENT.Set(tokenString, claims["cxs"], 0)
+		}
+
 		isValid = true
 
 	} else {

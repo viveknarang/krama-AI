@@ -36,9 +36,9 @@ func connectDB(url string, port string) *mongo.Client {
 
 }
 
-func find(db string, collec string, filter bson.M) []*interface{} {
+func find(db string, collec string, filter bson.M) []*bson.D {
 
-	var result []*interface{}
+	var result []*bson.D
 
 	collection := CLIENT.Database(db).Collection(collec)
 
@@ -51,7 +51,7 @@ func find(db string, collec string, filter bson.M) []*interface{} {
 
 	for cur.Next(context.TODO()) {
 
-		var elem interface{}
+		var elem bson.D
 		err := cur.Decode(&elem)
 		if err != nil {
 			log.Fatal(err)
