@@ -11,7 +11,9 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 	var response bool
 
-	results := find(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductGroupExtension, bson.M{"groupID": p.GroupID})
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductGroupExtension
+
+	results := find(ExternalDB, dbcol, bson.M{"groupID": p.GroupID})
 
 	if r.Method == http.MethodPost {
 
@@ -58,7 +60,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			npg.Updated = time.Now().UnixNano()
 
-			insert(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductGroupExtension, npg)
+			insert(ExternalDB, dbcol, npg)
 
 			response = true
 

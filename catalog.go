@@ -29,7 +29,9 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		sku := pth[len(pth)-1]
 
-		results := find(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductExtension, bson.M{"sku": sku})
+		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+
+		results := find(ExternalDB, dbcol, bson.M{"sku": sku})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound)
@@ -79,7 +81,9 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	p.Updated = time.Now().UnixNano()
 
-	insert(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductExtension, p)
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+
+	insert(ExternalDB, dbcol, p)
 
 	if syncProductGroup(w, r, p) {
 
@@ -108,7 +112,9 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result := update(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductExtension, bson.M{"sku": p.Sku}, bson.M{"$set": p})
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+
+	result := update(ExternalDB, dbcol, bson.M{"sku": p.Sku}, bson.M{"$set": p})
 
 	if result[0] == 1 && result[1] == 1 {
 
@@ -141,10 +147,12 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+
 	pth := strings.Split(r.URL.Path, "/")
 	sku := pth[len(pth)-1]
 
-	if delete(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductExtension, bson.M{"sku": sku}) == 1 {
+	if delete(ExternalDB, dbcol, bson.M{"sku": sku}) == 1 {
 
 		var p PRODUCT
 		p.Sku = sku
@@ -184,10 +192,12 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
+		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductGroupExtension
+
 		pth := strings.Split(r.URL.Path, "/")
 		pgid := pth[len(pth)-1]
 
-		results := find(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductGroupExtension, bson.M{"groupid": pgid})
+		results := find(ExternalDB, dbcol, bson.M{"groupid": pgid})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound)
@@ -226,10 +236,12 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductGroupExtension
+
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	if delete(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductGroupExtension, bson.M{"groupid": pgid}) == 1 {
+	if delete(ExternalDB, dbcol, bson.M{"groupid": pgid}) == 1 {
 		REDISCLIENT.Del(r.URL.Path)
 		respondWith(w, r, nil, ProductGroupDeletedMessage, nil, http.StatusOK)
 	} else {
