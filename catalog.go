@@ -187,7 +187,7 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		pgid := pth[len(pth)-1]
 
-		results := find(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductGroupExtension, bson.M{"groupID": pgid})
+		results := find(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductGroupExtension, bson.M{"groupid": pgid})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound)
@@ -229,7 +229,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	if delete(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductGroupExtension, bson.M{"groupID": pgid}) == 1 {
+	if delete(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductGroupExtension, bson.M{"groupid": pgid}) == 1 {
 		REDISCLIENT.Del(r.URL.Path)
 		respondWith(w, r, nil, ProductGroupDeletedMessage, nil, http.StatusOK)
 	} else {
