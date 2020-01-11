@@ -24,7 +24,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&p)
 
 	if err != nil {
-		respondWith(w, r, err, "Internal Error ...", nil, http.StatusBadRequest)
+		respondWith(w, r, err, "Bad Request ...", nil, http.StatusBadRequest)
 		return
 	}
 

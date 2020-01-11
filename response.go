@@ -26,7 +26,7 @@ func respondWith(w http.ResponseWriter, r *http.Request, err error, message stri
 
 	}
 
-	resp.Time = time.Now().Unix()
+	resp.Time = time.Now().UnixNano()
 	resp.Response = response
 
 	respons, err := json.Marshal(resp)
