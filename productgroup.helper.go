@@ -115,35 +115,33 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			productGroup.Products[p.Sku] = p
 
-			if p.IsMain {
-				productGroup.Name = p.Name
-				productGroup.Description = p.Description
-				productGroup.Images = p.Images
-			}
-
-			prds := productGroup.Products
-
 			nrpmin := math.MaxFloat64
-			nrpmax := 0.0
+			var nrpmax float64
 			nppmin := math.MaxFloat64
-			nppmax := 0.0
+			var nppmax float64
 			active := false
 
 			setInit()
 
-			for key, value := range prds {
+			for key, value := range productGroup.Products {
 
-				if value.RegularPrice < productGroup.RegularPriceMin {
+				if value.RegularPrice < nrpmin {
 					nrpmin = value.RegularPrice
 				}
-				if value.RegularPrice > productGroup.RegularPriceMax {
+				if value.RegularPrice > nrpmax {
 					nrpmax = value.RegularPrice
 				}
-				if value.PromotionPrice < productGroup.PromotionPriceMin {
+				if value.PromotionPrice < nppmin {
 					nppmin = value.PromotionPrice
 				}
-				if value.PromotionPrice < productGroup.PromotionPriceMax {
+				if value.PromotionPrice > nppmax {
 					nppmax = value.PromotionPrice
+				}
+
+				if value.IsMain {
+					productGroup.Name = value.Name
+					productGroup.Description = value.Description
+					productGroup.Images = value.Images
 				}
 
 				active = active || value.Active
@@ -171,6 +169,100 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		}
 
 	} else if r.Method == http.MethodPut {
+
+		var productGroup PRODUCTGROUP
+
+		j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+		if err0 != nil {
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			return false
+		}
+
+		err1 := json.Unmarshal([]byte(j), &productGroup)
+
+		if err1 != nil {
+			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			return false
+		}
+
+		setInit()
+		addAllInSet(p.SearchKeywords)
+		addAllInSet(productGroup.SearchKeywords)
+		productGroup.SearchKeywords = toArrayFromSet()
+
+		setInit()
+		addInSet(p.Size)
+		addAllInSet(productGroup.Sizes)
+		productGroup.Sizes = toArrayFromSet()
+
+		setInit()
+		addInSet(p.Color)
+		addAllInSet(productGroup.Colors)
+		productGroup.Colors = toArrayFromSet()
+
+		setInit()
+		addInSet(p.Brand)
+		addAllInSet(productGroup.Brands)
+		productGroup.Brands = toArrayFromSet()
+
+		setInit()
+		addAllInSet(p.Category)
+		addAllInSet(productGroup.Category)
+		productGroup.Category = toArrayFromSet()
+
+		productGroup.Products[p.Sku] = p
+
+		nrpmin := math.MaxFloat64
+		var nrpmax float64
+		nppmin := math.MaxFloat64
+		var nppmax float64
+		active := false
+
+		setInit()
+
+		for key, value := range productGroup.Products {
+
+			if value.RegularPrice < nrpmin {
+				nrpmin = value.RegularPrice
+			}
+			if value.RegularPrice > nrpmax {
+				nrpmax = value.RegularPrice
+			}
+			if value.PromotionPrice < nppmin {
+				nppmin = value.PromotionPrice
+			}
+			if value.PromotionPrice > nppmax {
+				nppmax = value.PromotionPrice
+			}
+
+			if value.IsMain {
+				productGroup.Name = value.Name
+				productGroup.Description = value.Description
+				productGroup.Images = value.Images
+			}
+
+			active = active || value.Active
+			addInSet(key)
+
+		}
+
+		productGroup.Skus = append(productGroup.Skus, p.Sku)
+
+		productGroup.RegularPriceMin = nrpmin
+		productGroup.RegularPriceMax = nrpmax
+		productGroup.PromotionPriceMin = nppmin
+		productGroup.PromotionPriceMax = nppmax
+		productGroup.Active = active
+		productGroup.Skus = toArrayFromSet()
+
+		result := update(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
+
+		if result[0] == 1 && result[1] == 1 {
+			response = true
+		} else {
+			response = false
+		}
 
 	} else if r.Method == http.MethodDelete {
 
