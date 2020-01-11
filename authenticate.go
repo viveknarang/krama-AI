@@ -24,6 +24,10 @@ func authenticate(tokenString string) bool {
 
 	})
 
+	if err != nil {
+		return false
+	}
+
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 
 		if REDISCLIENT.Get(tokenString).Err() == redis.Nil {
@@ -34,7 +38,10 @@ func authenticate(tokenString string) bool {
 
 	} else {
 
-		fmt.Println(err)
+		if REDISCLIENT.Get(tokenString).Err() != redis.Nil {
+			REDISCLIENT.Del(tokenString)
+		}
+
 		isValid = false
 
 	}

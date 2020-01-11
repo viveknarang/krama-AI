@@ -8,6 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/go-redis/redis"
 )
 
 func login(w http.ResponseWriter, r *http.Request) {
@@ -55,6 +56,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 		})
 
 		tokenString, err := token.SignedString([]byte(JWTSecret))
+
+		if REDISCLIENT.Get(tokenString).Err() == redis.Nil {
+			REDISCLIENT.Set(tokenString, customer.Secret, 0)
+		}
 
 		respondWith(w, r, err, LoginSuccessMessage, bson.M{"token": tokenString, "validForSeconds": LoginSessionDuration}, http.StatusOK)
 
