@@ -5,8 +5,6 @@ import (
 	"net/http"
 )
 
-const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/api.properties"
-
 func main() {
 
 	loadSystemProperties()

@@ -19,5 +19,5 @@ type PRODUCT struct {
 	Attributes     interface{} `json:"Attributes"`
 	IsMain         bool        `json:"IsMain"`
 	Currency       string      `json:"Currency"`
-	Updated        string      `json:"Updated"`
+	Updated        int64       `json:"Updated"`
 }

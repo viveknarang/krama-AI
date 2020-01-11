@@ -80,6 +80,23 @@ var ProductNotUpdatedMessage string
 //ProductDeletedMessage product deleted message
 var ProductDeletedMessage string
 
+//ProductGroupDeletedMessage product deleted message
+var ProductGroupDeletedMessage string
+
+//ProductGroupFoundMessage product found message
+var ProductGroupFoundMessage string
+
+//ProductGroupNotFoundMessage product not found message
+var ProductGroupNotFoundMessage string
+
+//ProductNotAddedMessage product not added message
+var ProductNotAddedMessage string
+
+//ProductNotDeletedMessage product not deleted message
+var ProductNotDeletedMessage string
+
+const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/api.properties"
+
 func loadSystemProperties() {
 
 	p := properties.MustLoadFile(properyFile, properties.UTF8)
@@ -110,4 +127,10 @@ func loadSystemProperties() {
 	ProductUpdatedMessage = p.GetString("api.response.message.product.updated", "")
 	ProductNotUpdatedMessage = p.GetString("api.response.message.product.notupdated", "")
 	ProductDeletedMessage = p.GetString("api.response.message.product.deleted", "")
+	ProductGroupDeletedMessage = p.GetString("api.response.message.productgroup.deleted", "")
+	ProductGroupFoundMessage = p.GetString("api.response.message.productgroup.found", "")
+	ProductGroupNotFoundMessage = p.GetString("api.response.message.productgroup.notfound", "")
+	ProductNotAddedMessage = p.GetString("api.response.message.product.notadded", "")
+	ProductNotDeletedMessage = p.GetString("api.response.message.product.notdeleted", "")
+
 }

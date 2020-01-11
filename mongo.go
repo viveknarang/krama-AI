@@ -74,9 +74,7 @@ func insert(db string, collec string, document interface{}) bool {
 		return false
 	}
 
-	fmt.Println("Inserted a single document: ", insertResult.InsertedID)
-
-	return true
+	return insertResult.InsertedID != nil
 
 }
 
