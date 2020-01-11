@@ -44,6 +44,9 @@ var HTTPInternalServerErrorMessage string
 //InvalidSessionMessage invalid session message
 var InvalidSessionMessage string
 
+//LoginSessionDuration login session duration
+var LoginSessionDuration int64
+
 func loadSystemProperties() {
 
 	p := properties.MustLoadFile(properyFile, properties.UTF8)
@@ -62,5 +65,6 @@ func loadSystemProperties() {
 	HTTPBadRequestMessage = p.GetString("api.response.code.message.badRequest", "")
 	HTTPInternalServerErrorMessage = p.GetString("api.response.code.message.InternalError", "")
 	InvalidSessionMessage = p.GetString("api.response.message.login.invalidSession", "")
+	LoginSessionDuration = p.GetInt64("api.login.session.duration", 80000)
 
 }

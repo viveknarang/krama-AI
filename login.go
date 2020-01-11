@@ -49,14 +49,14 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"cxs": customer.Secret,
-			"exp": currentTime + 80000,
+			"exp": currentTime + LoginSessionDuration,
 			"iat": currentTime,
 			"nbf": currentTime - 100,
 		})
 
 		tokenString, err := token.SignedString([]byte("erjejkr48308dkfdjsfkldsj9048340958kjfklsdjf934403884309248ekjklfjflksjflkjklrjrjt485908539405kfjsdklfjsdklfjkljsfhghtrotu5turgmgf"))
 
-		respondWith(w, r, err, LoginSuccessMessage, bson.M{"token": tokenString}, http.StatusOK)
+		respondWith(w, r, err, LoginSuccessMessage, bson.M{"token": tokenString, "validForSeconds": LoginSessionDuration}, http.StatusOK)
 
 	}
 
