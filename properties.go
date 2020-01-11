@@ -71,6 +71,15 @@ var ProductFoundMessage string
 //ProductNotFoundMessage product not found message
 var ProductNotFoundMessage string
 
+//ProductUpdatedMessage product updated message
+var ProductUpdatedMessage string
+
+//ProductNotUpdatedMessage product not updated message
+var ProductNotUpdatedMessage string
+
+//ProductDeletedMessage product deleted message
+var ProductDeletedMessage string
+
 func loadSystemProperties() {
 
 	p := properties.MustLoadFile(properyFile, properties.UTF8)
@@ -98,5 +107,7 @@ func loadSystemProperties() {
 	CustomersDB = p.GetString("db.mongo.internal.customers.collection", "")
 	ProductFoundMessage = p.GetString("api.response.message.product.found", "")
 	ProductNotFoundMessage = p.GetString("api.response.message.product.notfound", "")
-
+	ProductUpdatedMessage = p.GetString("api.response.message.product.updated", "")
+	ProductNotUpdatedMessage = p.GetString("api.response.message.product.notupdated", "")
+	ProductDeletedMessage = p.GetString("api.response.message.product.deleted", "")
 }

@@ -88,6 +88,25 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var p PRODUCT
+
+	err := json.NewDecoder(r.Body).Decode(&p)
+
+	if err != nil {
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		return
+	}
+
+	result := update(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductExtension, bson.M{"sku": p.Sku}, bson.M{"$set": p})
+
+	if result[0] == 1 && result[1] == 1 {
+		respondWith(w, r, nil, ProductUpdatedMessage, p, http.StatusAccepted)
+	} else if result[0] == 1 && result[1] == 0 {
+		respondWith(w, r, nil, ProductNotUpdatedMessage, nil, http.StatusNotModified)
+	} else if result[0] == 0 && result[1] == 0 {
+		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotModified)
+	}
+
 }
 
 func deleteProduct(w http.ResponseWriter, r *http.Request) {
@@ -96,12 +115,13 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-}
+	pth := strings.Split(r.URL.Path, "/")
+	sku := pth[len(pth)-1]
 
-func notFound(w http.ResponseWriter, r *http.Request) {
-
-	if !pre(w, r) {
-		return
+	if delete(ExternalDB, REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()+ProductExtension, bson.M{"sku": sku}) == 1 {
+		respondWith(w, r, nil, ProductDeletedMessage, nil, http.StatusOK)
+	} else {
+		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotModified)
 	}
 
 }

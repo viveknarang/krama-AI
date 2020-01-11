@@ -80,24 +80,29 @@ func insert(db string, collec string, document interface{}) bool {
 
 }
 
-func update(db string, collec string, filter interface{}, update interface{}) bool {
+func update(db string, collec string, filter interface{}, update interface{}) [2]int64 {
 
 	collection := CLIENT.Database(db).Collection(collec)
 
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
 
+	var result [2]int64
+
 	if err != nil {
 		log.Fatal(err)
-		return false
+		result[0] = -1
+		result[1] = -1
+		return result
 	}
 
-	fmt.Printf("Matched %v documents and updated %v documents.\n", updateResult.MatchedCount, updateResult.ModifiedCount)
+	result[0] = updateResult.MatchedCount
+	result[1] = updateResult.ModifiedCount
 
-	return true
+	return result
 
 }
 
-func delete(db string, collec string, deleteCriteria interface{}) {
+func delete(db string, collec string, deleteCriteria interface{}) int64 {
 
 	collection := CLIENT.Database(db).Collection(collec)
 
@@ -107,7 +112,7 @@ func delete(db string, collec string, deleteCriteria interface{}) {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Deleted %v documents in the trainers collection\n", deleteResult.DeletedCount)
+	return deleteResult.DeletedCount
 
 }
 
