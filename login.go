@@ -22,7 +22,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	results := find("Internal", "Customers", bson.M{"CustomerID": rx.CustomerID, "APIKey": rx.APIKey})
+	results := find(InternalDB, CustomersDB, bson.M{"CustomerID": rx.CustomerID, "APIKey": rx.APIKey})
 
 	if len(results) != 1 {
 

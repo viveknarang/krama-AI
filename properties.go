@@ -50,6 +50,27 @@ var LoginSessionDuration int64
 //JWTSecret JWT Secret
 var JWTSecret string
 
+//InternalDB Internal db
+var InternalDB string
+
+//ExternalDB External db
+var ExternalDB string
+
+//ProductExtension product extension
+var ProductExtension string
+
+//ProductGroupExtension product group extension
+var ProductGroupExtension string
+
+//CustomersDB customers database
+var CustomersDB string
+
+//ProductFoundMessage product found message
+var ProductFoundMessage string
+
+//ProductNotFoundMessage product not found message
+var ProductNotFoundMessage string
+
 func loadSystemProperties() {
 
 	p := properties.MustLoadFile(properyFile, properties.UTF8)
@@ -70,5 +91,12 @@ func loadSystemProperties() {
 	InvalidSessionMessage = p.GetString("api.response.message.login.invalidSession", "")
 	LoginSessionDuration = p.GetInt64("api.login.session.duration", 80000)
 	JWTSecret = p.GetString("jwt.secret", "")
+	InternalDB = p.GetString("db.mongo.internal", "Internal")
+	ExternalDB = p.GetString("db.mongo.external", "External")
+	ProductExtension = p.GetString("db.mongo.external.product.extension", "")
+	ProductGroupExtension = p.GetString("db.mongo.external.productgroup.extension", "")
+	CustomersDB = p.GetString("db.mongo.internal.customers.collection", "")
+	ProductFoundMessage = p.GetString("api.response.message.product.found", "")
+	ProductNotFoundMessage = p.GetString("api.response.message.product.notfound", "")
 
 }
