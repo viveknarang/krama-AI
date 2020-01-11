@@ -9,6 +9,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-redis/redis"
+	"github.com/google/uuid"
 )
 
 func login(w http.ResponseWriter, r *http.Request) {
@@ -50,6 +51,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"cxs": customer.Secret,
+			"uid": uuid.New(),
 			"exp": currentTime + LoginSessionDuration,
 			"iat": currentTime,
 			"nbf": currentTime - 100,
