@@ -17,10 +17,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&rx)
 
 	if err != nil {
-
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		respondWith(w, r, err, "Bad Request ...", nil, http.StatusBadRequest)
 		return
-
 	}
 
 	results := find("Internal", "Customers", bson.M{"CustomerID": rx.CustomerID, "APIKey": rx.APIKey})
@@ -33,15 +31,18 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 		var customer CUSTOMER
 
-		j, e := bson.MarshalExtJSON(results[0], false, false)
+		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
-		println(e)
+		if err0 != nil {
+			respondWith(w, r, err0, "Internal Error ...", nil, http.StatusInternalServerError)
+			return
+		}
 
-		err := json.Unmarshal([]byte(j), &customer)
+		err1 := json.Unmarshal([]byte(j), &customer)
 
-		//TODO: need to find a better approach for this.
-		if err != nil {
-			panic(err)
+		if err1 != nil {
+			respondWith(w, r, err1, "Internal Error ...", nil, http.StatusInternalServerError)
+			return
 		}
 
 		currentTime := time.Now().Unix()

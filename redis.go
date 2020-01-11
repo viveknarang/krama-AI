@@ -9,7 +9,9 @@ import (
 //REDISCLIENT client for redis
 var REDISCLIENT *redis.Client
 
-func connectRedis(url string, port string) {
+func connectRedis(url string, port string) bool {
+
+	var isRedisNormal bool
 
 	client := redis.NewClient(&redis.Options{
 		Addr:     url + ":" + port,
@@ -22,10 +24,13 @@ func connectRedis(url string, port string) {
 	if pong == "PONG" && err == nil {
 		REDISCLIENT = client
 		fmt.Println("Connected to Redis at " + url + ":" + port)
+		isRedisNormal = true
 	} else {
 		REDISCLIENT = nil
+		isRedisNormal = false
 	}
 
+	return isRedisNormal
 }
 
 func disconnectRedis() {
