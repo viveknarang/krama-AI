@@ -256,14 +256,22 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductGroupExtension
+	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+
+	dbcol := cidb + ProductGroupExtension
+	pgindex := cidb + ProductGroupExtension + SearchIndexExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
 	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"groupid": pgid}) == 1 {
+
 		REDISCLIENT.Del(r.URL.Path)
+
+		deleteESDocumentByID(pgindex, pgid)
+
 		respondWith(w, r, nil, ProductGroupDeletedMessage, nil, http.StatusOK)
+
 	} else {
 		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotModified)
 	}

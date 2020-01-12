@@ -13,7 +13,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 	var response bool
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductGroupExtension
+	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+
+	dbcol := cidb + ProductGroupExtension
+
+	pgindex := cidb + ProductGroupExtension + SearchIndexExtension
 
 	results := findMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
 
@@ -68,7 +72,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			insertMongoDocument(ExternalDB, dbcol, npg)
 
-			response = true
+			response = indexES(pgindex, PGMapping, npg, npg.GroupID)
 
 		} else {
 
@@ -161,7 +165,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
-				response = true
+				response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 			} else {
 				response = false
 			}
@@ -259,7 +263,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 		if result[0] == 1 && result[1] == 1 {
-			response = true
+			response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 		} else {
 			response = false
 		}
@@ -287,7 +291,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			delr := deleteMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
 
 			if delr == 1 {
-				response = true
+				response = deleteESDocumentByID(pgindex, p.GroupID)
 			} else {
 				response = false
 			}
@@ -372,7 +376,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
-				response = true
+				response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 			} else {
 				response = false
 			}

@@ -34,7 +34,7 @@ func connectElastic() bool {
 
 }
 
-func createESIndexIfNotExist(index string, mapping string) {
+func createESIndexIfNotExists(index string, mapping string) {
 
 	ctx := context.Background()
 
@@ -53,4 +53,35 @@ func createESIndexIfNotExist(index string, mapping string) {
 		}
 	}
 
+}
+
+func indexES(index string, mapping string, document interface{}, id string) bool {
+
+	createESIndexIfNotExists(index, mapping)
+
+	ctx := context.Background()
+
+	put, err := ESCLIENT.Index().Index(index).Id(id).BodyJson(document).Do(ctx)
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Indexed %s to index %s, type %s\n", put.Id, put.Index, put.Type)
+
+	return true
+
+}
+
+func deleteESDocumentByID(index string, id string) bool {
+
+	ctx := context.Background()
+	res, err := ESCLIENT.Delete().Index(index).Id(id).Do(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	println(res.Result)
+
+	return true
 }
