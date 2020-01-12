@@ -14,11 +14,17 @@ var APIPort string
 //CatalogBasePath base path
 var CatalogBasePath string
 
+//OrdersBasePath base path
+var OrdersBasePath string
+
 //APIVersion api version
 var APIVersion string
 
 //CatalogPath catalog path
 var CatalogPath string
+
+//OrdersPath catalog path
+var OrdersPath string
 
 //RedisURL redis url
 var RedisURL string
@@ -95,6 +101,27 @@ var ProductNotAddedMessage string
 //ProductNotDeletedMessage product not deleted message
 var ProductNotDeletedMessage string
 
+//OrdersExtension orders extension
+var OrdersExtension string
+
+//OrderCreatedMessage order created message
+var OrderCreatedMessage string
+
+//OrderUpdatedMessage order updated message
+var OrderUpdatedMessage string
+
+//OrderDeletedMessage order deleted message
+var OrderDeletedMessage string
+
+//OrderNotFoundMessage order not found message
+var OrderNotFoundMessage string
+
+//OrderFoundMessage order not found message
+var OrderFoundMessage string
+
+//OrderNotUpdatedMessage order updated message
+var OrderNotUpdatedMessage string
+
 const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/api.properties"
 
 func loadSystemProperties() {
@@ -105,8 +132,10 @@ func loadSystemProperties() {
 	MongoPort = p.GetString("db.mongo.port", "27017")
 	APIPort = p.GetString("api.listen.on", "9005")
 	CatalogBasePath = p.GetString("api.catalog.base.path", "/catalog/")
+	OrdersBasePath = p.GetString("api.orders.base.path", "/orders/")
 	APIVersion = p.GetString("api.version", "v1")
 	CatalogPath = CatalogBasePath + APIVersion
+	OrdersPath = OrdersBasePath + APIVersion
 	RedisURL = p.GetString("redis.url", "localhost")
 	RedisPort = p.GetString("redis.port", "6379")
 	LoginSuccessMessage = p.GetString("api.response.message.customer.login.success", "")
@@ -132,5 +161,12 @@ func loadSystemProperties() {
 	ProductGroupNotFoundMessage = p.GetString("api.response.message.productgroup.notfound", "")
 	ProductNotAddedMessage = p.GetString("api.response.message.product.notadded", "")
 	ProductNotDeletedMessage = p.GetString("api.response.message.product.notdeleted", "")
+	OrdersExtension = p.GetString("db.mongo.external.orders.extension", "")
+	OrderCreatedMessage = p.GetString("api.response.message.orders.ordercreated", "")
+	OrderUpdatedMessage = p.GetString("api.response.message.orders.orderupdated", "")
+	OrderNotUpdatedMessage = p.GetString("api.response.message.orders.ordernotupdated", "")
+	OrderDeletedMessage = p.GetString("api.response.message.orders.orderdeleted", "")
+	OrderFoundMessage = p.GetString("api.response.message.orders.orderfound", "")
+	OrderNotFoundMessage = p.GetString("api.response.message.orders.ordernotfound", "")
 
 }
