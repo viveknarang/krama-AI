@@ -258,13 +258,41 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 
 	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 
-	dbcol := cidb + ProductGroupExtension
+	pgcol := cidb + ProductGroupExtension
+	pcol := cidb + ProductExtension
 	pgindex := cidb + ProductGroupExtension + SearchIndexExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"groupid": pgid}) == 1 {
+	results := findMongoDocument(ExternalDB, pgcol, bson.M{"groupid": pgid})
+
+	if len(results) != 1 {
+		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound)
+		return
+	}
+
+	j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+	if err0 != nil {
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		return
+	}
+
+	var productGroup PRODUCTGROUP
+
+	err1 := json.Unmarshal([]byte(j), &productGroup)
+
+	if err1 != nil {
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		return
+	}
+
+	for _, sku := range productGroup.Skus {
+		deleteMongoDocument(ExternalDB, pcol, bson.M{"sku": sku})
+	}
+
+	if deleteMongoDocument(ExternalDB, pgcol, bson.M{"groupid": pgid}) == 1 {
 
 		REDISCLIENT.Del(r.URL.Path)
 
