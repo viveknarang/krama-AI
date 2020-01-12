@@ -73,6 +73,29 @@ func indexES(index string, mapping string, document interface{}, id string) bool
 
 }
 
+func queryES(index string, from int, to int, q string, fields []string) *elastic.SearchResult {
+
+	ctx := context.Background()
+
+	multiQuery := elastic.NewMultiMatchQuery(q, fields...)
+
+	searchResult, err := ESCLIENT.Search().
+		Index(index).
+		Query(multiQuery).
+		Aggregation("Brands", elastic.NewTermsAggregation().Field("Brands").Size(100)).
+		Aggregation("Colors", elastic.NewTermsAggregation().Field("Colors").Size(100)).
+		Aggregation("Sizes", elastic.NewTermsAggregation().Field("Sizes").Size(100)).
+		From(from).Size(to).
+		Pretty(true).
+		Do(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	return searchResult
+
+}
+
 func deleteESDocumentByID(index string, id string) bool {
 
 	ctx := context.Background()

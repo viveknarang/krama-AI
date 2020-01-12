@@ -5,57 +5,124 @@ const PGMapping = `
 {
 	"mappings": {
 	  "properties": {
-		"active": {
+		"Active": {
 		  "type": "boolean"
 		},
-		"brands": {
+		"Brands": {
 		  "type": "text",
 		  "fielddata": true
 		},
-		"category": {
+		"Category": {
 		  "type": "text"
 		},
-		"colors": {
+		"Colors": {
 		  "type": "text",
 		  "fielddata": true
 		},
-		"description": {
+		"Description": {
 		  "type": "text"
 		},
-		"groupID": {
+		"GroupID": {
 		  "type": "keyword"
 		},
-		"images": {
+		"Images": {
 		  "type": "text"
 		},
-		"name": {
+		"Name": {
 		  "type": "text"
 		},
-		"skus": {
+		"Skus": {
 		  "type": "keyword"
 		},
-		"products": {
-		  "type": "object"
-		},
-		"promotionPriceMax": {
+		"PromotionPriceMax": {
 		  "type": "float"
 		},
-		"promotionPriceMin": {
+		"PromotionPriceMin": {
 		  "type": "float"
 		},
-		"regularPriceMax": {
+		"RegularPriceMax": {
 		  "type": "float"
 		},
-		"regularPriceMin": {
+		"RegularPriceMin": {
 		  "type": "float"
 		},
-		"searchKeywords": {
+		"SearchKeywords": {
 		  "type": "keyword"
 		},
-		"sizes": {
+		"Sizes": {
 		  "type": "text",
 		  "fielddata": true
+		},
+		"Currency": {
+		  "type": "keyword"
+		},
+		"Updated": {
+		  "type": "long"
 		}
-	  }
+	  },
+	  "dynamic_templates": [
+		{
+		  "Products_objects": {
+			"mapping": {
+			  "type": "object",
+			  "properties": {
+				"Sku": {
+				  "type": "keyword"
+				},
+				"Name": {
+				  "type": "text"
+				},
+				"GroupID": {
+				  "type": "keyword"
+				},
+				"Description": {
+				  "type": "text"
+				},
+				"RegularPrice": {
+				  "type": "float"
+				},
+				"PromotionPrice": {
+				  "type": "float"
+				},
+				"Images": {
+				  "type": "text"
+				},
+				"SearchKeywords": {
+				  "type": "text"
+				},
+				"Quantity": {
+				  "type": "long"
+				},
+				"Category": {
+				  "type": "text"
+				},
+				"Color": {
+				  "type": "text"
+				},
+				"Brand": {
+				  "type": "text"
+				},
+				"Size": {
+				  "type": "text"
+				},
+				"Active": {
+				  "type": "boolean"
+				},
+				"IsMain": {
+				  "type": "boolean"
+				},
+				"Currency": {
+				  "type": "keyword"
+				},
+				"Updated": {
+				  "type": "long"
+				}
+			  }
+			},
+			"match_mapping_type": "object",
+			"path_match":   "Products.*"
+		  }
+		}
+	  ]
 	}
   }`
