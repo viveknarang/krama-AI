@@ -11,7 +11,6 @@ func addInSet(s string) {
 	if mp[s] {
 		return
 	}
-
 	mp[s] = true
 
 }
@@ -25,9 +24,7 @@ func addAllInSet(arr []string) {
 }
 
 func existsInSet(s string) bool {
-
 	return mp[s]
-
 }
 
 func toArrayFromSet() []string {
@@ -44,7 +41,5 @@ func toArrayFromSet() []string {
 }
 
 func setInit() {
-
 	mp = make(map[string]bool)
-
 }
