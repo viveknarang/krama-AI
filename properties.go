@@ -131,6 +131,12 @@ var ElasticPort string
 //SearchIndexExtension search index extension
 var SearchIndexExtension string
 
+//SearchBasePath search base path
+var SearchBasePath string
+
+//SearchPath search api path
+var SearchPath string
+
 const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/system.properties"
 
 func loadSystemProperties() {
@@ -142,9 +148,8 @@ func loadSystemProperties() {
 	APIPort = p.GetString("api.listen.on", "9005")
 	CatalogBasePath = p.GetString("api.catalog.base.path", "/catalog/")
 	OrdersBasePath = p.GetString("api.orders.base.path", "/orders/")
+	SearchBasePath = p.GetString("pi.search.base.path", "/search/")
 	APIVersion = p.GetString("api.version", "v1")
-	CatalogPath = CatalogBasePath + APIVersion
-	OrdersPath = OrdersBasePath + APIVersion
 	RedisURL = p.GetString("redis.url", "localhost")
 	RedisPort = p.GetString("redis.port", "6379")
 	LoginSuccessMessage = p.GetString("api.response.message.customer.login.success", "")
@@ -180,5 +185,9 @@ func loadSystemProperties() {
 	ElasticURL = p.GetString("search.elastic.url", "")
 	ElasticPort = p.GetString("search.elastic.port", "")
 	SearchIndexExtension = p.GetString("search.elastic.index.extension", "")
+
+	CatalogPath = CatalogBasePath + APIVersion
+	OrdersPath = OrdersBasePath + APIVersion
+	SearchPath = SearchBasePath + APIVersion
 
 }
