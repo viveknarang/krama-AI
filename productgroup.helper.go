@@ -15,7 +15,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductGroupExtension
 
-	results := find(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
 
 	if r.Method == http.MethodPost {
 
@@ -66,7 +66,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			npg.Updated = time.Now().UnixNano()
 
-			insert(ExternalDB, dbcol, npg)
+			insertMongoDocument(ExternalDB, dbcol, npg)
 
 			response = true
 
@@ -158,7 +158,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			productGroup.Active = active
 			productGroup.Skus = toArrayFromSet()
 
-			result := update(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
+			result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
 				response = true
@@ -256,7 +256,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		productGroup.Active = active
 		productGroup.Skus = toArrayFromSet()
 
-		result := update(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
+		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 		if result[0] == 1 && result[1] == 1 {
 			response = true
@@ -284,7 +284,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		if len(productGroup.Products) == 1 {
 
-			delr := deleteDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
+			delr := deleteMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
 
 			if delr == 1 {
 				response = true
@@ -369,7 +369,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			}
 			productGroup.Category = toArrayFromSet()
 
-			result := update(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
+			result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
 				response = true

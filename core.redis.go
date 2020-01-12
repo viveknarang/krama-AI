@@ -23,7 +23,7 @@ func connectRedis() bool {
 
 	if pong == "PONG" && err == nil {
 		REDISCLIENT = client
-		fmt.Println("Connected to Redis at " + RedisURL + ":" + RedisPort)
+		fmt.Println("Redis connected at " + RedisURL + ":" + RedisPort)
 		isRedisNormal = true
 	} else {
 		REDISCLIENT = nil

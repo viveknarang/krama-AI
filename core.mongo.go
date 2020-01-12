@@ -29,14 +29,14 @@ func connectDB() *mongo.Client {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Connected to MongoDB at " + MongoURL + ":" + MongoPort)
+	fmt.Println("MongoDB connected at " + MongoURL + ":" + MongoPort)
 
 	CLIENT = client
 	return client
 
 }
 
-func find(db string, collec string, filter bson.M) []*bson.D {
+func findMongoDocument(db string, collec string, filter bson.M) []*bson.D {
 
 	var result []*bson.D
 
@@ -63,7 +63,7 @@ func find(db string, collec string, filter bson.M) []*bson.D {
 
 }
 
-func insert(db string, collec string, document interface{}) bool {
+func insertMongoDocument(db string, collec string, document interface{}) bool {
 
 	collection := CLIENT.Database(db).Collection(collec)
 
@@ -78,7 +78,7 @@ func insert(db string, collec string, document interface{}) bool {
 
 }
 
-func update(db string, collec string, filter interface{}, update interface{}) [2]int64 {
+func updateMongoDocument(db string, collec string, filter interface{}, update interface{}) [2]int64 {
 
 	collection := CLIENT.Database(db).Collection(collec)
 
@@ -100,7 +100,7 @@ func update(db string, collec string, filter interface{}, update interface{}) [2
 
 }
 
-func deleteDocument(db string, collec string, deleteCriteria interface{}) int64 {
+func deleteMongoDocument(db string, collec string, deleteCriteria interface{}) int64 {
 
 	collection := CLIENT.Database(db).Collection(collec)
 

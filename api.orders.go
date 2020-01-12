@@ -31,7 +31,7 @@ func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
-		results := find(ExternalDB, dbcol, bson.M{"orderid": oid})
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"orderid": oid})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound)
@@ -85,7 +85,7 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
-		results := find(ExternalDB, dbcol, bson.M{"customerid": cid})
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"customerid": cid})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound)
@@ -137,7 +137,7 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
-	insert(ExternalDB, dbcol, order)
+	insertMongoDocument(ExternalDB, dbcol, order)
 
 	respondWith(w, r, nil, OrderCreatedMessage, order, http.StatusCreated)
 
@@ -160,7 +160,7 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
-	result := update(ExternalDB, dbcol, bson.M{"orderid": order.OrderID}, bson.M{"$set": order})
+	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"orderid": order.OrderID}, bson.M{"$set": order})
 
 	if result[0] == 1 && result[1] == 1 {
 
@@ -190,7 +190,7 @@ func deleteOrder(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	oid := pth[len(pth)-1]
 
-	results := find(ExternalDB, dbcol, bson.M{"orderid": oid})
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"orderid": oid})
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound)
@@ -213,7 +213,7 @@ func deleteOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if deleteDocument(ExternalDB, dbcol, bson.M{"orderid": oid}) == 1 {
+	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"orderid": oid}) == 1 {
 
 		REDISCLIENT.Del(r.URL.Path)
 		respondWith(w, r, nil, OrderDeletedMessage, nil, http.StatusOK)

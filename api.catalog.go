@@ -31,7 +31,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 
-		results := find(ExternalDB, dbcol, bson.M{"sku": sku})
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound)
@@ -83,7 +83,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 
-	insert(ExternalDB, dbcol, p)
+	insertMongoDocument(ExternalDB, dbcol, p)
 
 	if syncProductGroup(w, r, p) {
 
@@ -114,7 +114,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 
-	result := update(ExternalDB, dbcol, bson.M{"sku": p.Sku}, bson.M{"$set": p})
+	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"sku": p.Sku}, bson.M{"$set": p})
 
 	if result[0] == 1 && result[1] == 1 {
 
@@ -152,7 +152,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	sku := pth[len(pth)-1]
 
-	results := find(ExternalDB, dbcol, bson.M{"sku": sku})
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku})
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound)
@@ -175,7 +175,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if deleteDocument(ExternalDB, dbcol, bson.M{"sku": sku}) == 1 {
+	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku}) == 1 {
 
 		if syncProductGroup(w, r, product) {
 
@@ -217,7 +217,7 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		pgid := pth[len(pth)-1]
 
-		results := find(ExternalDB, dbcol, bson.M{"groupid": pgid})
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"groupid": pgid})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound)
@@ -261,7 +261,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	if deleteDocument(ExternalDB, dbcol, bson.M{"groupid": pgid}) == 1 {
+	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"groupid": pgid}) == 1 {
 		REDISCLIENT.Del(r.URL.Path)
 		respondWith(w, r, nil, ProductGroupDeletedMessage, nil, http.StatusOK)
 	} else {
