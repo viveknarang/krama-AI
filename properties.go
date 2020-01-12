@@ -122,7 +122,16 @@ var OrderFoundMessage string
 //OrderNotUpdatedMessage order updated message
 var OrderNotUpdatedMessage string
 
-const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/api.properties"
+//ElasticURL elastic URL
+var ElasticURL string
+
+//ElasticPort elastic port
+var ElasticPort string
+
+//SearchIndexExtension search index extension
+var SearchIndexExtension string
+
+const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/system.properties"
 
 func loadSystemProperties() {
 
@@ -168,5 +177,8 @@ func loadSystemProperties() {
 	OrderDeletedMessage = p.GetString("api.response.message.orders.orderdeleted", "")
 	OrderFoundMessage = p.GetString("api.response.message.orders.orderfound", "")
 	OrderNotFoundMessage = p.GetString("api.response.message.orders.ordernotfound", "")
+	ElasticURL = p.GetString("search.elastic.url", "")
+	ElasticPort = p.GetString("search.elastic.port", "")
+	SearchIndexExtension = p.GetString("search.elastic.index.extension", "")
 
 }

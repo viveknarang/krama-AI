@@ -9,8 +9,9 @@ func main() {
 
 	loadSystemProperties()
 
-	connectDB(MongoURL, MongoPort)
-	connectRedis(RedisURL, RedisPort)
+	connectDB()
+	connectRedis()
+	connectElastic()
 
 	log.Fatal(http.ListenAndServe(":"+APIPort, routers()))
 
