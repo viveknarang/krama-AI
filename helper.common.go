@@ -5,6 +5,7 @@ import (
 	"math"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -20,6 +21,12 @@ func isValidURL(toTest string) bool {
 	_, err := url.ParseRequestURI(toTest)
 
 	return !(err != nil)
+
+}
+
+func typeof(value interface{}) string {
+
+	return reflect.TypeOf(value).String()
 
 }
 
@@ -125,6 +132,24 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 	if len(product.SearchKeywords) == 0 || len(product.SearchKeywords) > 100 {
 
 		respondWith(w, r, nil, "SearchKeywords field cannot be empty or contain more than 100 search keywords", nil, http.StatusBadRequest)
+		return false
+
+	}
+
+	if len(product.Attributes) > 0 {
+
+		for key, value := range product.Attributes {
+			if strings.Contains(typeof(key), "interface") || strings.Contains(typeof(value), "interface") {
+				respondWith(w, r, nil, "Attribute field keys or values cannot be complex object. They need to be simple types like int, float or boolean etc ...", nil, http.StatusBadRequest)
+				return false
+			}
+		}
+
+	}
+
+	if len(product.Attributes) > 500 {
+
+		respondWith(w, r, nil, "A product entity cannot contain more than 500 additional attributes", nil, http.StatusBadRequest)
 		return false
 
 	}

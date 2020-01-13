@@ -35,6 +35,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			npg.Description = p.Description
 			npg.Active = p.Active
 			npg.Currency = p.Currency
+			npg.Attributes = p.Attributes
 
 			pm := make(map[string]PRODUCT)
 			pm[p.Sku] = p
