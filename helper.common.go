@@ -16,12 +16,11 @@ func isValidJSON(s string) bool {
 }
 
 func isValidURL(toTest string) bool {
+
 	_, err := url.ParseRequestURI(toTest)
-	if err != nil {
-		return false
-	} else {
-		return true
-	}
+
+	return !(err != nil)
+
 }
 
 func pre(w http.ResponseWriter, r *http.Request) bool {
