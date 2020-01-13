@@ -137,6 +137,12 @@ var SearchBasePath string
 //SearchPath search api path
 var SearchPath string
 
+//MissingAccessToken missing access token
+var MissingAccessToken string
+
+//MissingContentType missing content type
+var MissingContentType string
+
 const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/system.properties"
 
 func loadSystemProperties() {
@@ -185,6 +191,8 @@ func loadSystemProperties() {
 	ElasticURL = p.GetString("search.elastic.url", "")
 	ElasticPort = p.GetString("search.elastic.port", "")
 	SearchIndexExtension = p.GetString("search.elastic.index.extension", "")
+	MissingAccessToken = p.GetString("api.response.message.exception.missingtoken", "")
+	MissingContentType = p.GetString("api.response.message.exception.contentTypeMissing", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion
