@@ -1,0 +1,2462 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen-a1ce949a.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-bccf8c07.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-c5541673.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-16403879.png" class="logo" alt="Logo" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#api-login" class="toc-h1 toc-link" data-title="API login">API login</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-api-access-token" class="toc-h2 toc-link" data-title="Get API access token">Get API access token</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#catalog-api" class="toc-h1 toc-link" data-title="Catalog API">Catalog API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#add-a-new-product" class="toc-h2 toc-link" data-title="Add a new product">Add a new product</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-specific-product" class="toc-h2 toc-link" data-title="Get a specific product">Get a specific product</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-product" class="toc-h2 toc-link" data-title="Update a product">Update a product</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-product" class="toc-h2 toc-link" data-title="Delete a product">Delete a product</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-product-group" class="toc-h2 toc-link" data-title="Get a product group">Get a product group</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-product-group" class="toc-h2 toc-link" data-title="Delete a product group">Delete a product group</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#order-api" class="toc-h1 toc-link" data-title="Order API">Order API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-an-order" class="toc-h2 toc-link" data-title="Create an order">Create an order</a>
+                  </li>
+                  <li>
+                    <a href="#get-orders-for-a-customer" class="toc-h2 toc-link" data-title="Get orders for a customer">Get orders for a customer</a>
+                  </li>
+                  <li>
+                    <a href="#get-order-by-order-id" class="toc-h2 toc-link" data-title="Get order by order ID">Get order by order ID</a>
+                  </li>
+                  <li>
+                    <a href="#update-order" class="toc-h2 toc-link" data-title="Update order">Update order</a>
+                  </li>
+                  <li>
+                    <a href="#delete-order-by-order-id" class="toc-h2 toc-link" data-title="Delete order by order ID">Delete order by order ID</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#search-api" class="toc-h1 toc-link" data-title="Search API">Search API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#basic-search" class="toc-h2 toc-link" data-title="Basic search">Basic search</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#response-codes" class="toc-h1 toc-link" data-title="Response Codes">Response Codes</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><span>API documentation version 3.0</span></li>
+            <li><a href='mailto:vivek.narang10@gmail.com'>Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>This API provides you with several options to maintain your product catalog and search products in your catalog. </p>
+
+<p>With this API, you can create, update and delete products in your product catalog. The API automatically manages the product groups for you. The product group is identified by the groupID field (i.e. all the products with the same groupID are combined in a single product group). While the API allows you to get and delete product groups by groupID, the API does not allow you to directly modify the product groups. The only way to modify product groups is to use API endpoints for individual products. With this approach, the API tries to ensure that the data is not corrupted. When you delete a product group, all the products in the group are also automatically deleted. </p>
+
+<aside class="notice">
+It is important to understand the concept of product groups. For search quality and other advanced features provided by our platform, products are grouped to form product groups. These product groups are essentially a product with different variations. Example: A shirt can be of multiple sizes and/or colors. So all of the variations of this shirt are grouped to form a product group.  
+</aside>
+
+<p>The search API is fairly powerful too. It allows features like search on a specific field or a set of fields. The search API responds with product groups where the query matches certain fields. Search API also allows you to select the standard facets to be included in the API response. In addtion to the features mentioned above, the API automatically syncs the search index with changes in products/product groups, <strong>in real-time</strong>. Also, for efficiency and speed, the search and GET product/productgroup endpoints are cached. Upon any updates, the cache is updated as well. </p>
+
+<p>We are continuously adding new features and improving this API, if you have any suggestions please reach out to us <a href="mailto:vivek.narang10@gmail.com">here</a></p>
+
+<p>API Powered by</p>
+
+<ul>
+<li>Golang<br></li>
+<li>Redis<br></li>
+<li>Elasticsearch<br></li>
+<li>MongoDB<br></li>
+</ul>
+
+<aside class="success">
+The current API version is: v1 Please replace {API version} with v1 in your API calls
+</aside>
+<h1 id='api-login'>API login</h1><h2 id='get-api-access-token'>Get API access token</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"CustomerID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0100456"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"APIKey"</span><span class="w">     </span><span class="p">:</span><span class="w"> </span><span class="s2">"123445"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Login Successful ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578855509733742430</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJmZmFhYmJjY2RkIiwiZXhwIjoxNTc4OTM1NTA5LCJpYXQiOjE1Nzg4NTU1MDksIm5iZiI6MTU3ODg1NTQwOSwidWlkIjoiYzU1NWRmMDEtZTlkYy00NDU3LThlMzEtNWQ2ZjU3ODZmOTJiIn0.MQVnZymGzDjR6cW9QHT8SC6HazqkkJRcowqx85C2wrw"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"validForSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response (valid token expired or invalid token used):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You need to either login or your access token is either expired, invalid, or corrupt ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578882700872915416</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Login Failed! Please check your credentials and also make sure that you are an active customer ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578882733720622060</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint gets you your API access token. You need to send your customer ID and the API key that we provided you for using our platform. Upon receiving your valid credentials, the API will respond with a token with additional information including the validFor key which tells you how long this access token is valid for. Please set <strong>x-access-token</strong> to the value of the <strong>token</strong>, in the header of your subsequent API calls. </p>
+<h3 id='http-request-url'>HTTP Request URL</h3>
+<p><code>GET http://api.gallao.io/customers/{API version}/login</code></p>
+<h3 id='http-request-header'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CustomerID</td>
+<td>Your customer ID provided by us</td>
+</tr>
+<tr>
+<td>APIKey</td>
+<td>The API key that is sent by us</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+You do not need to invoke login too often. Please include the token that you receive upon a successful login in your subsequent API calls, until the token expires.
+</aside>
+<h3 id='http-response'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Included in response object that should be included in subsequent API calls</td>
+</tr>
+<tr>
+<td>validForSeconds</td>
+<td>Included in response object that tells the validity of access token in seconds</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+With the field validFor in response, you can calculate the time after with your servers need to login again to get a new token.
+</aside>
+<h1 id='catalog-api'>Catalog API</h1><h2 id='add-a-new-product'>Add a new product</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+     </span><span class="s2">"Sku"</span><span class="p">:</span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Images"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="p">],</span><span class="w">
+     </span><span class="s2">"Description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"GroupID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w"> 
+     </span><span class="s2">"SearchKeywords"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span><span class="s2">"B"</span><span class="p">,</span><span class="w"> </span><span class="s2">"C"</span><span class="p">],</span><span class="w">
+     </span><span class="s2">"RegularPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"PromotionPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Currency"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"IsMain"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Size"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Brand"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Color"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Category"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="p">],</span><span class="w">
+     </span><span class="s2">"Active"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Added ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578884392984514865</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"C"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578884392961353657</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to add a new product in the products collection. When a product is added in the products collection, this product is also added in product group collection. If the product group with the matching groupID is missing, a new product group is formed. Search index and the cache are also automatically updated with a valid call to this endpoint. </p>
+<h3 id='http-request-url-2'>HTTP Request URL</h3>
+<p><code>POST http://api.gallao.io/catalog/{API version}/products</code></p>
+<h3 id='http-request-header-2'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-2'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sku</td>
+<td>String, Max 50 Characters</td>
+<td>The SKU of the product</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Text, Max 250 Characters</td>
+<td>The name of the product</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Text, Max 2048 Characters</td>
+<td>The description of the product</td>
+</tr>
+<tr>
+<td>groupID</td>
+<td>String, Max 50 Characters</td>
+<td>The product group ID</td>
+</tr>
+<tr>
+<td>regularPrice</td>
+<td>Float, Greater than 0</td>
+<td>Everyday price</td>
+</tr>
+<tr>
+<td>promotionPrice</td>
+<td>Float, Greater than 0</td>
+<td>On-sale price</td>
+</tr>
+<tr>
+<td>images</td>
+<td>URL, Mandatory</td>
+<td>Product images</td>
+</tr>
+<tr>
+<td>searchKeywords</td>
+<td>Text, Mandatory</td>
+<td>Keywords that you want this product to be searched with</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Integer, Greater than 0</td>
+<td>Inventory stock quantity</td>
+</tr>
+<tr>
+<td>category</td>
+<td>Text, Mandatory</td>
+<td>Category breadcrumbs</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Text, Optional</td>
+<td>Product color</td>
+</tr>
+<tr>
+<td>brand</td>
+<td>Text, Optional</td>
+<td>Product brand</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Text, Optional</td>
+<td>Product size</td>
+</tr>
+<tr>
+<td>active</td>
+<td>Boolean, Mandatory</td>
+<td>Is product available for sale?</td>
+</tr>
+<tr>
+<td>isMain</td>
+<td>Boolean, Mandatory</td>
+<td>Is the product main product in the group?</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-2'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-product'>Get a specific product</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578884957448467117</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"C"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578867116584475564</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578884979555938176</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When you want to get a specific product you can use this endpoint. All you need to pass is your access token and the SKU. This endpoint is cached for efficiency but also ensures that updated product data is served when applicable. </p>
+<h3 id='http-request-url-3'>HTTP Request URL</h3>
+<p><code>GET http://api.gallao.io/catalog/{API version}/products/{SKU}</code></p>
+<h3 id='http-request-header-3'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SKU</td>
+<td>The product SKU</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-3'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>The SKU of the product</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The name of the product</td>
+</tr>
+<tr>
+<td>description</td>
+<td>The description of the product</td>
+</tr>
+<tr>
+<td>groupID</td>
+<td>The product group ID</td>
+</tr>
+<tr>
+<td>regularPrice</td>
+<td>Everyday price</td>
+</tr>
+<tr>
+<td>promotionPrice</td>
+<td>On-sale price</td>
+</tr>
+<tr>
+<td>images</td>
+<td>Product images</td>
+</tr>
+<tr>
+<td>searchKeywords</td>
+<td>Keywords that you want this product to be searched with</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Inventory stock quantity</td>
+</tr>
+<tr>
+<td>category</td>
+<td>Category breadcrumbs</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Product color</td>
+</tr>
+<tr>
+<td>brand</td>
+<td>Product brand</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Product size</td>
+</tr>
+<tr>
+<td>active</td>
+<td>Is product available for sale?</td>
+</tr>
+<tr>
+<td>isMain</td>
+<td>Is the product main product in the group?</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-product'>Update a product</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+     </span><span class="s2">"Sku"</span><span class="p">:</span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Images"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="p">],</span><span class="w">
+     </span><span class="s2">"Description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"GroupID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w"> 
+     </span><span class="s2">"SearchKeywords"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span><span class="s2">"B"</span><span class="p">,</span><span class="w"> </span><span class="s2">"C"</span><span class="p">],</span><span class="w">
+     </span><span class="s2">"RegularPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"PromotionPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Currency"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"IsMain"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Size"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Brand"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Color"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"Category"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="p">],</span><span class="w">
+     </span><span class="s2">"Active"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Updated ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578885765895872226</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1235"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1235"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1235"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"E"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"F"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">67443</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pink"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36A"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response when there is nothing to update:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">304</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nothing to Update ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578885774238860804</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">304</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578885669974853990</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to update your product information in the catalog. For now you need to pass the entire product object with updated parts (this functionality will be improved very soon). When you hit this endpoint, the data in the products collection gets updated, product group data also gets updated automatically, search index is also updated and the cache entry is removed first and updated on the next GET call. </p>
+<h3 id='http-request-url-4'>HTTP Request URL</h3>
+<p><code>PUT http://api.gallao.io/catalog/{API version}/products/{SKU}</code></p>
+<h3 id='http-request-header-4'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-body-parameters'>HTTP Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sku</td>
+<td>String, Max 50 Characters</td>
+<td>The SKU of the product</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Text, Max 250 Characters</td>
+<td>The name of the product</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Text, Max 2048 Characters</td>
+<td>The description of the product</td>
+</tr>
+<tr>
+<td>groupID</td>
+<td>String, Max 50 Characters</td>
+<td>The product group ID</td>
+</tr>
+<tr>
+<td>regularPrice</td>
+<td>Float, Greater than 0</td>
+<td>Everyday price</td>
+</tr>
+<tr>
+<td>promotionPrice</td>
+<td>Float, Greater than 0</td>
+<td>On-sale price</td>
+</tr>
+<tr>
+<td>images</td>
+<td>URL, Mandatory</td>
+<td>Product images</td>
+</tr>
+<tr>
+<td>searchKeywords</td>
+<td>Text, Mandatory</td>
+<td>Keywords that you want this product to be searched with</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Integer, Greater than 0</td>
+<td>Inventory stock quantity</td>
+</tr>
+<tr>
+<td>category</td>
+<td>Text, Mandatory</td>
+<td>Category breadcrumbs</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Text, Optional</td>
+<td>Product color</td>
+</tr>
+<tr>
+<td>brand</td>
+<td>Text, Optional</td>
+<td>Product brand</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Text, Optional</td>
+<td>Product size</td>
+</tr>
+<tr>
+<td>active</td>
+<td>Boolean, Mandatory</td>
+<td>Is product available for sale?</td>
+</tr>
+<tr>
+<td>isMain</td>
+<td>Boolean, Mandatory</td>
+<td>Is the product main product in the group?</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-4'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>The SKU of the product</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The name of the product</td>
+</tr>
+<tr>
+<td>description</td>
+<td>The description of the product</td>
+</tr>
+<tr>
+<td>groupID</td>
+<td>The product group ID</td>
+</tr>
+<tr>
+<td>regularPrice</td>
+<td>Everyday price</td>
+</tr>
+<tr>
+<td>promotionPrice</td>
+<td>On-sale price</td>
+</tr>
+<tr>
+<td>images</td>
+<td>Product images</td>
+</tr>
+<tr>
+<td>searchKeywords</td>
+<td>Keywords that you want this product to be searched with</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Inventory stock quantity</td>
+</tr>
+<tr>
+<td>category</td>
+<td>Category breadcrumbs</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Product color</td>
+</tr>
+<tr>
+<td>brand</td>
+<td>Product brand</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Product size</td>
+</tr>
+<tr>
+<td>active</td>
+<td>Is product available for sale?</td>
+</tr>
+<tr>
+<td>isMain</td>
+<td>Is the product main product in the group?</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-product'>Delete a product</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Deleted ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578886136908917901</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>If the SKU does not exist, the response will look like the following:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578886152262487961</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to remove a product from the catalog. When you hit this endpoint with a valid request, the product in the products collection gets removed, the productgroups collection is also automatically updated and the cache and search index is also updated. If there was only one product in the product group the product group object is also removed from the productgroups collection. </p>
+<h3 id='http-request-url-5'>HTTP Request URL</h3>
+<p><code>DELETE http://api.gallao.io/catalog/{API version}/products/{SKU}</code></p>
+<h3 id='http-request-header-5'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-2'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SKU</td>
+<td>The product SKU</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-5'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-product-group'>Get a product group</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Group Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578886406550794133</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1235"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1235"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RegularPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RegularPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PromotionPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PromotionPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"1235"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"E"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"F"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Colors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Pink"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Brands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"VS"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Sizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"36A"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578884392962398268</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1235"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1235"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1235"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1235"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">99.99</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.99</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"D"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"E"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"F"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">67443</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pink"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36A"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Group Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578886448802758717</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This API endpoint gets a specific product group by product group ID. This endpoint is cached for efficiency and speed. </p>
+<h3 id='http-request-url-6'>HTTP Request URL</h3>
+<p><code>GET http://api.gallao.io/catalog/{API version}/productgroups/{PGID}</code></p>
+<h3 id='http-requesr-header'>HTTP Requesr Header</h3><h3 id='http-request-header-6'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-3'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>PGID</td>
+<td>The product Group ID</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-6'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+<tr>
+<td>Skus</td>
+<td>A list of SKUs of all the products in the group</td>
+</tr>
+<tr>
+<td>Colors</td>
+<td>A list of all the colors from all the products in the group</td>
+</tr>
+<tr>
+<td>Brands</td>
+<td>A list of all the brands from all the products in the group</td>
+</tr>
+<tr>
+<td>Sizes</td>
+<td>A list of all the sizes from all the products in the group</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>A list of all the images from the main product in the group</td>
+</tr>
+<tr>
+<td>SearchKeywords</td>
+<td>A list of all the searchKeywords from all the products in the group</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>Category from the main product in the group</td>
+</tr>
+<tr>
+<td>GroupID</td>
+<td>Product group ID to uniquely identify this product group</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Name from the main product in the group</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Product description</td>
+</tr>
+<tr>
+<td>RegularPriceMin</td>
+<td>Minimum regular price computed in the group</td>
+</tr>
+<tr>
+<td>RegularPriceMax</td>
+<td>Maximum regular price computed in the group</td>
+</tr>
+<tr>
+<td>PromotionPriceMin</td>
+<td>Minimum promotion price computed in the group</td>
+</tr>
+<tr>
+<td>PromotionPriceMax</td>
+<td>Maximum promotion price computed in the group</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>Active flag to indicate if the product is available for sale</td>
+</tr>
+<tr>
+<td>Products</td>
+<td>List of all the product objects for reference</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-product-group'>Delete a product group</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Group Deleted ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578886773436347784</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>If the PGID does not exist, the response will look like the following:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Group Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578886787090095342</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to remove a product group from the productgroups collection in the database. This call also updates the search index. When a product group is deleted, entries of related products in the products collection are also removed. </p>
+<h3 id='http-request-url-7'>HTTP Request URL</h3>
+<p><code>DELETE http://api.gallao.io/catalog/{API version}/productgroups/{PGID}</code></p>
+<h3 id='http-request-header-7'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-4'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>PGID</td>
+<td>The product Group ID</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-7'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h1 id='order-api'>Order API</h1><h2 id='create-an-order'>Create an order</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"OrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55348"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"PaymentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT_PENDING"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"PaymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"OrderStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDERED"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ShippingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111 Edgar Ave"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"C"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888029190398500</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"ProductQuantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Created ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888156909048030</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"OrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderCreationDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888156908373526</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderUpdateDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55348"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"C"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888029190398500</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"ProductQuantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"PaymentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT_PENDING"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PaymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDERED"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ShippingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111 Edgar Ave"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to create an order entry in the database. Details on the fields and the constraints is listed below. </p>
+<h3 id='http-request-url-8'>HTTP Request URL</h3>
+<p><code>POST http://api.gallao.io/orders/{API version}/orders</code></p>
+<h3 id='http-request-header-8'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-body-request-parameters'>HTTP Body Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OrderID</td>
+<td>string, order id to uniquely identify an order in the system</td>
+</tr>
+<tr>
+<td>CustomerID</td>
+<td>string, customer id to bind an order with a customer</td>
+</tr>
+<tr>
+<td>PaymentStatus</td>
+<td>string, payent status identifier of an order</td>
+</tr>
+<tr>
+<td>PaymentAmount</td>
+<td>float,  total order amount</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>string, payment currency like CAD, USD etc ...</td>
+</tr>
+<tr>
+<td>OrderStatus</td>
+<td>string, order status identifier of an order</td>
+</tr>
+<tr>
+<td>ShippingAddress.FirstName</td>
+<td>string, first name of the customer as mentioned on the shipping address</td>
+</tr>
+<tr>
+<td>ShippingAddress.LastName</td>
+<td>string, last name of the customer as mentioned on the shipping address</td>
+</tr>
+<tr>
+<td>ShippingAddress.AddressLineOne</td>
+<td>string, address line one of the shipping address</td>
+</tr>
+<tr>
+<td>ShippingAddress.AddressLineTwo</td>
+<td>string, address line two of the shipping address</td>
+</tr>
+<tr>
+<td>ShippingAddress.City</td>
+<td>string, city of the shipping address</td>
+</tr>
+<tr>
+<td>ShippingAddress.State</td>
+<td>string, state of the shipping address</td>
+</tr>
+<tr>
+<td>ShippingAddress.Country</td>
+<td>string, country of the shipping address</td>
+</tr>
+<tr>
+<td>ShippingAddress.Pincode</td>
+<td>string, pincode of the shipping address</td>
+</tr>
+<tr>
+<td>Products</td>
+<td>Map[SKU]=&gt;{Product Object} Product map for reference</td>
+</tr>
+<tr>
+<td>ProductQuantity</td>
+<td>Map[SKU]=&gt;Quantity, Integer, product quantity map</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-8'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='get-orders-for-a-customer'>Get orders for a customer</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578889591913632532</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"OrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderCreationDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888156908373526</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderUpdateDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55348"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"C"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888029190398500</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"ProductQuantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"PaymentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT_PENDING"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PaymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDERED"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ShippingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111 Edgar Ave"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample API response for non existing order ID</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578889659887108977</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to get all the orders associated with a customer using the customer ID. </p>
+<h3 id='http-request-url-9'>HTTP Request URL</h3>
+<p><code>GET http://api.gallao.io/orders/{API version}/orders/customer/{CID}</code></p>
+<h3 id='http-request-header-9'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-5'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CID</td>
+<td>The Customer ID</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-9'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='get-order-by-order-id'>Get order by order ID</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578889591913632532</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"OrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderCreationDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888156908373526</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderUpdateDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55348"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"C"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888029190398500</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"ProductQuantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"PaymentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAYMENT_PENDING"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PaymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDERED"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ShippingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111 Edgar Ave"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample API response for non existing order ID</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578889659887108977</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to get all the orders associated with a customer using the customer ID. </p>
+<h3 id='http-request-url-10'>HTTP Request URL</h3>
+<p><code>GET http://api.gallao.io/orders/{API version}/orders/{OID}</code></p>
+<h3 id='http-request-header-10'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-6'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OID</td>
+<td>The Order ID</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-10'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='update-order'>Update order</h2>
+<blockquote>
+<p>Sample HTTP Request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"OrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55348"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"PaymentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAID"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"PaymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"OrderStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDERED"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ShippingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111 Edgar Ave"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"C"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888029190398500</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"ProductQuantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Updated ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578890371677332692</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"OrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderCreationDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderUpdateDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55348"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"C"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888029190398500</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"ProductQuantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"PaymentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAID"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PaymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"OrderStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDERED"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ShippingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111 Edgar Ave"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response (when nothing to update ...):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">304</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Not Updated ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578890430356224891</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response (when an order with order ID does not exist):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">304</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578890459696054203</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to update the order object. </p>
+<h3 id='http-request-url-11'>HTTP Request URL</h3>
+<p><code>PUT http://api.gallao.io/orders/{API version}/orders/{ID}</code></p>
+<h3 id='http-request-header-11'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>Order ID</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-11'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='delete-order-by-order-id'>Delete order by order ID</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Deleted ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578890915789973237</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578890926357243724</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to delete an order using the order ID. Recommended to use this endpoint carefully. </p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>DELETE http://api.gallao.io/orders/{API version}/orders/{ID}</code></p>
+<h3 id='http-request-header-12'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-7'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The Order ID</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-12'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h1 id='search-api'>Search API</h1><h2 id='basic-search'>Basic search</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"Q"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Fields"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Skus"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Search Result ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578891074650533153</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"took"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"relation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eq"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"max_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2876821</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"hits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"_score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2876821</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ffaabbccdd.productgroup.index"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_doc"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_seq_no"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_primary_term"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"_source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"RegularPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"RegularPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"PromotionPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"PromotionPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"1234"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"C"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"A"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="s2">"Colors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"Red"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="s2">"Brands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"VS"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="s2">"Sizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="s2">"36D"</span><span class="w">
+                        </span><span class="p">],</span><span class="w">
+                        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888029191572453</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="s2">"1234"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Product 1234"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55446677"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Description 1234"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.55</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.99</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                    </span><span class="s2">"https://homepages.cae.wisc.edu/~ece533/images/airplane.png"</span><span class="w">
+                                </span><span class="p">],</span><span class="w">
+                                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                    </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                                    </span><span class="s2">"B"</span><span class="p">,</span><span class="w">
+                                    </span><span class="s2">"C"</span><span class="w">
+                                </span><span class="p">],</span><span class="w">
+                                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                                    </span><span class="s2">"A&gt;B&gt;C&gt;D"</span><span class="w">
+                                </span><span class="p">],</span><span class="w">
+                                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36D"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578888029190398408</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"aggregations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Brands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"doc_count_error_upper_bound"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_other_doc_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"buckets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vs"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"doc_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"Colors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"doc_count_error_upper_bound"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_other_doc_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"buckets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"doc_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"Sizes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"doc_count_error_upper_bound"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"sum_other_doc_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"buckets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36d"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"doc_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"_shards"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"successful"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"failed"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to search a product group in the search index. Please note that product group objects are only returned in the response. </p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://api.gallao.io/search/{API version}/productgroups/search</code></p>
+<h3 id='http-request-header-13'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-3'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Q</td>
+<td>String, Query string</td>
+</tr>
+<tr>
+<td>Fields</td>
+<td>[]String, Multiple, query fields</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-13'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h1 id='response-codes'>Response Codes</h1>
+<p>This API uses the following HTTP Response codes:</p>
+
+<table><thead>
+<tr>
+<th>Response Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200  <strong>StatusOK</strong></td>
+<td>The API call was successful</td>
+</tr>
+<tr>
+<td>201  <strong>StatusCreated</strong></td>
+<td>The resource was successfully created</td>
+</tr>
+<tr>
+<td>202  <strong>StatusAccepted</strong></td>
+<td>The API request was accepted</td>
+</tr>
+<tr>
+<td>304  <strong>StatusNotModified</strong></td>
+<td>The request to modify the resource failed for some reason</td>
+</tr>
+<tr>
+<td>400  <strong>StatusBadRequest</strong></td>
+<td>The API call was malformed</td>
+</tr>
+<tr>
+<td>401  <strong>StatusUnauthorized</strong></td>
+<td>The API request is not authorized. Please check your access credentials</td>
+</tr>
+<tr>
+<td>404  <strong>StatusNotFound</strong></td>
+<td>The requested/referenced resource was not found</td>
+</tr>
+<tr>
+<td>500  <strong>StatusInternalServerError</strong></td>
+<td>Something went wrong on our server</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

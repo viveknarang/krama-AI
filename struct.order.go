@@ -10,6 +10,7 @@ type ORDER struct {
 	ProductQuantity   map[string]int64   `json:"ProductQuantity"`
 	PaymentStatus     string             `json:"PaymentStatus"`
 	PaymentAmount     float64            `json:"PaymentAmount"`
+	Currency          string             `json:"Currency"`
 	OrderStatus       string             `json:"OrderStatus"`
 	ShippingAddress   ADDRESS            `json:"ShippingAddress"`
 	Attributes        interface{}        `json:"Attributes"`
