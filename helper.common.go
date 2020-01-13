@@ -28,6 +28,12 @@ func typeof(value interface{}) string {
 
 }
 
+func areCoreServicesUp() bool {
+
+	return pingMongoDB() && pingES() && pingRedis()
+
+}
+
 func pre(w http.ResponseWriter, r *http.Request) bool {
 
 	if (r.Method == http.MethodPost || r.Method == http.MethodPut) && r.Header.Get("Content-Type") != "application/json" {
@@ -40,6 +46,13 @@ func pre(w http.ResponseWriter, r *http.Request) bool {
 	if r.Header.Get("x-access-token") == "" {
 
 		respondWith(w, r, nil, MissingAccessToken, nil, http.StatusBadRequest)
+		return false
+
+	}
+
+	if areCoreServicesUp() {
+
+		respondWith(w, r, nil, ServiceDownMessage, nil, http.StatusServiceUnavailable)
 		return false
 
 	}

@@ -143,6 +143,9 @@ var MissingAccessToken string
 //MissingContentType missing content type
 var MissingContentType string
 
+//ServiceDownMessage api service down message
+var ServiceDownMessage string
+
 const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/system.properties"
 
 func loadSystemProperties() {
@@ -193,6 +196,7 @@ func loadSystemProperties() {
 	SearchIndexExtension = p.GetString("search.elastic.index.extension", "")
 	MissingAccessToken = p.GetString("api.response.message.exception.missingtoken", "")
 	MissingContentType = p.GetString("api.response.message.exception.contentTypeMissing", "")
+	ServiceDownMessage = p.GetString("api.response.message.exception.serviceUnavailable", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion

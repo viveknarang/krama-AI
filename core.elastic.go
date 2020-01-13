@@ -12,25 +12,40 @@ var ESCLIENT *elastic.Client
 
 func connectElastic() bool {
 
-	ctx := context.Background()
-
 	client, err := elastic.NewClient(elastic.SetURL(ElasticURL + ":" + ElasticPort))
 
 	if err != nil {
 		panic(err)
 	}
 
-	info, code, err := client.Ping(ElasticURL + ":" + ElasticPort).Do(ctx)
-
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("Elasticsearch connected at %s:%s and returned with code %d, and version %s\n", ElasticURL, ElasticPort, code, info.Version.Number)
-
 	ESCLIENT = client
 
-	return true
+	return pingES()
+
+}
+
+func pingES() bool {
+
+	var isESUp bool
+
+	ctx := context.Background()
+
+	info, code, err := ESCLIENT.Ping(ElasticURL + ":" + ElasticPort).Do(ctx)
+
+	if err != nil {
+
+		isESUp = false
+		panic(err)
+
+	} else {
+
+		isESUp = true
+
+	}
+
+	fmt.Printf("ACTIVE PING FOR ES: Elasticsearch responding at %s:%s and returned with code %d, and version %s\n", ElasticURL, ElasticPort, code, info.Version.Number)
+
+	return isESUp
 
 }
 

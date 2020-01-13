@@ -23,6 +23,13 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if !areCoreServicesUp() {
+
+		respondWith(w, r, nil, ServiceDownMessage, nil, http.StatusServiceUnavailable)
+		return
+
+	}
+
 	results := findMongoDocument(InternalDB, CustomersDB, bson.M{"CustomerID": rx.CustomerID, "APIKey": rx.APIKey})
 
 	if len(results) != 1 {
