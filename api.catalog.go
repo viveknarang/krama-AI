@@ -79,6 +79,10 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if !validateProduct(w, r, p) {
+		return
+	}
+
 	p.Updated = time.Now().UnixNano()
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
@@ -109,6 +113,10 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		return
+	}
+
+	if !validateProduct(w, r, p) {
 		return
 	}
 
