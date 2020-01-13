@@ -45,9 +45,9 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 
 	}
 
-	if len(product.Description) > 1024 {
+	if len(product.Description) > 10240 {
 
-		respondWith(w, r, nil, "Description field cannot be greater than 1024 characters long", nil, http.StatusBadRequest)
+		respondWith(w, r, nil, "Description field cannot be greater than 10240 characters long", nil, http.StatusBadRequest)
 		return false
 
 	}
@@ -73,16 +73,16 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 
 	}
 
-	if len(product.Category) == 0 {
+	if len(product.Category) == 0 || len(product.Category) > 100 {
 
-		respondWith(w, r, nil, "Category field for any product cannot be empty", nil, http.StatusBadRequest)
+		respondWith(w, r, nil, "Category field for any product cannot be empty  or contain more than 100 categories", nil, http.StatusBadRequest)
 		return false
 
 	}
 
-	if len(product.Images) == 0 {
+	if len(product.Images) == 0 || len(product.Images) > 100 {
 
-		respondWith(w, r, nil, "Images field for any product cannot be empty", nil, http.StatusBadRequest)
+		respondWith(w, r, nil, "Images field for any product cannot be empty or contain more than 100 image URLs", nil, http.StatusBadRequest)
 		return false
 
 	}
@@ -108,9 +108,9 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 
 	}
 
-	if len(product.SearchKeywords) == 0 {
+	if len(product.SearchKeywords) == 0 || len(product.SearchKeywords) > 100 {
 
-		respondWith(w, r, nil, "SearchKeywords field cannot be empty", nil, http.StatusBadRequest)
+		respondWith(w, r, nil, "SearchKeywords field cannot be empty or contain more than 100 search keywords", nil, http.StatusBadRequest)
 		return false
 
 	}
