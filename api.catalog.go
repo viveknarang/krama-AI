@@ -362,7 +362,7 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 
 	if syncProductGroupFromProducts(w, r, priceUpdated, true) {
 
-		respondWith(w, r, nil, "Prices Updated ...", bson.M{"Updated Sku": priceUpdated, "Not Updated Skus": priceNotUpdated, "Not Found Skus": priceNotFound}, http.StatusOK)
+		respondWith(w, r, nil, "Prices Updated ...", bson.M{"Products Updated": priceUpdated, "Products Not Updated": priceNotUpdated, "Products Not Found": priceNotFound}, http.StatusOK)
 
 	} else {
 
@@ -416,7 +416,7 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	if syncProductGroupFromProducts(w, r, quantityUpdated, false) {
 
-		respondWith(w, r, nil, "Inventory Updated ...", bson.M{"Updated Sku": quantityUpdated, "Not Updated Skus": quantityNotUpdated, "Not Found Skus": quantityNotFound}, http.StatusOK)
+		respondWith(w, r, nil, "Inventory Updated ...", bson.M{"Products Updated": quantityUpdated, "Products Not Updated": quantityNotUpdated, "Products Not Found": quantityNotFound}, http.StatusOK)
 
 	} else {
 
