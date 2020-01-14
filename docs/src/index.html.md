@@ -5,8 +5,9 @@ language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.1</span>
-  - <a href='mailto:vivek.narang10@gmail.com'>Contact Us</a>
+  - <span>API documentation version 3.2</span>
+  - <a href='mailto:vivek.narang10@gmail.com'><u>Contact Us</u></a><br/><br/><br/><br/>
+  - API documentation generated using:<br/><a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a>
 
 includes:
 ##  - errors
@@ -49,8 +50,8 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
 
 ```json
 {
-    "CustomerID" : "0100456",
-    "APIKey"     : "123445"
+  "CustomerID": "6476154099",
+  "APIKey": "zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx"
 }
 ```
 
@@ -61,9 +62,9 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
     "Code": 200,
     "Success": true,
     "Message": "Login Successful ...",
-    "Time": 1578855509733742430,
+    "Time": 1579026954047130825,
     "Response": {
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJmZmFhYmJjY2RkIiwiZXhwIjoxNTc4OTM1NTA5LCJpYXQiOjE1Nzg4NTU1MDksIm5iZiI6MTU3ODg1NTQwOSwidWlkIjoiYzU1NWRmMDEtZTlkYy00NDU3LThlMzEtNWQ2ZjU3ODZmOTJiIn0.MQVnZymGzDjR6cW9QHT8SC6HazqkkJRcowqx85C2wrw",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJDb250ZUFtZXJpY2EiLCJleHAiOjE1NzkxMDY5NTQsImlhdCI6MTU3OTAyNjk1NCwibmJmIjoxNTc5MDI2ODU0LCJ1aWQiOiIwMjQ0Zjg1NS1jMWQ3LTQyNGYtOWI5OS04NGZmYWNiYzYwOGUifQ.6IhX3X321NlZFtSSf3JUPisD7fTxqeVrCpHQ6WDDgIk",
         "validForSeconds": 80000
     }
 }
@@ -74,9 +75,9 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
 ```json
 {
     "Code": 401,
-    "Success": true,
+    "Success": false,
     "Message": "You need to either login or your access token is either expired, invalid, or corrupt ...",
-    "Time": 1578882700872915416,
+    "Time": 1579029101079922462,
     "Response": null
 }
 ```
@@ -86,9 +87,9 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
 ```json
 {
     "Code": 401,
-    "Success": true,
+    "Success": false,
     "Message": "Login Failed! Please check your credentials and also make sure that you are an active customer ...",
-    "Time": 1578882733720622060,
+    "Time": 1579027031268672037,
     "Response": null
 }
 ```
@@ -143,22 +144,50 @@ With the field validForSeconds in response, you can calculate the time after wit
 
 ```json
 {
-	 "Sku":"1234",
-	 "Name": "Test Product 1234",
-	 "Images" : ["https://homepages.cae.wisc.edu/~ece533/images/airplane.png"],
-	 "Description" : "Test Description 1234",
-	 "GroupID" : "55446677", 
-	 "SearchKeywords" : ["A","B", "C"],
-	 "RegularPrice" : 12.55,
-	 "PromotionPrice" : 10.99,
-	 "Currency" : "USD",
-	 "IsMain" : true,
-	 "Quantity" : 45,
-	 "Size" : "36D",
-	 "Brand" : "VS",
-	 "Color" : "Red",
-	 "Category" : ["A>B>C>D"],
-	 "Active" : true
+  "Sku": "B07K3BHGL3",
+  "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+  "Images": [
+    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+  ],
+  "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+  "GroupID": "MSLAPS2",
+  "SearchKeywords": [
+    "Laptop",
+    "Microsoft",
+    "Surface"
+  ],
+  "RegularPrice": 2799,
+  "PromotionPrice": 2600,
+  "Currency": "CDN",
+  "IsMain": true,
+  "Quantity": 200,
+  "Size": "13.5 inches",
+  "Brand": "Microsoft",
+  "Color": "Black",
+  "Category": [
+    "Computers & Tablets>Laptops"
+  ],
+  "Active": true,
+  "Attributes": {
+    "Display Size": "13.5 inches",
+    "RAM": "16 GB",
+    "Memory Speed": "1 GHz",
+    "Wireless Standard": "802.11ac",
+    "Number of USB 2.0 Ports": "1",
+    "Series": "Surface Laptop 2",
+    "Item model number": "DAL-00092",
+    "Operating System": "Windows 10 Home",
+    "Item Weight": "1.28 Kg",
+    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+    "Color": "Black",
+    "Processor Count": "16",
+    "Flash Memory Size": "512.00",
+    "Batteries": "1",
+    "ASIN": "B07K3BHGL3",
+    "Shipping Weight": "2.2 kg",
+    "Date First Available": "Nov. 4 2018"
+  }
 }
 ```
 
@@ -169,34 +198,53 @@ With the field validForSeconds in response, you can calculate the time after wit
     "Code": 201,
     "Success": true,
     "Message": "Product Added ...",
-    "Time": 1578884392984514865,
+    "Time": 1579028967992159981,
     "Response": {
-        "Sku": "1234",
-        "Name": "Test Product 1234",
-        "GroupID": "55446677",
-        "Description": "Test Description 1234",
-        "RegularPrice": 12.55,
-        "PromotionPrice": 10.99,
+        "Sku": "B07K3BHGL3",
+        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+        "GroupID": "MSLAPS2",
+        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+        "RegularPrice": 2799,
+        "PromotionPrice": 2600,
         "Images": [
-            "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
         ],
         "SearchKeywords": [
-            "A",
-            "B",
-            "C"
+            "Laptop",
+            "Microsoft",
+            "Surface"
         ],
-        "Quantity": 45,
+        "Quantity": 200,
         "Category": [
-            "A>B>C>D"
+            "Computers & Tablets>Laptops"
         ],
-        "Color": "Red",
-        "Brand": "VS",
-        "Size": "36D",
+        "Color": "Black",
+        "Brand": "Microsoft",
+        "Size": "13.5 inches",
         "Active": true,
-        "Attributes": null,
+        "Attributes": {
+            "ASIN": "B07K3BHGL3",
+            "Batteries": "1",
+            "Color": "Black",
+            "Date First Available": "Nov. 4 2018",
+            "Display Size": "13.5 inches",
+            "Flash Memory Size": "512.00",
+            "Item Weight": "1.28 Kg",
+            "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+            "Item model number": "DAL-00092",
+            "Memory Speed": "1 GHz",
+            "Number of USB 2.0 Ports": "1",
+            "Operating System": "Windows 10 Home",
+            "Processor Count": "16",
+            "RAM": "16 GB",
+            "Series": "Surface Laptop 2",
+            "Shipping Weight": "2.2 kg",
+            "Wireless Standard": "802.11ac"
+        },
         "IsMain": true,
-        "Currency": "USD",
-        "Updated": 1578884392961353657
+        "Currency": "CDN",
+        "Updated": 1579028967412667337
     }
 }
 ```
@@ -257,36 +305,55 @@ Use this API endpoint to add a new product in the products collection. When a pr
 ```json
 {
     "Code": 200,
-    "Success": true,
+    "Success": false,
     "Message": "Product Found ...",
-    "Time": 1578884957448467117,
+    "Time": 1579029290287576701,
     "Response": {
-        "Sku": "1234",
-        "Name": "Test Product 1234",
-        "GroupID": "55446677",
-        "Description": "Test Description 1234",
-        "RegularPrice": 12.55,
-        "PromotionPrice": 10.99,
+        "Sku": "B07K3BHGL3",
+        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+        "GroupID": "MSLAPS2",
+        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+        "RegularPrice": 2799,
+        "PromotionPrice": 2600,
         "Images": [
-            "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
         ],
         "SearchKeywords": [
-            "A",
-            "B",
-            "C"
+            "Laptop",
+            "Microsoft",
+            "Surface"
         ],
-        "Quantity": 45,
+        "Quantity": 200,
         "Category": [
-            "A>B>C>D"
+            "Computers & Tablets>Laptops"
         ],
-        "Color": "Red",
-        "Brand": "VS",
-        "Size": "36D",
+        "Color": "Black",
+        "Brand": "Microsoft",
+        "Size": "13.5 inches",
         "Active": true,
-        "Attributes": null,
+        "Attributes": {
+            "ASIN": "B07K3BHGL3",
+            "Batteries": "1",
+            "Color": "Black",
+            "Date First Available": "Nov. 4 2018",
+            "Display Size": "13.5 inches",
+            "Flash Memory Size": "512.00",
+            "Item Weight": "1.28 Kg",
+            "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+            "Item model number": "DAL-00092",
+            "Memory Speed": "1 GHz",
+            "Number of USB 2.0 Ports": "1",
+            "Operating System": "Windows 10 Home",
+            "Processor Count": "16",
+            "RAM": "16 GB",
+            "Series": "Surface Laptop 2",
+            "Shipping Weight": "2.2 kg",
+            "Wireless Standard": "802.11ac"
+        },
         "IsMain": true,
-        "Currency": "USD",
-        "Updated": 1578867116584475564
+        "Currency": "CDN",
+        "Updated": 1579028967412667337
     }
 }
 ```
@@ -296,9 +363,9 @@ Use this API endpoint to add a new product in the products collection. When a pr
 ```json
 {
     "Code": 404,
-    "Success": true,
+    "Success": false,
     "Message": "Product Not Found ...",
-    "Time": 1578884979555938176,
+    "Time": 1579029354292991837,
     "Response": null
 }
 ```
@@ -357,22 +424,50 @@ When you want to get a specific product you can use this endpoint. All you need 
 
 ```json
 {
-	 "Sku":"1234",
-	 "Name": "Test Product 1234",
-	 "Images" : ["https://homepages.cae.wisc.edu/~ece533/images/airplane.png"],
-	 "Description" : "Test Description 1234",
-	 "GroupID" : "55446677", 
-	 "SearchKeywords" : ["A","B", "C"],
-	 "RegularPrice" : 12.55,
-	 "PromotionPrice" : 10.99,
-	 "Currency" : "USD",
-	 "IsMain" : true,
-	 "Quantity" : 45,
-	 "Size" : "36D",
-	 "Brand" : "VS",
-	 "Color" : "Red",
-	 "Category" : ["A>B>C>D"],
-	 "Active" : true
+  "Sku": "B07K3BHGL3",
+  "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+  "Images": [
+    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+  ],
+  "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+  "GroupID": "MSLAPS2",
+  "SearchKeywords": [
+    "Laptop",
+    "Microsoft",
+    "Surface"
+  ],
+  "RegularPrice": 2999,
+  "PromotionPrice": 2600,
+  "Currency": "CDN",
+  "IsMain": true,
+  "Quantity": 200,
+  "Size": "13.5 inches",
+  "Brand": "Microsoft",
+  "Color": "Black",
+  "Category": [
+    "Computers & Tablets>Laptops"
+  ],
+  "Active": true,
+  "Attributes": {
+    "Display Size": "13.5 inches",
+    "RAM": "16 GB",
+    "Memory Speed": "1 GHz",
+    "Wireless Standard": "802.11ac",
+    "Number of USB 2.0 Ports": "1",
+    "Series": "Surface Laptop 2",
+    "Item model number": "DAL-00092",
+    "Operating System": "Windows 10 Home",
+    "Item Weight": "1.28 Kg",
+    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+    "Color": "Black",
+    "Processor Count": "16",
+    "Flash Memory Size": "512.00",
+    "Batteries": "1",
+    "ASIN": "B07K3BHGL3",
+    "Shipping Weight": "2.2 kg",
+    "Date First Available": "Nov. 4 2018"
+  }
 }
 ```
 
@@ -383,47 +478,54 @@ When you want to get a specific product you can use this endpoint. All you need 
     "Code": 202,
     "Success": true,
     "Message": "Product Updated ...",
-    "Time": 1578885765895872226,
+    "Time": 1579029475468110631,
     "Response": {
-        "Sku": "1235",
-        "Name": "Test Product 1235",
-        "GroupID": "55446677",
-        "Description": "Test Description 1235",
-        "RegularPrice": 99.99,
-        "PromotionPrice": 3.99,
+        "Sku": "B07K3BHGL3",
+        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+        "GroupID": "MSLAPS2",
+        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+        "RegularPrice": 2999,
+        "PromotionPrice": 2600,
         "Images": [
-            "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
         ],
         "SearchKeywords": [
-            "D",
-            "E",
-            "F"
+            "Laptop",
+            "Microsoft",
+            "Surface"
         ],
-        "Quantity": 67443,
+        "Quantity": 200,
         "Category": [
-            "A>B>C>D"
+            "Computers & Tablets>Laptops"
         ],
-        "Color": "Pink",
-        "Brand": "VS",
-        "Size": "36A",
+        "Color": "Black",
+        "Brand": "Microsoft",
+        "Size": "13.5 inches",
         "Active": true,
-        "Attributes": null,
+        "Attributes": {
+            "ASIN": "B07K3BHGL3",
+            "Batteries": "1",
+            "Color": "Black",
+            "Date First Available": "Nov. 4 2018",
+            "Display Size": "13.5 inches",
+            "Flash Memory Size": "512.00",
+            "Item Weight": "1.28 Kg",
+            "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+            "Item model number": "DAL-00092",
+            "Memory Speed": "1 GHz",
+            "Number of USB 2.0 Ports": "1",
+            "Operating System": "Windows 10 Home",
+            "Processor Count": "16",
+            "RAM": "16 GB",
+            "Series": "Surface Laptop 2",
+            "Shipping Weight": "2.2 kg",
+            "Wireless Standard": "802.11ac"
+        },
         "IsMain": true,
-        "Currency": "USD",
+        "Currency": "CDN",
         "Updated": 0
     }
-}
-```
-
-> Sample valid API response when there is nothing to update:
-
-```json
-{
-    "Code": 304,
-    "Success": true,
-    "Message": "Nothing to Update ...",
-    "Time": 1578885774238860804,
-    "Response": null
 }
 ```
 
@@ -432,9 +534,9 @@ When you want to get a specific product you can use this endpoint. All you need 
 ```json
 {
     "Code": 304,
-    "Success": true,
+    "Success": false,
     "Message": "Product Not Found ...",
-    "Time": 1578885669974853990,
+    "Time": 1579029677035327895,
     "Response": null
 }
 ```
@@ -511,16 +613,16 @@ Use this API endpoint to update your product information in the catalog. For now
 
 ```json
 {
-	 "Prices" : {
-	 	"1234" : {
-		 	"RegularPrice" : 111,
-		 	"PromotionPrice" : 102
-	 	},
-	 	"1234588" : {
-		 	"RegularPrice" : 99,
-		 	"PromotionPrice" : 45
-	 	}
-	 }
+  "Prices": {
+    "B07K3BHGL3": {
+      "RegularPrice": 2700,
+      "PromotionPrice": 2500
+    },
+    "B07K3BHGL4": {
+      "RegularPrice": 99,
+      "PromotionPrice": 45
+    }
+  }
 }
 ```
 
@@ -531,14 +633,14 @@ Use this API endpoint to update your product information in the catalog. For now
     "Code": 200,
     "Success": true,
     "Message": "Prices Updated ...",
-    "Time": 1578984706084735751,
+    "Time": 1579029846231436883,
     "Response": {
         "Products Not Found": [
-            "1234588"
+            "B07K3BHGL4"
         ],
         "Products Not Updated": null,
         "Products Updated": [
-            "1234"
+            "B07K3BHGL3"
         ]
     }
 }
@@ -592,10 +694,10 @@ finally a list of skus that were not found. You can use this information to chec
 
 ```json
 {
-	 "Quantity" : {
-			 	"1234" : 100,
-			 	"9999" : 341
-	 }
+  "Quantity": {
+    "B07K3BHGL3": 500,
+    "B07K3BHGL4": 341
+  }
 }
 ```
 
@@ -606,14 +708,14 @@ finally a list of skus that were not found. You can use this information to chec
     "Code": 200,
     "Success": true,
     "Message": "Inventory Updated ...",
-    "Time": 1578985420311573562,
+    "Time": 1579030006188444624,
     "Response": {
         "Products Not Found": [
-            "9999"
+            "B07K3BHGL4"
         ],
         "Products Not Updated": null,
         "Products Updated": [
-            "1234"
+            "B07K3BHGL3"
         ]
     }
 }
@@ -675,7 +777,7 @@ those skus which were not found in the catalog.
 ```json
 {
     "Code": 404,
-    "Success": true,
+    "Success": false,
     "Message": "Product Not Found ...",
     "Time": 1578886152262487961,
     "Response": null
@@ -721,70 +823,143 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
     "Code": 200,
     "Success": true,
     "Message": "Product Group Found ...",
-    "Time": 1578886406550794133,
+    "Time": 1579030135545676974,
     "Response": {
-        "GroupID": "55446677",
-        "Name": "Test Product 1235",
-        "Description": "Test Description 1235",
-        "RegularPriceMin": 99.99,
-        "RegularPriceMax": 99.99,
-        "PromotionPriceMin": 3.99,
-        "PromotionPriceMax": 3.99,
+        "GroupID": "MSLAPS2",
+        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+        "RegularPriceMin": 2700,
+        "RegularPriceMax": 2700,
+        "PromotionPriceMin": 2500,
+        "PromotionPriceMax": 2500,
         "Skus": [
-            "1235"
+            "B07K3BHGL3"
         ],
         "Images": [
-            "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
         ],
         "SearchKeywords": [
-            "D",
-            "E",
-            "F"
+            "Laptop",
+            "Microsoft",
+            "Surface"
         ],
         "Category": [
-            "A>B>C>D"
+            "Computers & Tablets>Laptops"
         ],
         "Colors": [
-            "Pink"
+            "Black"
         ],
         "Brands": [
-            "VS"
+            "Microsoft"
         ],
         "Sizes": [
-            "36A"
+            "13.5 inches"
         ],
         "Active": true,
-        "Currency": "USD",
-        "Updated": 1578884392962398268,
+        "Currency": "CDN",
+        "Updated": 1579028967414440899,
         "Products": {
-            "1235": {
-                "Sku": "1235",
-                "Name": "Test Product 1235",
-                "GroupID": "55446677",
-                "Description": "Test Description 1235",
-                "RegularPrice": 99.99,
-                "PromotionPrice": 3.99,
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2700,
+                "PromotionPrice": 2500,
                 "Images": [
-                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
                 ],
                 "SearchKeywords": [
-                    "D",
-                    "E",
-                    "F"
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
                 ],
-                "Quantity": 67443,
+                "Quantity": 500,
                 "Category": [
-                    "A>B>C>D"
+                    "Computers & Tablets>Laptops"
                 ],
-                "Color": "Pink",
-                "Brand": "VS",
-                "Size": "36A",
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
                 "Active": true,
-                "Attributes": null,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2.0 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
                 "IsMain": true,
-                "Currency": "USD",
+                "Currency": "CDN",
                 "Updated": 0
             }
+        },
+        "Attributes": {
+            "ASIN": [
+                "B07K3BHGL3"
+            ],
+            "Batteries": [
+                "1"
+            ],
+            "Color": [
+                "Black"
+            ],
+            "Date First Available": [
+                "Nov. 4 2018"
+            ],
+            "Display Size": [
+                "13.5 inches"
+            ],
+            "Flash Memory Size": [
+                "512.00"
+            ],
+            "Item Weight": [
+                "1.28 Kg"
+            ],
+            "Item dimensions L x W x H": [
+                "17.8 x 12.7 x 15.2 cm"
+            ],
+            "Item model number": [
+                "DAL-00092"
+            ],
+            "Memory Speed": [
+                "1 GHz"
+            ],
+            "Number of USB 2.0 Ports": [
+                "1"
+            ],
+            "Operating System": [
+                "Windows 10 Home"
+            ],
+            "Processor Count": [
+                "16"
+            ],
+            "RAM": [
+                "16 GB"
+            ],
+            "Series": [
+                "Surface Laptop 2"
+            ],
+            "Shipping Weight": [
+                "2.2 kg"
+            ],
+            "Wireless Standard": [
+                "802.11ac"
+            ]
         }
     }
 }
@@ -795,7 +970,7 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
 ```json
 {
     "Code": 404,
-    "Success": true,
+    "Success": false,
     "Message": "Product Group Not Found ...",
     "Time": 1578886448802758717,
     "Response": null
@@ -872,7 +1047,7 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 ```json
 {
     "Code": 404,
-    "Success": true,
+    "Success": false,
     "Message": "Product Group Not Found ...",
     "Time": 1578886787090095342,
     "Response": null
@@ -922,8 +1097,8 @@ Use this API endpoint to remove a product group from the productgroups collectio
   "OrderID": "1234567",
   "CustomerID": "55348",
   "PaymentStatus": "PAYMENT_PENDING",
-  "PaymentAmount": 10.99,
-  "Currency": "CAD",
+  "PaymentAmount": 2600,
+  "Currency": "CDN",
   "OrderStatus": "ORDERED",
   "ShippingAddress": {
     "FirstName": "Vivek",
@@ -936,37 +1111,56 @@ Use this API endpoint to remove a product group from the productgroups collectio
     "Pincode": "L4C 6K3"
   },
   "Products": {
-    "1234": {
-      "Sku": "1234",
-      "Name": "Test Product 1234",
-      "GroupID": "55446677",
-      "Description": "Test Description 1234",
-      "RegularPrice": 12.55,
-      "PromotionPrice": 10.99,
+    "B07K3BHGL3": {
+      "Sku": "B07K3BHGL3",
+      "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+      "GroupID": "MSLAPS2",
+      "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+      "RegularPrice": 2999,
+      "PromotionPrice": 2600,
       "Images": [
-        "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+        "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+        "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
       ],
       "SearchKeywords": [
-        "A",
-        "B",
-        "C"
+        "Laptop",
+        "Microsoft",
+        "Surface"
       ],
-      "Quantity": 45,
+      "Quantity": 200,
       "Category": [
-        "A>B>C>D"
+        "Computers & Tablets>Laptops"
       ],
-      "Color": "Red",
-      "Brand": "VS",
-      "Size": "36D",
+      "Color": "Black",
+      "Brand": "Microsoft",
+      "Size": "13.5 inches",
       "Active": true,
-      "Attributes": null,
+      "Attributes": {
+        "ASIN": "B07K3BHGL3",
+        "Batteries": "1",
+        "Color": "Black",
+        "Date First Available": "Nov. 4 2018",
+        "Display Size": "13.5 inches",
+        "Flash Memory Size": "512.00",
+        "Item Weight": "1.28 Kg",
+        "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+        "Item model number": "DAL-00092",
+        "Memory Speed": "1 GHz",
+        "Number of USB 2.0 Ports": "1",
+        "Operating System": "Windows 10 Home",
+        "Processor Count": "16",
+        "RAM": "16 GB",
+        "Series": "Surface Laptop 2",
+        "Shipping Weight": "2.2 kg",
+        "Wireless Standard": "802.11ac"
+      },
       "IsMain": true,
-      "Currency": "USD",
-      "Updated": 1578888029190398500
+      "Currency": "CDN",
+      "Updated": 0
     }
   },
   "ProductQuantity": {
-    "1234": 1
+    "B07K3BHGL3": 1
   }
 }
 ```
@@ -979,48 +1173,67 @@ Use this API endpoint to remove a product group from the productgroups collectio
     "Code": 201,
     "Success": true,
     "Message": "Order Created ...",
-    "Time": 1578888156909048030,
+    "Time": 1579030377363245763,
     "Response": {
         "OrderID": "1234567",
-        "OrderCreationDate": 1578888156908373526,
+        "OrderCreationDate": 1579030377359016931,
         "OrderUpdateDate": 0,
         "CustomerID": "55348",
         "Products": {
-            "1234": {
-                "Sku": "1234",
-                "Name": "Test Product 1234",
-                "GroupID": "55446677",
-                "Description": "Test Description 1234",
-                "RegularPrice": 12.55,
-                "PromotionPrice": 10.99,
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2999,
+                "PromotionPrice": 2600,
                 "Images": [
-                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
                 ],
                 "SearchKeywords": [
-                    "A",
-                    "B",
-                    "C"
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
                 ],
-                "Quantity": 45,
+                "Quantity": 200,
                 "Category": [
-                    "A>B>C>D"
+                    "Computers & Tablets>Laptops"
                 ],
-                "Color": "Red",
-                "Brand": "VS",
-                "Size": "36D",
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
                 "Active": true,
-                "Attributes": null,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2.0 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
                 "IsMain": true,
-                "Currency": "USD",
-                "Updated": 1578888029190398500
+                "Currency": "CDN",
+                "Updated": 0
             }
         },
         "ProductQuantity": {
-            "1234": 1
+            "B07K3BHGL3": 1
         },
         "PaymentStatus": "PAYMENT_PENDING",
-        "PaymentAmount": 10.99,
-        "Currency": "CAD",
+        "PaymentAmount": 2600,
+        "Currency": "CDN",
         "OrderStatus": "ORDERED",
         "ShippingAddress": {
             "FirstName": "Vivek",
@@ -1092,48 +1305,67 @@ Use this endpoint to create an order entry in the database. Details on the field
     "Code": 200,
     "Success": true,
     "Message": "Order Found ...",
-    "Time": 1578889591913632532,
+    "Time": 1579030536721609239,
     "Response": {
         "OrderID": "1234567",
-        "OrderCreationDate": 1578888156908373526,
+        "OrderCreationDate": 1579030377359016931,
         "OrderUpdateDate": 0,
         "CustomerID": "55348",
         "Products": {
-            "1234": {
-                "Sku": "1234",
-                "Name": "Test Product 1234",
-                "GroupID": "55446677",
-                "Description": "Test Description 1234",
-                "RegularPrice": 12.55,
-                "PromotionPrice": 10.99,
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2999,
+                "PromotionPrice": 2600,
                 "Images": [
-                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
                 ],
                 "SearchKeywords": [
-                    "A",
-                    "B",
-                    "C"
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
                 ],
-                "Quantity": 45,
+                "Quantity": 200,
                 "Category": [
-                    "A>B>C>D"
+                    "Computers & Tablets>Laptops"
                 ],
-                "Color": "Red",
-                "Brand": "VS",
-                "Size": "36D",
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
                 "Active": true,
-                "Attributes": null,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2.0 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
                 "IsMain": true,
-                "Currency": "USD",
-                "Updated": 1578888029190398500
+                "Currency": "CDN",
+                "Updated": 0
             }
         },
         "ProductQuantity": {
-            "1234": 1
+            "B07K3BHGL3": 1
         },
         "PaymentStatus": "PAYMENT_PENDING",
-        "PaymentAmount": 10.99,
-        "Currency": "CAD",
+        "PaymentAmount": 2600,
+        "Currency": "CDN",
         "OrderStatus": "ORDERED",
         "ShippingAddress": {
             "FirstName": "Vivek",
@@ -1155,7 +1387,7 @@ Use this endpoint to create an order entry in the database. Details on the field
 ```json
 {
     "Code": 404,
-    "Success": true,
+    "Success": false,
     "Message": "Order Not Found ...",
     "Time": 1578889659887108977,
     "Response": null
@@ -1201,48 +1433,67 @@ Use this endpoint to get all the orders associated with a customer using the cus
     "Code": 200,
     "Success": true,
     "Message": "Order Found ...",
-    "Time": 1578889591913632532,
+    "Time": 1579030494721736586,
     "Response": {
         "OrderID": "1234567",
-        "OrderCreationDate": 1578888156908373526,
+        "OrderCreationDate": 1579030377359016931,
         "OrderUpdateDate": 0,
         "CustomerID": "55348",
         "Products": {
-            "1234": {
-                "Sku": "1234",
-                "Name": "Test Product 1234",
-                "GroupID": "55446677",
-                "Description": "Test Description 1234",
-                "RegularPrice": 12.55,
-                "PromotionPrice": 10.99,
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2999,
+                "PromotionPrice": 2600,
                 "Images": [
-                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
                 ],
                 "SearchKeywords": [
-                    "A",
-                    "B",
-                    "C"
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
                 ],
-                "Quantity": 45,
+                "Quantity": 200,
                 "Category": [
-                    "A>B>C>D"
+                    "Computers & Tablets>Laptops"
                 ],
-                "Color": "Red",
-                "Brand": "VS",
-                "Size": "36D",
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
                 "Active": true,
-                "Attributes": null,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2.0 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
                 "IsMain": true,
-                "Currency": "USD",
-                "Updated": 1578888029190398500
+                "Currency": "CDN",
+                "Updated": 0
             }
         },
         "ProductQuantity": {
-            "1234": 1
+            "B07K3BHGL3": 1
         },
         "PaymentStatus": "PAYMENT_PENDING",
-        "PaymentAmount": 10.99,
-        "Currency": "CAD",
+        "PaymentAmount": 2600,
+        "Currency": "CDN",
         "OrderStatus": "ORDERED",
         "ShippingAddress": {
             "FirstName": "Vivek",
@@ -1264,7 +1515,7 @@ Use this endpoint to get all the orders associated with a customer using the cus
 ```json
 {
     "Code": 404,
-    "Success": true,
+    "Success": false,
     "Message": "Order Not Found ...",
     "Time": 1578889659887108977,
     "Response": null
@@ -1311,8 +1562,8 @@ Use this endpoint to get all the orders associated with a customer using the cus
   "OrderID": "1234567",
   "CustomerID": "55348",
   "PaymentStatus": "PAID",
-  "PaymentAmount": 10.99,
-  "Currency": "CAD",
+  "PaymentAmount": 2600.0,
+  "Currency": "CDN",
   "OrderStatus": "ORDERED",
   "ShippingAddress": {
     "FirstName": "Vivek",
@@ -1325,37 +1576,56 @@ Use this endpoint to get all the orders associated with a customer using the cus
     "Pincode": "L4C 6K3"
   },
   "Products": {
-    "1234": {
-      "Sku": "1234",
-      "Name": "Test Product 1234",
-      "GroupID": "55446677",
-      "Description": "Test Description 1234",
-      "RegularPrice": 12.55,
-      "PromotionPrice": 10.99,
-      "Images": [
-        "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
-      ],
-      "SearchKeywords": [
-        "A",
-        "B",
-        "C"
-      ],
-      "Quantity": 45,
-      "Category": [
-        "A>B>C>D"
-      ],
-      "Color": "Red",
-      "Brand": "VS",
-      "Size": "36D",
-      "Active": true,
-      "Attributes": null,
-      "IsMain": true,
-      "Currency": "USD",
-      "Updated": 1578888029190398500
+    "B07K3BHGL3": {
+        "Sku": "B07K3BHGL3",
+        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+        "GroupID": "MSLAPS2",
+        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+        "RegularPrice": 2999,
+        "PromotionPrice": 2600,
+        "Images": [
+            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+        ],
+        "SearchKeywords": [
+            "Laptop",
+            "Microsoft",
+            "Surface"
+        ],
+        "Quantity": 200,
+        "Category": [
+            "Computers & Tablets>Laptops"
+        ],
+        "Color": "Black",
+        "Brand": "Microsoft",
+        "Size": "13.5 inches",
+        "Active": true,
+        "Attributes": {
+            "ASIN": "B07K3BHGL3",
+            "Batteries": "1",
+            "Color": "Black",
+            "Date First Available": "Nov. 4 2018",
+            "Display Size": "13.5 inches",
+            "Flash Memory Size": "512.00",
+            "Item Weight": "1.28 Kg",
+            "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+            "Item model number": "DAL-00092",
+            "Memory Speed": "1 GHz",
+            "Number of USB 2.0 Ports": "1",
+            "Operating System": "Windows 10 Home",
+            "Processor Count": "16",
+            "RAM": "16 GB",
+            "Series": "Surface Laptop 2",
+            "Shipping Weight": "2.2 kg",
+            "Wireless Standard": "802.11ac"
+        },
+        "IsMain": true,
+        "Currency": "CDN",
+        "Updated": 0
     }
   },
   "ProductQuantity": {
-    "1234": 1
+    "B07K3BHGL3": 1
   }
 }
 ```
@@ -1367,48 +1637,67 @@ Use this endpoint to get all the orders associated with a customer using the cus
     "Code": 202,
     "Success": true,
     "Message": "Order Updated ...",
-    "Time": 1578890371677332692,
+    "Time": 1579030671407502692,
     "Response": {
         "OrderID": "1234567",
         "OrderCreationDate": 0,
         "OrderUpdateDate": 0,
         "CustomerID": "55348",
         "Products": {
-            "1234": {
-                "Sku": "1234",
-                "Name": "Test Product 1234",
-                "GroupID": "55446677",
-                "Description": "Test Description 1234",
-                "RegularPrice": 12.55,
-                "PromotionPrice": 10.99,
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2999,
+                "PromotionPrice": 2600,
                 "Images": [
-                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
                 ],
                 "SearchKeywords": [
-                    "A",
-                    "B",
-                    "C"
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
                 ],
-                "Quantity": 45,
+                "Quantity": 200,
                 "Category": [
-                    "A>B>C>D"
+                    "Computers & Tablets>Laptops"
                 ],
-                "Color": "Red",
-                "Brand": "VS",
-                "Size": "36D",
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
                 "Active": true,
-                "Attributes": null,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2.0 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
                 "IsMain": true,
-                "Currency": "USD",
-                "Updated": 1578888029190398500
+                "Currency": "CDN",
+                "Updated": 0
             }
         },
         "ProductQuantity": {
-            "1234": 1
+            "B07K3BHGL3": 1
         },
         "PaymentStatus": "PAID",
-        "PaymentAmount": 10.99,
-        "Currency": "CAD",
+        "PaymentAmount": 2600,
+        "Currency": "CDN",
         "OrderStatus": "ORDERED",
         "ShippingAddress": {
             "FirstName": "Vivek",
@@ -1425,24 +1714,12 @@ Use this endpoint to get all the orders associated with a customer using the cus
 }
 ```
 
-> Sample invalid API response (when nothing to update ...):
-
-```json
-{
-    "Code": 304,
-    "Success": true,
-    "Message": "Order Not Updated ...",
-    "Time": 1578890430356224891,
-    "Response": null
-}
-```
-
 > Sample invalid API response (when an order with order ID does not exist):
 
 ```json
 {
     "Code": 304,
-    "Success": true,
+    "Success": false,
     "Message": "Order Not Found ...",
     "Time": 1578890459696054203,
     "Response": null
@@ -1505,7 +1782,7 @@ Use this endpoint to update the order object.
 ```json
 {
     "Code": 404,
-    "Success": true,
+    "Success": false,
     "Message": "Order Not Found ...",
     "Time": 1578890926357243724,
     "Response": null
@@ -1552,8 +1829,11 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
 
 ```json
 {
-  "Q" : "1234",
-  "Fields" : ["Name", "Skus"]
+  "Q": "Surface Laptop 2",
+  "Fields": [
+    "Name",
+    "Skus"
+  ]
 }
 ```
 
@@ -1564,86 +1844,159 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
     "Code": 200,
     "Success": true,
     "Message": "Search Result ...",
-    "Time": 1578891074650533153,
+    "Time": 1579030869519210940,
     "Response": {
-        "took": 8,
+        "took": 88,
         "hits": {
             "total": {
                 "value": 1,
                 "relation": "eq"
             },
-            "max_score": 0.2876821,
+            "max_score": 0.26103413,
             "hits": [
                 {
-                    "_score": 0.2876821,
+                    "_score": 0.26103413,
                     "_index": "ffaabbccdd.productgroup.index",
                     "_type": "_doc",
-                    "_id": "55446677",
+                    "_id": "MSLAPS2",
                     "_seq_no": null,
                     "_primary_term": null,
                     "_source": {
-                        "GroupID": "55446677",
-                        "Name": "Test Product 1234",
-                        "Description": "Test Description 1234",
-                        "RegularPriceMin": 12.55,
-                        "RegularPriceMax": 12.55,
-                        "PromotionPriceMin": 10.99,
-                        "PromotionPriceMax": 10.99,
+                        "GroupID": "MSLAPS2",
+                        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                        "RegularPriceMin": 2700,
+                        "RegularPriceMax": 2700,
+                        "PromotionPriceMin": 2500,
+                        "PromotionPriceMax": 2500,
                         "Skus": [
-                            "1234"
+                            "B07K3BHGL3"
                         ],
                         "Images": [
-                            "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
                         ],
                         "SearchKeywords": [
-                            "B",
-                            "C",
-                            "A"
+                            "Laptop",
+                            "Microsoft",
+                            "Surface"
                         ],
                         "Category": [
-                            "A>B>C>D"
+                            "Computers & Tablets>Laptops"
                         ],
                         "Colors": [
-                            "Red"
+                            "Black"
                         ],
                         "Brands": [
-                            "VS"
+                            "Microsoft"
                         ],
                         "Sizes": [
-                            "36D"
+                            "13.5 inches"
                         ],
                         "Active": true,
-                        "Currency": "USD",
-                        "Updated": 1578888029191572453,
+                        "Currency": "CDN",
+                        "Updated": 1579028967414440899,
                         "Products": {
-                            "1234": {
-                                "Sku": "1234",
-                                "Name": "Test Product 1234",
-                                "GroupID": "55446677",
-                                "Description": "Test Description 1234",
-                                "RegularPrice": 12.55,
-                                "PromotionPrice": 10.99,
+                            "B07K3BHGL3": {
+                                "Sku": "B07K3BHGL3",
+                                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                                "GroupID": "MSLAPS2",
+                                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                                "RegularPrice": 2700,
+                                "PromotionPrice": 2500,
                                 "Images": [
-                                    "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+                                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
                                 ],
                                 "SearchKeywords": [
-                                    "A",
-                                    "B",
-                                    "C"
+                                    "Laptop",
+                                    "Microsoft",
+                                    "Surface"
                                 ],
-                                "Quantity": 45,
+                                "Quantity": 500,
                                 "Category": [
-                                    "A>B>C>D"
+                                    "Computers & Tablets>Laptops"
                                 ],
-                                "Color": "Red",
-                                "Brand": "VS",
-                                "Size": "36D",
+                                "Color": "Black",
+                                "Brand": "Microsoft",
+                                "Size": "13.5 inches",
                                 "Active": true,
-                                "Attributes": null,
+                                "Attributes": {
+                                    "ASIN": "B07K3BHGL3",
+                                    "Batteries": "1",
+                                    "Color": "Black",
+                                    "Date First Available": "Nov. 4 2018",
+                                    "Display Size": "13.5 inches",
+                                    "Flash Memory Size": "512.00",
+                                    "Item Weight": "1.28 Kg",
+                                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                                    "Item model number": "DAL-00092",
+                                    "Memory Speed": "1 GHz",
+                                    "Number of USB 2.0 Ports": "1",
+                                    "Operating System": "Windows 10 Home",
+                                    "Processor Count": "16",
+                                    "RAM": "16 GB",
+                                    "Series": "Surface Laptop 2",
+                                    "Shipping Weight": "2.2 kg",
+                                    "Wireless Standard": "802.11ac"
+                                },
                                 "IsMain": true,
-                                "Currency": "USD",
-                                "Updated": 1578888029190398408
+                                "Currency": "CDN",
+                                "Updated": 0
                             }
+                        },
+                        "Attributes": {
+                            "ASIN": [
+                                "B07K3BHGL3"
+                            ],
+                            "Batteries": [
+                                "1"
+                            ],
+                            "Color": [
+                                "Black"
+                            ],
+                            "Date First Available": [
+                                "Nov. 4 2018"
+                            ],
+                            "Display Size": [
+                                "13.5 inches"
+                            ],
+                            "Flash Memory Size": [
+                                "512.00"
+                            ],
+                            "Item Weight": [
+                                "1.28 Kg"
+                            ],
+                            "Item dimensions L x W x H": [
+                                "17.8 x 12.7 x 15.2 cm"
+                            ],
+                            "Item model number": [
+                                "DAL-00092"
+                            ],
+                            "Memory Speed": [
+                                "1 GHz"
+                            ],
+                            "Number of USB 2.0 Ports": [
+                                "1"
+                            ],
+                            "Operating System": [
+                                "Windows 10 Home"
+                            ],
+                            "Processor Count": [
+                                "16"
+                            ],
+                            "RAM": [
+                                "16 GB"
+                            ],
+                            "Series": [
+                                "Surface Laptop 2"
+                            ],
+                            "Shipping Weight": [
+                                "2.2 kg"
+                            ],
+                            "Wireless Standard": [
+                                "802.11ac"
+                            ]
                         }
                     }
                 }
@@ -1655,7 +2008,7 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
                 "sum_other_doc_count": 0,
                 "buckets": [
                     {
-                        "key": "vs",
+                        "key": "microsoft",
                         "doc_count": 1
                     }
                 ]
@@ -1665,7 +2018,7 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
                 "sum_other_doc_count": 0,
                 "buckets": [
                     {
-                        "key": "red",
+                        "key": "black",
                         "doc_count": 1
                     }
                 ]
@@ -1675,7 +2028,7 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
                 "sum_other_doc_count": 0,
                 "buckets": [
                     {
-                        "key": "36d",
+                        "key": "13.5",
                         "doc_count": 1
                     }
                 ]
