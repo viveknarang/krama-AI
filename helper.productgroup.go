@@ -15,11 +15,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 
-	dbcol := cidb + ProductGroupExtension
+	pgcol := cidb + ProductGroupExtension
 
 	pgindex := cidb + ProductGroupExtension + SearchIndexExtension
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
+	results := findMongoDocument(ExternalDB, pgcol, bson.M{"groupid": p.GroupID})
 
 	if r.Method == http.MethodPost {
 
@@ -79,7 +79,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			npg.Updated = time.Now().UnixNano()
 
-			insertMongoDocument(ExternalDB, dbcol, npg)
+			insertMongoDocument(ExternalDB, pgcol, npg)
 
 			response = indexES(pgindex, PGMapping, npg, npg.GroupID)
 
@@ -183,7 +183,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			productGroup.Active = active
 			productGroup.Skus = toArrayFromSet()
 
-			result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
+			result := updateMongoDocument(ExternalDB, pgcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
 				response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
@@ -293,7 +293,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		productGroup.Active = active
 		productGroup.Skus = toArrayFromSet()
 
-		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
+		result := updateMongoDocument(ExternalDB, pgcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 		if result[0] == 1 && result[1] == 1 {
 			response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
@@ -321,7 +321,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		if len(productGroup.Products) == 1 {
 
-			delr := deleteMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID})
+			delr := deleteMongoDocument(ExternalDB, pgcol, bson.M{"groupid": p.GroupID})
 
 			if delr == 1 {
 				response = deleteESDocumentByID(pgindex, p.GroupID)
@@ -418,12 +418,134 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			}
 			productGroup.Category = toArrayFromSet()
 
-			result := updateMongoDocument(ExternalDB, dbcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
+			result := updateMongoDocument(ExternalDB, pgcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
 				response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 			} else {
 				response = false
+			}
+
+		}
+
+	}
+
+	return response
+}
+
+func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus []string, isPriceUpdate bool) bool {
+
+	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+
+	pgcol := cidb + ProductGroupExtension
+
+	pcol := cidb + ProductExtension
+
+	pgindex := cidb + ProductGroupExtension + SearchIndexExtension
+
+	response := true
+
+	for _, sku := range skus {
+
+		results := findMongoDocument(ExternalDB, pcol, bson.M{"sku": sku})
+
+		if len(results) != 1 {
+			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound)
+			return false
+		}
+
+		j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+		if err0 != nil {
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			return false
+		}
+
+		var product PRODUCT
+
+		err1 := json.Unmarshal([]byte(j), &product)
+
+		if err1 != nil {
+			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			return false
+		}
+
+		result := updateMongoDocument(ExternalDB, pgcol, bson.M{"groupid": product.GroupID}, bson.M{"$set": bson.M{"products." + product.Sku: product}})
+
+		if result[0] == 1 && result[1] == 1 {
+
+			results := findMongoDocument(ExternalDB, pgcol, bson.M{"groupid": product.GroupID})
+
+			var productGroup PRODUCTGROUP
+
+			j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+			if err0 != nil {
+				respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+				return false
+			}
+
+			err1 := json.Unmarshal([]byte(j), &productGroup)
+
+			if err1 != nil {
+				respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+				return false
+			}
+
+			if isPriceUpdate {
+
+				nrpmin := math.MaxFloat64
+				var nrpmax float64
+				nppmin := math.MaxFloat64
+				var nppmax float64
+
+				for _, value := range productGroup.Products {
+
+					if value.RegularPrice < nrpmin {
+						nrpmin = value.RegularPrice
+					}
+					if value.RegularPrice > nrpmax {
+						nrpmax = value.RegularPrice
+					}
+					if value.PromotionPrice < nppmin {
+						nppmin = value.PromotionPrice
+					}
+					if value.PromotionPrice > nppmax {
+						nppmax = value.PromotionPrice
+					}
+
+				}
+
+				result := updateMongoDocument(ExternalDB, pgcol, bson.M{"groupid": product.GroupID}, bson.M{"$set": bson.M{"regularpricemin": nrpmin, "regularpricemax": nrpmax, "promotionpricemin": nppmin, "promotionpricemax": nppmax}})
+
+				if result[0] == 1 && result[1] == 1 {
+
+					results := findMongoDocument(ExternalDB, pgcol, bson.M{"groupid": product.GroupID})
+
+					var productGroup PRODUCTGROUP
+
+					j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+					if err0 != nil {
+						respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+						return false
+					}
+
+					err1 := json.Unmarshal([]byte(j), &productGroup)
+
+					if err1 != nil {
+						respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+						return false
+					}
+
+					response = response && indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
+
+				}
+
+			} else {
+
+				response = response && indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
+
 			}
 
 		}

@@ -317,3 +317,97 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
+
+	if !pre(w, r) {
+		return
+	}
+
+	var prices PRICEUPDATEREQUEST
+
+	err := json.NewDecoder(r.Body).Decode(&prices)
+
+	if err != nil {
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		return
+	}
+
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+
+	var priceUpdated []string
+	var priceNotUpdated []string
+	var priceNotFound []string
+
+	for sku, price := range prices.Prices {
+
+		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku}, bson.M{"$set": bson.M{"regularprice": price.RegularPrice, "promotionprice": price.PromotionPrice}})
+
+		if result[0] == 1 && result[1] == 1 {
+			priceUpdated = append(priceUpdated, sku)
+		} else if result[0] == 1 && result[1] == 0 {
+			priceNotUpdated = append(priceNotUpdated, sku)
+		} else if result[0] == 0 && result[1] == 0 {
+			priceNotFound = append(priceNotFound, sku)
+		}
+
+	}
+
+	if syncProductGroupFromProducts(w, r, priceUpdated, true) {
+
+		respondWith(w, r, nil, "Prices Updated ...", bson.M{"Updated Sku": priceUpdated, "Not Updated Skus": priceNotUpdated, "Not Found Skus": priceNotFound}, http.StatusOK)
+
+	} else {
+
+		respondWith(w, r, nil, "Prices Not updated ...", nil, http.StatusNotModified)
+
+	}
+
+}
+
+func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
+
+	if !pre(w, r) {
+		return
+	}
+
+	var quantities INVENTORYUPDATEREQUEST
+
+	err := json.NewDecoder(r.Body).Decode(&quantities)
+
+	if err != nil {
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		return
+	}
+
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+
+	var quantityUpdated []string
+	var quantityNotUpdated []string
+	var quantityNotFound []string
+
+	for sku, quantity := range quantities.Quantity {
+
+		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku}, bson.M{"$set": bson.M{"quantity": quantity}})
+
+		if result[0] == 1 && result[1] == 1 {
+			quantityUpdated = append(quantityUpdated, sku)
+		} else if result[0] == 1 && result[1] == 0 {
+			quantityNotUpdated = append(quantityNotUpdated, sku)
+		} else if result[0] == 0 && result[1] == 0 {
+			quantityNotFound = append(quantityNotFound, sku)
+		}
+
+	}
+
+	if syncProductGroupFromProducts(w, r, quantityUpdated, false) {
+
+		respondWith(w, r, nil, "Inventory Updated ...", bson.M{"Updated Sku": quantityUpdated, "Not Updated Skus": quantityNotUpdated, "Not Found Skus": quantityNotFound}, http.StatusOK)
+
+	} else {
+
+		respondWith(w, r, nil, "Inventory Not updated ...", nil, http.StatusNotModified)
+
+	}
+
+}
