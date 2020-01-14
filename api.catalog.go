@@ -333,6 +333,13 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	for sku, price := range prices.Prices {
+		if price.RegularPrice < 0 || price.PromotionPrice < 0 {
+			respondWith(w, r, err, "Price for sku: "+sku+" is negative. Prices cannot be negative ...", nil, http.StatusBadRequest)
+			return
+		}
+	}
+
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 
 	var priceUpdated []string
@@ -378,6 +385,13 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
 		return
+	}
+
+	for sku, quantity := range quantities.Quantity {
+		if quantity < 0 {
+			respondWith(w, r, err, "Inventory for sku: "+sku+" is negative. Quantity field cannot be negative ...", nil, http.StatusBadRequest)
+			return
+		}
 	}
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
