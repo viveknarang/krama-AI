@@ -18,7 +18,7 @@ func pre(w http.ResponseWriter, r *http.Request) bool {
 
 	}
 
-	if areCoreServicesUp() {
+	if !areCoreServicesUp() {
 
 		respondWith(w, r, nil, ServiceDownMessage, nil, http.StatusServiceUnavailable)
 		return false

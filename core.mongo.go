@@ -25,9 +25,8 @@ func connectDB() bool {
 
 	MONGODBCLIENT = client
 
-	if pingMongoDB() {
+	if pingMongoDB(false) {
 
-		fmt.Println("MongoDB connected at " + MongoURL + ":" + MongoPort)
 		return true
 
 	}
@@ -36,13 +35,17 @@ func connectDB() bool {
 
 }
 
-func pingMongoDB() bool {
+func pingMongoDB(silent bool) bool {
 
 	err := MONGODBCLIENT.Ping(context.TODO(), nil)
 
 	if err != nil {
 		log.Fatal(err)
 		return false
+	}
+
+	if !silent {
+		fmt.Println("ACTIVE PING FOR MONGODB: MongoDB responding at " + MongoURL + ":" + MongoPort)
 	}
 
 	return true

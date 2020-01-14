@@ -19,18 +19,12 @@ func connectRedis() bool {
 
 	REDISCLIENT = client
 
-	checkRedis := pingRedis()
-
-	if checkRedis {
-		fmt.Println("Redis connected at " + RedisURL + ":" + RedisPort)
-	} else {
-		return false
-	}
+	checkRedis := pingRedis(false)
 
 	return checkRedis
 }
 
-func pingRedis() bool {
+func pingRedis(silent bool) bool {
 
 	var isRedisUp bool
 
@@ -38,6 +32,9 @@ func pingRedis() bool {
 
 	if pong == "PONG" && err == nil {
 		isRedisUp = true
+		if !silent {
+			fmt.Println("ACTIVE PING FOR REDIS: Redis responding at " + RedisURL + ":" + RedisPort)
+		}
 	} else {
 		isRedisUp = false
 	}

@@ -20,11 +20,11 @@ func connectElastic() bool {
 
 	ESCLIENT = client
 
-	return pingES()
+	return pingES(false)
 
 }
 
-func pingES() bool {
+func pingES(silent bool) bool {
 
 	var isESUp bool
 
@@ -43,7 +43,9 @@ func pingES() bool {
 
 	}
 
-	fmt.Printf("ACTIVE PING FOR ES: Elasticsearch responding at %s:%s and returned with code %d, and version %s\n", ElasticURL, ElasticPort, code, info.Version.Number)
+	if !silent {
+		fmt.Printf("ACTIVE PING FOR ES: Elasticsearch responding at %s:%s and returned with code %d, and version %s\n", ElasticURL, ElasticPort, code, info.Version.Number)
+	}
 
 	return isESUp
 

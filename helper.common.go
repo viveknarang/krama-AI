@@ -29,6 +29,6 @@ func typeof(value interface{}) string {
 
 func areCoreServicesUp() bool {
 
-	return pingMongoDB() && pingES() && pingRedis()
+	return pingMongoDB(true) && pingES(true) && pingRedis(true)
 
 }
