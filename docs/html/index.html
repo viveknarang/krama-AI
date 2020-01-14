@@ -209,7 +209,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-16403879.png" class="logo" alt="Logo" />
+      <img src="images/logo-c208a808.png" class="logo" alt="Logo" />
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -237,6 +237,12 @@
                   </li>
                   <li>
                     <a href="#update-a-product" class="toc-h2 toc-link" data-title="Update a product">Update a product</a>
+                  </li>
+                  <li>
+                    <a href="#update-product-price-bulk" class="toc-h2 toc-link" data-title="Update product price (Bulk)">Update product price (Bulk)</a>
+                  </li>
+                  <li>
+                    <a href="#update-product-inventory-bulk" class="toc-h2 toc-link" data-title="Update product inventory (Bulk)">Update product inventory (Bulk)</a>
                   </li>
                   <li>
                     <a href="#delete-a-product" class="toc-h2 toc-link" data-title="Delete a product">Delete a product</a>
@@ -282,7 +288,7 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 3.0</span></li>
+            <li><span>API documentation version 3.1</span></li>
             <li><a href='mailto:vivek.narang10@gmail.com'>Contact Us</a></li>
         </ul>
     </div>
@@ -361,7 +367,7 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
 </span></code></pre>
 <p>This endpoint gets you your API access token. You need to send your customer ID and the API key that we provided you for using our platform. Upon receiving your valid credentials, the API will respond with a token with additional information including the validFor key which tells you how long this access token is valid for. Please set <strong>x-access-token</strong> to the value of the <strong>token</strong>, in the header of your subsequent API calls. </p>
 <h3 id='http-request-url'>HTTP Request URL</h3>
-<p><code>GET http://api.gallao.io/customers/{API version}/login</code></p>
+<p><code>GET https://api.krama.ai/customers/{API version}/login</code></p>
 <h3 id='http-request-header'>HTTP Request Header</h3>
 <table><thead>
 <tr>
@@ -432,7 +438,7 @@ You do not need to invoke login too often. Please include the token that you rec
 </tbody></table>
 
 <aside class="notice">
-With the field validFor in response, you can calculate the time after with your servers need to login again to get a new token.
+With the field validForSeconds in response, you can calculate the time after with your servers need to login again to get a new token.
 </aside>
 <h1 id='catalog-api'>Catalog API</h1><h2 id='add-a-new-product'>Add a new product</h2>
 <blockquote>
@@ -497,7 +503,7 @@ With the field validFor in response, you can calculate the time after with your 
 </span></code></pre>
 <p>Use this API endpoint to add a new product in the products collection. When a product is added in the products collection, this product is also added in product group collection. If the product group with the matching groupID is missing, a new product group is formed. Search index and the cache are also automatically updated with a valid call to this endpoint. </p>
 <h3 id='http-request-url-2'>HTTP Request URL</h3>
-<p><code>POST http://api.gallao.io/catalog/{API version}/products</code></p>
+<p><code>POST https://api.krama.ai/catalog/{API version}/products</code></p>
 <h3 id='http-request-header-2'>HTTP Request Header</h3>
 <table><thead>
 <tr>
@@ -523,79 +529,84 @@ With the field validFor in response, you can calculate the time after with your 
 </tr>
 </thead><tbody>
 <tr>
-<td>sku</td>
+<td>Sku</td>
 <td>String, Max 50 Characters</td>
 <td>The SKU of the product</td>
 </tr>
 <tr>
-<td>name</td>
-<td>Text, Max 250 Characters</td>
+<td>Name</td>
+<td>Text, Max 100 Characters</td>
 <td>The name of the product</td>
 </tr>
 <tr>
-<td>description</td>
-<td>Text, Max 2048 Characters</td>
+<td>Description</td>
+<td>Text, Max 10240 Characters</td>
 <td>The description of the product</td>
 </tr>
 <tr>
-<td>groupID</td>
+<td>GroupID</td>
 <td>String, Max 50 Characters</td>
 <td>The product group ID</td>
 </tr>
 <tr>
-<td>regularPrice</td>
+<td>RegularPrice</td>
 <td>Float, Greater than 0</td>
 <td>Everyday price</td>
 </tr>
 <tr>
-<td>promotionPrice</td>
+<td>PromotionPrice</td>
 <td>Float, Greater than 0</td>
 <td>On-sale price</td>
 </tr>
 <tr>
-<td>images</td>
-<td>URL, Mandatory</td>
+<td>Images</td>
+<td>Valid URL, Mandatory</td>
 <td>Product images</td>
 </tr>
 <tr>
-<td>searchKeywords</td>
-<td>Text, Mandatory</td>
+<td>SearchKeywords</td>
+<td>Text[], Mandatory</td>
 <td>Keywords that you want this product to be searched with</td>
 </tr>
 <tr>
-<td>quantity</td>
+<td>Quantity</td>
 <td>Integer, Greater than 0</td>
 <td>Inventory stock quantity</td>
 </tr>
 <tr>
-<td>category</td>
-<td>Text, Mandatory</td>
-<td>Category breadcrumbs</td>
+<td>Category</td>
+<td>Text[], Mandatory</td>
+<td>Category breadcrumbs array</td>
 </tr>
 <tr>
-<td>color</td>
+<td>Color</td>
 <td>Text, Optional</td>
 <td>Product color</td>
 </tr>
 <tr>
-<td>brand</td>
+<td>Brand</td>
 <td>Text, Optional</td>
 <td>Product brand</td>
 </tr>
 <tr>
-<td>size</td>
+<td>Size</td>
 <td>Text, Optional</td>
 <td>Product size</td>
 </tr>
 <tr>
-<td>active</td>
+<td>Active</td>
 <td>Boolean, Mandatory</td>
-<td>Is product available for sale?</td>
+<td>Flag to set the product availble for sale</td>
 </tr>
 <tr>
-<td>isMain</td>
+<td>IsMain</td>
 <td>Boolean, Mandatory</td>
-<td>Is the product main product in the group?</td>
+<td>Is the product main product in the product group?</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Details in another section</td>
+<td>Additional field to pass in misc. product attributes</td>
 </tr>
 </tbody></table>
 <h3 id='http-response-2'>HTTP Response</h3>
@@ -678,7 +689,7 @@ With the field validFor in response, you can calculate the time after with your 
 </span></code></pre>
 <p>When you want to get a specific product you can use this endpoint. All you need to pass is your access token and the SKU. This endpoint is cached for efficiency but also ensures that updated product data is served when applicable. </p>
 <h3 id='http-request-url-3'>HTTP Request URL</h3>
-<p><code>GET http://api.gallao.io/catalog/{API version}/products/{SKU}</code></p>
+<p><code>GET https://api.krama.ai/catalog/{API version}/products/{SKU}</code></p>
 <h3 id='http-request-header-3'>HTTP Request Header</h3>
 <table><thead>
 <tr>
@@ -731,64 +742,68 @@ With the field validFor in response, you can calculate the time after with your 
 <td>Response object containing response information</td>
 </tr>
 <tr>
-<td>sku</td>
+<td>Sku</td>
 <td>The SKU of the product</td>
 </tr>
 <tr>
-<td>name</td>
+<td>Name</td>
 <td>The name of the product</td>
 </tr>
 <tr>
-<td>description</td>
+<td>Description</td>
 <td>The description of the product</td>
 </tr>
 <tr>
-<td>groupID</td>
+<td>GroupID</td>
 <td>The product group ID</td>
 </tr>
 <tr>
-<td>regularPrice</td>
+<td>RegularPrice</td>
 <td>Everyday price</td>
 </tr>
 <tr>
-<td>promotionPrice</td>
+<td>PromotionPrice</td>
 <td>On-sale price</td>
 </tr>
 <tr>
-<td>images</td>
+<td>Images</td>
 <td>Product images</td>
 </tr>
 <tr>
-<td>searchKeywords</td>
+<td>SearchKeywords</td>
 <td>Keywords that you want this product to be searched with</td>
 </tr>
 <tr>
-<td>quantity</td>
+<td>Quantity</td>
 <td>Inventory stock quantity</td>
 </tr>
 <tr>
-<td>category</td>
+<td>Category</td>
 <td>Category breadcrumbs</td>
 </tr>
 <tr>
-<td>color</td>
+<td>Color</td>
 <td>Product color</td>
 </tr>
 <tr>
-<td>brand</td>
+<td>Brand</td>
 <td>Product brand</td>
 </tr>
 <tr>
-<td>size</td>
+<td>Size</td>
 <td>Product size</td>
 </tr>
 <tr>
-<td>active</td>
+<td>Active</td>
 <td>Is product available for sale?</td>
 </tr>
 <tr>
-<td>isMain</td>
+<td>IsMain</td>
 <td>Is the product main product in the group?</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Field to define additional product attributes</td>
 </tr>
 </tbody></table>
 <h2 id='update-a-product'>Update a product</h2>
@@ -876,7 +891,7 @@ With the field validFor in response, you can calculate the time after with your 
 </span></code></pre>
 <p>Use this API endpoint to update your product information in the catalog. For now you need to pass the entire product object with updated parts (this functionality will be improved very soon). When you hit this endpoint, the data in the products collection gets updated, product group data also gets updated automatically, search index is also updated and the cache entry is removed first and updated on the next GET call. </p>
 <h3 id='http-request-url-4'>HTTP Request URL</h3>
-<p><code>PUT http://api.gallao.io/catalog/{API version}/products/{SKU}</code></p>
+<p><code>PUT https://api.krama.ai/catalog/{API version}/products/{SKU}</code></p>
 <h3 id='http-request-header-4'>HTTP Request Header</h3>
 <table><thead>
 <tr>
@@ -902,79 +917,84 @@ With the field validFor in response, you can calculate the time after with your 
 </tr>
 </thead><tbody>
 <tr>
-<td>sku</td>
+<td>Sku</td>
 <td>String, Max 50 Characters</td>
 <td>The SKU of the product</td>
 </tr>
 <tr>
-<td>name</td>
-<td>Text, Max 250 Characters</td>
+<td>Name</td>
+<td>Text, Max 100 Characters</td>
 <td>The name of the product</td>
 </tr>
 <tr>
-<td>description</td>
-<td>Text, Max 2048 Characters</td>
+<td>Description</td>
+<td>Text, Max 10240 Characters</td>
 <td>The description of the product</td>
 </tr>
 <tr>
-<td>groupID</td>
+<td>GroupID</td>
 <td>String, Max 50 Characters</td>
 <td>The product group ID</td>
 </tr>
 <tr>
-<td>regularPrice</td>
+<td>RegularPrice</td>
 <td>Float, Greater than 0</td>
 <td>Everyday price</td>
 </tr>
 <tr>
-<td>promotionPrice</td>
+<td>PromotionPrice</td>
 <td>Float, Greater than 0</td>
 <td>On-sale price</td>
 </tr>
 <tr>
-<td>images</td>
-<td>URL, Mandatory</td>
+<td>Images</td>
+<td>Valid URL, Mandatory</td>
 <td>Product images</td>
 </tr>
 <tr>
-<td>searchKeywords</td>
-<td>Text, Mandatory</td>
+<td>SearchKeywords</td>
+<td>Text[], Mandatory</td>
 <td>Keywords that you want this product to be searched with</td>
 </tr>
 <tr>
-<td>quantity</td>
+<td>Quantity</td>
 <td>Integer, Greater than 0</td>
 <td>Inventory stock quantity</td>
 </tr>
 <tr>
-<td>category</td>
-<td>Text, Mandatory</td>
-<td>Category breadcrumbs</td>
+<td>Category</td>
+<td>Text[], Mandatory</td>
+<td>Category breadcrumbs array</td>
 </tr>
 <tr>
-<td>color</td>
+<td>Color</td>
 <td>Text, Optional</td>
 <td>Product color</td>
 </tr>
 <tr>
-<td>brand</td>
+<td>Brand</td>
 <td>Text, Optional</td>
 <td>Product brand</td>
 </tr>
 <tr>
-<td>size</td>
+<td>Size</td>
 <td>Text, Optional</td>
 <td>Product size</td>
 </tr>
 <tr>
-<td>active</td>
+<td>Active</td>
 <td>Boolean, Mandatory</td>
-<td>Is product available for sale?</td>
+<td>Flag to set the product availble for sale</td>
 </tr>
 <tr>
-<td>isMain</td>
+<td>IsMain</td>
 <td>Boolean, Mandatory</td>
-<td>Is the product main product in the group?</td>
+<td>Is the product main product in the product group?</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Details in another section</td>
+<td>Additional field to pass in misc. product attributes</td>
 </tr>
 </tbody></table>
 <h3 id='http-response-4'>HTTP Response</h3>
@@ -1005,64 +1025,277 @@ With the field validFor in response, you can calculate the time after with your 
 <td>Response object containing response information</td>
 </tr>
 <tr>
-<td>sku</td>
+<td>Sku</td>
 <td>The SKU of the product</td>
 </tr>
 <tr>
-<td>name</td>
+<td>Name</td>
 <td>The name of the product</td>
 </tr>
 <tr>
-<td>description</td>
+<td>Description</td>
 <td>The description of the product</td>
 </tr>
 <tr>
-<td>groupID</td>
+<td>GroupID</td>
 <td>The product group ID</td>
 </tr>
 <tr>
-<td>regularPrice</td>
+<td>RegularPrice</td>
 <td>Everyday price</td>
 </tr>
 <tr>
-<td>promotionPrice</td>
+<td>PromotionPrice</td>
 <td>On-sale price</td>
 </tr>
 <tr>
-<td>images</td>
+<td>Images</td>
 <td>Product images</td>
 </tr>
 <tr>
-<td>searchKeywords</td>
+<td>SearchKeywords</td>
 <td>Keywords that you want this product to be searched with</td>
 </tr>
 <tr>
-<td>quantity</td>
+<td>Quantity</td>
 <td>Inventory stock quantity</td>
 </tr>
 <tr>
-<td>category</td>
+<td>Category</td>
 <td>Category breadcrumbs</td>
 </tr>
 <tr>
-<td>color</td>
+<td>Color</td>
 <td>Product color</td>
 </tr>
 <tr>
-<td>brand</td>
+<td>Brand</td>
 <td>Product brand</td>
 </tr>
 <tr>
-<td>size</td>
+<td>Size</td>
 <td>Product size</td>
 </tr>
 <tr>
-<td>active</td>
+<td>Active</td>
 <td>Is product available for sale?</td>
 </tr>
 <tr>
-<td>isMain</td>
+<td>IsMain</td>
 <td>Is the product main product in the group?</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Field to define additional product attributes</td>
+</tr>
+</tbody></table>
+<h2 id='update-product-price-bulk'>Update product price (Bulk)</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+     </span><span class="s2">"Prices"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"1234"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RegularPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PromotionPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"1234588"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RegularPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PromotionPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prices Updated ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578984706084735751</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Products Not Found"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"1234588"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Products Not Updated"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Products Updated"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to update your product prices in the catalog. You can use this endpoint to submit a map of skus of prices. Each sku in the map
+is associated with the regular and the promotion prices. The new prices cannot not be negative values. As with other features the API takes care of 
+ensuring that the product groups and the search index are synced as well. The response object contains three lists - the list of updated skus 
+(essentially the skus for which the prices were updated), a list of skus which were not updated (most likely that you submitted same old prices), and
+finally a list of skus that were not found. You can use this information to check if your update request was executed as per your expectations. </p>
+<h3 id='http-request-url-5'>HTTP Request URL</h3>
+<p><code>PUT https://api.krama.ai/catalog/{API version}/products/price/update</code></p>
+<h3 id='http-request-header-5'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-body-parameters-2'>HTTP Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Prices</td>
+<td></td>
+<td>The prices map that contains the sku-price maps</td>
+</tr>
+<tr>
+<td>PromotionPrice</td>
+<td>Float, non-negative</td>
+<td>The promotion price of the mapped sku</td>
+</tr>
+<tr>
+<td>RegularPrice</td>
+<td>Float, non-negative</td>
+<td>The regular price associated with the sku</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-5'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='update-product-inventory-bulk'>Update product inventory (Bulk)</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+     </span><span class="s2">"Quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"1234"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"9999"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">341</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Inventory Updated ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578985420311573562</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Products Not Found"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"9999"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Products Not Updated"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Products Updated"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"1234"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to update your product quantity. You can use this endpoint to updates inventory for multiple products. Please find the API request details below. The API updates product groups as well as search index. The response object contains three lists - a list that gives you the skus of those
+products where the product quantities were updated. The response object also provides you with list of those skus where there was no change and also
+those skus which were not found in the catalog. </p>
+<h3 id='http-request-url-6'>HTTP Request URL</h3>
+<p><code>PUT https://api.krama.ai/catalog/{API version}/products/inventory/update</code></p>
+<h3 id='http-request-header-6'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-body-parameters-3'>HTTP Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Quantity</td>
+<td></td>
+<td>The map containing skus-quantity mappings</td>
+</tr>
+<tr>
+<td>{sku : quantity}</td>
+<td>{unique identifier, float non-negative}</td>
+<td>sku-quantity mappings in the Quantity object</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-6'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
 </tr>
 </tbody></table>
 <h2 id='delete-a-product'>Delete a product</h2>
@@ -1089,9 +1322,9 @@ With the field validFor in response, you can calculate the time after with your 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this API endpoint to remove a product from the catalog. When you hit this endpoint with a valid request, the product in the products collection gets removed, the productgroups collection is also automatically updated and the cache and search index is also updated. If there was only one product in the product group the product group object is also removed from the productgroups collection. </p>
-<h3 id='http-request-url-5'>HTTP Request URL</h3>
-<p><code>DELETE http://api.gallao.io/catalog/{API version}/products/{SKU}</code></p>
-<h3 id='http-request-header-5'>HTTP Request Header</h3>
+<h3 id='http-request-url-7'>HTTP Request URL</h3>
+<p><code>DELETE https://api.krama.ai/catalog/{API version}/products/{SKU}</code></p>
+<h3 id='http-request-header-7'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1115,7 +1348,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>The product SKU</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-5'>HTTP Response</h3>
+<h3 id='http-response-7'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1231,9 +1464,9 @@ With the field validFor in response, you can calculate the time after with your 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This API endpoint gets a specific product group by product group ID. This endpoint is cached for efficiency and speed. </p>
-<h3 id='http-request-url-6'>HTTP Request URL</h3>
-<p><code>GET http://api.gallao.io/catalog/{API version}/productgroups/{PGID}</code></p>
-<h3 id='http-requesr-header'>HTTP Requesr Header</h3><h3 id='http-request-header-6'>HTTP Request Header</h3>
+<h3 id='http-request-url-8'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/catalog/{API version}/productgroups/{PGID}</code></p>
+<h3 id='http-requesr-header'>HTTP Requesr Header</h3><h3 id='http-request-header-8'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1257,7 +1490,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>The product Group ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-6'>HTTP Response</h3>
+<h3 id='http-response-8'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1348,6 +1581,10 @@ With the field validFor in response, you can calculate the time after with your 
 <td>Products</td>
 <td>List of all the product objects for reference</td>
 </tr>
+<tr>
+<td>Attributes</td>
+<td>Field that maps additional attributes to the product group</td>
+</tr>
 </tbody></table>
 <h2 id='delete-a-product-group'>Delete a product group</h2>
 <blockquote>
@@ -1373,9 +1610,9 @@ With the field validFor in response, you can calculate the time after with your 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this API endpoint to remove a product group from the productgroups collection in the database. This call also updates the search index. When a product group is deleted, entries of related products in the products collection are also removed. </p>
-<h3 id='http-request-url-7'>HTTP Request URL</h3>
-<p><code>DELETE http://api.gallao.io/catalog/{API version}/productgroups/{PGID}</code></p>
-<h3 id='http-request-header-7'>HTTP Request Header</h3>
+<h3 id='http-request-url-9'>HTTP Request URL</h3>
+<p><code>DELETE https://api.krama.ai/catalog/{API version}/productgroups/{PGID}</code></p>
+<h3 id='http-request-header-9'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1399,7 +1636,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>The product Group ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-7'>HTTP Response</h3>
+<h3 id='http-response-9'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1548,9 +1785,9 @@ With the field validFor in response, you can calculate the time after with your 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to create an order entry in the database. Details on the fields and the constraints is listed below. </p>
-<h3 id='http-request-url-8'>HTTP Request URL</h3>
-<p><code>POST http://api.gallao.io/orders/{API version}/orders</code></p>
-<h3 id='http-request-header-8'>HTTP Request Header</h3>
+<h3 id='http-request-url-10'>HTTP Request URL</h3>
+<p><code>POST https://api.krama.ai/orders/{API version}/orders</code></p>
+<h3 id='http-request-header-10'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1638,7 +1875,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>Map[SKU]=&gt;Quantity, Integer, product quantity map</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-8'>HTTP Response</h3>
+<h3 id='http-response-10'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1743,9 +1980,9 @@ With the field validFor in response, you can calculate the time after with your 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get all the orders associated with a customer using the customer ID. </p>
-<h3 id='http-request-url-9'>HTTP Request URL</h3>
-<p><code>GET http://api.gallao.io/orders/{API version}/orders/customer/{CID}</code></p>
-<h3 id='http-request-header-9'>HTTP Request Header</h3>
+<h3 id='http-request-url-11'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/orders/{API version}/orders/customer/{CID}</code></p>
+<h3 id='http-request-header-11'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1769,7 +2006,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>The Customer ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-9'>HTTP Response</h3>
+<h3 id='http-response-11'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1874,9 +2111,9 @@ With the field validFor in response, you can calculate the time after with your 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get all the orders associated with a customer using the customer ID. </p>
-<h3 id='http-request-url-10'>HTTP Request URL</h3>
-<p><code>GET http://api.gallao.io/orders/{API version}/orders/{OID}</code></p>
-<h3 id='http-request-header-10'>HTTP Request Header</h3>
+<h3 id='http-request-url-12'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/orders/{API version}/orders/{OID}</code></p>
+<h3 id='http-request-header-12'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1900,7 +2137,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>The Order ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-10'>HTTP Response</h3>
+<h3 id='http-response-12'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2071,9 +2308,9 @@ With the field validFor in response, you can calculate the time after with your 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to update the order object. </p>
-<h3 id='http-request-url-11'>HTTP Request URL</h3>
-<p><code>PUT http://api.gallao.io/orders/{API version}/orders/{ID}</code></p>
-<h3 id='http-request-header-11'>HTTP Request Header</h3>
+<h3 id='http-request-url-13'>HTTP Request URL</h3>
+<p><code>PUT https://api.krama.ai/orders/{API version}/orders/{ID}</code></p>
+<h3 id='http-request-header-13'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2101,7 +2338,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>Order ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-11'>HTTP Response</h3>
+<h3 id='http-response-13'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2154,8 +2391,8 @@ With the field validFor in response, you can calculate the time after with your 
 </span></code></pre>
 <p>Use this endpoint to delete an order using the order ID. Recommended to use this endpoint carefully. </p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>DELETE http://api.gallao.io/orders/{API version}/orders/{ID}</code></p>
-<h3 id='http-request-header-12'>HTTP Request Header</h3>
+<p><code>DELETE https://api.krama.ai/orders/{API version}/orders/{ID}</code></p>
+<h3 id='http-request-header-14'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2179,7 +2416,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>The Order ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-12'>HTTP Response</h3>
+<h3 id='http-response-14'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2350,8 +2587,8 @@ With the field validFor in response, you can calculate the time after with your 
 </span></code></pre>
 <p>Use this API endpoint to search a product group in the search index. Please note that product group objects are only returned in the response. </p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://api.gallao.io/search/{API version}/productgroups/search</code></p>
-<h3 id='http-request-header-13'>HTTP Request Header</h3>
+<p><code>GET https://api.krama.ai/search/{API version}/productgroups/search</code></p>
+<h3 id='http-request-header-15'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2383,7 +2620,7 @@ With the field validFor in response, you can calculate the time after with your 
 <td>[]String, Multiple, query fields</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-13'>HTTP Response</h3>
+<h3 id='http-response-15'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2451,6 +2688,10 @@ With the field validFor in response, you can calculate the time after with your 
 <tr>
 <td>500  <strong>StatusInternalServerError</strong></td>
 <td>Something went wrong on our server</td>
+</tr>
+<tr>
+<td>503  <strong>StatusServiceUnavailable</strong></td>
+<td>The API service is down</td>
 </tr>
 </tbody></table>
 
