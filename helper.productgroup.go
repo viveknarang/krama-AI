@@ -90,14 +90,14 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 			if err0 != nil {
-				respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+				respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 				return false
 			}
 
 			err1 := json.Unmarshal([]byte(j), &productGroup)
 
 			if err1 != nil {
-				respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+				respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 				return false
 			}
 
@@ -200,14 +200,14 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return false
 		}
 
 		err1 := json.Unmarshal([]byte(j), &productGroup)
 
 		if err1 != nil {
-			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return false
 		}
 
@@ -308,14 +308,14 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return false
 		}
 
 		err1 := json.Unmarshal([]byte(j), &productGroup)
 
 		if err1 != nil {
-			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return false
 		}
 
@@ -450,14 +450,14 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 		results := findMongoDocument(ExternalDB, pcol, bson.M{"sku": sku})
 
 		if len(results) != 1 {
-			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound)
+			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
 			return false
 		}
 
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return false
 		}
 
@@ -466,7 +466,7 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 		err1 := json.Unmarshal([]byte(j), &product)
 
 		if err1 != nil {
-			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return false
 		}
 
@@ -481,14 +481,14 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 			j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 			if err0 != nil {
-				respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+				respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 				return false
 			}
 
 			err1 := json.Unmarshal([]byte(j), &productGroup)
 
 			if err1 != nil {
-				respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+				respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 				return false
 			}
 
@@ -527,14 +527,14 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 					j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 					if err0 != nil {
-						respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+						respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 						return false
 					}
 
 					err1 := json.Unmarshal([]byte(j), &productGroup)
 
 					if err1 != nil {
-						respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+						respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 						return false
 					}
 

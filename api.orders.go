@@ -34,14 +34,14 @@ func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
 		results := findMongoDocument(ExternalDB, dbcol, bson.M{"orderid": oid})
 
 		if len(results) != 1 {
-			respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound)
+			respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound, false)
 			return
 		}
 
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return
 		}
 
@@ -56,11 +56,11 @@ func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
 	err1 := json.Unmarshal([]byte(jx), &order)
 
 	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
-	respondWith(w, r, nil, OrderFoundMessage, order, http.StatusOK)
+	respondWith(w, r, nil, OrderFoundMessage, order, http.StatusOK, true)
 
 }
 
@@ -88,14 +88,14 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 		results := findMongoDocument(ExternalDB, dbcol, bson.M{"customerid": cid})
 
 		if len(results) != 1 {
-			respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound)
+			respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound, false)
 			return
 		}
 
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return
 		}
 
@@ -110,11 +110,11 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 	err1 := json.Unmarshal([]byte(jx), &order)
 
 	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
-	respondWith(w, r, nil, OrderFoundMessage, order, http.StatusOK)
+	respondWith(w, r, nil, OrderFoundMessage, order, http.StatusOK, true)
 
 }
 
@@ -129,7 +129,7 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&order)
 
 	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
 		return
 	}
 
@@ -139,7 +139,7 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 
 	insertMongoDocument(ExternalDB, dbcol, order)
 
-	respondWith(w, r, nil, OrderCreatedMessage, order, http.StatusCreated)
+	respondWith(w, r, nil, OrderCreatedMessage, order, http.StatusCreated, true)
 
 }
 
@@ -154,7 +154,7 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&order)
 
 	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
 		return
 	}
 
@@ -165,15 +165,15 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 	if result[0] == 1 && result[1] == 1 {
 
 		REDISCLIENT.Del(r.URL.Path)
-		respondWith(w, r, nil, OrderUpdatedMessage, order, http.StatusAccepted)
+		respondWith(w, r, nil, OrderUpdatedMessage, order, http.StatusAccepted, true)
 
 	} else if result[0] == 1 && result[1] == 0 {
 
-		respondWith(w, r, nil, OrderNotUpdatedMessage, nil, http.StatusNotModified)
+		respondWith(w, r, nil, OrderNotUpdatedMessage, nil, http.StatusNotModified, false)
 
 	} else if result[0] == 0 && result[1] == 0 {
 
-		respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotModified)
+		respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotModified, false)
 
 	}
 
@@ -193,14 +193,14 @@ func deleteOrder(w http.ResponseWriter, r *http.Request) {
 	results := findMongoDocument(ExternalDB, dbcol, bson.M{"orderid": oid})
 
 	if len(results) != 1 {
-		respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound)
+		respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound, false)
 		return
 	}
 
 	j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
@@ -209,18 +209,18 @@ func deleteOrder(w http.ResponseWriter, r *http.Request) {
 	err1 := json.Unmarshal([]byte(j), &order)
 
 	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
 	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"orderid": oid}) == 1 {
 
 		REDISCLIENT.Del(r.URL.Path)
-		respondWith(w, r, nil, OrderDeletedMessage, nil, http.StatusOK)
+		respondWith(w, r, nil, OrderDeletedMessage, nil, http.StatusOK, true)
 
 	} else {
 
-		respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotModified)
+		respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotModified, false)
 
 	}
 

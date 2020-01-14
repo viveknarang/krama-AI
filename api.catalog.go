@@ -34,14 +34,14 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 		results := findMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku})
 
 		if len(results) != 1 {
-			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound)
+			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
 			return
 		}
 
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return
 		}
 
@@ -56,11 +56,11 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	err1 := json.Unmarshal([]byte(jx), &product)
 
 	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
-	respondWith(w, r, nil, ProductFoundMessage, product, http.StatusOK)
+	respondWith(w, r, nil, ProductFoundMessage, product, http.StatusOK, false)
 
 }
 
@@ -75,7 +75,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&p)
 
 	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
 		return
 	}
 
@@ -93,11 +93,11 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	if syncProductGroup(w, r, p) {
 
-		respondWith(w, r, nil, ProductAddedMessage, p, http.StatusCreated)
+		respondWith(w, r, nil, ProductAddedMessage, p, http.StatusCreated, true)
 
 	} else {
 
-		respondWith(w, r, nil, ProductNotAddedMessage, p, http.StatusNotModified)
+		respondWith(w, r, nil, ProductNotAddedMessage, p, http.StatusNotModified, false)
 
 	}
 
@@ -114,7 +114,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&p)
 
 	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
 		return
 	}
 
@@ -133,21 +133,21 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 		if syncProductGroup(w, r, p) {
 
 			REDISCLIENT.Del(r.URL.Path)
-			respondWith(w, r, nil, ProductUpdatedMessage, p, http.StatusAccepted)
+			respondWith(w, r, nil, ProductUpdatedMessage, p, http.StatusAccepted, true)
 
 		} else {
 
-			respondWith(w, r, nil, ProductNotUpdatedMessage, p, http.StatusNotModified)
+			respondWith(w, r, nil, ProductNotUpdatedMessage, p, http.StatusNotModified, false)
 
 		}
 
 	} else if result[0] == 1 && result[1] == 0 {
 
-		respondWith(w, r, nil, ProductNotUpdatedMessage, nil, http.StatusNotModified)
+		respondWith(w, r, nil, ProductNotUpdatedMessage, nil, http.StatusNotModified, false)
 
 	} else if result[0] == 0 && result[1] == 0 {
 
-		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotModified)
+		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotModified, false)
 
 	}
 
@@ -167,14 +167,14 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	results := findMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku})
 
 	if len(results) != 1 {
-		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound)
+		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
 		return
 	}
 
 	j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
@@ -183,7 +183,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	err1 := json.Unmarshal([]byte(j), &product)
 
 	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
@@ -192,17 +192,17 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 		if syncProductGroup(w, r, product) {
 
 			REDISCLIENT.Del(r.URL.Path)
-			respondWith(w, r, nil, ProductDeletedMessage, nil, http.StatusOK)
+			respondWith(w, r, nil, ProductDeletedMessage, nil, http.StatusOK, true)
 
 		} else {
 
-			respondWith(w, r, nil, ProductNotDeletedMessage, nil, http.StatusOK)
+			respondWith(w, r, nil, ProductNotDeletedMessage, nil, http.StatusOK, true)
 
 		}
 
 	} else {
 
-		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotModified)
+		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotModified, false)
 
 	}
 
@@ -232,14 +232,14 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 		results := findMongoDocument(ExternalDB, dbcol, bson.M{"groupid": pgid})
 
 		if len(results) != 1 {
-			respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound)
+			respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
 			return
 		}
 
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 			return
 		}
 
@@ -254,11 +254,11 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 	err1 := json.Unmarshal([]byte(jx), &productGroup)
 
 	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
-	respondWith(w, r, nil, ProductGroupFoundMessage, productGroup, http.StatusOK)
+	respondWith(w, r, nil, ProductGroupFoundMessage, productGroup, http.StatusOK, true)
 
 }
 
@@ -280,14 +280,14 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	results := findMongoDocument(ExternalDB, pgcol, bson.M{"groupid": pgid})
 
 	if len(results) != 1 {
-		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound)
+		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
 		return
 	}
 
 	j, err0 := bson.MarshalExtJSON(results[0], false, false)
 
 	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
@@ -296,7 +296,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	err1 := json.Unmarshal([]byte(j), &productGroup)
 
 	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError)
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 		return
 	}
 
@@ -310,10 +310,10 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 
 		deleteESDocumentByID(pgindex, pgid)
 
-		respondWith(w, r, nil, ProductGroupDeletedMessage, nil, http.StatusOK)
+		respondWith(w, r, nil, ProductGroupDeletedMessage, nil, http.StatusOK, true)
 
 	} else {
-		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotModified)
+		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotModified, false)
 	}
 
 }
@@ -329,13 +329,13 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&prices)
 
 	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
 		return
 	}
 
 	for sku, price := range prices.Prices {
 		if price.RegularPrice < 0 || price.PromotionPrice < 0 {
-			respondWith(w, r, err, "Price for sku: "+sku+" is negative. Prices cannot be negative ...", nil, http.StatusBadRequest)
+			respondWith(w, r, err, "Price for sku: "+sku+" is negative. Prices cannot be negative ...", nil, http.StatusBadRequest, false)
 			return
 		}
 	}
@@ -362,11 +362,11 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 
 	if syncProductGroupFromProducts(w, r, priceUpdated, true) {
 
-		respondWith(w, r, nil, "Prices Updated ...", bson.M{"Products Updated": priceUpdated, "Products Not Updated": priceNotUpdated, "Products Not Found": priceNotFound}, http.StatusOK)
+		respondWith(w, r, nil, "Prices Updated ...", bson.M{"Products Updated": priceUpdated, "Products Not Updated": priceNotUpdated, "Products Not Found": priceNotFound}, http.StatusOK, true)
 
 	} else {
 
-		respondWith(w, r, nil, "Prices Not updated ...", nil, http.StatusNotModified)
+		respondWith(w, r, nil, "Prices Not updated ...", nil, http.StatusNotModified, false)
 
 	}
 
@@ -383,13 +383,13 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&quantities)
 
 	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest)
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
 		return
 	}
 
 	for sku, quantity := range quantities.Quantity {
 		if quantity < 0 {
-			respondWith(w, r, err, "Inventory for sku: "+sku+" is negative. Quantity field cannot be negative ...", nil, http.StatusBadRequest)
+			respondWith(w, r, err, "Inventory for sku: "+sku+" is negative. Quantity field cannot be negative ...", nil, http.StatusBadRequest, false)
 			return
 		}
 	}
@@ -416,11 +416,11 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	if syncProductGroupFromProducts(w, r, quantityUpdated, false) {
 
-		respondWith(w, r, nil, "Inventory Updated ...", bson.M{"Products Updated": quantityUpdated, "Products Not Updated": quantityNotUpdated, "Products Not Found": quantityNotFound}, http.StatusOK)
+		respondWith(w, r, nil, "Inventory Updated ...", bson.M{"Products Updated": quantityUpdated, "Products Not Updated": quantityNotUpdated, "Products Not Found": quantityNotFound}, http.StatusOK, true)
 
 	} else {
 
-		respondWith(w, r, nil, "Inventory Not updated ...", nil, http.StatusNotModified)
+		respondWith(w, r, nil, "Inventory Not updated ...", nil, http.StatusNotModified, false)
 
 	}
 

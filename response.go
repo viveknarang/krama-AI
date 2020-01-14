@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func respondWith(w http.ResponseWriter, r *http.Request, err error, message string, response interface{}, code int) {
+func respondWith(w http.ResponseWriter, r *http.Request, err error, message string, response interface{}, code int, success bool) {
 
 	w.Header().Set("Content-Type", "application/json")
 
@@ -14,20 +14,18 @@ func respondWith(w http.ResponseWriter, r *http.Request, err error, message stri
 
 	if err != nil {
 
-		resp.Code = http.StatusBadRequest
 		resp.Message = err.Error()
-		resp.Success = false
 
 	} else {
 
-		resp.Code = code
 		resp.Message = message
-		resp.Success = true
 
 	}
 
-	resp.Time = time.Now().UnixNano()
+	resp.Code = code
+	resp.Success = success
 	resp.Response = response
+	resp.Time = time.Now().UnixNano()
 
 	respons, err := json.Marshal(resp)
 	w.Write([]byte(respons))
