@@ -36,11 +36,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			npg.Active = p.Active
 			npg.Currency = p.Currency
 
+			npg.Attributes = make(map[string][]interface{})
 			for key, value := range p.Attributes {
 
-				var r [1]interface{}
-				r[0] = value
-				npg.Attributes = make(map[string]interface{})
+				var r []interface{}
+				r = append(r, value)
 				npg.Attributes[key] = r
 
 			}
@@ -164,21 +164,13 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			for key, value := range p.Attributes {
 
-				if productGroup.Attributes[key] == nil {
+				var x []interface{}
 
-					var r [1]interface{}
-					r[0] = value
-					productGroup.Attributes = make(map[string]interface{})
-					productGroup.Attributes[key] = r
-
-				} else {
-
-					var s []interface{}
-					s = append(s, productGroup.Attributes[key])
-					s = append(s, value)
-					productGroup.Attributes[key] = s
-
+				if productGroup.Attributes[key] != nil {
+					x = append(x, productGroup.Attributes[key]...)
 				}
+
+				productGroup.Attributes[key] = append(x, value)
 
 			}
 
