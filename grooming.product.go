@@ -37,6 +37,11 @@ func groom(product *PRODUCT) {
 			splits := strings.Split(product.Category[i], ">")
 			var cleanerCategoryPath string
 			for _, val := range splits {
+
+				if val == "" {
+					continue
+				}
+
 				val = strings.TrimSpace(val)
 				cleanerCategoryPath += val + ">"
 			}
