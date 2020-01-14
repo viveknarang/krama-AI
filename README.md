@@ -1,12 +1,17 @@
-# KRAMA - Introduction
+
+# Introduction
 
 This API provides you with several options to maintain your product catalog and search products in your catalog. 
 
 With this API, you can create, update and delete products in your product catalog. The API automatically manages the product groups for you. The product group is identified by the groupID field (i.e. all the products with the same groupID are combined in a single product group). While the API allows you to get and delete product groups by groupID, the API does not allow you to directly modify the product groups. The only way to modify product groups is to use API endpoints for individual products. With this approach, the API tries to ensure that the data is not corrupted. When you delete a product group, all the products in the group are also automatically deleted. 
 
+
+
 <aside class="notice">
 It is important to understand the concept of product groups. For search quality and other advanced features provided by our platform, products are grouped to form product groups. These product groups are essentially a product with different variations. Example: A shirt can be of multiple sizes and/or colors. So all of the variations of this shirt are grouped to form a product group.  
 </aside>
+
+
 
 The search API is fairly powerful too. It allows features like search on a specific field or a set of fields. The search API responds with product groups where the query matches certain fields. Search API also allows you to select the standard facets to be included in the API response. In addtion to the features mentioned above, the API automatically syncs the search index with changes in products/product groups, **in real-time**. Also, for efficiency and speed, the search and GET product/productgroup endpoints are cached. Upon any updates, the cache is updated as well. 
 
@@ -82,7 +87,7 @@ This endpoint gets you your API access token. You need to send your customer ID 
 
 ### HTTP Request URL
 
-`GET http://api.gallao.io/customers/{API version}/login`
+`GET https://api.krama.ai/customers/{API version}/login`
 
 ### HTTP Request Header
 
@@ -115,7 +120,7 @@ You do not need to invoke login too often. Please include the token that you rec
 
 
 <aside class="notice">
-With the field validFor in response, you can calculate the time after with your servers need to login again to get a new token.
+With the field validForSeconds in response, you can calculate the time after with your servers need to login again to get a new token.
 </aside>
 
 
@@ -190,7 +195,7 @@ Use this API endpoint to add a new product in the products collection. When a pr
 
 ### HTTP Request URL
 
-`POST http://api.gallao.io/catalog/{API version}/products`
+`POST https://api.krama.ai/catalog/{API version}/products`
 
 ### HTTP Request Header
 
@@ -203,21 +208,22 @@ Use this API endpoint to add a new product in the products collection. When a pr
 
 |    Parameter   |          Constraints         |        Description                                           |
 |----------------|------------------------------|--------------------------------------------------------------|
-|sku             |   String, Max 50 Characters  |  The SKU of the product                                      |
-|name            |   Text, Max 250 Characters   |  The name of the product                                     |
-|description     |   Text, Max 2048 Characters  |  The description of the product                              | 
-|groupID         |   String, Max 50 Characters  |  The product group ID                                        | 
-|regularPrice    |   Float, Greater than 0      |  Everyday price                                              | 
-|promotionPrice  |   Float, Greater than 0      |  On-sale price                                               | 
-|images          |   URL, Mandatory             |  Product images                                              | 
-|searchKeywords  |   Text, Mandatory            |  Keywords that you want this product to be searched with     |
-|quantity        |   Integer, Greater than 0    |  Inventory stock quantity                                    | 
-|category        |   Text, Mandatory            |  Category breadcrumbs                                        | 
-|color           |   Text, Optional             |  Product color                                               |
-|brand           |   Text, Optional             |  Product brand                                               | 
-|size            |   Text, Optional             |  Product size                                                | 
-|active          |   Boolean, Mandatory         |  Is product available for sale?                              |    
-|isMain          |   Boolean, Mandatory         |  Is the product main product in the group?                   |
+|Sku             |   String, Max 50 Characters  |  The SKU of the product                                      |
+|Name            |   Text, Max 100 Characters   |  The name of the product                                     |
+|Description     |   Text, Max 10240 Characters |  The description of the product                              | 
+|GroupID         |   String, Max 50 Characters  |  The product group ID                                        | 
+|RegularPrice    |   Float, Greater than 0      |  Everyday price                                              | 
+|PromotionPrice  |   Float, Greater than 0      |  On-sale price                                               | 
+|Images          |   Valid URL, Mandatory       |  Product images                                              | 
+|SearchKeywords  |   Text[], Mandatory          |  Keywords that you want this product to be searched with     |
+|Quantity        |   Integer, Greater than 0    |  Inventory stock quantity                                    | 
+|Category        |   Text[], Mandatory          |  Category breadcrumbs array                                  | 
+|Color           |   Text, Optional             |  Product color                                               |
+|Brand           |   Text, Optional             |  Product brand                                               | 
+|Size            |   Text, Optional             |  Product size                                                | 
+|Active          |   Boolean, Mandatory         |  Flag to set the product availble for sale                   |    
+|IsMain          |   Boolean, Mandatory         |  Is the product main product in the product group?           |
+|Attributes      |   Details in another section |  Additional field to pass in misc. product attributes        |
 
 
 ### HTTP Response
@@ -291,7 +297,7 @@ When you want to get a specific product you can use this endpoint. All you need 
 
 ### HTTP Request URL
 
-`GET http://api.gallao.io/catalog/{API version}/products/{SKU}`
+`GET https://api.krama.ai/catalog/{API version}/products/{SKU}`
 
 ### HTTP Request Header
 
@@ -314,21 +320,22 @@ When you want to get a specific product you can use this endpoint. All you need 
 | Message           | Message for additional information                                            |
 | Time              | Unix timestamp of the response                                                |
 | Response          | Response object containing response information                               |
-| sku               | The SKU of the product                                                        |
-| name              | The name of the product                                                       |
-| description       | The description of the product                                                |   
-| groupID           | The product group ID                                                          |
-| regularPrice      | Everyday price                                                                |
-| promotionPrice    | On-sale price                                                                 |
-| images            | Product images                                                                |
-| searchKeywords    | Keywords that you want this product to be searched with                       |
-| quantity          | Inventory stock quantity                                                      |
-| category          | Category breadcrumbs                                                          |
-| color             | Product color                                                                 |
-| brand             | Product brand                                                                 |
-| size              | Product size                                                                  |
-| active            | Is product available for sale?                                                |
-| isMain            | Is the product main product in the group?                                     |
+| Sku               | The SKU of the product                                                        |
+| Name              | The name of the product                                                       |
+| Description       | The description of the product                                                |   
+| GroupID           | The product group ID                                                          |
+| RegularPrice      | Everyday price                                                                |
+| PromotionPrice    | On-sale price                                                                 |
+| Images            | Product images                                                                |
+| SearchKeywords    | Keywords that you want this product to be searched with                       |
+| Quantity          | Inventory stock quantity                                                      |
+| Category          | Category breadcrumbs                                                          |
+| Color             | Product color                                                                 |
+| Brand             | Product brand                                                                 |
+| Size              | Product size                                                                  |
+| Active            | Is product available for sale?                                                |
+| IsMain            | Is the product main product in the group?                                     |
+| Attributes        | Field to define additional product attributes                                 |
 
 
 
@@ -426,7 +433,7 @@ Use this API endpoint to update your product information in the catalog. For now
 
 ### HTTP Request URL
 
-`PUT http://api.gallao.io/catalog/{API version}/products/{SKU}`
+`PUT https://api.krama.ai/catalog/{API version}/products/{SKU}`
 
 ### HTTP Request Header
 
@@ -440,21 +447,22 @@ Use this API endpoint to update your product information in the catalog. For now
 
 |    Parameter   |          Constraints         |        Description                                           |
 |----------------|------------------------------|--------------------------------------------------------------|
-|sku             |   String, Max 50 Characters  |  The SKU of the product                                      |
-|name            |   Text, Max 250 Characters   |  The name of the product                                     |
-|description     |   Text, Max 2048 Characters  |  The description of the product                              | 
-|groupID         |   String, Max 50 Characters  |  The product group ID                                        | 
-|regularPrice    |   Float, Greater than 0      |  Everyday price                                              | 
-|promotionPrice  |   Float, Greater than 0      |  On-sale price                                               | 
-|images          |   URL, Mandatory             |  Product images                                              | 
-|searchKeywords  |   Text, Mandatory            |  Keywords that you want this product to be searched with     |
-|quantity        |   Integer, Greater than 0    |  Inventory stock quantity                                    | 
-|category        |   Text, Mandatory            |  Category breadcrumbs                                        | 
-|color           |   Text, Optional             |  Product color                                               |
-|brand           |   Text, Optional             |  Product brand                                               | 
-|size            |   Text, Optional             |  Product size                                                | 
-|active          |   Boolean, Mandatory         |  Is product available for sale?                              |    
-|isMain          |   Boolean, Mandatory         |  Is the product main product in the group?                   |
+|Sku             |   String, Max 50 Characters  |  The SKU of the product                                      |
+|Name            |   Text, Max 100 Characters   |  The name of the product                                     |
+|Description     |   Text, Max 10240 Characters |  The description of the product                              | 
+|GroupID         |   String, Max 50 Characters  |  The product group ID                                        | 
+|RegularPrice    |   Float, Greater than 0      |  Everyday price                                              | 
+|PromotionPrice  |   Float, Greater than 0      |  On-sale price                                               | 
+|Images          |   Valid URL, Mandatory       |  Product images                                              | 
+|SearchKeywords  |   Text[], Mandatory          |  Keywords that you want this product to be searched with     |
+|Quantity        |   Integer, Greater than 0    |  Inventory stock quantity                                    | 
+|Category        |   Text[], Mandatory          |  Category breadcrumbs array                                  | 
+|Color           |   Text, Optional             |  Product color                                               |
+|Brand           |   Text, Optional             |  Product brand                                               | 
+|Size            |   Text, Optional             |  Product size                                                | 
+|Active          |   Boolean, Mandatory         |  Flag to set the product availble for sale                   |    
+|IsMain          |   Boolean, Mandatory         |  Is the product main product in the product group?           |
+|Attributes      |   Details in another section |  Additional field to pass in misc. product attributes        |
 
 
 ### HTTP Response
@@ -466,21 +474,174 @@ Use this API endpoint to update your product information in the catalog. For now
 | Message           | Message for additional information                                            |
 | Time              | Unix timestamp of the response                                                |
 | Response          | Response object containing response information                               |
-| sku               | The SKU of the product                                                        |
-| name              | The name of the product                                                       |
-| description       | The description of the product                                                |   
-| groupID           | The product group ID                                                          |
-| regularPrice      | Everyday price                                                                |
-| promotionPrice    | On-sale price                                                                 |
-| images            | Product images                                                                |
-| searchKeywords    | Keywords that you want this product to be searched with                       |
-| quantity          | Inventory stock quantity                                                      |
-| category          | Category breadcrumbs                                                          |
-| color             | Product color                                                                 |
-| brand             | Product brand                                                                 |
-| size              | Product size                                                                  |
-| active            | Is product available for sale?                                                |
-| isMain            | Is the product main product in the group?                                     |
+| Sku               | The SKU of the product                                                        |
+| Name              | The name of the product                                                       |
+| Description       | The description of the product                                                |   
+| GroupID           | The product group ID                                                          |
+| RegularPrice      | Everyday price                                                                |
+| PromotionPrice    | On-sale price                                                                 |
+| Images            | Product images                                                                |
+| SearchKeywords    | Keywords that you want this product to be searched with                       |
+| Quantity          | Inventory stock quantity                                                      |
+| Category          | Category breadcrumbs                                                          |
+| Color             | Product color                                                                 |
+| Brand             | Product brand                                                                 |
+| Size              | Product size                                                                  |
+| Active            | Is product available for sale?                                                |
+| IsMain            | Is the product main product in the group?                                     |
+| Attributes        | Field to define additional product attributes                                 |
+
+
+
+
+## Update product price (Bulk)
+
+> Sample HTTP request body:
+
+```json
+{
+	 "Prices" : {
+	 	"1234" : {
+		 	"RegularPrice" : 111,
+		 	"PromotionPrice" : 102
+	 	},
+	 	"1234588" : {
+		 	"RegularPrice" : 99,
+		 	"PromotionPrice" : 45
+	 	}
+	 }
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Prices Updated ...",
+    "Time": 1578984706084735751,
+    "Response": {
+        "Products Not Found": [
+            "1234588"
+        ],
+        "Products Not Updated": null,
+        "Products Updated": [
+            "1234"
+        ]
+    }
+}
+```
+
+Use this API endpoint to update your product prices in the catalog. You can use this endpoint to submit a map of skus of prices. Each sku in the map
+is associated with the regular and the promotion prices. The new prices cannot not be negative values. As with other features the API takes care of 
+ensuring that the product groups and the search index are synced as well. The response object contains three lists - the list of updated skus 
+(essentially the skus for which the prices were updated), a list of skus which were not updated (most likely that you submitted same old prices), and
+finally a list of skus that were not found. You can use this information to check if your update request was executed as per your expectations. 
+
+
+### HTTP Request URL
+
+`PUT https://api.krama.ai/catalog/{API version}/products/price/update`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Body Parameters
+
+|    Parameter   |          Constraints         |        Description                                           |
+|----------------|------------------------------|--------------------------------------------------------------|
+|Prices          |                              |  The prices map that contains the sku-price maps             |
+|PromotionPrice  |   Float, non-negative        |  The promotion price of the mapped sku                       |
+|RegularPrice    |   Float, non-negative        |  The regular price associated with the sku                   | 
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+
+## Update product inventory (Bulk)
+
+> Sample HTTP request body:
+
+```json
+{
+	 "Quantity" : {
+			 	"1234" : 100,
+			 	"9999" : 341
+	 }
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Inventory Updated ...",
+    "Time": 1578985420311573562,
+    "Response": {
+        "Products Not Found": [
+            "9999"
+        ],
+        "Products Not Updated": null,
+        "Products Updated": [
+            "1234"
+        ]
+    }
+}
+```
+
+Use this API endpoint to update your product quantity. You can use this endpoint to updates inventory for multiple products. Please find the API request details below. The API updates product groups as well as search index. The response object contains three lists - a list that gives you the skus of those
+products where the product quantities were updated. The response object also provides you with list of those skus where there was no change and also
+those skus which were not found in the catalog. 
+
+
+### HTTP Request URL
+
+`PUT https://api.krama.ai/catalog/{API version}/products/inventory/update`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Body Parameters
+
+|    Parameter    |          Constraints                    |        Description                                           |
+|-----------------|-----------------------------------------|--------------------------------------------------------------|
+|Quantity         |                                         |  The map containing skus-quantity mappings                   |
+|{sku : quantity} | {unique identifier, float non-negative} |  sku-quantity mappings in the Quantity object                |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
 
 
 
@@ -515,7 +676,7 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
 
 ### HTTP Request URL
 
-`DELETE http://api.gallao.io/catalog/{API version}/products/{SKU}`
+`DELETE https://api.krama.ai/catalog/{API version}/products/{SKU}`
 
 ### HTTP Request Header
 
@@ -636,7 +797,7 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 
 ### HTTP Request URL
 
-`GET http://api.gallao.io/catalog/{API version}/productgroups/{PGID}`
+`GET https://api.krama.ai/catalog/{API version}/productgroups/{PGID}`
 
 ### HTTP Requesr Header
 
@@ -677,6 +838,7 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 | PromotionPriceMax     |  Maximum promotion price computed in the group                                |
 | Active                |  Active flag to indicate if the product is available for sale                 |
 | Products              |  List of all the product objects for reference                                |
+| Attributes            |  Field that maps additional attributes to the product group                   |
 
 
 
@@ -711,7 +873,7 @@ Use this API endpoint to remove a product group from the productgroups collectio
 
 ### HTTP Request URL
 
-`DELETE http://api.gallao.io/catalog/{API version}/productgroups/{PGID}`
+`DELETE https://api.krama.ai/catalog/{API version}/productgroups/{PGID}`
 
 ### HTTP Request Header
 
@@ -869,7 +1031,7 @@ Use this endpoint to create an order entry in the database. Details on the field
 
 ### HTTP Request URL
 
-`POST http://api.gallao.io/orders/{API version}/orders`
+`POST https://api.krama.ai/orders/{API version}/orders`
 
 ### HTTP Request Header
 
@@ -994,7 +1156,7 @@ Use this endpoint to get all the orders associated with a customer using the cus
 
 ### HTTP Request URL
 
-`GET http://api.gallao.io/orders/{API version}/orders/customer/{CID}`
+`GET https://api.krama.ai/orders/{API version}/orders/customer/{CID}`
 
 ### HTTP Request Header
 
@@ -1103,7 +1265,7 @@ Use this endpoint to get all the orders associated with a customer using the cus
 
 ### HTTP Request URL
 
-`GET http://api.gallao.io/orders/{API version}/orders/{OID}`
+`GET https://api.krama.ai/orders/{API version}/orders/{OID}`
 
 ### HTTP Request Header
 
@@ -1282,7 +1444,7 @@ Use this endpoint to update the order object.
 
 ### HTTP Request URL
 
-`PUT http://api.gallao.io/orders/{API version}/orders/{ID}`
+`PUT https://api.krama.ai/orders/{API version}/orders/{ID}`
 
 
 ### HTTP Request Header
@@ -1344,7 +1506,7 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
 
 ### HTTP Request
 
-`DELETE http://api.gallao.io/orders/{API version}/orders/{ID}`
+`DELETE https://api.krama.ai/orders/{API version}/orders/{ID}`
 
 ### HTTP Request Header
 
@@ -1522,7 +1684,7 @@ Use this API endpoint to search a product group in the search index. Please note
 
 ### HTTP Request
 
-`GET http://api.gallao.io/search/{API version}/productgroups/search`
+`GET https://api.krama.ai/search/{API version}/productgroups/search`
 
 
 ### HTTP Request Header
@@ -1567,3 +1729,4 @@ This API uses the following HTTP Response codes:
 | 401  **StatusUnauthorized**        | The API request is not authorized. Please check your access credentials |
 | 404  **StatusNotFound**            | The requested/referenced resource was not found                         |
 | 500  **StatusInternalServerError** | Something went wrong on our server                                      |
+| 503  **StatusServiceUnavailable**  | The API service is down                                                 |
