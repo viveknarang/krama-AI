@@ -1,9 +1,7 @@
 
 [![Build Status](https://travis-ci.org/viveknarang/kramaAPI.svg?branch=master)](https://travis-ci.org/viveknarang/kramaAPI)
 
-# Krama AI - Introduction
-
-## A blazing-fast headless E-commerce AI platform
+# Krama AI - A blazing-fast headless E-commerce AI platform
 
 
 This API provides you with several options to maintain your product catalog and search products in your catalog. 
