@@ -18,6 +18,4 @@ func main() {
 	disconnectDB()
 	disconnectRedis()
 
-	some garbage here to test travis-ci
-	
 }
