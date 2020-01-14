@@ -78,13 +78,11 @@ func indexES(index string, mapping string, document interface{}, id string) bool
 
 	ctx := context.Background()
 
-	put, err := ESCLIENT.Index().Index(index).Id(id).BodyJson(document).Do(ctx)
+	_, err := ESCLIENT.Index().Index(index).Id(id).BodyJson(document).Do(ctx)
 
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Printf("Indexed %s to index %s, type %s\n", put.Id, put.Index, put.Type)
 
 	return true
 
@@ -116,12 +114,11 @@ func queryES(index string, from int, to int, q string, fields []string) *elastic
 func deleteESDocumentByID(index string, id string) bool {
 
 	ctx := context.Background()
-	res, err := ESCLIENT.Delete().Index(index).Id(id).Do(ctx)
+	_, err := ESCLIENT.Delete().Index(index).Id(id).Do(ctx)
+
 	if err != nil {
 		panic(err)
 	}
-
-	println(res.Result)
 
 	return true
 }
