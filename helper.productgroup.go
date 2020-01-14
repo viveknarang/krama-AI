@@ -272,6 +272,18 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		}
 
+		updpg := make(map[string][]interface{})
+		for _, valueP := range productGroup.Products {
+
+			for key, value := range valueP.Attributes {
+
+				updpg[key] = append(updpg[key], value)
+
+			}
+
+		}
+		productGroup.Attributes = updpg
+
 		productGroup.Skus = append(productGroup.Skus, p.Sku)
 
 		productGroup.RegularPriceMin = nrpmin
@@ -354,6 +366,18 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 				addInSet(key)
 
 			}
+
+			updpg := make(map[string][]interface{})
+			for _, valueP := range productGroup.Products {
+
+				for key, value := range valueP.Attributes {
+
+					updpg[key] = append(updpg[key], value)
+
+				}
+
+			}
+			productGroup.Attributes = updpg
 
 			productGroup.Skus = append(productGroup.Skus, p.Sku)
 
