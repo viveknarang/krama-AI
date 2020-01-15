@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/url"
 	"reflect"
+	"regexp"
 )
 
 func isValidJSON(s string) bool {
@@ -18,6 +19,14 @@ func isValidURL(toTest string) bool {
 	_, err := url.ParseRequestURI(toTest)
 
 	return !(err != nil)
+
+}
+
+func isValidEmail(toTest string) bool {
+
+	emailRegularExpression := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+
+	return emailRegularExpression.MatchString(toTest)
 
 }
 
