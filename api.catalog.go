@@ -83,7 +83,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	groom(&p)
+	groomProductData(&p)
 
 	p.Updated = time.Now().UnixNano()
 
@@ -124,7 +124,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	groom(&p)
+	groomProductData(&p)
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 

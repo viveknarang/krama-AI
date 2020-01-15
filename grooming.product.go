@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func groom(product *PRODUCT) {
+func groomProductData(product *PRODUCT) {
 
 	product.Sku = strings.TrimSpace(product.Sku)
 	product.Name = strings.TrimSpace(product.Name)

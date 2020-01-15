@@ -146,6 +146,39 @@ var MissingContentType string
 //ServiceDownMessage api service down message
 var ServiceDownMessage string
 
+//CustomersBasePath customers base path
+var CustomersBasePath string
+
+//CustomersPath customers path
+var CustomersPath string
+
+//CustomersAddedMessage product found message
+var CustomersAddedMessage string
+
+//CustomersFoundMessage product found message
+var CustomersFoundMessage string
+
+//CustomersNotFoundMessage product not found message
+var CustomersNotFoundMessage string
+
+//CustomersUpdatedMessage product updated message
+var CustomersUpdatedMessage string
+
+//CustomersNotUpdatedMessage product not updated message
+var CustomersNotUpdatedMessage string
+
+//CustomersDeletedMessage product deleted message
+var CustomersDeletedMessage string
+
+//CustomersNotAddedMessage product not added message
+var CustomersNotAddedMessage string
+
+//CustomersNotDeletedMessage product not deleted message
+var CustomersNotDeletedMessage string
+
+//CustomersCollectionExtension customers collection extension
+var CustomersCollectionExtension string
+
 const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/system.properties"
 
 func loadSystemProperties() {
@@ -158,6 +191,7 @@ func loadSystemProperties() {
 	CatalogBasePath = p.GetString("api.catalog.base.path", "/catalog/")
 	OrdersBasePath = p.GetString("api.orders.base.path", "/orders/")
 	SearchBasePath = p.GetString("pi.search.base.path", "/search/")
+	CustomersBasePath = p.GetString("api.customers.base.path", "/customers/")
 	APIVersion = p.GetString("api.version", "v1")
 	RedisURL = p.GetString("redis.url", "localhost")
 	RedisPort = p.GetString("redis.port", "6379")
@@ -197,9 +231,19 @@ func loadSystemProperties() {
 	MissingAccessToken = p.GetString("api.response.message.exception.missingtoken", "")
 	MissingContentType = p.GetString("api.response.message.exception.contentTypeMissing", "")
 	ServiceDownMessage = p.GetString("api.response.message.exception.serviceUnavailable", "")
+	CustomersAddedMessage = p.GetString("api.response.message.customers.added", "")
+	CustomersFoundMessage = p.GetString("api.response.message.customers.found", "")
+	CustomersNotFoundMessage = p.GetString("api.response.message.customers.notfound", "")
+	CustomersUpdatedMessage = p.GetString("api.response.message.customers.updated", "")
+	CustomersNotUpdatedMessage = p.GetString("api.response.message.customers.notupdated", "")
+	CustomersDeletedMessage = p.GetString("api.response.message.customers.deleted", "")
+	CustomersNotAddedMessage = p.GetString("api.response.message.customers.notadded", "")
+	CustomersNotDeletedMessage = p.GetString("api.response.message.customers.notdeleted", "")
+	CustomersCollectionExtension = p.GetString("db.mongo.external.customers.extension", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion
 	SearchPath = SearchBasePath + APIVersion
+	CustomersPath = CustomersBasePath + APIVersion
 
 }

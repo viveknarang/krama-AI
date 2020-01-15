@@ -40,6 +40,14 @@ func routers() *mux.Router {
 
 	router.HandleFunc(SearchPath+"/productgroups/search", basicProductGroupSearch).Methods(http.MethodPost)
 
+	router.HandleFunc(CustomersPath+"/customers/{SKU}", getCustomer).Methods(http.MethodGet)
+
+	router.HandleFunc(CustomersPath+"/customers", postCustomer).Methods(http.MethodPost)
+
+	router.HandleFunc(CustomersPath+"/customers/{SKU}", putCustomer).Methods(http.MethodPut)
+
+	router.HandleFunc(CustomersPath+"/customers/{SKU}", deleteCustomer).Methods(http.MethodDelete)
+
 	return router
 
 }

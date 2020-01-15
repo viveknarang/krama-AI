@@ -46,3 +46,11 @@ func resetProductCacheKeys(p *PRODUCT, pg *PRODUCTGROUP) {
 	}
 
 }
+
+func resetCustomerCacheKeys(customer *CUSTOMER) {
+
+	if customer != nil {
+		REDISCLIENT.Del(CustomersPath + "/customers/" + customer.CustomerID)
+	}
+
+}
