@@ -38,7 +38,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		var customer CUSTOMER
+		var customer PLATFORMCUSTOMER
 
 		j, err0 := bson.MarshalExtJSON(results[0], false, false)
 

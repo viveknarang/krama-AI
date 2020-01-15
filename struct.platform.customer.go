@@ -1,7 +1,7 @@
 package main
 
-//CUSTOMER document structure
-type CUSTOMER struct {
+//PLATFORMCUSTOMER document structure
+type PLATFORMCUSTOMER struct {
 	CustomerID string `json:"CustomerID"`
 	APIKey     string `json:"APIKey"`
 	Name       string `json:"Name"`
