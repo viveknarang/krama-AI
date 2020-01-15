@@ -10,4 +10,5 @@ type ADDRESS struct {
 	State          string `json:"State"`
 	Country        string `json:"Country"`
 	Pincode        string `json:"Pincode"`
+	Default        bool   `json:"Default"`
 }
