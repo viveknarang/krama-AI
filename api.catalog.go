@@ -93,6 +93,8 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	if syncProductGroup(w, r, p) {
 
+		resetProductCacheKeys(&p, nil)
+
 		respondWith(w, r, nil, ProductAddedMessage, p, http.StatusCreated, true)
 
 	} else {
@@ -132,7 +134,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 		if syncProductGroup(w, r, p) {
 
-			REDISCLIENT.Del(r.URL.Path)
+			resetProductCacheKeys(&p, nil)
 			respondWith(w, r, nil, ProductUpdatedMessage, p, http.StatusAccepted, true)
 
 		} else {
@@ -191,7 +193,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 
 		if syncProductGroup(w, r, product) {
 
-			REDISCLIENT.Del(r.URL.Path)
+			resetProductCacheKeys(&product, nil)
 			respondWith(w, r, nil, ProductDeletedMessage, nil, http.StatusOK, true)
 
 		} else {
@@ -306,7 +308,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 
 	if deleteMongoDocument(ExternalDB, pgcol, bson.M{"groupid": pgid}) == 1 {
 
-		REDISCLIENT.Del(r.URL.Path)
+		resetProductCacheKeys(nil, &productGroup)
 
 		deleteESDocumentByID(pgindex, pgid)
 

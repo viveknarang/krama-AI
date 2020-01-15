@@ -32,3 +32,17 @@ func areCoreServicesUp() bool {
 	return pingMongoDB(true) && pingES(true) && pingRedis(true)
 
 }
+
+func resetProductCacheKeys(p *PRODUCT, pg *PRODUCTGROUP) {
+
+	if p != nil {
+		REDISCLIENT.Del(CatalogPath + "/products/" + p.Sku)
+		REDISCLIENT.Del(CatalogPath + "/productgroups/" + p.GroupID)
+	} else if pg != nil {
+		REDISCLIENT.Del(CatalogPath + "/productgroups/" + pg.GroupID)
+		for _, sku := range pg.Skus {
+			REDISCLIENT.Del(CatalogPath + "/products/" + sku)
+		}
+	}
+
+}

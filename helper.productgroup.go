@@ -573,6 +573,8 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 			}
 
+			resetProductCacheKeys(nil, &productGroup)
+
 		}
 
 	}
