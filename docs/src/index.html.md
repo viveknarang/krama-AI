@@ -5,8 +5,10 @@ language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.2</span>
-  - <a href='mailto:vivek.narang10@gmail.com'><u>Contact Us</u></a><br/><br/><br/><br/>
+  - <span>API documentation version 3.3</span>
+  - <a href='mailto:vivek.narang10@gmail.com'><u>Contact Us</u></a><br/><br/>
+  - <span>For Platform Developers:</span><br/>
+  - <img src='https://travis-ci.org/viveknarang/kramaAPI.svg?branch=master'></img><br/><br/>
   - API documentation generated using:<br/><a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a>
 
 includes:
@@ -25,7 +27,7 @@ With this API, you can create, update and delete products in your product catalo
 It is important to understand the concept of product groups. For search quality and other advanced features provided by our platform, products are grouped to form product groups. These product groups are essentially a product with different variations. Example: A shirt can be of multiple sizes and/or colors. So all of the variations of this shirt are grouped to form a product group.  
 </aside>
 
-The search API is fairly powerful too. It allows features like search on a specific field or a set of fields. The search API responds with product groups where the query matches certain fields. Search API also allows you to select the standard facets to be included in the API response. In addtion to the features mentioned above, the API automatically syncs the search index with changes in products/product groups, **in real-time**. Also, for efficiency and speed, the search and GET product/productgroup endpoints are cached. Upon any updates, the cache is updated as well. 
+The search API is fairly powerful too (Work in progress, expect great features coming up soon!). It allows features like search on a specific field or a set of fields. The search API responds with product groups where the query matches certain fields. Search API also allows you to select the standard facets to be included in the API response. In addtion to the features mentioned above, the API automatically syncs the search index with changes in products/product groups, **in real-time**. Also, for efficiency and speed, the search and GET product/productgroup endpoints are cached. Upon any updates, the cache is updated as well. 
 
 We are continuously adding new features and improving this API, if you have any suggestions please reach out to us [here](mailto:vivek.narang10@gmail.com)
 
@@ -42,7 +44,102 @@ API Powered by
 The current API version is: v1 Please replace {API version} with v1 in your API calls
 </aside>
 
-# API login
+
+# Data Structures
+
+## The Product Data Structure
+
+> Sample valid product object:
+
+```json
+{
+  "Sku": "B07K3BHGL3",
+  "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+  "Images": [
+    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+  ],
+  "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+  "GroupID": "MSLAPS2",
+  "SearchKeywords": [
+    "Laptop",
+    "Microsoft",
+    "Surface"
+  ],
+  "RegularPrice": 2799,
+  "PromotionPrice": 2600,
+  "Currency": "CDN",
+  "IsMain": true,
+  "Quantity": 200,
+  "Size": "13.5 inches",
+  "Brand": "Microsoft",
+  "Color": "Black",
+  "Category": [
+    "Computers & Tablets>Laptops"
+  ],
+  "Active": true,
+  "Attributes": {
+    "Display Size": "13.5 inches",
+    "RAM": "16 GB",
+    "Memory Speed": "1 GHz",
+    "Wireless Standard": "802.11ac",
+    "Number of USB 2.0 Ports": "1",
+    "Series": "Surface Laptop 2",
+    "Item model number": "DAL-00092",
+    "Operating System": "Windows 10 Home",
+    "Item Weight": "1.28 Kg",
+    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+    "Color": "Black",
+    "Processor Count": "16",
+    "Flash Memory Size": "512.00",
+    "Batteries": "1",
+    "ASIN": "B07K3BHGL3",
+    "Shipping Weight": "2.2 kg",
+    "Date First Available": "Nov. 4 2018"
+  }
+}
+```
+
+At the heart of this API lies the product and so it is very important to understand the concept of product, its data structure and the rules around it. 
+The product data structure provides a skeleton of an individual product. This skeleton is very powerful and allowes this API to store most real-world 
+products. The skeleton essentially consists of some most common fields that define a product. Many of these fields are mandatory and some are optional.
+
+Among all of the fields in the product skeleton, the one field that we would particularly like to disucss here is the Attributes field. the attributes field make the product skeleton very flexible. It allows defining of custom product attributes that are unique to your product definition. Attributes field accepts a map of key value pairs. Keys in the Attributes are the custom attribute names and are strings. The values are only allowed to be either
+strings, integers, floats or boolean values. 
+
+<aside class="warning">
+The API will reject product addition and change requests if the constraints are not met! 
+</aside>
+
+Please find the field definitions, types and constraints below:
+
+|   Field          |   Type         |     Short Description                                         |    Constraints                                                          |
+|------------------|----------------|---------------------------------------------------------------|-------------------------------------------------------------------------|
+|  Sku             |   String       | Unique product identifier                                     | Mandatory, Unique, Alphanumeric, Less than 50 characters                |
+|  Name            |   String       | Name of the product                                           | Mandatory, Less than 100 characters                                     |
+|  GroupID         |   String       | Product group identifier. More details in other section       | Mandatory, Less than 50 characters                                      |
+|  Description     |   String       | Product description field                                     | Mandatory, less than 10240 characters                                   |
+|  RegularPrice    |   Float        | Product's everyday price                                      | Mandatory, Cannot be negative                                           |
+|  PromotionPrice  |   Float        | Product's promotion price. Typically less than regular price. | Mandatory, Cannot be negative                                           |
+|  Images          |   String       | Product image links                                           | Mandatory, need to be valid URLs, cannot be more than 100 URLs          |
+|  SearchKeywords  |   String[]     | Product search keywords                                       | Mandatory, cannot be more than 100 search keywords                      |
+|  Quantity        |   Integer      | Product stock quantity field                                  | Mandatory, cannot be negative                                           |
+|  Category        |   String[]     | Product category path. Please see product object example      | Mandatory, '>' separated category path                                  |
+|  Color           |   String       | Product color field                                           | Optional, cannot be greater than 100 characters                         |         
+|  Brand           |   String       | Product brand field                                           | Optional, cannot be greater than 100 characters                         |
+|  Size            |   String       | Product size field                                            | Optional, cannot be greater than 100 characters                         |
+|  Active          |   Boolean      | Field to mark product available for sale                      | Boolean - either true or false                                          |
+|  IsMain          |   Boolean      | Field to mark the product as a main product in the group      | Boolean - either true of false                                          |
+|  Currency        |   String       | Product purchase currency                                     | Either - "USD", "CAD", "CDN", "INR", "GBP" or "EUR" (for now!)          |
+|  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | keys should be strings and values either: int, float, string or boolean |                      
+
+<aside class="notice">
+The isMain field in the product data structure essentially marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
+of the product name, images, etc ... to show up on the product page by default.  
+</aside>
+
+
+# API access
 
 ## Get API access token
 
@@ -265,24 +362,25 @@ Use this API endpoint to add a new product in the products collection. When a pr
 
 ### HTTP Request Body Parameters
 
-|    Parameter   |          Constraints         |        Description                                           |
-|----------------|------------------------------|--------------------------------------------------------------|
-|Sku             |   String, Max 50 Characters  |  The SKU of the product                                      |
-|Name            |   Text, Max 100 Characters   |  The name of the product                                     |
-|Description     |   Text, Max 10240 Characters |  The description of the product                              | 
-|GroupID         |   String, Max 50 Characters  |  The product group ID                                        | 
-|RegularPrice    |   Float, Greater than 0      |  Everyday price                                              | 
-|PromotionPrice  |   Float, Greater than 0      |  On-sale price                                               | 
-|Images          |   Valid URL, Mandatory       |  Product images                                              | 
-|SearchKeywords  |   Text[], Mandatory          |  Keywords that you want this product to be searched with     |
-|Quantity        |   Integer, Greater than 0    |  Inventory stock quantity                                    | 
-|Category        |   Text[], Mandatory          |  Category breadcrumbs array                                  | 
-|Color           |   Text, Optional             |  Product color                                               |
-|Brand           |   Text, Optional             |  Product brand                                               | 
-|Size            |   Text, Optional             |  Product size                                                | 
-|Active          |   Boolean, Mandatory         |  Flag to set the product availble for sale                   |    
-|IsMain          |   Boolean, Mandatory         |  Is the product main product in the product group?           |
-|Attributes      |   Details in another section |  Additional field to pass in misc. product attributes        |
+|   Field          |   Type         |     Short Description                                         |    Constraints                                                          |
+|------------------|----------------|---------------------------------------------------------------|-------------------------------------------------------------------------|
+|  Sku             |   String       | Unique product identifier                                     | Mandatory, Unique, Alphanumeric, Less than 50 characters                |
+|  Name            |   String       | Name of the product                                           | Mandatory, Less than 100 characters                                     |
+|  GroupID         |   String       | Product group identifier. More details in other section       | Mandatory, Less than 50 characters                                      |
+|  Description     |   String       | Product description field                                     | Mandatory, less than 10240 characters                                   |
+|  RegularPrice    |   Float        | Product's everyday price                                      | Mandatory, Cannot be negative                                           |
+|  PromotionPrice  |   Float        | Product's promotion price. Typically less than regular price. | Mandatory, Cannot be negative                                           |
+|  Images          |   String       | Product image links                                           | Mandatory, need to be valid URLs, cannot be more than 100 URLs          |
+|  SearchKeywords  |   String[]     | Product search keywords                                       | Mandatory, cannot be more than 100 search keywords                      |
+|  Quantity        |   Integer      | Product stock quantity field                                  | Mandatory, cannot be negative                                           |
+|  Category        |   String[]     | Product category path. Please see product object example      | Mandatory, '>' separated category path                                  |
+|  Color           |   String       | Product color field                                           | Optional, cannot be greater than 100 characters                         |         
+|  Brand           |   String       | Product brand field                                           | Optional, cannot be greater than 100 characters                         |
+|  Size            |   String       | Product size field                                            | Optional, cannot be greater than 100 characters                         |
+|  Active          |   Boolean      | Field to mark product available for sale                      | Boolean - either true or false                                          |
+|  IsMain          |   Boolean      | Field to mark the product as a main product in the group      | Boolean - either true of false                                          |
+|  Currency        |   String       | Product purchase currency                                     | Either - "USD", "CAD", "CDN", "INR", "GBP" or "EUR" (for now!)          |
+|  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | keys should be strings and values either: int, float, string or boolean |  
 
 
 ### HTTP Response
@@ -558,24 +656,25 @@ Use this API endpoint to update your product information in the catalog. For now
 
 ### HTTP Body Parameters
 
-|    Parameter   |          Constraints         |        Description                                           |
-|----------------|------------------------------|--------------------------------------------------------------|
-|Sku             |   String, Max 50 Characters  |  The SKU of the product                                      |
-|Name            |   Text, Max 100 Characters   |  The name of the product                                     |
-|Description     |   Text, Max 10240 Characters |  The description of the product                              | 
-|GroupID         |   String, Max 50 Characters  |  The product group ID                                        | 
-|RegularPrice    |   Float, Greater than 0      |  Everyday price                                              | 
-|PromotionPrice  |   Float, Greater than 0      |  On-sale price                                               | 
-|Images          |   Valid URL, Mandatory       |  Product images                                              | 
-|SearchKeywords  |   Text[], Mandatory          |  Keywords that you want this product to be searched with     |
-|Quantity        |   Integer, Greater than 0    |  Inventory stock quantity                                    | 
-|Category        |   Text[], Mandatory          |  Category breadcrumbs array                                  | 
-|Color           |   Text, Optional             |  Product color                                               |
-|Brand           |   Text, Optional             |  Product brand                                               | 
-|Size            |   Text, Optional             |  Product size                                                | 
-|Active          |   Boolean, Mandatory         |  Flag to set the product availble for sale                   |    
-|IsMain          |   Boolean, Mandatory         |  Is the product main product in the product group?           |
-|Attributes      |   Details in another section |  Additional field to pass in misc. product attributes        |
+|   Field          |   Type         |     Short Description                                         |    Constraints                                                          |
+|------------------|----------------|---------------------------------------------------------------|-------------------------------------------------------------------------|
+|  Sku             |   String       | Unique product identifier                                     | Mandatory, Unique, Alphanumeric, Less than 50 characters                |
+|  Name            |   String       | Name of the product                                           | Mandatory, Less than 100 characters                                     |
+|  GroupID         |   String       | Product group identifier. More details in other section       | Mandatory, Less than 50 characters                                      |
+|  Description     |   String       | Product description field                                     | Mandatory, less than 10240 characters                                   |
+|  RegularPrice    |   Float        | Product's everyday price                                      | Mandatory, Cannot be negative                                           |
+|  PromotionPrice  |   Float        | Product's promotion price. Typically less than regular price. | Mandatory, Cannot be negative                                           |
+|  Images          |   String       | Product image links                                           | Mandatory, need to be valid URLs, cannot be more than 100 URLs          |
+|  SearchKeywords  |   String[]     | Product search keywords                                       | Mandatory, cannot be more than 100 search keywords                      |
+|  Quantity        |   Integer      | Product stock quantity field                                  | Mandatory, cannot be negative                                           |
+|  Category        |   String[]     | Product category path. Please see product object example      | Mandatory, '>' separated category path                                  |
+|  Color           |   String       | Product color field                                           | Optional, cannot be greater than 100 characters                         |         
+|  Brand           |   String       | Product brand field                                           | Optional, cannot be greater than 100 characters                         |
+|  Size            |   String       | Product size field                                            | Optional, cannot be greater than 100 characters                         |
+|  Active          |   Boolean      | Field to mark product available for sale                      | Boolean - either true or false                                          |
+|  IsMain          |   Boolean      | Field to mark the product as a main product in the group      | Boolean - either true of false                                          |
+|  Currency        |   String       | Product purchase currency                                     | Either - "USD", "CAD", "CDN", "INR", "GBP" or "EUR" (for now!)          |
+|  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | keys should be strings and values either: int, float, string or boolean |  
 
 
 ### HTTP Response
@@ -987,8 +1086,6 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 
 ### HTTP Requesr Header
 
-### HTTP Request Header
-
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
 |x-access-token     | The access token that you receive upon login |
@@ -1003,11 +1100,11 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 
 |  Key                  |    Description                                                                |
 |-----------------------|-------------------------------------------------------------------------------|
-| Code                  | Response code for the request                                                 |
-| Success               | Flag that tells if the request was successful                                 |
-| Message               | Message for additional information                                            |
-| Time                  | Unix timestamp of the response                                                |
-| Response              | Response object containing response information                               |
+| Code                  |  Response code for the request                                                |
+| Success               |  Flag that tells if the request was successful                                |
+| Message               |  Message for additional information                                           |
+| Time                  |  Unix timestamp of the response                                               |
+| Response              |  Response object containing response information                              |
 | Skus                  |  A list of SKUs of all the products in the group                              |
 | Colors                |  A list of all the colors from all the products in the group                  |
 | Brands                |  A list of all the brands from all the products in the group                  |
@@ -1085,7 +1182,7 @@ Use this API endpoint to remove a product group from the productgroups collectio
 
 
 
-# Order API
+# Orders API
 
 ## Create an order
 

@@ -219,7 +219,15 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#api-login" class="toc-h1 toc-link" data-title="API login">API login</a>
+            <a href="#data-structures" class="toc-h1 toc-link" data-title="Data Structures">Data Structures</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#the-product-data-structure" class="toc-h2 toc-link" data-title="The Product Data Structure">The Product Data Structure</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#api-access" class="toc-h1 toc-link" data-title="API access">API access</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-api-access-token" class="toc-h2 toc-link" data-title="Get API access token">Get API access token</a>
@@ -256,7 +264,7 @@
               </ul>
           </li>
           <li>
-            <a href="#order-api" class="toc-h1 toc-link" data-title="Order API">Order API</a>
+            <a href="#orders-api" class="toc-h1 toc-link" data-title="Orders API">Orders API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-an-order" class="toc-h2 toc-link" data-title="Create an order">Create an order</a>
@@ -288,8 +296,10 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 3.2</span></li>
-            <li><a href='mailto:vivek.narang10@gmail.com'><u>Contact Us</u></a><br/><br/><br/><br/></li>
+            <li><span>API documentation version 3.3</span></li>
+            <li><a href='mailto:vivek.narang10@gmail.com'><u>Contact Us</u></a><br/><br/></li>
+            <li><span>For Platform Developers:</span><br/></li>
+            <li><img src='https://travis-ci.org/viveknarang/kramaAPI.svg?branch=master'></img><br/><br/></li>
             <li>API documentation generated using:<br/><a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a></li>
         </ul>
     </div>
@@ -305,7 +315,7 @@
 It is important to understand the concept of product groups. For search quality and other advanced features provided by our platform, products are grouped to form product groups. These product groups are essentially a product with different variations. Example: A shirt can be of multiple sizes and/or colors. So all of the variations of this shirt are grouped to form a product group.  
 </aside>
 
-<p>The search API is fairly powerful too. It allows features like search on a specific field or a set of fields. The search API responds with product groups where the query matches certain fields. Search API also allows you to select the standard facets to be included in the API response. In addtion to the features mentioned above, the API automatically syncs the search index with changes in products/product groups, <strong>in real-time</strong>. Also, for efficiency and speed, the search and GET product/productgroup endpoints are cached. Upon any updates, the cache is updated as well. </p>
+<p>The search API is fairly powerful too (Work in progress, expect great features coming up soon!). It allows features like search on a specific field or a set of fields. The search API responds with product groups where the query matches certain fields. Search API also allows you to select the standard facets to be included in the API response. In addtion to the features mentioned above, the API automatically syncs the search index with changes in products/product groups, <strong>in real-time</strong>. Also, for efficiency and speed, the search and GET product/productgroup endpoints are cached. Upon any updates, the cache is updated as well. </p>
 
 <p>We are continuously adding new features and improving this API, if you have any suggestions please reach out to us <a href="mailto:vivek.narang10@gmail.com">here</a></p>
 
@@ -321,7 +331,187 @@ It is important to understand the concept of product groups. For search quality 
 <aside class="success">
 The current API version is: v1 Please replace {API version} with v1 in your API calls
 </aside>
-<h1 id='api-login'>API login</h1><h2 id='get-api-access-token'>Get API access token</h2>
+<h1 id='data-structures'>Data Structures</h1><h2 id='the-product-data-structure'>The Product Data Structure</h2>
+<blockquote>
+<p>Sample valid product object:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Surface"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2799</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Computers &amp; Tablets&gt;Laptops"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.28 Kg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2 kg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nov. 4 2018"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>At the heart of this API lies the product and so it is very important to understand the concept of product, its data structure and the rules around it. 
+The product data structure provides a skeleton of an individual product. This skeleton is very powerful and allowes this API to store most real-world 
+products. The skeleton essentially consists of some most common fields that define a product. Many of these fields are mandatory and some are optional.</p>
+
+<p>Among all of the fields in the product skeleton, the one field that we would particularly like to disucss here is the Attributes field. the attributes field make the product skeleton very flexible. It allows defining of custom product attributes that are unique to your product definition. Attributes field accepts a map of key value pairs. Keys in the Attributes are the custom attribute names and are strings. The values are only allowed to be either
+strings, integers, floats or boolean values. </p>
+
+<aside class="warning">
+The API will reject product addition and change requests if the constraints are not met! 
+</aside>
+
+<p>Please find the field definitions, types and constraints below:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Short Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Sku</td>
+<td>String</td>
+<td>Unique product identifier</td>
+<td>Mandatory, Unique, Alphanumeric, Less than 50 characters</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>String</td>
+<td>Name of the product</td>
+<td>Mandatory, Less than 100 characters</td>
+</tr>
+<tr>
+<td>GroupID</td>
+<td>String</td>
+<td>Product group identifier. More details in other section</td>
+<td>Mandatory, Less than 50 characters</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>String</td>
+<td>Product description field</td>
+<td>Mandatory, less than 10240 characters</td>
+</tr>
+<tr>
+<td>RegularPrice</td>
+<td>Float</td>
+<td>Product&#39;s everyday price</td>
+<td>Mandatory, Cannot be negative</td>
+</tr>
+<tr>
+<td>PromotionPrice</td>
+<td>Float</td>
+<td>Product&#39;s promotion price. Typically less than regular price.</td>
+<td>Mandatory, Cannot be negative</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>String</td>
+<td>Product image links</td>
+<td>Mandatory, need to be valid URLs, cannot be more than 100 URLs</td>
+</tr>
+<tr>
+<td>SearchKeywords</td>
+<td>String[]</td>
+<td>Product search keywords</td>
+<td>Mandatory, cannot be more than 100 search keywords</td>
+</tr>
+<tr>
+<td>Quantity</td>
+<td>Integer</td>
+<td>Product stock quantity field</td>
+<td>Mandatory, cannot be negative</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>String[]</td>
+<td>Product category path. Please see product object example</td>
+<td>Mandatory, &#39;&gt;&#39; separated category path</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>String</td>
+<td>Product color field</td>
+<td>Optional, cannot be greater than 100 characters</td>
+</tr>
+<tr>
+<td>Brand</td>
+<td>String</td>
+<td>Product brand field</td>
+<td>Optional, cannot be greater than 100 characters</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>String</td>
+<td>Product size field</td>
+<td>Optional, cannot be greater than 100 characters</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>Boolean</td>
+<td>Field to mark product available for sale</td>
+<td>Boolean - either true or false</td>
+</tr>
+<tr>
+<td>IsMain</td>
+<td>Boolean</td>
+<td>Field to mark the product as a main product in the group</td>
+<td>Boolean - either true of false</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>String</td>
+<td>Product purchase currency</td>
+<td>Either - &quot;USD&quot;, &quot;CAD&quot;, &quot;CDN&quot;, &quot;INR&quot;, &quot;GBP&quot; or &quot;EUR&quot; (for now!)</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Map{k,v}</td>
+<td>Product custom attributes that fit your needs</td>
+<td>keys should be strings and values either: int, float, string or boolean</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The isMain field in the product data structure essentially marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
+of the product name, images, etc ... to show up on the product page by default.  
+</aside>
+<h1 id='api-access'>API access</h1><h2 id='get-api-access-token'>Get API access token</h2>
 <blockquote>
 <p>Sample HTTP request body:</p>
 </blockquote>
@@ -571,90 +761,113 @@ With the field validForSeconds in response, you can calculate the time after wit
 <h3 id='http-request-body-parameters-2'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Field</th>
+<th>Type</th>
+<th>Short Description</th>
 <th>Constraints</th>
-<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>Sku</td>
-<td>String, Max 50 Characters</td>
-<td>The SKU of the product</td>
+<td>String</td>
+<td>Unique product identifier</td>
+<td>Mandatory, Unique, Alphanumeric, Less than 50 characters</td>
 </tr>
 <tr>
 <td>Name</td>
-<td>Text, Max 100 Characters</td>
-<td>The name of the product</td>
-</tr>
-<tr>
-<td>Description</td>
-<td>Text, Max 10240 Characters</td>
-<td>The description of the product</td>
+<td>String</td>
+<td>Name of the product</td>
+<td>Mandatory, Less than 100 characters</td>
 </tr>
 <tr>
 <td>GroupID</td>
-<td>String, Max 50 Characters</td>
-<td>The product group ID</td>
+<td>String</td>
+<td>Product group identifier. More details in other section</td>
+<td>Mandatory, Less than 50 characters</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>String</td>
+<td>Product description field</td>
+<td>Mandatory, less than 10240 characters</td>
 </tr>
 <tr>
 <td>RegularPrice</td>
-<td>Float, Greater than 0</td>
-<td>Everyday price</td>
+<td>Float</td>
+<td>Product&#39;s everyday price</td>
+<td>Mandatory, Cannot be negative</td>
 </tr>
 <tr>
 <td>PromotionPrice</td>
-<td>Float, Greater than 0</td>
-<td>On-sale price</td>
+<td>Float</td>
+<td>Product&#39;s promotion price. Typically less than regular price.</td>
+<td>Mandatory, Cannot be negative</td>
 </tr>
 <tr>
 <td>Images</td>
-<td>Valid URL, Mandatory</td>
-<td>Product images</td>
+<td>String</td>
+<td>Product image links</td>
+<td>Mandatory, need to be valid URLs, cannot be more than 100 URLs</td>
 </tr>
 <tr>
 <td>SearchKeywords</td>
-<td>Text[], Mandatory</td>
-<td>Keywords that you want this product to be searched with</td>
+<td>String[]</td>
+<td>Product search keywords</td>
+<td>Mandatory, cannot be more than 100 search keywords</td>
 </tr>
 <tr>
 <td>Quantity</td>
-<td>Integer, Greater than 0</td>
-<td>Inventory stock quantity</td>
+<td>Integer</td>
+<td>Product stock quantity field</td>
+<td>Mandatory, cannot be negative</td>
 </tr>
 <tr>
 <td>Category</td>
-<td>Text[], Mandatory</td>
-<td>Category breadcrumbs array</td>
+<td>String[]</td>
+<td>Product category path. Please see product object example</td>
+<td>Mandatory, &#39;&gt;&#39; separated category path</td>
 </tr>
 <tr>
 <td>Color</td>
-<td>Text, Optional</td>
-<td>Product color</td>
+<td>String</td>
+<td>Product color field</td>
+<td>Optional, cannot be greater than 100 characters</td>
 </tr>
 <tr>
 <td>Brand</td>
-<td>Text, Optional</td>
-<td>Product brand</td>
+<td>String</td>
+<td>Product brand field</td>
+<td>Optional, cannot be greater than 100 characters</td>
 </tr>
 <tr>
 <td>Size</td>
-<td>Text, Optional</td>
-<td>Product size</td>
+<td>String</td>
+<td>Product size field</td>
+<td>Optional, cannot be greater than 100 characters</td>
 </tr>
 <tr>
 <td>Active</td>
-<td>Boolean, Mandatory</td>
-<td>Flag to set the product availble for sale</td>
+<td>Boolean</td>
+<td>Field to mark product available for sale</td>
+<td>Boolean - either true or false</td>
 </tr>
 <tr>
 <td>IsMain</td>
-<td>Boolean, Mandatory</td>
-<td>Is the product main product in the product group?</td>
+<td>Boolean</td>
+<td>Field to mark the product as a main product in the group</td>
+<td>Boolean - either true of false</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>String</td>
+<td>Product purchase currency</td>
+<td>Either - &quot;USD&quot;, &quot;CAD&quot;, &quot;CDN&quot;, &quot;INR&quot;, &quot;GBP&quot; or &quot;EUR&quot; (for now!)</td>
 </tr>
 <tr>
 <td>Attributes</td>
-<td>Details in another section</td>
-<td>Additional field to pass in misc. product attributes</td>
+<td>Map{k,v}</td>
+<td>Product custom attributes that fit your needs</td>
+<td>keys should be strings and values either: int, float, string or boolean</td>
 </tr>
 </tbody></table>
 <h3 id='http-response-2'>HTTP Response</h3>
@@ -1014,90 +1227,113 @@ With the field validForSeconds in response, you can calculate the time after wit
 <h3 id='http-body-parameters'>HTTP Body Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Field</th>
+<th>Type</th>
+<th>Short Description</th>
 <th>Constraints</th>
-<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>Sku</td>
-<td>String, Max 50 Characters</td>
-<td>The SKU of the product</td>
+<td>String</td>
+<td>Unique product identifier</td>
+<td>Mandatory, Unique, Alphanumeric, Less than 50 characters</td>
 </tr>
 <tr>
 <td>Name</td>
-<td>Text, Max 100 Characters</td>
-<td>The name of the product</td>
-</tr>
-<tr>
-<td>Description</td>
-<td>Text, Max 10240 Characters</td>
-<td>The description of the product</td>
+<td>String</td>
+<td>Name of the product</td>
+<td>Mandatory, Less than 100 characters</td>
 </tr>
 <tr>
 <td>GroupID</td>
-<td>String, Max 50 Characters</td>
-<td>The product group ID</td>
+<td>String</td>
+<td>Product group identifier. More details in other section</td>
+<td>Mandatory, Less than 50 characters</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>String</td>
+<td>Product description field</td>
+<td>Mandatory, less than 10240 characters</td>
 </tr>
 <tr>
 <td>RegularPrice</td>
-<td>Float, Greater than 0</td>
-<td>Everyday price</td>
+<td>Float</td>
+<td>Product&#39;s everyday price</td>
+<td>Mandatory, Cannot be negative</td>
 </tr>
 <tr>
 <td>PromotionPrice</td>
-<td>Float, Greater than 0</td>
-<td>On-sale price</td>
+<td>Float</td>
+<td>Product&#39;s promotion price. Typically less than regular price.</td>
+<td>Mandatory, Cannot be negative</td>
 </tr>
 <tr>
 <td>Images</td>
-<td>Valid URL, Mandatory</td>
-<td>Product images</td>
+<td>String</td>
+<td>Product image links</td>
+<td>Mandatory, need to be valid URLs, cannot be more than 100 URLs</td>
 </tr>
 <tr>
 <td>SearchKeywords</td>
-<td>Text[], Mandatory</td>
-<td>Keywords that you want this product to be searched with</td>
+<td>String[]</td>
+<td>Product search keywords</td>
+<td>Mandatory, cannot be more than 100 search keywords</td>
 </tr>
 <tr>
 <td>Quantity</td>
-<td>Integer, Greater than 0</td>
-<td>Inventory stock quantity</td>
+<td>Integer</td>
+<td>Product stock quantity field</td>
+<td>Mandatory, cannot be negative</td>
 </tr>
 <tr>
 <td>Category</td>
-<td>Text[], Mandatory</td>
-<td>Category breadcrumbs array</td>
+<td>String[]</td>
+<td>Product category path. Please see product object example</td>
+<td>Mandatory, &#39;&gt;&#39; separated category path</td>
 </tr>
 <tr>
 <td>Color</td>
-<td>Text, Optional</td>
-<td>Product color</td>
+<td>String</td>
+<td>Product color field</td>
+<td>Optional, cannot be greater than 100 characters</td>
 </tr>
 <tr>
 <td>Brand</td>
-<td>Text, Optional</td>
-<td>Product brand</td>
+<td>String</td>
+<td>Product brand field</td>
+<td>Optional, cannot be greater than 100 characters</td>
 </tr>
 <tr>
 <td>Size</td>
-<td>Text, Optional</td>
-<td>Product size</td>
+<td>String</td>
+<td>Product size field</td>
+<td>Optional, cannot be greater than 100 characters</td>
 </tr>
 <tr>
 <td>Active</td>
-<td>Boolean, Mandatory</td>
-<td>Flag to set the product availble for sale</td>
+<td>Boolean</td>
+<td>Field to mark product available for sale</td>
+<td>Boolean - either true or false</td>
 </tr>
 <tr>
 <td>IsMain</td>
-<td>Boolean, Mandatory</td>
-<td>Is the product main product in the product group?</td>
+<td>Boolean</td>
+<td>Field to mark the product as a main product in the group</td>
+<td>Boolean - either true of false</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>String</td>
+<td>Product purchase currency</td>
+<td>Either - &quot;USD&quot;, &quot;CAD&quot;, &quot;CDN&quot;, &quot;INR&quot;, &quot;GBP&quot; or &quot;EUR&quot; (for now!)</td>
 </tr>
 <tr>
 <td>Attributes</td>
-<td>Details in another section</td>
-<td>Additional field to pass in misc. product attributes</td>
+<td>Map{k,v}</td>
+<td>Product custom attributes that fit your needs</td>
+<td>keys should be strings and values either: int, float, string or boolean</td>
 </tr>
 </tbody></table>
 <h3 id='http-response-4'>HTTP Response</h3>
@@ -1642,7 +1878,7 @@ those skus which were not found in the catalog. </p>
 <p>This API endpoint gets a specific product group by product group ID. This endpoint is cached for efficiency and speed. </p>
 <h3 id='http-request-url-8'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/catalog/{API version}/productgroups/{PGID}</code></p>
-<h3 id='http-requesr-header'>HTTP Requesr Header</h3><h3 id='http-request-header-8'>HTTP Request Header</h3>
+<h3 id='http-requesr-header'>HTTP Requesr Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1788,7 +2024,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this API endpoint to remove a product group from the productgroups collection in the database. This call also updates the search index. When a product group is deleted, entries of related products in the products collection are also removed. </p>
 <h3 id='http-request-url-9'>HTTP Request URL</h3>
 <p><code>DELETE https://api.krama.ai/catalog/{API version}/productgroups/{PGID}</code></p>
-<h3 id='http-request-header-9'>HTTP Request Header</h3>
+<h3 id='http-request-header-8'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1840,7 +2076,7 @@ those skus which were not found in the catalog. </p>
 <td>Response object containing response information</td>
 </tr>
 </tbody></table>
-<h1 id='order-api'>Order API</h1><h2 id='create-an-order'>Create an order</h2>
+<h1 id='orders-api'>Orders API</h1><h2 id='create-an-order'>Create an order</h2>
 <blockquote>
 <p>Sample HTTP request body:</p>
 </blockquote>
@@ -2001,7 +2237,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this endpoint to create an order entry in the database. Details on the fields and the constraints is listed below. </p>
 <h3 id='http-request-url-10'>HTTP Request URL</h3>
 <p><code>POST https://api.krama.ai/orders/{API version}/orders</code></p>
-<h3 id='http-request-header-10'>HTTP Request Header</h3>
+<h3 id='http-request-header-9'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2215,7 +2451,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this endpoint to get all the orders associated with a customer using the customer ID. </p>
 <h3 id='http-request-url-11'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/orders/{API version}/orders/customer/{CID}</code></p>
-<h3 id='http-request-header-11'>HTTP Request Header</h3>
+<h3 id='http-request-header-10'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2365,7 +2601,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this endpoint to get all the orders associated with a customer using the customer ID. </p>
 <h3 id='http-request-url-12'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/orders/{API version}/orders/{OID}</code></p>
-<h3 id='http-request-header-12'>HTTP Request Header</h3>
+<h3 id='http-request-header-11'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2589,7 +2825,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this endpoint to update the order object. </p>
 <h3 id='http-request-url-13'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/orders/{API version}/orders/{ID}</code></p>
-<h3 id='http-request-header-13'>HTTP Request Header</h3>
+<h3 id='http-request-header-12'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2671,7 +2907,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this endpoint to delete an order using the order ID. Recommended to use this endpoint carefully. </p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>DELETE https://api.krama.ai/orders/{API version}/orders/{ID}</code></p>
-<h3 id='http-request-header-14'>HTTP Request Header</h3>
+<h3 id='http-request-header-13'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2943,7 +3179,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this API endpoint to search a product group in the search index. Please note that product group objects are only returned in the response. </p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://api.krama.ai/search/{API version}/productgroups/search</code></p>
-<h3 id='http-request-header-15'>HTTP Request Header</h3>
+<h3 id='http-request-header-14'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
