@@ -103,6 +103,34 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 
 	}
 
+	if len(product.Color) > 100 {
+
+		respondWith(w, r, nil, "Product Color field cannot be greater than 100 characters long", nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
+	if len(product.Size) > 100 {
+
+		respondWith(w, r, nil, "Product Size field cannot be greater than 100 characters long", nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
+	if len(product.Brand) > 100 {
+
+		respondWith(w, r, nil, "Product Brand field cannot be greater than 100 characters long", nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
+	if !(product.Currency == "USD" || product.Currency == "CAD" || product.Currency == "CDN" || product.Currency == "EUR" || product.Currency == "INR" || product.Currency == "GBP") {
+
+		respondWith(w, r, nil, "Currency field can only have one of the following values: 'USD','CAD','CDN','EUR','GBP', or 'INR' ", nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
 	return true
 
 }
