@@ -26,6 +26,10 @@ func connectRedis() bool {
 
 func pingRedis(silent bool) bool {
 
+	if REDISCLIENT == nil {
+		return false
+	}
+
 	var isRedisUp bool
 
 	pong, err := REDISCLIENT.Ping().Result()

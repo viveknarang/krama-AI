@@ -37,6 +37,10 @@ func connectDB() bool {
 
 func pingMongoDB(silent bool) bool {
 
+	if MONGODBCLIENT == nil {
+		return false
+	}
+
 	err := MONGODBCLIENT.Ping(context.TODO(), nil)
 
 	if err != nil {

@@ -172,6 +172,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 				productGroup.Attributes[key] = append(x, value)
 
+				gsetInit()
+				addAllInGSet(productGroup.Attributes[key])
+				productGroup.Attributes[key] = nil
+				productGroup.Attributes[key] = toArrayFromGSet()
+
 			}
 
 			productGroup.Skus = append(productGroup.Skus, p.Sku)
@@ -282,6 +287,16 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			}
 
 		}
+
+		for key := range updpg {
+
+			gsetInit()
+			addAllInGSet(updpg[key])
+			updpg[key] = nil
+			updpg[key] = toArrayFromGSet()
+
+		}
+
 		productGroup.Attributes = updpg
 
 		productGroup.Skus = append(productGroup.Skus, p.Sku)
@@ -377,6 +392,16 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 				}
 
 			}
+
+			for key := range updpg {
+
+				gsetInit()
+				addAllInGSet(updpg[key])
+				updpg[key] = nil
+				updpg[key] = toArrayFromGSet()
+
+			}
+
 			productGroup.Attributes = updpg
 
 			productGroup.Skus = append(productGroup.Skus, p.Sku)

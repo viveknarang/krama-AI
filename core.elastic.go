@@ -26,6 +26,10 @@ func connectElastic() bool {
 
 func pingES(silent bool) bool {
 
+	if ESCLIENT == nil || !ESCLIENT.IsRunning() {
+		return false
+	}
+
 	var isESUp bool
 
 	ctx := context.Background()
