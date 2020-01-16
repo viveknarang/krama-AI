@@ -3,7 +3,7 @@
 
 # Krama AI - A blazing fast E-commerce AI platform
 
-# Introduction
+## Introduction
 
 This API provides you with several options to maintain your product catalog and search products in your catalog. 
 
@@ -33,7 +33,7 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
 
 # Data Structures
 
-## The Product Data Structure
+## Product Data Structure
 
 > Sample valid product object:
 
@@ -2159,6 +2159,462 @@ Use this API endpoint to search a product group in the search index. Please note
 | Time              | Unix timestamp of the response                                                |
 | Response          | Response object containing response information                               |
 
+
+
+# Customers API
+
+## Get a customer
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": false,
+    "Message": "Customer Found ...",
+    "Time": 1579148454974283502,
+    "Response": {
+        "CustomerID": "1b8026d5-ac28-4c60-b9ff-a5789f6710bd",
+        "Active": true,
+        "FirstName": "Vivek",
+        "LastName": "Narang",
+        "Email": "vivek.narang10@gmail.com",
+        "PhoneNumbers": [
+            "647-615-4080"
+        ],
+        "Password": "password",
+        "AddressBook": [
+            {
+                "FirstName": "Vivek",
+                "LastName": "Narang",
+                "AddressLineOne": "113 Edgar Ave",
+                "AddressLineTwo": "",
+                "City": "Richmond Hill",
+                "State": "Ontario",
+                "Country": "Canada",
+                "Pincode": "L4C 6K3",
+                "Default": true
+            }
+        ],
+        "PaymentOptions": [
+            {
+                "Name": "VIVEK NARANG",
+                "CardNumber": "0000-0000-0000-0000",
+                "CardExpiryMM": "00",
+                "CardExpiryYY": "00",
+                "SecurityCode": "000",
+                "ZipCode": "L4C 6K3",
+                "Default": true,
+                "SaveInformation": true
+            }
+        ],
+        "WishList": [
+            "83947DSDS"
+        ],
+        "SaveForLater": [
+            "FSDF3434",
+            "ERF4432D"
+        ],
+        "Updated": 1579148447090954583
+    }
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Customer Not Found ...",
+    "Time": 1579148524152947154,
+    "Response": null
+}
+```
+
+
+Use this endpoint to get the customer object from the database. 
+
+
+### HTTP Request URL
+
+`GET https://api.krama.ai/customers/{API version}/customers/{CID}`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+
+
+### HTTP Request URL Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| CID                   |  Customer identifier                                |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+## Add a customer
+
+> Sample HTTP request body:
+
+```json
+{
+  "Active": true,
+  "FirstName": "Vivek",
+  "LastName": "Narang",
+  "Email": "vivek.narang10@gmail.com",
+  "PhoneNumbers": [
+    "647-615-4080"
+  ],
+  "Password": "password",
+  "AddressBook": [
+    {
+      "FirstName": "Vivek",
+      "LastName": "Narang",
+      "AddressLineOne": "113 Edgar Ave",
+      "AddressLineTwo": "",
+      "City": "Richmond Hill",
+      "State": "Ontario",
+      "Country": "Canada",
+      "Pincode": "L4C 6K3",
+      "Default": true
+    }
+  ],
+  "PaymentOptions": [
+    {
+      "Name": "VIVEK NARANG",
+      "CardNumber": "0000-0000-0000-0000",
+      "CardExpiryMM": "00",
+      "CardExpiryYY": "00",
+      "SecurityCode": "000",
+      "ZipCode": "L4C 6K3",
+      "Default": true,
+      "SaveInformation": true
+    }
+  ],
+  "WishList": [
+    "83947DSDS",
+    "84378DFDW"
+  ],
+  "SaveForLater": [
+    "FSDF3434",
+    "ERF4432D"
+  ]
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 201,
+    "Success": true,
+    "Message": "Customer Added ...",
+    "Time": 1579148334213937296,
+    "Response": {
+        "CustomerID": "1b8026d5-ac28-4c60-b9ff-a5789f6710bd",
+        "Active": true,
+        "FirstName": "Vivek",
+        "LastName": "Narang",
+        "Email": "vivek.narang10@gmail.com",
+        "PhoneNumbers": [
+            "647-615-4080"
+        ],
+        "Password": "password",
+        "AddressBook": [
+            {
+                "FirstName": "Vivek",
+                "LastName": "Narang",
+                "AddressLineOne": "113 Edgar Ave",
+                "AddressLineTwo": "",
+                "City": "Richmond Hill",
+                "State": "Ontario",
+                "Country": "Canada",
+                "Pincode": "L4C 6K3",
+                "Default": true
+            }
+        ],
+        "PaymentOptions": [
+            {
+                "Name": "VIVEK NARANG",
+                "CardNumber": "0000-0000-0000-0000",
+                "CardExpiryMM": "00",
+                "CardExpiryYY": "00",
+                "SecurityCode": "000",
+                "ZipCode": "L4C 6K3",
+                "Default": true,
+                "SaveInformation": true
+            }
+        ],
+        "WishList": [
+            "83947DSDS",
+            "84378DFDW"
+        ],
+        "SaveForLater": [
+            "FSDF3434",
+            "ERF4432D"
+        ],
+        "Updated": 1579148334213328727
+    }
+}
+```
+
+Use this endpoint to add a customer into the database.
+
+
+### HTTP Request URL
+
+`POST https://api.krama.ai/customers/{API version}/`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| CID                   |  Customer identifier                                |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+## Update a customer's information
+
+> Sample HTTP request body:
+
+```json
+{
+  "CustomerID": "1b8026d5-ac28-4c60-b9ff-a5789f6710bd",
+  "Active": true,
+  "FirstName": "Vivek",
+  "LastName": "Narang",
+  "Email": "vivek.narang10@gmail.com",
+  "PhoneNumbers": [
+    "647-615-4080"
+  ],
+  "Password": "password",
+  "AddressBook": [
+    {
+      "FirstName": "Vivek",
+      "LastName": "Narang",
+      "AddressLineOne": "113 Edgar Ave",
+      "AddressLineTwo": "",
+      "City": "Richmond Hill",
+      "State": "Ontario",
+      "Country": "Canada",
+      "Pincode": "L4C 6K3",
+      "Default": true
+    }
+  ],
+  "PaymentOptions": [
+    {
+      "Name": "VIVEK NARANG",
+      "CardNumber": "0000-0000-0000-0000",
+      "CardExpiryMM": "00",
+      "CardExpiryYY": "00",
+      "SecurityCode": "000",
+      "ZipCode": "L4C 6K3",
+      "Default": true,
+      "SaveInformation": true
+    }
+  ],
+  "WishList": [
+    "83947DSDS"
+  ],
+  "SaveForLater": [
+    "FSDF3434",
+    "ERF4432D"
+  ]
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 202,
+    "Success": true,
+    "Message": "Customer Updated ...",
+    "Time": 1579148447091860639,
+    "Response": {
+        "CustomerID": "1b8026d5-ac28-4c60-b9ff-a5789f6710bd",
+        "Active": true,
+        "FirstName": "Vivek",
+        "LastName": "Narang",
+        "Email": "vivek.narang10@gmail.com",
+        "PhoneNumbers": [
+            "647-615-4080"
+        ],
+        "Password": "password",
+        "AddressBook": [
+            {
+                "FirstName": "Vivek",
+                "LastName": "Narang",
+                "AddressLineOne": "113 Edgar Ave",
+                "AddressLineTwo": "",
+                "City": "Richmond Hill",
+                "State": "Ontario",
+                "Country": "Canada",
+                "Pincode": "L4C 6K3",
+                "Default": true
+            }
+        ],
+        "PaymentOptions": [
+            {
+                "Name": "VIVEK NARANG",
+                "CardNumber": "0000-0000-0000-0000",
+                "CardExpiryMM": "00",
+                "CardExpiryYY": "00",
+                "SecurityCode": "000",
+                "ZipCode": "L4C 6K3",
+                "Default": true,
+                "SaveInformation": true
+            }
+        ],
+        "WishList": [
+            "83947DSDS"
+        ],
+        "SaveForLater": [
+            "FSDF3434",
+            "ERF4432D"
+        ],
+        "Updated": 1579148447090954583
+    }
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 304,
+    "Success": false,
+    "Message": "Customer Not Found ...",
+    "Time": 1579147170529434000,
+    "Response": null
+}
+```
+
+
+Use this information to update a customer's information. 
+
+
+### HTTP Request URL
+
+`PUT https://api.krama.ai/customers/{API version}/customers/{CID}`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request URL Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| CID                   |  Customer identifier                                |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+
+## Delete a customer
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Customer Deleted ...",
+    "Time": 1579146617669614321,
+    "Response": null
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Customer Not Found ...",
+    "Time": 1579146368716061070,
+    "Response": null
+}
+```
+
+
+Use this endpoint to delete the customer object from the database. 
+
+
+### HTTP Request URL
+
+`DELETE https://api.krama.ai/customers/{API version}/customers/{CID}`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+
+
+### HTTP Request URL Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| CID                   |  Customer identifier                                |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
 
 
 
