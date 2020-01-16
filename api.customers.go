@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/go-redis/redis"
+	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
@@ -86,6 +87,7 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 	groomCustomerData(&customer)
 
 	customer.Updated = time.Now().UnixNano()
+	customer.CustomerID = uuid.New().String()
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
 
@@ -100,6 +102,9 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 	if !pre(w, r) {
 		return
 	}
+
+	pth := strings.Split(r.URL.Path, "/")
+	cid := pth[len(pth)-1]
 
 	var customer CUSTOMER
 
@@ -117,6 +122,7 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 	groomCustomerData(&customer)
 
 	customer.Updated = time.Now().UnixNano()
+	customer.CustomerID = cid
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
 
