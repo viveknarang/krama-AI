@@ -73,10 +73,19 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 
 	var customer CUSTOMER
 
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
+
 	err := json.NewDecoder(r.Body).Decode(&customer)
 
 	if err != nil {
 		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
+		return
+	}
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"email": customer.Email})
+
+	if len(results) != 0 {
+		respondWith(w, r, nil, CustomerAlreadyExistsMessage, nil, http.StatusConflict, false)
 		return
 	}
 
@@ -91,8 +100,6 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 	if customer.CustomerID == "" {
 		customer.CustomerID = uuid.New().String()
 	}
-
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
 
 	insertMongoDocument(ExternalDB, dbcol, customer)
 
