@@ -9,15 +9,13 @@ const PGMapping = `
 		  "type": "boolean"
 		},
 		"Brands": {
-		  "type": "text",
-		  "fielddata": true
-		},
-		"Category": {
 		  "type": "text"
 		},
+		"Category": {
+		  "type": "keyword"
+		},
 		"Colors": {
-		  "type": "text",
-		  "fielddata": true
+		  "type": "text"
 		},
 		"Description": {
 		  "type": "text"
@@ -50,8 +48,7 @@ const PGMapping = `
 		  "type": "keyword"
 		},
 		"Sizes": {
-		  "type": "text",
-		  "fielddata": true
+		  "type": "keyword"
 		},
 		"Currency": {
 		  "type": "keyword"
@@ -62,65 +59,48 @@ const PGMapping = `
 	  },
 	  "dynamic_templates": [
 		{
-		  "Products_objects": {
-			"mapping": {
-			  "type": "object",
-			  "properties": {
-				"Sku": {
+			"Attributes_text": {
+				"path_match":   "Attributes.*",
+				"match_mapping_type": "string",
+				"mapping": {
 				  "type": "keyword"
-				},
-				"Name": {
-				  "type": "text"
-				},
-				"GroupID": {
-				  "type": "keyword"
-				},
-				"Description": {
-				  "type": "text"
-				},
-				"RegularPrice": {
-				  "type": "float"
-				},
-				"PromotionPrice": {
-				  "type": "float"
-				},
-				"Images": {
-				  "type": "text"
-				},
-				"SearchKeywords": {
-				  "type": "text"
-				},
-				"Quantity": {
-				  "type": "long"
-				},
-				"Category": {
-				  "type": "text"
-				},
-				"Color": {
-				  "type": "text"
-				},
-				"Brand": {
-				  "type": "text"
-				},
-				"Size": {
-				  "type": "text"
-				},
-				"Active": {
-				  "type": "boolean"
-				},
-				"IsMain": {
-				  "type": "boolean"
-				},
-				"Currency": {
-				  "type": "keyword"
-				},
-				"Updated": {
-				  "type": "long"
 				}
+			}
+		},
+		{
+		  "Attributes_long": {
+			  "path_match":   "Attributes.*",
+			  "match_mapping_type": "long",
+			  "mapping": {
+				"type": "long"
 			  }
-			},
-			"match_mapping_type": "object",
-			"path_match":   "Products.*"
+		  }
+		},
+		{
+		  "Attributes_boolean": {
+			  "path_match":   "Attributes.*",
+			  "match_mapping_type": "boolean",
+			  "mapping": {
+				"type": "boolean"
+			  }
+		  }
+		},
+		{
+		  "Attributes_date": {
+			  "path_match":   "Attributes.*",
+			  "match_mapping_type": "date",
+			  "mapping": {
+				"type": "date"
+			  }
+		  }
+		},
+		{
+		  "Attributes_double": {
+			  "path_match":   "Attributes.*",
+			  "match_mapping_type": "double",
+			  "mapping": {
+				"type": "double"
+			  }
 		  }
 		}
 	  ]

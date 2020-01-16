@@ -80,7 +80,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			npg.Updated = time.Now().UnixNano()
 
 			insertMongoDocument(ExternalDB, pgcol, npg)
-
+			npg.Products = nil
 			response = indexES(pgindex, PGMapping, npg, npg.GroupID)
 
 		} else {
@@ -191,6 +191,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			result := updateMongoDocument(ExternalDB, pgcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
+				productGroup.Products = nil
 				response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 			} else {
 				response = false
@@ -311,6 +312,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		result := updateMongoDocument(ExternalDB, pgcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 		if result[0] == 1 && result[1] == 1 {
+			productGroup.Products = nil
 			response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 		} else {
 			response = false
@@ -446,6 +448,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			result := updateMongoDocument(ExternalDB, pgcol, bson.M{"groupid": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
+				productGroup.Products = nil
 				response = indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 			} else {
 				response = false
@@ -563,12 +566,14 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 						return false
 					}
 
+					productGroup.Products = nil
 					response = response && indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 
 				}
 
 			} else {
 
+				productGroup.Products = nil
 				response = response && indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
 
 			}
