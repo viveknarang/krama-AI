@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/go-redis/redis"
+	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
@@ -134,6 +135,7 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	order.OrderCreationDate = time.Now().UnixNano()
+	order.OrderID = uuid.New().String()
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
@@ -149,6 +151,9 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	pth := strings.Split(r.URL.Path, "/")
+	oid := pth[len(pth)-1]
+
 	var order ORDER
 
 	err := json.NewDecoder(r.Body).Decode(&order)
@@ -157,6 +162,9 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
 		return
 	}
+
+	order.OrderCreationDate = time.Now().UnixNano()
+	order.OrderID = oid
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
