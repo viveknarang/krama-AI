@@ -1,7 +1,9 @@
 package main
 
 import (
+	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"net/url"
 	"reflect"
 	"regexp"
@@ -28,6 +30,14 @@ func isValidEmail(toTest string) bool {
 
 	return emailRegularExpression.MatchString(toTest)
 
+}
+
+func hashString(Txt string) string {
+	h := sha256.New()
+	h.Write([]byte(Txt))
+	bs := h.Sum(nil)
+	sh := string(fmt.Sprintf("%x", bs))
+	return sh
 }
 
 func typeof(value interface{}) string {

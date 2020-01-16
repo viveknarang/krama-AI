@@ -95,6 +95,7 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 
 	groomCustomerData(&customer)
 
+	customer.Password = hashString(customer.Password)
 	customer.Updated = time.Now().UnixNano()
 
 	if customer.CustomerID == "" {
