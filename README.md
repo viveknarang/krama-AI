@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/viveknarang/kramaAPI.svg?branch=master)](https://travis-ci.org/viveknarang/kramaAPI)
+[![Build Status](https://travis-ci.org/viveknarang/krama-AI.svg?branch=master)](https://travis-ci.org/viveknarang/krama-AI)
 
 # Krama AI - A blazing fast E-commerce AI platform
 
