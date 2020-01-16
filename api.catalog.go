@@ -70,12 +70,21 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+
 	var p PRODUCT
 
 	err := json.NewDecoder(r.Body).Decode(&p)
 
 	if err != nil {
 		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
+		return
+	}
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"sku": p.Sku})
+
+	if len(results) != 0 {
+		respondWith(w, r, nil, ProductAlreadyExistsMessage, nil, http.StatusConflict, false)
 		return
 	}
 
@@ -86,8 +95,6 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 	groomProductData(&p)
 
 	p.Updated = time.Now().UnixNano()
-
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 
 	insertMongoDocument(ExternalDB, dbcol, p)
 

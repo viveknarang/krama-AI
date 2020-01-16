@@ -179,6 +179,9 @@ var CustomersNotDeletedMessage string
 //CustomersCollectionExtension customers collection extension
 var CustomersCollectionExtension string
 
+//ProductAlreadyExistsMessage product already exists message
+var ProductAlreadyExistsMessage string
+
 const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/system.properties"
 
 func loadSystemProperties() {
@@ -240,6 +243,7 @@ func loadSystemProperties() {
 	CustomersNotAddedMessage = p.GetString("api.response.message.customers.notadded", "")
 	CustomersNotDeletedMessage = p.GetString("api.response.message.customers.notdeleted", "")
 	CustomersCollectionExtension = p.GetString("db.mongo.external.customers.extension", "")
+	ProductAlreadyExistsMessage = p.GetString("api.response.message.product.exists", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion
