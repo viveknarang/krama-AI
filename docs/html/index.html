@@ -222,7 +222,7 @@
             <a href="#data-structures" class="toc-h1 toc-link" data-title="Data Structures">Data Structures</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#the-product-data-structure" class="toc-h2 toc-link" data-title="The Product Data Structure">The Product Data Structure</a>
+                    <a href="#product-data-structure" class="toc-h2 toc-link" data-title="Product Data Structure">Product Data Structure</a>
                   </li>
               </ul>
           </li>
@@ -292,14 +292,32 @@
               </ul>
           </li>
           <li>
+            <a href="#customers-api" class="toc-h1 toc-link" data-title="Customers API">Customers API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-a-customer" class="toc-h2 toc-link" data-title="Get a customer">Get a customer</a>
+                  </li>
+                  <li>
+                    <a href="#add-a-customer" class="toc-h2 toc-link" data-title="Add a customer">Add a customer</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-customer-39-s-information" class="toc-h2 toc-link" data-title="Update a customer's information">Update a customer's information</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-customer" class="toc-h2 toc-link" data-title="Delete a customer">Delete a customer</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#response-codes" class="toc-h1 toc-link" data-title="Response Codes">Response Codes</a>
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 3.3</span></li>
-            <li><a href='mailto:vivek.narang10@gmail.com'><u>Contact Us</u></a><br/><br/></li>
-            <li><span>For Platform Developers:</span><br/></li>
-            <li><img src='https://travis-ci.org/viveknarang/kramaAPI.svg?branch=master'></img><br/><br/></li>
+            <li><span>API documentation version 3.4</span><br/><br/></li>
+            <li><a href='mailto:vivek.narang10@gmail.com'><u>Contribute to this project</u></a><br/><br/></li>
+            <li><span>Development Branch Status:</span><br/></li>
+            <li><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img><br/><br/></li>
+            <li><a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/><br/></li>
             <li>API documentation generated using:<br/><a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a></li>
         </ul>
     </div>
@@ -331,7 +349,7 @@ It is important to understand the concept of product groups. For search quality 
 <aside class="success">
 The current API version is: v1 Please replace {API version} with v1 in your API calls
 </aside>
-<h1 id='data-structures'>Data Structures</h1><h2 id='the-product-data-structure'>The Product Data Structure</h2>
+<h1 id='data-structures'>Data Structures</h1><h2 id='product-data-structure'>Product Data Structure</h2>
 <blockquote>
 <p>Sample valid product object:</p>
 </blockquote>
@@ -3212,6 +3230,539 @@ those skus which were not found in the catalog. </p>
 </tr>
 </tbody></table>
 <h3 id='http-response-15'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h1 id='customers-api'>Customers API</h1><h2 id='get-a-customer'>Get a customer</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579148454974283502</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b8026d5-ac28-4c60-b9ff-a5789f6710bd"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vivek.narang10@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PhoneNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"647-615-4080"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"AddressBook"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113 Edgar Ave"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIVEK NARANG"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"WishList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"83947DSDS"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SaveForLater"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"FSDF3434"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ERF4432D"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579148447090954583</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579148524152947154</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to get the customer object from the database. </p>
+<h3 id='http-request-url-14'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/customers/{API version}/customers/{CID}</code></p>
+<h3 id='http-request-header-15'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-8'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CID</td>
+<td>Customer identifier</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-16'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='add-a-customer'>Add a customer</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vivek.narang10@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"PhoneNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"647-615-4080"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"AddressBook"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113 Edgar Ave"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIVEK NARANG"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"WishList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"83947DSDS"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"84378DFDW"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"SaveForLater"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"FSDF3434"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ERF4432D"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">201</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Added ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579148334213937296</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b8026d5-ac28-4c60-b9ff-a5789f6710bd"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vivek.narang10@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PhoneNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"647-615-4080"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"AddressBook"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113 Edgar Ave"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIVEK NARANG"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"WishList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"83947DSDS"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"84378DFDW"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SaveForLater"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"FSDF3434"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ERF4432D"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579148334213328727</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to add a customer into the database.</p>
+<h3 id='http-request-url-15'>HTTP Request URL</h3>
+<p><code>POST https://api.krama.ai/customers/{API version}/</code></p>
+<h3 id='http-request-header-16'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-4'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CID</td>
+<td>Customer identifier</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-17'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-customer-39-s-information'>Update a customer&#39;s information</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b8026d5-ac28-4c60-b9ff-a5789f6710bd"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vivek.narang10@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"PhoneNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"647-615-4080"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"AddressBook"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113 Edgar Ave"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIVEK NARANG"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"WishList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"83947DSDS"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"SaveForLater"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"FSDF3434"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ERF4432D"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Updated ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579148447091860639</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b8026d5-ac28-4c60-b9ff-a5789f6710bd"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vivek.narang10@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PhoneNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"647-615-4080"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"AddressBook"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113 Edgar Ave"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIVEK NARANG"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"WishList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"83947DSDS"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SaveForLater"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"FSDF3434"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ERF4432D"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579148447090954583</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">304</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579147170529434000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this information to update a customer&#39;s information. </p>
+<h3 id='http-request-url-16'>HTTP Request URL</h3>
+<p><code>PUT https://api.krama.ai/customers/{API version}/customers/{CID}</code></p>
+<h3 id='http-request-header-17'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-9'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CID</td>
+<td>Customer identifier</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-18'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-customer'>Delete a customer</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Deleted ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579146617669614321</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579146368716061070</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to delete the customer object from the database. </p>
+<h3 id='http-request-url-17'>HTTP Request URL</h3>
+<p><code>DELETE https://api.krama.ai/customers/{API version}/customers/{CID}</code></p>
+<h3 id='http-request-header-18'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-10'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CID</td>
+<td>Customer identifier</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-19'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
