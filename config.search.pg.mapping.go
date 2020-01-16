@@ -9,13 +9,13 @@ const PGMapping = `
 		  "type": "boolean"
 		},
 		"Brands": {
-		  "type": "text"
-		},
-		"Category": {
 		  "type": "keyword"
 		},
-		"Colors": {
+		"Category": {
 		  "type": "text"
+		},
+		"Colors": {
+		  "type": "keyword"
 		},
 		"Description": {
 		  "type": "text"

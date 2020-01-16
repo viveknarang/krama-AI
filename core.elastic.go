@@ -92,26 +92,36 @@ func indexES(index string, mapping string, document interface{}, id string) bool
 
 }
 
-func queryES(index string, from int, to int, q string, fields []string) *elastic.SearchResult {
+func quickSearch(index string, from int, to int, query string, queryFields []string, responseFields []string) *elastic.SearchHits {
 
 	ctx := context.Background()
 
-	multiQuery := elastic.NewMultiMatchQuery(q, fields...)
+	multiQuery := elastic.NewMultiMatchQuery(query, queryFields...)
+	ss := elastic.NewSearchSource()
+
+	ss.FetchSourceIncludeExclude(responseFields, nil)
 
 	searchResult, err := ESCLIENT.Search().
 		Index(index).
+		SearchSource(ss).
 		Query(multiQuery).
-		Aggregation("Brands", elastic.NewTermsAggregation().Field("Brands").Size(100)).
-		Aggregation("Colors", elastic.NewTermsAggregation().Field("Colors").Size(100)).
-		Aggregation("Sizes", elastic.NewTermsAggregation().Field("Sizes").Size(100)).
 		From(from).Size(to).
 		Pretty(true).
 		Do(ctx)
+
 	if err != nil {
 		panic(err)
 	}
 
-	return searchResult
+	return searchResult.Hits
+
+}
+
+func fullPageSearch() {
+
+	//Aggregation("Brands", elastic.NewTermsAggregation().Field("Brands").Size(100)).
+	//Aggregation("Colors", elastic.NewTermsAggregation().Field("Colors").Size(100)).
+	//Aggregation("Sizes", elastic.NewTermsAggregation().Field("Sizes").Size(100)).
 
 }
 

@@ -23,8 +23,18 @@ func basicProductGroupSearch(w http.ResponseWriter, r *http.Request) {
 	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 	index := cidb + ProductGroupExtension + SearchIndexExtension
 
-	searchResponse := queryES(index, 0, 100, sq.Q, sq.Fields)
+	searchResponse := quickSearch(index, sq.From, sq.To, sq.Query, sq.QueryFields, sq.ResponseFields)
 
-	respondWith(w, r, nil, "Search Result ...", searchResponse, http.StatusOK, true)
+	hits := make(map[int]interface{})
+	results := make(map[string]interface{})
+
+	for index, response := range searchResponse.Hits {
+		hits[index] = response.Source
+	}
+
+	results["count"] = searchResponse.TotalHits.Value
+	results["results"] = hits
+
+	respondWith(w, r, nil, "Search Result ...", results, http.StatusOK, true)
 
 }
