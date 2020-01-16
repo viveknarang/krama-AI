@@ -135,7 +135,10 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	order.OrderCreationDate = time.Now().UnixNano()
-	order.OrderID = uuid.New().String()
+
+	if order.OrderID == "" {
+		order.OrderID = uuid.New().String()
+	}
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
