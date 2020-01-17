@@ -92,6 +92,10 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 				respondWith(w, r, nil, "Attribute field keys or values cannot be complex object. They need to be simple types like int, float or boolean etc ...", nil, http.StatusBadRequest, false)
 				return false
 			}
+			if !isValidAttributeKey(key) {
+				respondWith(w, r, nil, "Attribute field key: "+key+" is not following attribute naming rules. Please check API documentation.", nil, http.StatusBadRequest, false)
+				return false
+			}
 		}
 
 	}
