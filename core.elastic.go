@@ -147,8 +147,8 @@ func facetedSearch(index string, from int, to int, q string, queryFields []strin
 			m3["field"] = key
 			m3["ranges"] = m4
 
-			m1[key+"_ranges"] = make(map[string]interface{})
-			m1[key+"_ranges"]["range"] = m3
+			m1[key] = make(map[string]interface{})
+			m1[key]["range"] = m3
 
 		}
 
@@ -171,6 +171,17 @@ func facetedSearch(index string, from int, to int, q string, queryFields []strin
 
 	m0["query"] = m2
 	m0["aggs"] = m1
+
+	m0["from"] = from
+	m0["size"] = to
+
+	if len(responseFields) == 0 {
+		responseFields = append(responseFields, "*")
+	}
+
+	m6 := make(map[string][]string)
+	m6["includes"] = responseFields
+	m0["_source"] = m6
 
 	json, err := json.Marshal(m0)
 
