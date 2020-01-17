@@ -316,7 +316,7 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 3.5.1</span><br/><br/></li>
+            <li><span>API documentation version 3.5.2</span><br/><br/></li>
             <li><a href='mailto:vivek.narang10@gmail.com'><u>Contribute to this project</u></a><br/><br/></li>
             <li><span>Development Branch Status:</span><br/></li>
             <li><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img><br/><br/></li>
@@ -3582,36 +3582,35 @@ those skus which were not found in the catalog. </p>
 <p>Sample HTTP request body:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1b8026d5-ac28-4c60-b9ff-a5789f6710bd"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vivek.narang10@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tom"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hanks"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tom.hanks@gmail.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"PhoneNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"647-615-4080"</span><span class="w">
+    </span><span class="s2">"000-000-0000"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"AddressBook"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivek"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narang"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113 Edgar Ave"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tom"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hanks"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101 Broad St"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Richmond Hill"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ontario"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Santa Barbara"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"California"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIVEK NARANG"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L4C 6K3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">

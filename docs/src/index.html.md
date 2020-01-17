@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.5.1</span><br/><br/>
+  - <span>API documentation version 3.5.2</span><br/><br/>
   - <a href='mailto:vivek.narang10@gmail.com'><u>Contribute to this project</u></a><br/><br/>
   - <span>Development Branch Status:</span><br/>
   - <img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img><br/><br/>
@@ -2413,36 +2413,35 @@ Use this endpoint to add a customer into the database.
 
 ```json
 {
-  "CustomerID": "1b8026d5-ac28-4c60-b9ff-a5789f6710bd",
   "Active": true,
-  "FirstName": "Vivek",
-  "LastName": "Narang",
-  "Email": "vivek.narang10@gmail.com",
+  "FirstName": "Tom",
+  "LastName": "Hanks",
+  "Email": "tom.hanks@gmail.com",
   "PhoneNumbers": [
-    "647-615-4080"
+    "000-000-0000"
   ],
   "Password": "password",
   "AddressBook": [
     {
-      "FirstName": "Vivek",
-      "LastName": "Narang",
-      "AddressLineOne": "113 Edgar Ave",
+      "FirstName": "Tom",
+      "LastName": "Hanks",
+      "AddressLineOne": "101 Broad St",
       "AddressLineTwo": "",
-      "City": "Richmond Hill",
-      "State": "Ontario",
-      "Country": "Canada",
-      "Pincode": "L4C 6K3",
+      "City": "Santa Barbara",
+      "State": "California",
+      "Country": "United States",
+      "Pincode": "00000",
       "Default": true
     }
   ],
   "PaymentOptions": [
     {
-      "Name": "VIVEK NARANG",
+      "Name": "TOM HANKS",
       "CardNumber": "0000-0000-0000-0000",
       "CardExpiryMM": "00",
       "CardExpiryYY": "00",
       "SecurityCode": "000",
-      "ZipCode": "L4C 6K3",
+      "ZipCode": "00000",
       "Default": true,
       "SaveInformation": true
     }
