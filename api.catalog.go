@@ -7,10 +7,13 @@ import (
 	"time"
 
 	"github.com/go-redis/redis"
+	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
 func getProduct(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("getProduct() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -66,6 +69,8 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 
 func postProduct(w http.ResponseWriter, r *http.Request) {
 
+	rlog.Debug("postProduct() handle function invoked ...")
+
 	if !pre(w, r) {
 		return
 	}
@@ -113,6 +118,8 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 func putProduct(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("putProduct() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -163,6 +170,8 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteProduct(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("deleteProduct() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -219,6 +228,8 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 
 func getProductGroup(w http.ResponseWriter, r *http.Request) {
 
+	rlog.Debug("getProductGroup() handle function invoked ...")
+
 	if !pre(w, r) {
 		return
 	}
@@ -272,6 +283,8 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("deleteProductGroup() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -329,6 +342,8 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 
 func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 
+	rlog.Debug("updateProductsPrice() handle function invoked ...")
+
 	if !pre(w, r) {
 		return
 	}
@@ -382,6 +397,8 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("updateProductsInventory() handle function invoked ...")
 
 	if !pre(w, r) {
 		return

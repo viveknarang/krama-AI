@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/olivere/elastic"
+	"github.com/romana/rlog"
 )
 
 //ESCLIENT ES client
@@ -13,10 +14,12 @@ var ESCLIENT *elastic.Client
 
 func connectElastic() bool {
 
+	rlog.Debug("connectElastic() handle function invoked ...")
+
 	client, err := elastic.NewClient(elastic.SetURL(ElasticURL + ":" + ElasticPort))
 
 	if err != nil {
-		panic(err)
+		rlog.Error("connectElastic() Error: " + err.Error())
 	}
 
 	ESCLIENT = client
@@ -26,6 +29,8 @@ func connectElastic() bool {
 }
 
 func pingES(silent bool) bool {
+
+	rlog.Debug("pingES() handle function invoked ...")
 
 	if ESCLIENT == nil || !ESCLIENT.IsRunning() {
 		return false
@@ -38,14 +43,10 @@ func pingES(silent bool) bool {
 	info, code, err := ESCLIENT.Ping(ElasticURL + ":" + ElasticPort).Do(ctx)
 
 	if err != nil {
-
 		isESUp = false
-		panic(err)
-
+		rlog.Error("pingES() Error: " + err.Error())
 	} else {
-
 		isESUp = true
-
 	}
 
 	if !silent {
@@ -58,17 +59,20 @@ func pingES(silent bool) bool {
 
 func createESIndexIfNotExists(index string, mapping string) {
 
+	rlog.Debug("createESIndexIfNotExists() handle function invoked ...")
+
 	ctx := context.Background()
 
 	exists, err := ESCLIENT.IndexExists(index).Do(ctx)
 	if err != nil {
+		rlog.Error("createESIndexIfNotExists() Error: " + err.Error())
 		panic(err)
 	}
 
 	if !exists {
 		createIndex, err := ESCLIENT.CreateIndex(index).BodyString(mapping).Do(ctx)
 		if err != nil {
-			panic(err)
+			rlog.Error("createESIndexIfNotExists() Error: " + err.Error())
 		}
 		if !createIndex.Acknowledged {
 			// Not acknowledged
@@ -79,6 +83,8 @@ func createESIndexIfNotExists(index string, mapping string) {
 
 func indexES(index string, mapping string, document interface{}, id string) bool {
 
+	rlog.Debug("indexES() handle function invoked ...")
+
 	createESIndexIfNotExists(index, mapping)
 
 	ctx := context.Background()
@@ -86,7 +92,7 @@ func indexES(index string, mapping string, document interface{}, id string) bool
 	_, err := ESCLIENT.Index().Index(index).Id(id).BodyJson(document).Do(ctx)
 
 	if err != nil {
-		panic(err)
+		rlog.Error("indexES() Error: " + err.Error())
 	}
 
 	return true
@@ -94,6 +100,8 @@ func indexES(index string, mapping string, document interface{}, id string) bool
 }
 
 func basicSearch(index string, from int, to int, query string, queryFields []string, responseFields []string) *elastic.SearchHits {
+
+	rlog.Debug("basicSearch() handle function invoked ...")
 
 	ctx := context.Background()
 
@@ -111,7 +119,7 @@ func basicSearch(index string, from int, to int, query string, queryFields []str
 		Do(ctx)
 
 	if err != nil {
-		panic(err)
+		rlog.Error("basicSearch() Error: " + err.Error())
 	}
 
 	return searchResult.Hits
@@ -119,6 +127,8 @@ func basicSearch(index string, from int, to int, query string, queryFields []str
 }
 
 func facetedSearch(index string, from int, to int, q string, queryFields []string, responseFields []string, termFacetFields []string, rangeFacetFields []map[string][]map[string]interface{}) *elastic.SearchResult {
+
+	rlog.Debug("facetedSearch() handle function invoked ...")
 
 	m0 := make(map[string]interface{})
 	m1 := make(map[string]map[string]interface{})
@@ -186,7 +196,7 @@ func facetedSearch(index string, from int, to int, q string, queryFields []strin
 	json, err := json.Marshal(m0)
 
 	if err != nil {
-		panic(err)
+		rlog.Error("facetedSearch() Error: " + err.Error())
 	}
 
 	ctx := context.Background()
@@ -195,7 +205,7 @@ func facetedSearch(index string, from int, to int, q string, queryFields []strin
 	searchResult, err := so.Do(ctx)
 
 	if err != nil {
-		panic(err)
+		rlog.Error("facetedSearch() Error: " + err.Error())
 	}
 
 	return searchResult
@@ -204,11 +214,13 @@ func facetedSearch(index string, from int, to int, q string, queryFields []strin
 
 func deleteESDocumentByID(index string, id string) bool {
 
+	rlog.Debug("deleteESDocumentByID() handle function invoked ...")
+
 	ctx := context.Background()
 	_, err := ESCLIENT.Delete().Index(index).Id(id).Do(ctx)
 
 	if err != nil {
-		panic(err)
+		rlog.Error("deleteESDocumentByID() Error: " + err.Error())
 	}
 
 	return true

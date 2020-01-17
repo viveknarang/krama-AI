@@ -4,11 +4,14 @@ import (
 	"fmt"
 
 	"github.com/go-redis/redis"
+	"github.com/romana/rlog"
 
 	"github.com/dgrijalva/jwt-go"
 )
 
 func authenticate(tokenString string) bool {
+
+	rlog.Debug("authenticate() function invoked for token: " + tokenString)
 
 	var isValid bool
 

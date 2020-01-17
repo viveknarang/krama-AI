@@ -4,12 +4,15 @@ import (
 	"fmt"
 
 	"github.com/go-redis/redis"
+	"github.com/romana/rlog"
 )
 
 //REDISCLIENT client for redis
 var REDISCLIENT *redis.Client
 
 func connectRedis() bool {
+
+	rlog.Debug("connectRedis() handle function invoked ...")
 
 	client := redis.NewClient(&redis.Options{
 		Addr:     RedisURL + ":" + RedisPort,
@@ -25,6 +28,8 @@ func connectRedis() bool {
 }
 
 func pingRedis(silent bool) bool {
+
+	rlog.Debug("pingRedis() handle function invoked ...")
 
 	if REDISCLIENT == nil {
 		return false
@@ -48,5 +53,8 @@ func pingRedis(silent bool) bool {
 }
 
 func disconnectRedis() {
+
+	rlog.Debug("disconnectRedis() handle function invoked ...")
+
 	REDISCLIENT.Close()
 }

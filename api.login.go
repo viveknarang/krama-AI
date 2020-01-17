@@ -10,17 +10,22 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-redis/redis"
 	"github.com/google/uuid"
+	"github.com/romana/rlog"
 )
 
 func login(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("login() handle function invoked ...")
 
 	var rx LOGIN
 
 	err := json.NewDecoder(r.Body).Decode(&rx)
 
 	if err != nil {
+
 		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
 		return
+
 	}
 
 	if !areCoreServicesUp() {

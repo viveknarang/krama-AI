@@ -8,10 +8,13 @@ import (
 
 	"github.com/go-redis/redis"
 	"github.com/google/uuid"
+	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
 func getCustomer(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("getCustomer() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -67,6 +70,8 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 
 func postCustomer(w http.ResponseWriter, r *http.Request) {
 
+	rlog.Debug("postCustomer() handle function invoked ...")
+
 	if !pre(w, r) {
 		return
 	}
@@ -109,6 +114,8 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 }
 
 func putCustomer(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("putCustomer() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -157,6 +164,8 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteCustomer(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("deleteCustomer() handle function invoked ...")
 
 	if !pre(w, r) {
 		return

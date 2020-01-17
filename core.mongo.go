@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 
+	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -15,12 +15,14 @@ var MONGODBCLIENT *mongo.Client
 
 func connectDB() bool {
 
+	rlog.Debug("connectDB() handle function invoked ...")
+
 	clientOptions := options.Client().ApplyURI("mongodb://" + MongoURL + ":" + MongoPort)
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
 	if err != nil {
-		log.Fatal(err)
+		rlog.Error("connectDB() Error: " + err.Error())
 	}
 
 	MONGODBCLIENT = client
@@ -37,6 +39,8 @@ func connectDB() bool {
 
 func pingMongoDB(silent bool) bool {
 
+	rlog.Debug("pingMongoDB() handle function invoked ...")
+
 	if MONGODBCLIENT == nil {
 		return false
 	}
@@ -44,7 +48,7 @@ func pingMongoDB(silent bool) bool {
 	err := MONGODBCLIENT.Ping(context.TODO(), nil)
 
 	if err != nil {
-		log.Fatal(err)
+		rlog.Error("pingMongoDB() Error: " + err.Error())
 		return false
 	}
 
@@ -58,6 +62,8 @@ func pingMongoDB(silent bool) bool {
 
 func findMongoDocument(db string, collec string, filter bson.M) []*bson.D {
 
+	rlog.Debug("findMongoDocument() handle function invoked ...")
+
 	var result []*bson.D
 
 	collection := MONGODBCLIENT.Database(db).Collection(collec)
@@ -65,7 +71,7 @@ func findMongoDocument(db string, collec string, filter bson.M) []*bson.D {
 	cur, err := collection.Find(context.TODO(), filter)
 
 	if err != nil {
-		log.Fatal(err)
+		rlog.Error("findMongoDocument() Error: " + err.Error())
 		return nil
 	}
 
@@ -74,7 +80,7 @@ func findMongoDocument(db string, collec string, filter bson.M) []*bson.D {
 		var elem bson.D
 		err := cur.Decode(&elem)
 		if err != nil {
-			log.Fatal(err)
+			rlog.Error("findMongoDocument() Error: " + err.Error())
 		}
 		result = append(result, &elem)
 	}
@@ -85,12 +91,14 @@ func findMongoDocument(db string, collec string, filter bson.M) []*bson.D {
 
 func insertMongoDocument(db string, collec string, document interface{}) bool {
 
+	rlog.Debug("insertMongoDocument() handle function invoked ...")
+
 	collection := MONGODBCLIENT.Database(db).Collection(collec)
 
 	insertResult, err := collection.InsertOne(context.TODO(), document)
 
 	if err != nil {
-		log.Fatal(err)
+		rlog.Error("insertMongoDocument() Error: " + err.Error())
 		return false
 	}
 
@@ -100,6 +108,8 @@ func insertMongoDocument(db string, collec string, document interface{}) bool {
 
 func updateMongoDocument(db string, collec string, filter interface{}, update interface{}) [2]int64 {
 
+	rlog.Debug("updateMongoDocument() handle function invoked ...")
+
 	collection := MONGODBCLIENT.Database(db).Collection(collec)
 
 	updateResult, err := collection.UpdateOne(context.TODO(), filter, update)
@@ -107,7 +117,7 @@ func updateMongoDocument(db string, collec string, filter interface{}, update in
 	var result [2]int64
 
 	if err != nil {
-		log.Fatal(err)
+		rlog.Error("updateMongoDocument() Error: " + err.Error())
 		result[0] = -1
 		result[1] = -1
 		return result
@@ -122,12 +132,14 @@ func updateMongoDocument(db string, collec string, filter interface{}, update in
 
 func deleteMongoDocument(db string, collec string, deleteCriteria interface{}) int64 {
 
+	rlog.Debug("deleteMongoDocument() handle function invoked ...")
+
 	collection := MONGODBCLIENT.Database(db).Collection(collec)
 
 	deleteResult, err := collection.DeleteMany(context.TODO(), deleteCriteria)
 
 	if err != nil {
-		log.Fatal(err)
+		rlog.Error("deleteMongoDocument() Error: " + err.Error())
 	}
 
 	return deleteResult.DeletedCount
@@ -136,10 +148,12 @@ func deleteMongoDocument(db string, collec string, deleteCriteria interface{}) i
 
 func disconnectDB() {
 
+	rlog.Debug("disconnectDB() handle function invoked ...")
+
 	err := MONGODBCLIENT.Disconnect(context.TODO())
 
 	if err != nil {
-		log.Fatal(err)
+		rlog.Error("disconnectDB() Error: " + err.Error())
 	}
 
 	fmt.Println("Connection to MongoDB closed.")

@@ -8,10 +8,13 @@ import (
 
 	"github.com/go-redis/redis"
 	"github.com/google/uuid"
+	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
 func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("getOrderByOrderID() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -67,6 +70,8 @@ func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
 
 func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 
+	rlog.Debug("getOrderByCustomerID() handle function invoked ...")
+
 	if !pre(w, r) {
 		return
 	}
@@ -121,6 +126,8 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 
 func postOrder(w http.ResponseWriter, r *http.Request) {
 
+	rlog.Debug("postOrder() handle function invoked ...")
+
 	if !pre(w, r) {
 		return
 	}
@@ -149,6 +156,8 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 }
 
 func putOrder(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("putOrder() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -191,6 +200,8 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteOrder(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("deleteOrder() handle function invoked ...")
 
 	if !pre(w, r) {
 		return

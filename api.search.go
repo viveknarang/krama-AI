@@ -3,9 +3,13 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/romana/rlog"
 )
 
 func quickSearch(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("quickSearch() handle function invoked ...")
 
 	if !pre(w, r) {
 		return
@@ -40,6 +44,8 @@ func quickSearch(w http.ResponseWriter, r *http.Request) {
 }
 
 func fullpageSearch(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("fullpageSearch() handle function invoked ...")
 
 	if !pre(w, r) {
 		return

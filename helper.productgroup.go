@@ -6,10 +6,13 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
 func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
+
+	rlog.Debug("syncProductGroup() handle function invoked ...")
 
 	var response bool
 
@@ -462,6 +465,8 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 }
 
 func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus []string, isPriceUpdate bool) bool {
+
+	rlog.Debug("syncProductGroupFromProducts() handle function invoked ...")
 
 	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 

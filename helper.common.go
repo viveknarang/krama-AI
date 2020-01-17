@@ -7,6 +7,8 @@ import (
 	"net/url"
 	"reflect"
 	"regexp"
+
+	"github.com/romana/rlog"
 )
 
 func isValidJSON(s string) bool {
@@ -55,6 +57,8 @@ func typeof(value interface{}) string {
 }
 
 func areCoreServicesUp() bool {
+
+	rlog.Debug("areCoreServicesUp() function invoked ...")
 
 	return pingMongoDB(true) && pingES(true) && pingRedis(true)
 

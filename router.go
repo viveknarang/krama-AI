@@ -4,9 +4,12 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/romana/rlog"
 )
 
 func routers() *mux.Router {
+
+	rlog.Debug("Setting up routers and handle functions ...")
 
 	router := mux.NewRouter()
 
@@ -49,6 +52,8 @@ func routers() *mux.Router {
 	router.HandleFunc(CustomersPath+"/customers/{SKU}", putCustomer).Methods(http.MethodPut)
 
 	router.HandleFunc(CustomersPath+"/customers/{SKU}", deleteCustomer).Methods(http.MethodDelete)
+
+	rlog.Debug("Router setup complete ...")
 
 	return router
 
