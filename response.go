@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/romana/rlog"
@@ -16,12 +17,12 @@ func respondWith(w http.ResponseWriter, r *http.Request, err error, message stri
 
 	if err != nil {
 
-		rlog.Debug("respondWith() for: " + r.Method + " : " + r.URL.Path + " has Error: " + err.Error())
+		rlog.Debug("respondWith() with code " + strconv.Itoa(code) + " for: " + r.Method + " : " + r.URL.Path + " has Error: " + err.Error())
 		resp.Message = err.Error()
 
 	} else {
 
-		rlog.Debug("respondWith() for: " + r.Method + " : " + r.URL.Path)
+		rlog.Debug("respondWith() with code " + strconv.Itoa(code) + " for: " + r.Method + " : " + r.URL.Path)
 		resp.Message = message
 
 	}
