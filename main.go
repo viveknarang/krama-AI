@@ -26,4 +26,5 @@ func main() {
 
 	rlog.Debug("Closing ...")
 
+	....
 }
