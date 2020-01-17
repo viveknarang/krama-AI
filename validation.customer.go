@@ -27,6 +27,13 @@ func validateCustomer(w http.ResponseWriter, r *http.Request, customer CUSTOMER)
 
 	}
 
+	if len(customer.Password) < 5 || len(customer.Password) > 1024 {
+
+		respondWith(w, r, nil, "Customer's password cannot be less than 5 or more than 1024 characters", nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
 	if len(customer.PhoneNumbers) > 10 {
 
 		respondWith(w, r, nil, "A customer object cannot have more than 100 phone numbers associated with it", nil, http.StatusBadRequest, false)
