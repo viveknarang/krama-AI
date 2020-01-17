@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Krama.ai - API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -222,7 +222,16 @@
             <a href="#data-structures" class="toc-h1 toc-link" data-title="Data Structures">Data Structures</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#product-data-structure" class="toc-h2 toc-link" data-title="Product Data Structure">Product Data Structure</a>
+                    <a href="#product" class="toc-h2 toc-link" data-title="Product">Product</a>
+                  </li>
+                  <li>
+                    <a href="#customer" class="toc-h2 toc-link" data-title="Customer">Customer</a>
+                  </li>
+                  <li>
+                    <a href="#address" class="toc-h2 toc-link" data-title="Address">Address</a>
+                  </li>
+                  <li>
+                    <a href="#paymentoption" class="toc-h2 toc-link" data-title="PaymentOption">PaymentOption</a>
                   </li>
               </ul>
           </li>
@@ -316,13 +325,13 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 3.5.2</span><br/><br/></li>
-            <li><a href='mailto:vivek.narang10@gmail.com'><u>Contribute to this project</u></a><br/><br/></li>
+            <li><span>API documentation version 3.6</span><br/></li>
+            <li><a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/></li>
+            <li><a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/></li>
+            <li><a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/></li>
+            <li><a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a></li>
             <li><span>Development Branch Status:</span><br/></li>
-            <li><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img><br/><br/></li>
-            <li><a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/><br/></li>
-            <li><a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/><br/></li>
-            <li>API documentation generated using:<br/><a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a></li>
+            <li><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -353,7 +362,7 @@ It is important to understand the concept of product groups. For search quality 
 <aside class="success">
 The current API version is: v1 Please replace {API version} with v1 in your API calls
 </aside>
-<h1 id='data-structures'>Data Structures</h1><h2 id='product-data-structure'>Product Data Structure</h2>
+<h1 id='data-structures'>Data Structures</h1><h2 id='product'>Product</h2>
 <blockquote>
 <p>Sample valid product object:</p>
 </blockquote>
@@ -388,7 +397,7 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
     </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
@@ -525,7 +534,7 @@ The API will reject product addition and change requests if the constraints are 
 <td>Attributes</td>
 <td>Map{k,v}</td>
 <td>Product custom attributes that fit your needs</td>
-<td>keys should be strings and values either: int, float, string or boolean</td>
+<td>Keys should be strings (alphanumeric with single space and &quot;-&quot; or &quot;_&quot;) and values either: Int, Float, String or Boolean</td>
 </tr>
 </tbody></table>
 
@@ -533,6 +542,290 @@ The API will reject product addition and change requests if the constraints are 
 The isMain field in the product data structure essentially marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
 of the product name, images, etc ... to show up on the product page by default.  
 </aside>
+
+<aside class="warning">
+Attribute field key naming has to follow specific rules. Attibute key names can only have alphanumeric characters with single spaces, "_", or "-" characters.  
+</aside>
+<h2 id='customer'>Customer</h2>
+<blockquote>
+<p>Sample valid product object:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tom"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hanks"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tom.hanks@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"PhoneNumbers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"000-000-0000"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"AddressBook"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tom"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hanks"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101 Broad St"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Santa Barbara"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"California"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"WishList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"83947DSDS"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"84378DFDW"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"SaveForLater"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"FSDF3434"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ERF4432D"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Please find customer object fields and constraints/rules associated with each, below:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Short Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Active</td>
+<td>Boolean</td>
+<td>Flag to mark if the customer is an active customer</td>
+<td>Mandatory, boolean value - either true or false</td>
+</tr>
+<tr>
+<td>CustomerID</td>
+<td>String</td>
+<td>Platform generated customer identifier</td>
+<td>Mandatory, generated automatically</td>
+</tr>
+<tr>
+<td>FirstName</td>
+<td>String</td>
+<td>First name of the customer</td>
+<td>Mandatory, less than 100 characters</td>
+</tr>
+<tr>
+<td>LastName</td>
+<td>String</td>
+<td>Last name of the customer</td>
+<td>Mandatory, less than 100 characters</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>String</td>
+<td>Email address. Used as primary field to identify a customer</td>
+<td>Mandatory, Valid email address</td>
+</tr>
+<tr>
+<td>PhoneNumbers</td>
+<td>String[]</td>
+<td>An array of phone numbers</td>
+<td>Multiple, A customer can have at most 10 phone numbers</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>String</td>
+<td>Customer password</td>
+<td>Mandatory, Cannot have less than 5 or more than 1024 characters</td>
+</tr>
+<tr>
+<td>AddressBook</td>
+<td>Address[]</td>
+<td>Object containing customer&#39;s valid addresses</td>
+<td>Multiple, A customer can have at most 10 adresses at a time</td>
+</tr>
+<tr>
+<td>PaymentOptions</td>
+<td>CreditCard[]</td>
+<td>Object containing customer&#39;s valid payment information</td>
+<td>Multiple, A customer can have at most 50 payment options at a time</td>
+</tr>
+<tr>
+<td>WishList</td>
+<td>String[]</td>
+<td>An array of product SKUs</td>
+<td>Multiple, At a time a customer can have at most 1000 SKUs</td>
+</tr>
+<tr>
+<td>SaveForLater</td>
+<td>String[]</td>
+<td>An array of product SKUs</td>
+<td>Multiple, At a time a customer can have at most 1000 SKUs</td>
+</tr>
+</tbody></table>
+<h2 id='address'>Address</h2>
+<blockquote>
+<p>Sample valid address object:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+      </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tom"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"LastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hanks"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineOne"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101 Broad St"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"AddressLineTwo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"City"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Santa Barbara"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"California"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Pincode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Address object fields, definitions, and constraints below:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Short Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>FirstName</td>
+<td>String</td>
+<td>First name of the address</td>
+<td>Mandatory, less than 100 characters</td>
+</tr>
+<tr>
+<td>LastName</td>
+<td>String</td>
+<td>Last name of the address</td>
+<td>Mandatory, less than 100 characters</td>
+</tr>
+<tr>
+<td>AddressLineOne</td>
+<td>String</td>
+<td>First line for address description</td>
+<td>Mandatory, less than 200 characters</td>
+</tr>
+<tr>
+<td>AddressLineTwo</td>
+<td>String</td>
+<td>Second line for address description</td>
+<td>Optional, less than 200 characters</td>
+</tr>
+<tr>
+<td>City</td>
+<td>String</td>
+<td>Address city</td>
+<td>Mandatory, less than 100 characters</td>
+</tr>
+<tr>
+<td>State</td>
+<td>String</td>
+<td>Address state</td>
+<td>Mandatory, less than 100 characters</td>
+</tr>
+<tr>
+<td>Country</td>
+<td>String</td>
+<td>Address country</td>
+<td>Mandatory, less than 100 characters</td>
+</tr>
+<tr>
+<td>Pincode</td>
+<td>String</td>
+<td>Addres pincode</td>
+<td>Mandatory, less than 10 characters</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>Boolean</td>
+<td>Is the address the default address?</td>
+<td>Boolean value - either true or false</td>
+</tr>
+</tbody></table>
+<h2 id='paymentoption'>PaymentOption</h2>
+<blockquote>
+<p>Sample valid address object:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+      </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Payment option object fields, definitions, and constraints below:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Short Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Name</td>
+<td>String</td>
+<td>Name associated with credit card</td>
+<td>Mandatory, less than 100 characters</td>
+</tr>
+<tr>
+<td>CardNumber</td>
+<td>String</td>
+<td>Card number associated with payment option</td>
+<td>Mandatory, 16 digits</td>
+</tr>
+<tr>
+<td>CardExpiryMM</td>
+<td>String</td>
+<td>Card expiry month</td>
+<td>Mandatory, 2 digits greater than 00 and less than equal to 12</td>
+</tr>
+<tr>
+<td>CardExpiryYY</td>
+<td>String</td>
+<td>Card expiry year</td>
+<td>Mandatory, 2 digits</td>
+</tr>
+<tr>
+<td>SecurityCode</td>
+<td>String</td>
+<td>Card security code</td>
+<td>Mandatory, 3 digits</td>
+</tr>
+<tr>
+<td>ZipCode</td>
+<td>String</td>
+<td>Card pincode</td>
+<td>Mandatory, valid pincode (based on country)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>Boolean</td>
+<td>Flag to make if the payment information is the default option</td>
+<td>Mandatory, boolean - either true or false</td>
+</tr>
+<tr>
+<td>SaveInformation</td>
+<td>Boolean</td>
+<td>Flag to mark the payment information to be saved for use later</td>
+<td>Mandatory, boolean - either true or false</td>
+</tr>
+</tbody></table>
 <h1 id='api-access'>API access</h1><h2 id='get-api-access-token'>Get API access token</h2>
 <blockquote>
 <p>Sample HTTP request body:</p>
@@ -688,7 +981,7 @@ With the field validForSeconds in response, you can calculate the time after wit
     </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
@@ -747,7 +1040,7 @@ With the field validForSeconds in response, you can calculate the time after wit
             </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -964,7 +1257,7 @@ With the field validForSeconds in response, you can calculate the time after wit
             </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -1143,7 +1436,7 @@ With the field validForSeconds in response, you can calculate the time after wit
     </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
@@ -1202,7 +1495,7 @@ With the field validForSeconds in response, you can calculate the time after wit
             </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -1817,7 +2110,7 @@ those skus which were not found in the catalog. </p>
                     </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -1861,7 +2154,7 @@ those skus which were not found in the catalog. </p>
             </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                 </span><span class="s2">"1 GHz"</span><span class="w">
             </span><span class="p">],</span><span class="w">
-            </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                 </span><span class="s2">"1"</span><span class="w">
             </span><span class="p">],</span><span class="w">
             </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2155,7 +2448,7 @@ those skus which were not found in the catalog. </p>
         </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -2222,7 +2515,7 @@ those skus which were not found in the catalog. </p>
                     </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -2425,7 +2718,7 @@ those skus which were not found in the catalog. </p>
                     </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -2575,7 +2868,7 @@ those skus which were not found in the catalog. </p>
                     </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -2732,7 +3025,7 @@ those skus which were not found in the catalog. </p>
             </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
@@ -2799,7 +3092,7 @@ those skus which were not found in the catalog. </p>
                     </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"Number of USB 2.0 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">

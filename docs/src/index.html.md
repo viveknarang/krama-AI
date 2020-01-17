@@ -1,17 +1,18 @@
 ---
-title: API Reference
+title: Krama.ai - API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.5.2</span><br/><br/>
-  - <a href='mailto:vivek.narang10@gmail.com'><u>Contribute to this project</u></a><br/><br/>
+  - <span>API documentation version 3.6</span><br/>
+  - <a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/>
+  - <a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/>
+  - <a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/>
+  - <a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a>
   - <span>Development Branch Status:</span><br/>
-  - <img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img><br/><br/>
-  - <a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/><br/>
-  - <a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/><br/>
-  - API documentation generated using:<br/><a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a>
+  - <img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img>
+
 
 includes:
 ##  - errors
@@ -49,7 +50,7 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
 
 # Data Structures
 
-## Product Data Structure
+## Product
 
 > Sample valid product object:
 
@@ -85,7 +86,7 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
     "RAM": "16 GB",
     "Memory Speed": "1 GHz",
     "Wireless Standard": "802.11ac",
-    "Number of USB 2.0 Ports": "1",
+    "Number of USB 2 Ports": "1",
     "Series": "Surface Laptop 2",
     "Item model number": "DAL-00092",
     "Operating System": "Windows 10 Home",
@@ -133,13 +134,154 @@ Please find the field definitions, types and constraints below:
 |  Active          |   Boolean      | Field to mark product available for sale                      | Boolean - either true or false                                          |
 |  IsMain          |   Boolean      | Field to mark the product as a main product in the group      | Boolean - either true of false                                          |
 |  Currency        |   String       | Product purchase currency                                     | Either - "USD", "CAD", "CDN", "INR", "GBP" or "EUR" (for now!)          |
-|  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | keys should be strings and values either: int, float, string or boolean |                      
+|  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | Keys should be strings (alphanumeric with single space and "-" or "_") and values either: Int, Float, String or Boolean |                      
 
 <aside class="notice">
 The isMain field in the product data structure essentially marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
 of the product name, images, etc ... to show up on the product page by default.  
 </aside>
 
+<aside class="warning">
+Attribute field key naming has to follow specific rules. Attibute key names can only have alphanumeric characters with single spaces, "_", or "-" characters.  
+</aside>
+
+
+## Customer
+
+> Sample valid product object:
+
+```json
+{
+  "Active": true,
+  "FirstName": "Tom",
+  "LastName": "Hanks",
+  "Email": "tom.hanks@gmail.com",
+  "PhoneNumbers": [
+    "000-000-0000"
+  ],
+  "Password": "password",
+  "AddressBook": [
+    {
+      "FirstName": "Tom",
+      "LastName": "Hanks",
+      "AddressLineOne": "101 Broad St",
+      "AddressLineTwo": "",
+      "City": "Santa Barbara",
+      "State": "California",
+      "Country": "United States",
+      "Pincode": "00000",
+      "Default": true
+    }
+  ],
+  "PaymentOptions": [
+    {
+      "Name": "TOM HANKS",
+      "CardNumber": "0000-0000-0000-0000",
+      "CardExpiryMM": "00",
+      "CardExpiryYY": "00",
+      "SecurityCode": "000",
+      "ZipCode": "00000",
+      "Default": true,
+      "SaveInformation": true
+    }
+  ],
+  "WishList": [
+    "83947DSDS",
+    "84378DFDW"
+  ],
+  "SaveForLater": [
+    "FSDF3434",
+    "ERF4432D"
+  ]
+}
+```
+
+Please find customer object fields and constraints/rules associated with each, below:
+
+
+|   Field          |   Type         |     Short Description                                         |    Constraints                                                          |
+|------------------|----------------|---------------------------------------------------------------|-------------------------------------------------------------------------|
+| Active           | Boolean        | Flag to mark if the customer is an active customer            | Mandatory, boolean value - either true or false                         |
+| CustomerID       | String         | Platform generated customer identifier                        | Mandatory, generated automatically                                      |
+| FirstName        | String         | First name of the customer                                    | Mandatory, less than 100 characters                                     |
+| LastName         | String         | Last name of the customer                                     | Mandatory, less than 100 characters                                     |
+| Email            | String         | Email address. Used as primary field to identify a customer   | Mandatory, Valid email address                                          |
+| PhoneNumbers     | String[]       | An array of phone numbers                                     | Multiple, A customer can have at most 10 phone numbers                  |
+| Password         | String         | Customer password                                             | Mandatory, Cannot have less than 5 or more than 1024 characters         |
+| AddressBook      | Address[]      | Object containing customer's valid addresses                  | Multiple, A customer can have at most 10 adresses at a time             |
+| PaymentOptions   | CreditCard[]   | Object containing customer's valid payment information        | Multiple, A customer can have at most 50 payment options at a time      |
+| WishList         | String[]       | An array of product SKUs                                      | Multiple, At a time a customer can have at most 1000 SKUs               |
+| SaveForLater     | String[]       | An array of product SKUs                                      | Multiple, At a time a customer can have at most 1000 SKUs               |
+
+
+
+
+## Address
+
+> Sample valid address object:
+
+```json
+{
+      "FirstName": "Tom",
+      "LastName": "Hanks",
+      "AddressLineOne": "101 Broad St",
+      "AddressLineTwo": "",
+      "City": "Santa Barbara",
+      "State": "California",
+      "Country": "United States",
+      "Pincode": "00000",
+      "Default": true
+}
+```
+
+Address object fields, definitions, and constraints below:
+
+
+|   Field          |   Type         |     Short Description                                         |    Constraints                                                          |
+|------------------|----------------|---------------------------------------------------------------|-------------------------------------------------------------------------|
+| FirstName        | String         | First name of the address                                     | Mandatory, less than 100 characters                                     |
+| LastName         | String         | Last name of the address                                      | Mandatory, less than 100 characters                                     |
+| AddressLineOne   | String         | First line for address description                            | Mandatory, less than 200 characters                                     |
+| AddressLineTwo   | String         | Second line for address description                           | Optional, less than 200 characters                                      |
+| City             | String         | Address city                                                  | Mandatory, less than 100 characters                                     |
+| State            | String         | Address state                                                 | Mandatory, less than 100 characters                                     |
+| Country          | String         | Address country                                               | Mandatory, less than 100 characters                                     |
+| Pincode          | String         | Addres pincode                                                | Mandatory, less than 10 characters                                      |
+| Default          | Boolean        | Is the address the default address?                           | Boolean value - either true or false                                    |
+
+
+
+## PaymentOption
+
+> Sample valid address object:
+
+```json
+{
+      "Name": "TOM HANKS",
+      "CardNumber": "0000-0000-0000-0000",
+      "CardExpiryMM": "00",
+      "CardExpiryYY": "00",
+      "SecurityCode": "000",
+      "ZipCode": "00000",
+      "Default": true,
+      "SaveInformation": true
+}
+```
+
+
+Payment option object fields, definitions, and constraints below:
+
+
+|   Field          |   Type         |     Short Description                                         |    Constraints                                                          |
+|------------------|----------------|---------------------------------------------------------------|-------------------------------------------------------------------------|
+| Name             | String         | Name associated with credit card                              | Mandatory, less than 100 characters                                     |
+| CardNumber       | String         | Card number associated with payment option                    | Mandatory, 16 digits                                                    |
+| CardExpiryMM     | String         | Card expiry month                                             | Mandatory, 2 digits greater than 00 and less than equal to 12           |
+| CardExpiryYY     | String         | Card expiry year                                              | Mandatory, 2 digits                                                     |
+| SecurityCode     | String         | Card security code                                            | Mandatory, 3 digits                                                     |
+| ZipCode          | String         | Card pincode                                                  | Mandatory, valid pincode (based on country)                             |
+| Default          | Boolean        | Flag to make if the payment information is the default option | Mandatory, boolean - either true or false                               |
+| SaveInformation  | Boolean        | Flag to mark the payment information to be saved for use later| Mandatory, boolean - either true or false                               |                                          
 
 # API access
 
@@ -273,7 +415,7 @@ With the field validForSeconds in response, you can calculate the time after wit
     "RAM": "16 GB",
     "Memory Speed": "1 GHz",
     "Wireless Standard": "802.11ac",
-    "Number of USB 2.0 Ports": "1",
+    "Number of USB 2 Ports": "1",
     "Series": "Surface Laptop 2",
     "Item model number": "DAL-00092",
     "Operating System": "Windows 10 Home",
@@ -333,7 +475,7 @@ With the field validForSeconds in response, you can calculate the time after wit
             "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
             "Item model number": "DAL-00092",
             "Memory Speed": "1 GHz",
-            "Number of USB 2.0 Ports": "1",
+            "Number of USB 2 Ports": "1",
             "Operating System": "Windows 10 Home",
             "Processor Count": "16",
             "RAM": "16 GB",
@@ -443,7 +585,7 @@ Use this API endpoint to add a new product in the products collection. When a pr
             "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
             "Item model number": "DAL-00092",
             "Memory Speed": "1 GHz",
-            "Number of USB 2.0 Ports": "1",
+            "Number of USB 2 Ports": "1",
             "Operating System": "Windows 10 Home",
             "Processor Count": "16",
             "RAM": "16 GB",
@@ -554,7 +696,7 @@ When you want to get a specific product you can use this endpoint. All you need 
     "RAM": "16 GB",
     "Memory Speed": "1 GHz",
     "Wireless Standard": "802.11ac",
-    "Number of USB 2.0 Ports": "1",
+    "Number of USB 2 Ports": "1",
     "Series": "Surface Laptop 2",
     "Item model number": "DAL-00092",
     "Operating System": "Windows 10 Home",
@@ -614,7 +756,7 @@ When you want to get a specific product you can use this endpoint. All you need 
             "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
             "Item model number": "DAL-00092",
             "Memory Speed": "1 GHz",
-            "Number of USB 2.0 Ports": "1",
+            "Number of USB 2 Ports": "1",
             "Operating System": "Windows 10 Home",
             "Processor Count": "16",
             "RAM": "16 GB",
@@ -996,7 +1138,7 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
                     "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                     "Item model number": "DAL-00092",
                     "Memory Speed": "1 GHz",
-                    "Number of USB 2.0 Ports": "1",
+                    "Number of USB 2 Ports": "1",
                     "Operating System": "Windows 10 Home",
                     "Processor Count": "16",
                     "RAM": "16 GB",
@@ -1040,7 +1182,7 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
             "Memory Speed": [
                 "1 GHz"
             ],
-            "Number of USB 2.0 Ports": [
+            "Number of USB 2 Ports": [
                 "1"
             ],
             "Operating System": [
@@ -1245,7 +1387,7 @@ Use this API endpoint to remove a product group from the productgroups collectio
         "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
         "Item model number": "DAL-00092",
         "Memory Speed": "1 GHz",
-        "Number of USB 2.0 Ports": "1",
+        "Number of USB 2 Ports": "1",
         "Operating System": "Windows 10 Home",
         "Processor Count": "16",
         "RAM": "16 GB",
@@ -1314,7 +1456,7 @@ Use this API endpoint to remove a product group from the productgroups collectio
                     "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                     "Item model number": "DAL-00092",
                     "Memory Speed": "1 GHz",
-                    "Number of USB 2.0 Ports": "1",
+                    "Number of USB 2 Ports": "1",
                     "Operating System": "Windows 10 Home",
                     "Processor Count": "16",
                     "RAM": "16 GB",
@@ -1446,7 +1588,7 @@ Use this endpoint to create an order entry in the database. Details on the field
                     "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                     "Item model number": "DAL-00092",
                     "Memory Speed": "1 GHz",
-                    "Number of USB 2.0 Ports": "1",
+                    "Number of USB 2 Ports": "1",
                     "Operating System": "Windows 10 Home",
                     "Processor Count": "16",
                     "RAM": "16 GB",
@@ -1574,7 +1716,7 @@ Use this endpoint to get all the orders associated with a customer using the cus
                     "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                     "Item model number": "DAL-00092",
                     "Memory Speed": "1 GHz",
-                    "Number of USB 2.0 Ports": "1",
+                    "Number of USB 2 Ports": "1",
                     "Operating System": "Windows 10 Home",
                     "Processor Count": "16",
                     "RAM": "16 GB",
@@ -1710,7 +1852,7 @@ Use this endpoint to get all the orders associated with a customer using the cus
             "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
             "Item model number": "DAL-00092",
             "Memory Speed": "1 GHz",
-            "Number of USB 2.0 Ports": "1",
+            "Number of USB 2 Ports": "1",
             "Operating System": "Windows 10 Home",
             "Processor Count": "16",
             "RAM": "16 GB",
@@ -1778,7 +1920,7 @@ Use this endpoint to get all the orders associated with a customer using the cus
                     "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                     "Item model number": "DAL-00092",
                     "Memory Speed": "1 GHz",
-                    "Number of USB 2.0 Ports": "1",
+                    "Number of USB 2 Ports": "1",
                     "Operating System": "Windows 10 Home",
                     "Processor Count": "16",
                     "RAM": "16 GB",
