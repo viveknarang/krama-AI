@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/olivere/elastic"
@@ -92,7 +93,7 @@ func indexES(index string, mapping string, document interface{}, id string) bool
 
 }
 
-func quickSearch(index string, from int, to int, query string, queryFields []string, responseFields []string) *elastic.SearchHits {
+func basicSearch(index string, from int, to int, query string, queryFields []string, responseFields []string) *elastic.SearchHits {
 
 	ctx := context.Background()
 
@@ -117,11 +118,76 @@ func quickSearch(index string, from int, to int, query string, queryFields []str
 
 }
 
-func fullPageSearch() {
+func facetedSearch(index string, from int, to int, q string, queryFields []string, responseFields []string, termFacetFields []string, rangeFacetFields []map[string][]map[string]interface{}) *elastic.SearchResult {
 
-	//Aggregation("Brands", elastic.NewTermsAggregation().Field("Brands").Size(100)).
-	//Aggregation("Colors", elastic.NewTermsAggregation().Field("Colors").Size(100)).
-	//Aggregation("Sizes", elastic.NewTermsAggregation().Field("Sizes").Size(100)).
+	m0 := make(map[string]interface{})
+	m1 := make(map[string]map[string]interface{})
+	m2 := make(map[string]map[string]interface{})
+	m3 := make(map[string]interface{})
+	var m4 []interface{}
+	m5 := make(map[string]interface{})
+
+	// Range Aggregation for rangeFacetFields parameter
+	for _, rangeF := range rangeFacetFields {
+
+		for key, value := range rangeF {
+
+			m3 = make(map[string]interface{})
+			m4 = nil
+
+			for _, ar := range value {
+
+				m5 = make(map[string]interface{})
+				m5["from"] = ar["from"]
+				m5["to"] = ar["to"]
+				m4 = append(m4, m5)
+
+			}
+
+			m3["field"] = key
+			m3["ranges"] = m4
+
+			m1[key+"_ranges"] = make(map[string]interface{})
+			m1[key+"_ranges"]["range"] = m3
+
+		}
+
+	}
+
+	// Term Aggregation for termFacetFields parameter
+	for _, term := range termFacetFields {
+
+		m3 = make(map[string]interface{})
+		m3["field"] = term
+		m1[term] = make(map[string]interface{})
+		m1[term]["terms"] = m3
+
+	}
+
+	m2["multi_match"] = make(map[string]interface{})
+	m2["multi_match"]["fields"] = queryFields
+	m2["multi_match"] = make(map[string]interface{})
+	m2["multi_match"]["query"] = q
+
+	m0["query"] = m2
+	m0["aggs"] = m1
+
+	json, err := json.Marshal(m0)
+
+	if err != nil {
+		panic(err)
+	}
+
+	ctx := context.Background()
+	so := elastic.NewSearchService(ESCLIENT)
+	so.Source(string(json))
+	searchResult, err := so.Do(ctx)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return searchResult
 
 }
 

@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func basicProductGroupSearch(w http.ResponseWriter, r *http.Request) {
+func quickSearch(w http.ResponseWriter, r *http.Request) {
 
 	if !pre(w, r) {
 		return
@@ -23,7 +23,7 @@ func basicProductGroupSearch(w http.ResponseWriter, r *http.Request) {
 	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 	index := cidb + ProductGroupExtension + SearchIndexExtension
 
-	searchResponse := quickSearch(index, sq.From, sq.To, sq.Query, sq.QueryFields, sq.ResponseFields)
+	searchResponse := basicSearch(index, sq.From, sq.To, sq.Query, sq.QueryFields, sq.ResponseFields)
 
 	hits := make(map[int]interface{})
 	results := make(map[string]interface{})
@@ -34,6 +34,36 @@ func basicProductGroupSearch(w http.ResponseWriter, r *http.Request) {
 
 	results["count"] = searchResponse.TotalHits.Value
 	results["results"] = hits
+
+	respondWith(w, r, nil, "Search Result ...", results, http.StatusOK, true)
+
+}
+
+func fullpageSearch(w http.ResponseWriter, r *http.Request) {
+
+	if !pre(w, r) {
+		return
+	}
+
+	var sq SEARCHREQUEST
+
+	err := json.NewDecoder(r.Body).Decode(&sq)
+
+	if err != nil {
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
+		return
+	}
+
+	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	index := cidb + ProductGroupExtension + SearchIndexExtension
+
+	searchResponse := facetedSearch(index, sq.From, sq.To, sq.Query, sq.QueryFields, sq.ResponseFields, sq.TermFacetFields, sq.RangeFacetFields)
+
+	results := make(map[string]interface{})
+
+	results["facets"] = searchResponse.Aggregations
+	results["hits"] = searchResponse.Hits.Hits
+	results["count"] = searchResponse.Hits.TotalHits.Value
 
 	respondWith(w, r, nil, "Search Result ...", results, http.StatusOK, true)
 
