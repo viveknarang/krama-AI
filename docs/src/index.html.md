@@ -5,11 +5,12 @@ language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.4</span><br/><br/>
+  - <span>API documentation version 3.5</span><br/><br/>
   - <a href='mailto:vivek.narang10@gmail.com'><u>Contribute to this project</u></a><br/><br/>
   - <span>Development Branch Status:</span><br/>
   - <img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img><br/><br/>
   - <a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/><br/>
+  - <a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/><br/>
   - API documentation generated using:<br/><a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a>
 
 includes:
@@ -1921,17 +1922,24 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
 
 # Search API
 
-## Basic search
+## Quick search
 
 > Sample HTTP request body:
 
 ```json
 {
-  "Q": "Surface Laptop 2",
-  "Fields": [
+  "Query": " microsoft",
+  "QueryFields": [
     "Name",
-    "Skus"
-  ]
+    "Sku"
+  ],
+  "ResponseFields": [
+    "Name",
+    "Skus",
+    "Images"
+  ],
+  "From": 0,
+  "To": 100
 }
 ```
 
@@ -1942,211 +1950,31 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
     "Code": 200,
     "Success": true,
     "Message": "Search Result ...",
-    "Time": 1579030869519210940,
+    "Time": 1579233804527950065,
     "Response": {
-        "took": 88,
-        "hits": {
-            "total": {
-                "value": 1,
-                "relation": "eq"
-            },
-            "max_score": 0.26103413,
-            "hits": [
-                {
-                    "_score": 0.26103413,
-                    "_index": "ffaabbccdd.productgroup.index",
-                    "_type": "_doc",
-                    "_id": "MSLAPS2",
-                    "_seq_no": null,
-                    "_primary_term": null,
-                    "_source": {
-                        "GroupID": "MSLAPS2",
-                        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
-                        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-                        "RegularPriceMin": 2700,
-                        "RegularPriceMax": 2700,
-                        "PromotionPriceMin": 2500,
-                        "PromotionPriceMax": 2500,
-                        "Skus": [
-                            "B07K3BHGL3"
-                        ],
-                        "Images": [
-                            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
-                            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
-                        ],
-                        "SearchKeywords": [
-                            "Laptop",
-                            "Microsoft",
-                            "Surface"
-                        ],
-                        "Category": [
-                            "Computers & Tablets>Laptops"
-                        ],
-                        "Colors": [
-                            "Black"
-                        ],
-                        "Brands": [
-                            "Microsoft"
-                        ],
-                        "Sizes": [
-                            "13.5 inches"
-                        ],
-                        "Active": true,
-                        "Currency": "CDN",
-                        "Updated": 1579028967414440899,
-                        "Products": {
-                            "B07K3BHGL3": {
-                                "Sku": "B07K3BHGL3",
-                                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
-                                "GroupID": "MSLAPS2",
-                                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-                                "RegularPrice": 2700,
-                                "PromotionPrice": 2500,
-                                "Images": [
-                                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
-                                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
-                                ],
-                                "SearchKeywords": [
-                                    "Laptop",
-                                    "Microsoft",
-                                    "Surface"
-                                ],
-                                "Quantity": 500,
-                                "Category": [
-                                    "Computers & Tablets>Laptops"
-                                ],
-                                "Color": "Black",
-                                "Brand": "Microsoft",
-                                "Size": "13.5 inches",
-                                "Active": true,
-                                "Attributes": {
-                                    "ASIN": "B07K3BHGL3",
-                                    "Batteries": "1",
-                                    "Color": "Black",
-                                    "Date First Available": "Nov. 4 2018",
-                                    "Display Size": "13.5 inches",
-                                    "Flash Memory Size": "512.00",
-                                    "Item Weight": "1.28 Kg",
-                                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
-                                    "Item model number": "DAL-00092",
-                                    "Memory Speed": "1 GHz",
-                                    "Number of USB 2.0 Ports": "1",
-                                    "Operating System": "Windows 10 Home",
-                                    "Processor Count": "16",
-                                    "RAM": "16 GB",
-                                    "Series": "Surface Laptop 2",
-                                    "Shipping Weight": "2.2 kg",
-                                    "Wireless Standard": "802.11ac"
-                                },
-                                "IsMain": true,
-                                "Currency": "CDN",
-                                "Updated": 0
-                            }
-                        },
-                        "Attributes": {
-                            "ASIN": [
-                                "B07K3BHGL3"
-                            ],
-                            "Batteries": [
-                                "1"
-                            ],
-                            "Color": [
-                                "Black"
-                            ],
-                            "Date First Available": [
-                                "Nov. 4 2018"
-                            ],
-                            "Display Size": [
-                                "13.5 inches"
-                            ],
-                            "Flash Memory Size": [
-                                "512.00"
-                            ],
-                            "Item Weight": [
-                                "1.28 Kg"
-                            ],
-                            "Item dimensions L x W x H": [
-                                "17.8 x 12.7 x 15.2 cm"
-                            ],
-                            "Item model number": [
-                                "DAL-00092"
-                            ],
-                            "Memory Speed": [
-                                "1 GHz"
-                            ],
-                            "Number of USB 2.0 Ports": [
-                                "1"
-                            ],
-                            "Operating System": [
-                                "Windows 10 Home"
-                            ],
-                            "Processor Count": [
-                                "16"
-                            ],
-                            "RAM": [
-                                "16 GB"
-                            ],
-                            "Series": [
-                                "Surface Laptop 2"
-                            ],
-                            "Shipping Weight": [
-                                "2.2 kg"
-                            ],
-                            "Wireless Standard": [
-                                "802.11ac"
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        "aggregations": {
-            "Brands": {
-                "doc_count_error_upper_bound": 0,
-                "sum_other_doc_count": 0,
-                "buckets": [
-                    {
-                        "key": "microsoft",
-                        "doc_count": 1
-                    }
-                ]
-            },
-            "Colors": {
-                "doc_count_error_upper_bound": 0,
-                "sum_other_doc_count": 0,
-                "buckets": [
-                    {
-                        "key": "black",
-                        "doc_count": 1
-                    }
-                ]
-            },
-            "Sizes": {
-                "doc_count_error_upper_bound": 0,
-                "sum_other_doc_count": 0,
-                "buckets": [
-                    {
-                        "key": "13.5",
-                        "doc_count": 1
-                    }
-                ]
+        "count": 1,
+        "results": {
+            "0": {
+                "Skus": [
+                    "B07K3BHGL3"
+                ],
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"
             }
-        },
-        "_shards": {
-            "total": 1,
-            "successful": 1,
-            "failed": 0
         }
     }
 }
 ```
 
-Use this API endpoint to search a product group in the search index. Please note that product group objects are only returned in the response. 
+Use this API endpoint to search products in the search index. Use of this endpoint is recommended for quick search feature. 
 
 
 ### HTTP Request
 
-`GET https://api.krama.ai/search/{API version}/productgroups/search`
+`POST https://api.krama.ai/search/{API version}/quick`
 
 
 ### HTTP Request Header
@@ -2159,10 +1987,170 @@ Use this API endpoint to search a product group in the search index. Please note
 
 ### HTTP Request Body Parameters
 
-| Parameter             |               Description                           |
-|-----------------------|-----------------------------------------------------|
-| Q                     |  String, Query string                               |
-| Fields                |  []String, Multiple, query fields                   |
+| Parameter             |               Description                                        |
+|-----------------------|------------------------------------------------------------------|
+| Query                 |  String, Query string                                            |
+| QueryFields           |  String[], Multiple, query fields                                |
+| ResponseFields        |  String[], Multiple, fields that requested in response           |
+| From                  |  Integer, used for pagination returning products in range        |
+| To                    |  Integer, used for pagination returning products in range        | 
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+
+
+## Full Page search
+
+> Sample HTTP request body:
+
+```json
+{
+  "Query": "microsoft",
+  "QueryFields": [
+    "Name",
+    "Sku"
+  ],
+  "ResponseFields": [
+    "Attributes.Color",
+    "Skus",
+    "Images"
+  ],
+  "From": 0,
+  "To": 100,
+  "TermFacetFields": [
+    "Brands"
+  ],
+  "RangeFacetFields": [
+    {
+      "RegularPriceMin": [
+        {
+          "from": 0,
+          "to": 1000
+        },
+        {
+          "from": 1001,
+          "to": 2000
+        },
+        {
+          "from": 2001,
+          "to": 3000
+        }
+      ]
+    }
+  ]
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Search Result ...",
+    "Time": 1579235619698744869,
+    "Response": {
+        "count": 1,
+        "facets": {
+            "Brands": {
+                "doc_count_error_upper_bound": 0,
+                "sum_other_doc_count": 0,
+                "buckets": [
+                    {
+                        "key": "Microsoft xxx yyy",
+                        "doc_count": 1
+                    }
+                ]
+            },
+            "RegularPriceMin": {
+                "buckets": [
+                    {
+                        "key": "0.0-1000.0",
+                        "from": 0.0,
+                        "to": 1000.0,
+                        "doc_count": 0
+                    },
+                    {
+                        "key": "1001.0-2000.0",
+                        "from": 1001.0,
+                        "to": 2000.0,
+                        "doc_count": 0
+                    },
+                    {
+                        "key": "2001.0-3000.0",
+                        "from": 2001.0,
+                        "to": 3000.0,
+                        "doc_count": 1
+                    }
+                ]
+            }
+        },
+        "hits": [
+            {
+                "_score": 0.2876821,
+                "_index": "ffaabbccdd.productgroups.index",
+                "_type": "_doc",
+                "_id": "MSLAPS2",
+                "_seq_no": null,
+                "_primary_term": null,
+                "_source": {
+                    "Skus": [
+                        "B07K3BHGL3"
+                    ],
+                    "Images": [
+                        "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                        "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                    ],
+                    "Attributes": {
+                        "Color": [
+                            "Black"
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
+```
+
+Use this API endpoint to search products in the search index. Use of this endpoint is recommended for full-page search. 
+
+
+### HTTP Request
+
+`POST https://api.krama.ai/search/{API version}/fullpage`
+
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter                     |               Description                                        |
+|-------------------------------|------------------------------------------------------------------|
+| Query                         |  String,   Query string                                          |
+| QueryFields                   |  String[], Multiple, query fields                                |
+| ResponseFields                |  String[], Multiple, fields that requested in response           |
+| From                          |  Integer,  Used for pagination returning products in range       |
+| To                            |  Integer,  Used for pagination returning products in range       | 
+| TermFacetFields               |  String[], Eligible fields for term faceting                     |
+| RangeFacetFields              |  Complex,  Typically used for a numeric field like price         |
 
 ### HTTP Response
 
@@ -2287,34 +2275,34 @@ Use this endpoint to get the customer object from the database.
 ```json
 {
   "Active": true,
-  "FirstName": "Vivek",
-  "LastName": "Narang",
-  "Email": "vivek.narang10@gmail.com",
+  "FirstName": "Tom",
+  "LastName": "Hanks",
+  "Email": "tom.hanks@gmail.com",
   "PhoneNumbers": [
-    "647-615-4080"
+    "000-000-0000"
   ],
   "Password": "password",
   "AddressBook": [
     {
-      "FirstName": "Vivek",
-      "LastName": "Narang",
-      "AddressLineOne": "113 Edgar Ave",
+      "FirstName": "Tom",
+      "LastName": "Hanks",
+      "AddressLineOne": "101 Broad St",
       "AddressLineTwo": "",
-      "City": "Richmond Hill",
-      "State": "Ontario",
-      "Country": "Canada",
-      "Pincode": "L4C 6K3",
+      "City": "Santa Barbara",
+      "State": "California",
+      "Country": "United States",
+      "Pincode": "00000",
       "Default": true
     }
   ],
   "PaymentOptions": [
     {
-      "Name": "VIVEK NARANG",
+      "Name": "TOM HANKS",
       "CardNumber": "0000-0000-0000-0000",
       "CardExpiryMM": "00",
       "CardExpiryYY": "00",
       "SecurityCode": "000",
-      "ZipCode": "L4C 6K3",
+      "ZipCode": "00000",
       "Default": true,
       "SaveInformation": true
     }
@@ -2337,38 +2325,38 @@ Use this endpoint to get the customer object from the database.
     "Code": 201,
     "Success": true,
     "Message": "Customer Added ...",
-    "Time": 1579148334213937296,
+    "Time": 1579233420045379570,
     "Response": {
-        "CustomerID": "1b8026d5-ac28-4c60-b9ff-a5789f6710bd",
+        "CustomerID": "127452a3-00b6-4a04-a03b-e1db919645cc",
         "Active": true,
-        "FirstName": "Vivek",
-        "LastName": "Narang",
-        "Email": "vivek.narang10@gmail.com",
+        "FirstName": "Tom",
+        "LastName": "Hanks",
+        "Email": "tom.hanks@gmail.com",
         "PhoneNumbers": [
-            "647-615-4080"
+            "000-000-0000"
         ],
-        "Password": "password",
+        "Password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
         "AddressBook": [
             {
-                "FirstName": "Vivek",
-                "LastName": "Narang",
-                "AddressLineOne": "113 Edgar Ave",
+                "FirstName": "Tom",
+                "LastName": "Hanks",
+                "AddressLineOne": "101 Broad St",
                 "AddressLineTwo": "",
-                "City": "Richmond Hill",
-                "State": "Ontario",
-                "Country": "Canada",
-                "Pincode": "L4C 6K3",
+                "City": "Santa Barbara",
+                "State": "California",
+                "Country": "United States",
+                "Pincode": "00000",
                 "Default": true
             }
         ],
         "PaymentOptions": [
             {
-                "Name": "VIVEK NARANG",
+                "Name": "TOM HANKS",
                 "CardNumber": "0000-0000-0000-0000",
                 "CardExpiryMM": "00",
                 "CardExpiryYY": "00",
                 "SecurityCode": "000",
-                "ZipCode": "L4C 6K3",
+                "ZipCode": "00000",
                 "Default": true,
                 "SaveInformation": true
             }
@@ -2381,7 +2369,7 @@ Use this endpoint to get the customer object from the database.
             "FSDF3434",
             "ERF4432D"
         ],
-        "Updated": 1579148334213328727
+        "Updated": 1579233419983053555
     }
 }
 ```
@@ -2476,38 +2464,38 @@ Use this endpoint to add a customer into the database.
     "Code": 202,
     "Success": true,
     "Message": "Customer Updated ...",
-    "Time": 1579148447091860639,
+    "Time": 1579233562710123000,
     "Response": {
-        "CustomerID": "1b8026d5-ac28-4c60-b9ff-a5789f6710bd",
+        "CustomerID": "127452a3-00b6-4a04-a03b-e1db919645cc",
         "Active": true,
-        "FirstName": "Vivek",
-        "LastName": "Narang",
-        "Email": "vivek.narang10@gmail.com",
+        "FirstName": "Tom",
+        "LastName": "Hanks",
+        "Email": "tom.hanks@gmail.com",
         "PhoneNumbers": [
-            "647-615-4080"
+            "000-000-0000"
         ],
         "Password": "password",
         "AddressBook": [
             {
-                "FirstName": "Vivek",
-                "LastName": "Narang",
-                "AddressLineOne": "113 Edgar Ave",
+                "FirstName": "Tom",
+                "LastName": "Hanks",
+                "AddressLineOne": "101 Broad St",
                 "AddressLineTwo": "",
-                "City": "Richmond Hill",
-                "State": "Ontario",
-                "Country": "Canada",
-                "Pincode": "L4C 6K3",
+                "City": "Santa Barbara",
+                "State": "California",
+                "Country": "United States",
+                "Pincode": "00000",
                 "Default": true
             }
         ],
         "PaymentOptions": [
             {
-                "Name": "VIVEK NARANG",
+                "Name": "TOM HANKS",
                 "CardNumber": "0000-0000-0000-0000",
                 "CardExpiryMM": "00",
                 "CardExpiryYY": "00",
                 "SecurityCode": "000",
-                "ZipCode": "L4C 6K3",
+                "ZipCode": "00000",
                 "Default": true,
                 "SaveInformation": true
             }
@@ -2519,7 +2507,7 @@ Use this endpoint to add a customer into the database.
             "FSDF3434",
             "ERF4432D"
         ],
-        "Updated": 1579148447090954583
+        "Updated": 1579233562701600551
     }
 }
 ```
@@ -2537,7 +2525,7 @@ Use this endpoint to add a customer into the database.
 ```
 
 
-Use this information to update a customer's information. 
+Use this information to update a customer's information. In the example shown in this section there is a request to remove one product sku from the customer's wishlist.
 
 
 ### HTTP Request URL
@@ -2637,14 +2625,15 @@ Use this endpoint to delete the customer object from the database.
 
 This API uses the following HTTP Response codes:
 
-| Response Code                      | Meaning                                                                 |
-|------------------------------------|-------------------------------------------------------------------------|
-| 200  **StatusOK**                  | The API call was successful                                             |
-| 201  **StatusCreated**             | The resource was successfully created                                   |
-| 202  **StatusAccepted**            | The API request was accepted                                            |
-| 304  **StatusNotModified**         | The request to modify the resource failed for some reason               |
-| 400  **StatusBadRequest**          | The API call was malformed                                              |
-| 401  **StatusUnauthorized**        | The API request is not authorized. Please check your access credentials |
-| 404  **StatusNotFound**            | The requested/referenced resource was not found                         |
-| 500  **StatusInternalServerError** | Something went wrong on our server                                      |
-| 503  **StatusServiceUnavailable**  | The API service is down                                                 |
+| Response Code                      | Meaning                                                                             |
+|------------------------------------|-------------------------------------------------------------------------------------|
+| 200  **StatusOK**                  | The API call was successful                                                         |
+| 201  **StatusCreated**             | The resource was successfully created                                               |
+| 202  **StatusAccepted**            | The API request was accepted                                                        |
+| 304  **StatusNotModified**         | The request to modify the resource failed for some reason                           |
+| 400  **StatusBadRequest**          | The API call was malformed                                                          |
+| 401  **StatusUnauthorized**        | The API request is not authorized. Please check your access credentials             |
+| 404  **StatusNotFound**            | The requested/referenced resource was not found                                     |
+| 409  **StatusConflict**            | Code that is returned when, for example, product with same SKU already exists       |
+| 500  **StatusInternalServerError** | Something went wrong on our server                                                  |
+| 503  **StatusServiceUnavailable**  | The API service is down                                                             |
