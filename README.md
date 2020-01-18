@@ -159,9 +159,9 @@ Attribute field key naming has to follow specific rules. Attibute key names can 
   "PaymentOptions": [
     {
       "Name": "TOM HANKS",
-      "CardNumber": "0000-0000-0000-0000",
-      "CardExpiryMM": "00",
-      "CardExpiryYY": "00",
+      "CardNumber": "0000000000000000",
+      "CardExpiryMM": "01",
+      "CardExpiryYY": "20",
       "SecurityCode": "000",
       "ZipCode": "00000",
       "Default": true,
@@ -201,7 +201,7 @@ Please find customer object fields and constraints/rules associated with each, b
 
 ## Address
 
-> Sample valid address object:
+> Sample valid Address object:
 
 ```json
 {
@@ -236,14 +236,14 @@ Address object fields, definitions, and constraints below:
 
 ## PaymentOption
 
-> Sample valid address object:
+> Sample valid PaymentOption object:
 
 ```json
 {
       "Name": "TOM HANKS",
-      "CardNumber": "0000-0000-0000-0000",
-      "CardExpiryMM": "00",
-      "CardExpiryYY": "00",
+      "CardNumber": "0000000000000000",
+      "CardExpiryMM": "01",
+      "CardExpiryYY": "20",
       "SecurityCode": "000",
       "ZipCode": "00000",
       "Default": true,
@@ -252,7 +252,7 @@ Address object fields, definitions, and constraints below:
 ```
 
 
-Payment option object fields, definitions, and constraints below:
+PaymentOption object fields, definitions, and constraints below:
 
 
 |   Field          |   Type         |     Short Description                                         |    Constraints                                                          |
@@ -781,7 +781,7 @@ Use this API endpoint to update your product information in the catalog. For now
 |Content-Type       | application/json                             |
 
 
-### HTTP Body Parameters
+### HTTP Request Body Parameters
 
 |   Field          |   Type         |     Short Description                                         |    Constraints                                                          |
 |------------------|----------------|---------------------------------------------------------------|-------------------------------------------------------------------------|
@@ -1967,7 +1967,7 @@ Use this endpoint to update the order object.
 |Content-Type       | application/json                             |
 
 
-### URL Parameters
+### HTTP Request URL Parameters
 
 |Parameter                |               Description                            |
 |-------------------------|------------------------------------------------------|
@@ -1987,7 +1987,7 @@ Use this endpoint to update the order object.
 
 
 
-## Delete order by order ID
+## Delete order
 
 > Sample valid API response:
 
@@ -2327,9 +2327,9 @@ Use this API endpoint to search products in the search index. Use of this endpoi
         "PaymentOptions": [
             {
                 "Name": "TOM HANKS",
-                "CardNumber": "0000-0000-0000-0000",
-                "CardExpiryMM": "00",
-                "CardExpiryYY": "00",
+                "CardNumber": "0000000000000000",
+                "CardExpiryMM": "01",
+                "CardExpiryYY": "20",
                 "SecurityCode": "000",
                 "ZipCode": "00000",
                 "Default": true,
@@ -2423,9 +2423,9 @@ Use this endpoint to get the customer object from the database.
   "PaymentOptions": [
     {
       "Name": "TOM HANKS",
-      "CardNumber": "0000-0000-0000-0000",
-      "CardExpiryMM": "00",
-      "CardExpiryYY": "00",
+      "CardNumber": "0000000000000000",
+      "CardExpiryMM": "01",
+      "CardExpiryYY": "20",
       "SecurityCode": "000",
       "ZipCode": "00000",
       "Default": true,
@@ -2477,9 +2477,9 @@ Use this endpoint to get the customer object from the database.
         "PaymentOptions": [
             {
                 "Name": "TOM HANKS",
-                "CardNumber": "0000-0000-0000-0000",
-                "CardExpiryMM": "00",
-                "CardExpiryYY": "00",
+                "CardNumber": "0000000000000000",
+                "CardExpiryMM": "01",
+                "CardExpiryYY": "20",
                 "SecurityCode": "000",
                 "ZipCode": "00000",
                 "Default": true,
@@ -2562,9 +2562,9 @@ Use this endpoint to add a customer into the database.
   "PaymentOptions": [
     {
       "Name": "TOM HANKS",
-      "CardNumber": "0000-0000-0000-0000",
-      "CardExpiryMM": "00",
-      "CardExpiryYY": "00",
+      "CardNumber": "0000000000000000",
+      "CardExpiryMM": "01",
+      "CardExpiryYY": "20",
       "SecurityCode": "000",
       "ZipCode": "00000",
       "Default": true,
@@ -2615,9 +2615,9 @@ Use this endpoint to add a customer into the database.
         "PaymentOptions": [
             {
                 "Name": "TOM HANKS",
-                "CardNumber": "0000-0000-0000-0000",
-                "CardExpiryMM": "00",
-                "CardExpiryYY": "00",
+                "CardNumber": "0000000000000000",
+                "CardExpiryMM": "01",
+                "CardExpiryYY": "20",
                 "SecurityCode": "000",
                 "ZipCode": "00000",
                 "Default": true,
@@ -2718,6 +2718,505 @@ Use this endpoint to delete the customer object from the database.
 ### HTTP Request URL
 
 `DELETE https://api.krama.ai/customers/{API version}/customers/{CID}`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+
+
+### HTTP Request URL Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| CID                   |  Customer identifier                                |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+# Shopping Cart API
+
+## Get shopping cart
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Shopping Cart: ",
+    "Time": 1579336082414378455,
+    "Response": {
+        "CartID": "6ea6b222-8634-43f3-bb27-067d58d515ef",
+        "CustomerID": "1234",
+        "ProductsCount": {
+            "B07K3BHGL3": 5
+        },
+        "Products": {
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2799,
+                "PromotionPrice": 2600,
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "SearchKeywords": [
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
+                ],
+                "Quantity": 200,
+                "Category": [
+                    "Computers & Tablets>Laptops"
+                ],
+                "Color": "Black",
+                "Brand": "Microsoft xxx yyy",
+                "Size": "13.5 inches",
+                "Active": true,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac",
+                    "testingb": true,
+                    "testingf": 55.234,
+                    "testingi": 345
+                },
+                "IsMain": true,
+                "Currency": "CDN",
+                "Updated": 1579300684745433221
+            }
+        },
+        "Total": 13000,
+        "Currency": "CDN",
+        "Updated": 1579336048673188848
+    }
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Cart id: 6ea6b222-8634-43f3-bb27-067d58d515efx not found ...",
+    "Time": 1579336141745608597,
+    "Response": null
+}
+```
+
+Use this endpoint to get the shopping cart object using the cart ID. 
+
+
+### HTTP Request URL
+
+`GET https://api.krama.ai/shoppingcart/{API version}/cart/{CID}`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+
+
+### HTTP Request URL Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| CID                   |  Shopping cart identifier                           |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+## Add product in cart
+
+> Sample HTTP request body:
+
+```json
+{
+	"CustomerID" : "1234",
+	"Product" : {
+        "Sku": "B07K3BHGL3",
+        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+        "GroupID": "MSLAPS2",
+        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+        "RegularPrice": 2799,
+        "PromotionPrice": 2600,
+        "Images": [
+            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+        ],
+        "SearchKeywords": [
+            "Laptop",
+            "Microsoft",
+            "Surface"
+        ],
+        "Quantity": 200,
+        "Category": [
+            "Computers & Tablets>Laptops"
+        ],
+        "Color": "Black",
+        "Brand": "Microsoft xxx yyy",
+        "Size": "13.5 inches",
+        "Active": true,
+        "Attributes": {
+            "ASIN": "B07K3BHGL3",
+            "Batteries": "1",
+            "Color": "Black",
+            "Date First Available": "Nov. 4 2018",
+            "Display Size": "13.5 inches",
+            "Flash Memory Size": "512.00",
+            "Item Weight": "1.28 Kg",
+            "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+            "Item model number": "DAL-00092",
+            "Memory Speed": "1 GHz",
+            "Number of USB 2 Ports": "1",
+            "Operating System": "Windows 10 Home",
+            "Processor Count": "16",
+            "RAM": "16 GB",
+            "Series": "Surface Laptop 2",
+            "Shipping Weight": "2.2 kg",
+            "Wireless Standard": "802.11ac",
+            "testingb": true,
+            "testingf": 55.234,
+            "testingi": 345
+        },
+        "IsMain": true,
+        "Currency": "CDN",
+        "Updated": 1579300684745433221
+    },    
+    "Count" : 5
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Product added in the cart...",
+    "Time": 1579335347860765751,
+    "Response": {
+        "CartID": "6ea6b222-8634-43f3-bb27-067d58d515ef",
+        "CustomerID": "1234",
+        "ProductsCount": {
+            "B07K3BHGL3": 5
+        },
+        "Products": {
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2799,
+                "PromotionPrice": 2600,
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "SearchKeywords": [
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
+                ],
+                "Quantity": 200,
+                "Category": [
+                    "Computers & Tablets>Laptops"
+                ],
+                "Color": "Black",
+                "Brand": "Microsoft xxx yyy",
+                "Size": "13.5 inches",
+                "Active": true,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac",
+                    "testingb": true,
+                    "testingf": 55.234,
+                    "testingi": 345
+                },
+                "IsMain": true,
+                "Currency": "CDN",
+                "Updated": 1579300684745433221
+            }
+        },
+        "Total": 13000,
+        "Currency": "CDN",
+        "Updated": 1579335347860479220
+    }
+}
+```
+
+
+Use this endpoint to add a product in the shopping cart. If the mentioned product already exists in the cart, the quantity is incremented and the total is updated accordingly.
+If a cart ID is not passed in the request the API creates a new unique cart ID - essentially a new shopping cart! So to create a shopping cart you need to make sure to NOT pass
+a cart ID in your request. 
+
+
+### HTTP Request URL
+
+`POST https://api.krama.ai/shoppingcart/{API version}/cart/addproduct`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| CartID                | String, Shopping cart identifier                    |
+| CustomerID            | String, Customer unique identifier                  |
+| Product               | Product Object                                      |
+| Count                 | Integer, the quantity of the added product          |
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+## Remove product from cart
+
+> Sample valid HTTP request body:
+
+```json
+{
+	"CartID" : "6ea6b222-8634-43f3-bb27-067d58d515ef",
+	"CustomerID" : "1234",
+	"SKU" : "B07K3BHGL3",
+    "Count" : 4
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Product removed the cart...",
+    "Time": 1579336317220235734,
+    "Response": {
+        "CartID": "6ea6b222-8634-43f3-bb27-067d58d515ef",
+        "CustomerID": "1234",
+        "ProductsCount": {
+            "B07K3BHGL3": 6
+        },
+        "Products": {
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2799,
+                "PromotionPrice": 2600,
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "SearchKeywords": [
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
+                ],
+                "Quantity": 200,
+                "Category": [
+                    "Computers & Tablets>Laptops"
+                ],
+                "Color": "Black",
+                "Brand": "Microsoft xxx yyy",
+                "Size": "13.5 inches",
+                "Active": true,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac",
+                    "testingb": true,
+                    "testingf": 55.234,
+                    "testingi": 345
+                },
+                "IsMain": true,
+                "Currency": "CDN",
+                "Updated": 1579300684745433221
+            }
+        },
+        "Total": 15600,
+        "Currency": "CDN",
+        "Updated": 1579336317220058378
+    }
+}
+```
+
+> Sample valid API response (when all the product quantity is removed):
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Product removed the cart...",
+    "Time": 1579336403193133086,
+    "Response": {
+        "CartID": "6ea6b222-8634-43f3-bb27-067d58d515ef",
+        "CustomerID": "1234",
+        "ProductsCount": {},
+        "Products": {},
+        "Total": 0,
+        "Currency": "CDN",
+        "Updated": 1579336403192931756
+    }
+}
+```
+
+
+Use this endpoint to remove the product or adjust the product quantity in the shopping cart. 
+
+
+### HTTP Request URL
+
+`POST https://api.krama.ai/shoppingcart/{API version}/cart/removeproduct`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| CartID                |  Shopping cart identifier                           |
+| CustomerID            |  Customer unique identifier                         |
+| SKU                   |  Product SKU                                        |
+| Count                 |  The quantity to be subtracted from cart            |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+## Clear shopping cart
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 202,
+    "Success": true,
+    "Message": "Cart with id: 6ea6b222-8634-43f3-bb27-067d58d515ef deleted ...",
+    "Time": 1579335148388432310,
+    "Response": null
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Cart id: 6ea6b222-8634-43f3-bb27-067d58d515ef not found ...",
+    "Time": 1579335172915531779,
+    "Response": null
+}
+```
+
+
+Use this endpoint to reset/clear the shopping cart. 
+
+
+### HTTP Request URL
+
+`DELETE https://api.krama.ai/shoppingcart/{API version}/cart/clear/{CID}`
 
 ### HTTP Request Header
 

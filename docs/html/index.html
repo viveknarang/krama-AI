@@ -288,7 +288,7 @@
                     <a href="#update-order" class="toc-h2 toc-link" data-title="Update order">Update order</a>
                   </li>
                   <li>
-                    <a href="#delete-order-by-order-id" class="toc-h2 toc-link" data-title="Delete order by order ID">Delete order by order ID</a>
+                    <a href="#delete-order" class="toc-h2 toc-link" data-title="Delete order">Delete order</a>
                   </li>
               </ul>
           </li>
@@ -321,15 +321,32 @@
               </ul>
           </li>
           <li>
+            <a href="#shopping-cart-api" class="toc-h1 toc-link" data-title="Shopping Cart API">Shopping Cart API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-shopping-cart" class="toc-h2 toc-link" data-title="Get shopping cart">Get shopping cart</a>
+                  </li>
+                  <li>
+                    <a href="#add-product-in-cart" class="toc-h2 toc-link" data-title="Add product in cart">Add product in cart</a>
+                  </li>
+                  <li>
+                    <a href="#remove-product-from-cart" class="toc-h2 toc-link" data-title="Remove product from cart">Remove product from cart</a>
+                  </li>
+                  <li>
+                    <a href="#clear-shopping-cart" class="toc-h2 toc-link" data-title="Clear shopping cart">Clear shopping cart</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#response-codes" class="toc-h1 toc-link" data-title="Response Codes">Response Codes</a>
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 3.6</span><br/></li>
+            <li><span>API documentation version 3.7</span><br/><br/></li>
             <li><a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/></li>
             <li><a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/></li>
             <li><a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/></li>
-            <li><a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a></li>
+            <li><a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a><br/><br/></li>
             <li><span>Development Branch Status:</span><br/></li>
             <li><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img></li>
         </ul>
@@ -575,9 +592,9 @@ Attribute field key naming has to follow specific rules. Attibute key names can 
   </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000000000000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -673,7 +690,7 @@ Attribute field key naming has to follow specific rules. Attibute key names can 
 </tbody></table>
 <h2 id='address'>Address</h2>
 <blockquote>
-<p>Sample valid address object:</p>
+<p>Sample valid Address object:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
       </span><span class="s2">"FirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tom"</span><span class="p">,</span><span class="w">
@@ -754,20 +771,20 @@ Attribute field key naming has to follow specific rules. Attibute key names can 
 </tbody></table>
 <h2 id='paymentoption'>PaymentOption</h2>
 <blockquote>
-<p>Sample valid address object:</p>
+<p>Sample valid PaymentOption object:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
       </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000000000000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="s2">"SaveInformation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Payment option object fields, definitions, and constraints below:</p>
+<p>PaymentOption object fields, definitions, and constraints below:</p>
 
 <table><thead>
 <tr>
@@ -1539,7 +1556,7 @@ With the field validForSeconds in response, you can calculate the time after wit
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-body-parameters'>HTTP Body Parameters</h3>
+<h3 id='http-request-body-parameters-3'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -1802,7 +1819,7 @@ finally a list of skus that were not found. You can use this information to chec
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-body-parameters-2'>HTTP Body Parameters</h3>
+<h3 id='http-body-parameters'>HTTP Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1905,7 +1922,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-body-parameters-3'>HTTP Body Parameters</h3>
+<h3 id='http-body-parameters-2'>HTTP Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3156,7 +3173,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='url-parameters'>URL Parameters</h3>
+<h3 id='http-request-url-parameters-7'>HTTP Request URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3196,7 +3213,7 @@ those skus which were not found in the catalog. </p>
 <td>Response object containing response information</td>
 </tr>
 </tbody></table>
-<h2 id='delete-order-by-order-id'>Delete order by order ID</h2>
+<h2 id='delete-order'>Delete order</h2>
 <blockquote>
 <p>Sample valid API response:</p>
 </blockquote>
@@ -3234,7 +3251,7 @@ those skus which were not found in the catalog. </p>
 <td>The access token that you receive upon login</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-url-parameters-7'>HTTP Request URL Parameters</h3>
+<h3 id='http-request-url-parameters-8'>HTTP Request URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3337,7 +3354,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-3'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-4'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3523,7 +3540,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-4'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-5'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3622,9 +3639,9 @@ those skus which were not found in the catalog. </p>
         </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -3668,7 +3685,7 @@ those skus which were not found in the catalog. </p>
 <td>The access token that you receive upon login</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-url-parameters-8'>HTTP Request URL Parameters</h3>
+<h3 id='http-request-url-parameters-9'>HTTP Request URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3737,9 +3754,9 @@ those skus which were not found in the catalog. </p>
   </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000000000000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -3790,9 +3807,9 @@ those skus which were not found in the catalog. </p>
         </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -3830,7 +3847,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-5'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-6'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3899,9 +3916,9 @@ those skus which were not found in the catalog. </p>
   </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000000000000"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -3951,9 +3968,9 @@ those skus which were not found in the catalog. </p>
         </span><span class="s2">"PaymentOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOM HANKS"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000000000000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryMM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"CardExpiryYY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"SecurityCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"ZipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -4001,7 +4018,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-url-parameters-9'>HTTP Request URL Parameters</h3>
+<h3 id='http-request-url-parameters-10'>HTTP Request URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4079,7 +4096,7 @@ those skus which were not found in the catalog. </p>
 <td>The access token that you receive upon login</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-url-parameters-10'>HTTP Request URL Parameters</h3>
+<h3 id='http-request-url-parameters-11'>HTTP Request URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4092,6 +4109,600 @@ those skus which were not found in the catalog. </p>
 </tr>
 </tbody></table>
 <h3 id='http-response-20'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h1 id='shopping-cart-api'>Shopping Cart API</h1><h2 id='get-shopping-cart'>Get shopping cart</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shopping Cart: "</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579336082414378455</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"CartID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6ea6b222-8634-43f3-bb27-067d58d515ef"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ProductsCount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"B07K3BHGL3"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"B07K3BHGL3"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2799</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Surface"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Computers &amp; Tablets&gt;Laptops"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft xxx yyy"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nov. 4 2018"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.00"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.28 Kg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2 kg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingb"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingf"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.234</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingi"</span><span class="p">:</span><span class="w"> </span><span class="mi">345</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579300684745433221</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579336048673188848</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cart id: 6ea6b222-8634-43f3-bb27-067d58d515efx not found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579336141745608597</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to get the shopping cart object using the cart ID. </p>
+<h3 id='http-request-url-18'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/shoppingcart/{API version}/cart/{CID}</code></p>
+<h3 id='http-request-header-20'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-12'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CID</td>
+<td>Shopping cart identifier</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-21'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='add-product-in-cart'>Add product in cart</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"CustomerID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Product"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2799</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Surface"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Computers &amp; Tablets&gt;Laptops"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft xxx yyy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nov. 4 2018"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.28 Kg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2 kg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"testingb"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"testingf"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.234</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"testingi"</span><span class="p">:</span><span class="w"> </span><span class="mi">345</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579300684745433221</span><span class="w">
+    </span><span class="p">},</span><span class="w">    
+    </span><span class="s2">"Count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product added in the cart..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579335347860765751</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"CartID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6ea6b222-8634-43f3-bb27-067d58d515ef"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ProductsCount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"B07K3BHGL3"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"B07K3BHGL3"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2799</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Surface"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Computers &amp; Tablets&gt;Laptops"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft xxx yyy"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nov. 4 2018"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.00"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.28 Kg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2 kg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingb"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingf"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.234</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingi"</span><span class="p">:</span><span class="w"> </span><span class="mi">345</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579300684745433221</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">13000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579335347860479220</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to add a product in the shopping cart. If the mentioned product already exists in the cart, the quantity is incremented and the total is updated accordingly.
+If a cart ID is not passed in the request the API creates a new unique cart ID - essentially a new shopping cart! So to create a shopping cart you need to make sure to NOT pass
+a cart ID in your request. </p>
+<h3 id='http-request-url-19'>HTTP Request URL</h3>
+<p><code>POST https://api.krama.ai/shoppingcart/{API version}/cart/addproduct</code></p>
+<h3 id='http-request-header-21'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-7'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CartID</td>
+<td>String, Shopping cart identifier</td>
+</tr>
+<tr>
+<td>CustomerID</td>
+<td>String, Customer unique identifier</td>
+</tr>
+<tr>
+<td>Product</td>
+<td>Product Object</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>Integer, the quantity of the added product</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-22'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='remove-product-from-cart'>Remove product from cart</h2>
+<blockquote>
+<p>Sample valid HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"CartID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"6ea6b222-8634-43f3-bb27-067d58d515ef"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CustomerID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SKU"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product removed the cart..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579336317220235734</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"CartID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6ea6b222-8634-43f3-bb27-067d58d515ef"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ProductsCount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"B07K3BHGL3"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"B07K3BHGL3"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2799</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Surface"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Computers &amp; Tablets&gt;Laptops"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft xxx yyy"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nov. 4 2018"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.00"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.28 Kg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2 kg"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingb"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingf"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.234</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"testingi"</span><span class="p">:</span><span class="w"> </span><span class="mi">345</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579300684745433221</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">15600</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579336317220058378</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response (when all the product quantity is removed):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product removed the cart..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579336403193133086</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"CartID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6ea6b222-8634-43f3-bb27-067d58d515ef"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"CustomerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ProductsCount"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579336403192931756</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to remove the product or adjust the product quantity in the shopping cart. </p>
+<h3 id='http-request-url-20'>HTTP Request URL</h3>
+<p><code>POST https://api.krama.ai/shoppingcart/{API version}/cart/removeproduct</code></p>
+<h3 id='http-request-header-22'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-8'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CartID</td>
+<td>Shopping cart identifier</td>
+</tr>
+<tr>
+<td>CustomerID</td>
+<td>Customer unique identifier</td>
+</tr>
+<tr>
+<td>SKU</td>
+<td>Product SKU</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>The quantity to be subtracted from cart</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-23'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='clear-shopping-cart'>Clear shopping cart</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">202</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cart with id: 6ea6b222-8634-43f3-bb27-067d58d515ef deleted ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579335148388432310</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cart id: 6ea6b222-8634-43f3-bb27-067d58d515ef not found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579335172915531779</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to reset/clear the shopping cart. </p>
+<h3 id='http-request-url-21'>HTTP Request URL</h3>
+<p><code>DELETE https://api.krama.ai/shoppingcart/{API version}/cart/clear/{CID}</code></p>
+<h3 id='http-request-header-23'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-url-parameters-13'>HTTP Request URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CID</td>
+<td>Customer identifier</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-24'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
