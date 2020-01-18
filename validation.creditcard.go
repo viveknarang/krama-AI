@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strconv"
 )
 
 func validateCreditCard(w http.ResponseWriter, r *http.Request, creditcard CREDITCARD) bool {
@@ -23,6 +24,15 @@ func validateCreditCard(w http.ResponseWriter, r *http.Request, creditcard CREDI
 	if len(creditcard.CardExpiryMM) == 0 || len(creditcard.CardExpiryMM) > 2 {
 
 		respondWith(w, r, nil, "Payment options's expiry month field cannot be empty or greater than 2 characters long", nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
+	mm, _ := strconv.Atoi(creditcard.CardExpiryMM)
+
+	if mm < 1 || mm > 12 {
+
+		respondWith(w, r, nil, "Payment options's expiry month field should be between 1 and 12 (inclusive)", nil, http.StatusBadRequest, false)
 		return false
 
 	}
