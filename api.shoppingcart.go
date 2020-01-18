@@ -76,8 +76,10 @@ func addProductInShoppingCart(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	if shoppingCart.CartID == "" {
+	if shoppingCartReq.CartID == "" {
 		shoppingCart.CartID = uuid.New().String()
+	} else {
+		shoppingCart.CartID = shoppingCartReq.CartID
 	}
 
 	if shoppingCart.Products == nil {
