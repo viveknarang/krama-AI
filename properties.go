@@ -185,6 +185,15 @@ var ProductAlreadyExistsMessage string
 //CustomerAlreadyExistsMessage customer already exists message
 var CustomerAlreadyExistsMessage string
 
+//ShoppingCartBasePath shopping cart base path
+var ShoppingCartBasePath string
+
+//ShoppingCartPath shopping cart path
+var ShoppingCartPath string
+
+//ShoppingCartLife shopping cart life duration
+var ShoppingCartLife string
+
 const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/system.properties"
 
 func loadSystemProperties() {
@@ -198,6 +207,8 @@ func loadSystemProperties() {
 	OrdersBasePath = p.GetString("api.orders.base.path", "/orders/")
 	SearchBasePath = p.GetString("pi.search.base.path", "/search/")
 	CustomersBasePath = p.GetString("api.customers.base.path", "/customers/")
+	ShoppingCartBasePath = p.GetString("api.shoppingcart.base.path", "/shoppingcart/")
+
 	APIVersion = p.GetString("api.version", "v1")
 	RedisURL = p.GetString("redis.url", "localhost")
 	RedisPort = p.GetString("redis.port", "6379")
@@ -248,10 +259,12 @@ func loadSystemProperties() {
 	CustomersCollectionExtension = p.GetString("db.mongo.external.customers.extension", "")
 	ProductAlreadyExistsMessage = p.GetString("api.response.message.product.exists", "")
 	CustomerAlreadyExistsMessage = p.GetString("api.response.message.customers.exists", "")
+	ShoppingCartLife = p.GetString("api.shoppingcart.life", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion
 	SearchPath = SearchBasePath + APIVersion
 	CustomersPath = CustomersBasePath + APIVersion
+	ShoppingCartPath = ShoppingCartBasePath + APIVersion
 
 }
