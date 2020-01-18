@@ -35,7 +35,7 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"customerid": cid})
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, CustomersNotFoundMessage, nil, http.StatusNotFound, false)
@@ -87,7 +87,7 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"email": customer.Email})
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Email": customer.Email})
 
 	if len(results) != 0 {
 		respondWith(w, r, nil, CustomerAlreadyExistsMessage, nil, http.StatusConflict, false)
@@ -144,7 +144,7 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
 
-	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"customerid": customer.CustomerID}, bson.M{"$set": customer})
+	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": customer.CustomerID}, bson.M{"$set": customer})
 
 	if result[0] == 1 && result[1] == 1 {
 
@@ -176,7 +176,7 @@ func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	cid := pth[len(pth)-1]
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"customerid": cid})
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid})
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, CustomersNotFoundMessage, nil, http.StatusNotFound, false)
@@ -199,7 +199,7 @@ func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"customerid": cid}) == 1 {
+	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid}) == 1 {
 
 		resetCustomerCacheKeys(&customer)
 		respondWith(w, r, nil, CustomersDeletedMessage, nil, http.StatusOK, true)

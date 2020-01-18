@@ -75,7 +75,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 			REDISCLIENT.Set(tokenString, customer.Secret, 0)
 		}
 
-		respondWith(w, r, err, LoginSuccessMessage, bson.M{"token": tokenString, "validForSeconds": LoginSessionDuration}, http.StatusOK, true)
+		respondWith(w, r, err, LoginSuccessMessage, bson.M{"Token": tokenString, "ValidForSeconds": LoginSessionDuration}, http.StatusOK, true)
 
 	}
 

@@ -2,13 +2,13 @@ package main
 
 //ADDRESS document structure
 type ADDRESS struct {
-	FirstName      string `json:"FirstName"`
-	LastName       string `json:"LastName"`
-	AddressLineOne string `json:"AddressLineOne"`
-	AddressLineTwo string `json:"AddressLineTwo"`
-	City           string `json:"City"`
-	State          string `json:"State"`
-	Country        string `json:"Country"`
-	Pincode        string `json:"Pincode"`
-	Default        bool   `json:"Default"`
+	FirstName      string `json:"FirstName" bson:"FirstName"`
+	LastName       string `json:"LastName" bson:"LastName"`
+	AddressLineOne string `json:"AddressLineOne" bson:"AddressLineOne"`
+	AddressLineTwo string `json:"AddressLineTwo" bson:"AddressLineTwo"`
+	City           string `json:"City" bson:"City"`
+	State          string `json:"State" bson:"State"`
+	Country        string `json:"Country" bson:"Country"`
+	Pincode        string `json:"Pincode" bson:"Pincode"`
+	Default        bool   `json:"Default" bson:"Default"`
 }

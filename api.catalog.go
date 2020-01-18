@@ -34,7 +34,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku})
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -86,7 +86,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"sku": p.Sku})
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku})
 
 	if len(results) != 0 {
 		respondWith(w, r, nil, ProductAlreadyExistsMessage, nil, http.StatusConflict, false)
@@ -142,7 +142,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 
-	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"sku": p.Sku}, bson.M{"$set": p})
+	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, bson.M{"$set": p})
 
 	if result[0] == 1 && result[1] == 1 {
 
@@ -182,7 +182,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	sku := pth[len(pth)-1]
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku})
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku})
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -205,7 +205,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku}) == 1 {
+	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}) == 1 {
 
 		if syncProductGroup(w, r, product) {
 
@@ -249,7 +249,7 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		pgid := pth[len(pth)-1]
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"groupid": pgid})
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid})
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
@@ -299,7 +299,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	results := findMongoDocument(ExternalDB, pgcol, bson.M{"groupid": pgid})
+	results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": pgid})
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
@@ -323,10 +323,10 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, sku := range productGroup.Skus {
-		deleteMongoDocument(ExternalDB, pcol, bson.M{"sku": sku})
+		deleteMongoDocument(ExternalDB, pcol, bson.M{"Sku": sku})
 	}
 
-	if deleteMongoDocument(ExternalDB, pgcol, bson.M{"groupid": pgid}) == 1 {
+	if deleteMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": pgid}) == 1 {
 
 		resetProductCacheKeys(nil, &productGroup)
 
@@ -372,7 +372,7 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 
 	for sku, price := range prices.Prices {
 
-		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku}, bson.M{"$set": bson.M{"regularprice": price.RegularPrice, "promotionprice": price.PromotionPrice}})
+		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}, bson.M{"$set": bson.M{"RegularPrice": price.RegularPrice, "PromotionPrice": price.PromotionPrice}})
 
 		if result[0] == 1 && result[1] == 1 {
 			priceUpdated = append(priceUpdated, sku)
@@ -428,7 +428,7 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	for sku, quantity := range quantities.Quantity {
 
-		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"sku": sku}, bson.M{"$set": bson.M{"quantity": quantity}})
+		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}, bson.M{"$set": bson.M{"Quantity": quantity}})
 
 		if result[0] == 1 && result[1] == 1 {
 			quantityUpdated = append(quantityUpdated, sku)
