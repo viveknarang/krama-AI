@@ -9,7 +9,11 @@ import (
 
 func main() {
 
-	loadSystemProperties()
+	loadEnvironmentVariables()
+
+	if !loadSystemProperties() {
+		return
+	}
 
 	rlog.Debug("Attempting to connect to base components - [ELASTIC, REDIS, MONGO]...")
 
@@ -20,10 +24,5 @@ func main() {
 	rlog.Info("Base components - [ELASTIC, REDIS, MONGO] connected ...")
 
 	log.Fatal(http.ListenAndServe(":"+APIPort, routers()))
-
-	disconnectDB()
-	disconnectRedis()
-
-	rlog.Debug("Closing ...")
 
 }

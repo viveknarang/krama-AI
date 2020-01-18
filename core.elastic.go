@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"github.com/olivere/elastic"
 	"github.com/romana/rlog"
@@ -40,7 +39,7 @@ func pingES(silent bool) bool {
 
 	ctx := context.Background()
 
-	info, code, err := ESCLIENT.Ping(ElasticURL + ":" + ElasticPort).Do(ctx)
+	_, _, err := ESCLIENT.Ping(ElasticURL + ":" + ElasticPort).Do(ctx)
 
 	if err != nil {
 		isESUp = false
@@ -50,7 +49,7 @@ func pingES(silent bool) bool {
 	}
 
 	if !silent {
-		fmt.Printf("ACTIVE PING FOR ES: Elasticsearch responding at %s:%s and returned with code %d, and version %s\n", ElasticURL, ElasticPort, code, info.Version.Number)
+		rlog.Debug("pingES() Elasticsearch responding at:" + ElasticURL + ":" + ElasticPort)
 	}
 
 	return isESUp

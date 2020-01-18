@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
@@ -53,7 +52,7 @@ func pingMongoDB(silent bool) bool {
 	}
 
 	if !silent {
-		fmt.Println("ACTIVE PING FOR MONGODB: MongoDB responding at " + MongoURL + ":" + MongoPort)
+		rlog.Debug("pingMongoDB() MongoDB responding at " + MongoURL + ":" + MongoPort)
 	}
 
 	return true
@@ -156,6 +155,6 @@ func disconnectDB() {
 		rlog.Error("disconnectDB() Error: " + err.Error())
 	}
 
-	fmt.Println("Connection to MongoDB closed.")
+	rlog.Debug("disconnectDB() Connection to MongoDB closed.")
 
 }

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/go-redis/redis"
 	"github.com/romana/rlog"
 )
@@ -42,7 +40,7 @@ func pingRedis(silent bool) bool {
 	if pong == "PONG" && err == nil {
 		isRedisUp = true
 		if !silent {
-			fmt.Println("ACTIVE PING FOR REDIS: Redis responding at " + RedisURL + ":" + RedisPort)
+			rlog.Debug("pingRedis() Redis responding at " + RedisURL + ":" + RedisPort)
 		}
 	} else {
 		isRedisUp = false

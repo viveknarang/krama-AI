@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/url"
+	"os"
 	"reflect"
 	"regexp"
 
@@ -43,11 +44,24 @@ func isValidAttributeKey(potentialAttributeKey string) bool {
 }
 
 func hashString(Txt string) string {
+
 	h := sha256.New()
 	h.Write([]byte(Txt))
 	bs := h.Sum(nil)
 	sh := string(fmt.Sprintf("%x", bs))
 	return sh
+
+}
+
+func fileExists(fileName string) bool {
+
+	if _, err := os.Stat(fileName); err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
+	}
+	return true
+
 }
 
 func typeof(value interface{}) string {

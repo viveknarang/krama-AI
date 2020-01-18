@@ -1,6 +1,9 @@
 package main
 
-import "github.com/magiconair/properties"
+import (
+	"github.com/magiconair/properties"
+	"github.com/romana/rlog"
+)
 
 //MongoURL mongo url for something
 var MongoURL string
@@ -194,11 +197,22 @@ var ShoppingCartPath string
 //ShoppingCartLife shopping cart life duration
 var ShoppingCartLife string
 
-const properyFile = "/home/narang/work/src/github.com/viveknarang/kramaAPI/system.properties"
+func loadSystemProperties() bool {
 
-func loadSystemProperties() {
+	rlog.Debug("loadSystemProperties() handle function invoked ...")
 
-	p := properties.MustLoadFile(properyFile, properties.UTF8)
+	if !fileExists(PROPERTYFILE) {
+
+		rlog.Error("loadSystemProperties() Error property file: " + PROPERTYFILE + " does not exist...")
+		return false
+
+	} else {
+
+		rlog.Debug("loadSystemProperties() loading property file: " + PROPERTYFILE)
+
+	}
+
+	p := properties.MustLoadFile(PROPERTYFILE, properties.UTF8)
 
 	MongoURL = p.GetString("db.mongo.url", "localhost")
 	MongoPort = p.GetString("db.mongo.port", "27017")
@@ -266,5 +280,7 @@ func loadSystemProperties() {
 	SearchPath = SearchBasePath + APIVersion
 	CustomersPath = CustomersBasePath + APIVersion
 	ShoppingCartPath = ShoppingCartBasePath + APIVersion
+
+	return true
 
 }
