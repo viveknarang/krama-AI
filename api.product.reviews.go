@@ -20,13 +20,31 @@ func getProductReviews(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var prr PRODREVIEWREQ
+
+	err := json.NewDecoder(r.Body).Decode(&prr)
+
+	if err != nil {
+
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
+		return
+
+	}
+
+	if !validateProductReviewRequest(w, r, prr) {
+		return
+	}
+
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductReviewsExtension
 
 	var opts options.FindOptions
-	opts.SetSort(bson.M{"Time": -1})
+
+	opts.SetSort(bson.M{prr.SortField: prr.Order})
+	opts.SetSkip(prr.From)
+	opts.SetLimit(prr.To)
 
 	results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}, &opts)
 
