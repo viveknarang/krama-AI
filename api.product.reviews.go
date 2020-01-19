@@ -69,7 +69,10 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 
 	var review PRODUCTREVIEW
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductReviewsExtension
+	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+
+	prdbcol := csx + ProductReviewsExtension
+	pgdbcol := csx + ProductGroupExtension
 
 	err := json.NewDecoder(r.Body).Decode(&review)
 
@@ -85,9 +88,50 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 	review.Time = time.Now().UnixNano()
 	review.ReviewID = uuid.New().String()
 
-	insertMongoDocument(ExternalDB, dbcol, review)
+	insertMongoDocument(ExternalDB, prdbcol, review)
 
-	respondWith(w, r, nil, "Review Added ...", review, http.StatusCreated, true)
+	results := findMongoDocument(ExternalDB, pgdbcol, bson.M{"GroupID": review.GroupID})
+
+	if len(results) != 1 {
+		respondWith(w, r, nil, "Product Review Insertion Failed! Reason:"+ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
+		return
+	}
+
+	j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+	if err0 != nil {
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	var productGroup PRODUCTGROUP
+
+	err1 := json.Unmarshal([]byte(j), &productGroup)
+
+	if err1 != nil {
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	newReviewCount := productGroup.CumulativeReviewCount + 1
+	newReviewStars := (productGroup.CumulativeReviewStars + review.Stars) / float64(newReviewCount)
+
+	updateResult := updateMongoDocument(ExternalDB, pgdbcol, bson.M{"GroupID": review.GroupID}, bson.M{"$set": bson.M{"CumulativeReviewStars": newReviewStars, "CumulativeReviewCount": newReviewCount}})
+
+	if updateResult[0] == 1 && updateResult[1] == 1 {
+
+		resetProductCacheKeys(nil, &productGroup)
+		respondWith(w, r, nil, "Review Added and Cumulative review data updated in Product Group object ...", review, http.StatusCreated, true)
+
+	} else if updateResult[0] == 1 && updateResult[1] == 0 {
+
+		respondWith(w, r, nil, "Review Added and Cumulative review data not updated in Product Group object ...", review, http.StatusCreated, false)
+
+	} else if updateResult[0] == 0 && updateResult[1] == 0 {
+
+		respondWith(w, r, nil, "Review Added and Cumulative review data not updated in Product Group object ...", review, http.StatusCreated, false)
+
+	}
 
 }
 

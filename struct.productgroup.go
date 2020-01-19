@@ -21,6 +21,6 @@ type PRODUCTGROUP struct {
 	Updated               int64                    `json:"Updated" bson:"Updated"`
 	Products              map[string]PRODUCT       `json:"Products" bson:"Products"`
 	Attributes            map[string][]interface{} `json:"Attributes" bson:"Attributes"`
-	CumulativeReviewStars int                      `json:"CumulativeReviewStars" bson:"CumulativeReviewStars"`
+	CumulativeReviewStars float64                  `json:"CumulativeReviewStars" bson:"CumulativeReviewStars"`
 	CumulativeReviewCount int64                    `json:"CumulativeReviewCount" bson:"CumulativeReviewCount"`
 }
