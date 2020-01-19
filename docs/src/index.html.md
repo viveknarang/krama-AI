@@ -5,13 +5,14 @@ language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.7.1</span><br/><br/>
+  - <span>API documentation version 3.8.0</span><br/><br/>
   - <a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/>
   - <a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/>
   - <a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/>
   - <a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a><br/><br/>
   - <span>Development Branch Status:</span><br/>
-  - <img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'></img>
+  - <img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'/><br/><br/><br/>
+  - <img src='/images/canada.png' width='50px' height='25px'/>
 
 
 includes:
@@ -23,8 +24,6 @@ search: true
 # Introduction
 
 Krama AI is an ecommerce AI platform that provides a portfolio of novel and powerful features to build an online store. The headless, API-first approach allows our customers to utilize platform features to build online stores with exceptional flexibility. Using Krama AI, businesses can build online stores with user interface of their choice - be it a website, a mobile app or any other possible interface. Krama AI provides basic ecommerce platform components such as catalog, orders & shopping cart as well as advanced features such as sophisticated search capabilities using the Search API,sophisticated recommendation features to increase sales conversion and customer engagement. Krama AI also plans to provide sophisticated analytics & insights API that will give a competitive edge to businesses and will open new avenues for better customer engagement, inventory planning and price optimization and much more ... Stay tuned!
-
-A product of Canada!
 
 Krama AI is powered by:
 
@@ -462,6 +461,45 @@ PaymentOption object fields, definitions, and constraints below:
 | ZipCode          | String         | Card pincode                                                  | Mandatory, valid pincode (based on country)                             |
 | Default          | Boolean        | Flag to make if the payment information is the default option | Mandatory, boolean - either true or false                               |
 | SaveInformation  | Boolean        | Flag to mark the payment information to be saved for use later| Mandatory, boolean - either true or false                               |                                          
+
+## Response
+
+> Sample response object:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Search Result ...",
+    "Time": 1579463722416637832,
+    "Response": {
+        "count": 1,
+        "results": {
+            "0": {
+                "Skus": [
+                    "B07K3BHGL4"
+                ],
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"
+            }
+        }
+    }
+}
+```
+
+Every request to this API gets a standard response object. Details on the fields of the response object is elaborated in the table below.
+
+|  Key              |    Description                                                                        |
+|-------------------|---------------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                         |
+| Success           | Flag that tells if the request was successful or not                                  |
+| Message           | Message for additional information                                                    |
+| Time              | Unix timestamp of the response                                                        |
+| Response          | Response object containing response information (variable field for each request)     |
+
 
 # API access
 
@@ -3438,6 +3476,285 @@ Use this endpoint to reset/clear the shopping cart.
 | Message           | Message for additional information                                            |
 | Time              | Unix timestamp of the response                                                |
 | Response          | Response object containing response information                               |
+
+
+
+
+# Product Reviews API
+
+## Get product reviews
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Customer Found ...",
+    "Time": 1579464266245156552,
+    "Response": [
+        {
+            "ReviewID": "2c588edf-c81e-449d-b9b6-ffefc00908a0",
+            "Time": 1579464264414715770,
+            "GroupID": "MSLAPS2",
+            "CustomerID": "340950843976",
+            "Stars": 1,
+            "Description": "Test Review"
+        },
+        {
+            "ReviewID": "5dfb83f7-5995-4be5-8c0c-d0dd5e99428c",
+            "Time": 1579464261921297128,
+            "GroupID": "MSLAPS2",
+            "CustomerID": "340950843976",
+            "Stars": 1,
+            "Description": "Test Review"
+        }
+    ]
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Reviews Not found ...",
+    "Time": 1579464296786186393,
+    "Response": null
+}
+```
+
+
+Use this endpoint to product reviews for a product group. It must be noted that the reviews are stored and retrieved in context with product groups and not individual products as it 
+does not make any sense to store reviews by products which could be indeed versions of other products.  
+
+
+### HTTP Request URL
+
+`GET https://api.krama.ai/productreviews/{API version}/reviews/{PGID}`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+
+
+### HTTP Request URL Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| PGID                  |  Customer identifier                                |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+## Post a product review
+
+> Sample valid HTTP request body:
+
+```json
+{
+	"GroupID" : "MSLAPS2",
+	"CustomerID" : "340950843976",
+	"Stars" : 1,
+	"Description" : "Test Review"
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 201,
+    "Success": true,
+    "Message": "Review Added and Cumulative review data updated in Product Group object ...",
+    "Time": 1579464264416813978,
+    "Response": {
+        "ReviewID": "2c588edf-c81e-449d-b9b6-ffefc00908a0",
+        "Time": 1579464264414715770,
+        "GroupID": "MSLAPS2",
+        "CustomerID": "340950843976",
+        "Stars": 1,
+        "Description": "Test Review"
+    }
+}
+```
+
+
+Use this endpoint to post a review for a product group. 
+
+
+### HTTP Request URL
+
+`POST https://api.krama.ai/productreviews/{API version}/reviews`
+
+### HTTP Request Header
+
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+
+### HTTP Request Body Parameters
+
+| Parameter             |               Description                                                 |
+|-----------------------|---------------------------------------------------------------------------|
+| GroupID               |  String, Product GroupID for which the review is being posted             |
+| CustomerID            |  String, CustomerID of the customer who is posting this review            |
+| Stars                 |  Float,  star rating on the review  (value between: 1-5)                  |
+| Description           |  String, description in the review. Less than 10240 characters            |                  
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+
+## Delete a product review
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Review deleted ...",
+    "Time": 1579464792787915410,
+    "Response": null
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Review Not Found ...",
+    "Time": 1579464802608052274,
+    "Response": null
+}
+```
+
+
+Use this endpoint to delete a review for a product group using the unique ReviewID. 
+
+
+### HTTP Request URL
+
+`DELETE https://api.krama.ai/productreviews/{API version}/reviews/{RID}`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+
+
+### HTTP Request URL Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| RID                   |  Review ID of the review to be deleted              |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+
+## Delete all product reviews
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Review for product group deleted ...",
+    "Time": 1579464873282343364,
+    "Response": null
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Reviews for Product group mentioned in request, Not Found ...",
+    "Time": 1579464888741724246,
+    "Response": null
+}
+```
+
+
+Use this endpoint to remove all the reviews for a product group using the product GroupID. 
+
+
+### HTTP Request URL
+
+`DELETE https://api.krama.ai/productreviews/{API version}/reviews/productgroup/{PGID}`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+
+
+### HTTP Request URL Parameters
+
+| Parameter             |               Description                                                                       |
+|-----------------------|-------------------------------------------------------------------------------------------------|
+| PGID                  |  Product GroupID of the product group for which the reviews are expected to be deleted          |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
 
 
 
