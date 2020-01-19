@@ -59,7 +59,7 @@ func pingMongoDB(silent bool) bool {
 
 }
 
-func findMongoDocument(db string, collec string, filter bson.M) []*bson.D {
+func findMongoDocument(db string, collec string, filter bson.M, opts *options.FindOptions) []*bson.D {
 
 	rlog.Debug("findMongoDocument() handle function invoked ...")
 
@@ -67,7 +67,7 @@ func findMongoDocument(db string, collec string, filter bson.M) []*bson.D {
 
 	collection := MONGODBCLIENT.Database(db).Collection(collec)
 
-	cur, err := collection.Find(context.TODO(), filter)
+	cur, err := collection.Find(context.TODO(), filter, opts)
 
 	if err != nil {
 		rlog.Error("findMongoDocument() Error: " + err.Error())

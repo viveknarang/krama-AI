@@ -9,6 +9,7 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func getProduct(w http.ResponseWriter, r *http.Request) {
@@ -34,7 +35,9 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku})
+		var opts options.FindOptions
+
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -86,7 +89,9 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, &opts)
 
 	if len(results) != 0 {
 		respondWith(w, r, nil, ProductAlreadyExistsMessage, nil, http.StatusConflict, false)
@@ -182,7 +187,9 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	sku := pth[len(pth)-1]
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -249,7 +256,9 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		pgid := pth[len(pth)-1]
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid})
+		var opts options.FindOptions
+
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
@@ -299,7 +308,9 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": pgid})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": pgid}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)

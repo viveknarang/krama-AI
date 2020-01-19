@@ -10,6 +10,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +36,9 @@ func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"OrderID": oid})
+		var opts options.FindOptions
+
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"OrderID": oid}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound, false)
@@ -91,7 +94,9 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid})
+		var opts options.FindOptions
+
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound, false)
@@ -212,7 +217,9 @@ func deleteOrder(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	oid := pth[len(pth)-1]
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"OrderID": oid})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"OrderID": oid}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, OrderNotFoundMessage, nil, http.StatusNotFound, false)

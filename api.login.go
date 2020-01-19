@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-redis/redis"
@@ -35,7 +36,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	results := findMongoDocument(InternalDB, CustomersDB, bson.M{"CustomerID": rx.CustomerID, "APIKey": rx.APIKey})
+	var opts options.FindOptions
+
+	results := findMongoDocument(InternalDB, CustomersDB, bson.M{"CustomerID": rx.CustomerID, "APIKey": rx.APIKey}, &opts)
 
 	if len(results) != 1 {
 

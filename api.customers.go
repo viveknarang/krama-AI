@@ -10,6 +10,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func getCustomer(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +36,9 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 
 		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid})
+		var opts options.FindOptions
+
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, CustomersNotFoundMessage, nil, http.StatusNotFound, false)
@@ -87,7 +90,9 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Email": customer.Email})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Email": customer.Email}, &opts)
 
 	if len(results) != 0 {
 		respondWith(w, r, nil, CustomerAlreadyExistsMessage, nil, http.StatusConflict, false)
@@ -176,7 +181,9 @@ func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	cid := pth[len(pth)-1]
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, CustomersNotFoundMessage, nil, http.StatusNotFound, false)

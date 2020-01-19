@@ -8,6 +8,7 @@ import (
 
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
@@ -22,7 +23,9 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 	pgindex := cidb + ProductGroupExtension + SearchIndexExtension
 
-	results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID}, &opts)
 
 	if r.Method == http.MethodPost {
 
@@ -480,7 +483,9 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 	for _, sku := range skus {
 
-		results := findMongoDocument(ExternalDB, pcol, bson.M{"Sku": sku})
+		var opts options.FindOptions
+
+		results := findMongoDocument(ExternalDB, pcol, bson.M{"Sku": sku}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -507,7 +512,9 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 		if result[0] == 1 && result[1] == 1 {
 
-			results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID})
+			var opts options.FindOptions
+
+			results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, &opts)
 
 			var productGroup PRODUCTGROUP
 
@@ -553,7 +560,9 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 				if result[0] == 1 && result[1] == 1 {
 
-					results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID})
+					var opts options.FindOptions
+
+					results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, &opts)
 
 					var productGroup PRODUCTGROUP
 

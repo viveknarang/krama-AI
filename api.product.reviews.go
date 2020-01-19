@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func getProductReviews(w http.ResponseWriter, r *http.Request) {
@@ -24,7 +25,10 @@ func getProductReviews(w http.ResponseWriter, r *http.Request) {
 
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductReviewsExtension
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid})
+	var opts options.FindOptions
+	opts.SetSort(bson.M{"Time": -1})
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}, &opts)
 
 	if len(results) == 0 {
 		respondWith(w, r, nil, "Reviews Not found ...", nil, http.StatusNotFound, false)
@@ -90,7 +94,9 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 
 	insertMongoDocument(ExternalDB, prdbcol, review)
 
-	results := findMongoDocument(ExternalDB, pgdbcol, bson.M{"GroupID": review.GroupID})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, pgdbcol, bson.M{"GroupID": review.GroupID}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, "Product Review Insertion Failed! Reason:"+ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
@@ -148,7 +154,9 @@ func deleteProductReview(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	rid := pth[len(pth)-1]
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"ReviewID": rid})
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"ReviewID": rid}, &opts)
 
 	if len(results) == 0 {
 		respondWith(w, r, nil, "Review Not Found ...", nil, http.StatusNotFound, false)
