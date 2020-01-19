@@ -128,12 +128,13 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
 
 > Sample valid ProductGroup object:
 
+
 ```json
 {
     "Code": 200,
     "Success": true,
     "Message": "Product Group Found ...",
-    "Time": 1579405334957973573,
+    "Time": 1579467238021475003,
     "Response": {
         "GroupID": "MSLAPS2",
         "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
@@ -168,7 +169,7 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
         ],
         "Active": true,
         "Currency": "CDN",
-        "Updated": 1579405166692399398,
+        "Updated": 1579412175672069392,
         "Products": {
             "B07K3BHGL4": {
                 "Sku": "B07K3BHGL4",
@@ -215,7 +216,7 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
                 },
                 "IsMain": true,
                 "Currency": "CDN",
-                "Updated": 1579405166691334807
+                "Updated": 1579412175670350481
             }
         },
         "Attributes": {
@@ -270,7 +271,9 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
             "Wireless Standard": [
                 "802.11ac"
             ]
-        }
+        },
+        "CumulativeReviewStars": 0.059042448628409,
+        "CumulativeReviewCount": 18
     }
 }
 ```
@@ -302,7 +305,9 @@ Please find the field definitions, types and constraints below:
 |  Currency                 |   String       | Currency as mentioned in the product group.                                                                          |
 |  Updated                  |   Integer      | Unix timestamp of the last time when the product group was updated                                                   |
 |  Products                 |   Map{k,v}     | Map of products in the group. Key is the product SKU, value is the Product object                                    |
-|  Attributes               |   Map{k,v}     | Aggregated Map of custom product attributes. Unique values are grouped in arrays for each key                        | 
+|  Attributes               |   Map{k,v}     | Aggregated Map of custom product attributes. Unique values are grouped in arrays for each key                        |
+|  CumulativeReviewStars    |   Float        | Cumulative Average of star rating of the product group                                                               |
+|  CumulativeReviewCount    |   Integer      | Cumulative count of the reviews on the product group                                                                 | 
 
 
 
@@ -370,7 +375,7 @@ Please find customer object fields and constraints/rules associated with each, b
 | PhoneNumbers     | String[]       | An array of phone numbers                                     | Multiple, A customer can have at most 10 phone numbers                  |
 | Password         | String         | Customer password                                             | Mandatory, Cannot have less than 5 or more than 1024 characters         |
 | AddressBook      | Address[]      | Object containing customer's valid addresses                  | Multiple, A customer can have at most 10 adresses at a time             |
-| PaymentOptions   | CreditCard[]   | Object containing customer's valid payment information        | Multiple, A customer can have at most 50 payment options at a time      |
+| PaymentOptions   | PaymentOption[]| Object containing customer's valid payment information        | Multiple, A customer can have at most 50 payment options at a time      |
 | WishList         | String[]       | An array of product SKUs                                      | Multiple, At a time a customer can have at most 1000 SKUs               |
 | SaveForLater     | String[]       | An array of product SKUs                                      | Multiple, At a time a customer can have at most 1000 SKUs               |
 
@@ -1266,17 +1271,17 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
     "Code": 200,
     "Success": true,
     "Message": "Product Group Found ...",
-    "Time": 1579030135545676974,
+    "Time": 1579467238021475003,
     "Response": {
         "GroupID": "MSLAPS2",
         "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
         "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-        "RegularPriceMin": 2700,
-        "RegularPriceMax": 2700,
-        "PromotionPriceMin": 2500,
-        "PromotionPriceMax": 2500,
+        "RegularPriceMin": 2799,
+        "RegularPriceMax": 2799,
+        "PromotionPriceMin": 2600,
+        "PromotionPriceMax": 2600,
         "Skus": [
-            "B07K3BHGL3"
+            "B07K3BHGL4"
         ],
         "Images": [
             "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
@@ -1294,22 +1299,22 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
             "Black"
         ],
         "Brands": [
-            "Microsoft"
+            "Microsoft xxx yyy"
         ],
         "Sizes": [
             "13.5 inches"
         ],
         "Active": true,
         "Currency": "CDN",
-        "Updated": 1579028967414440899,
+        "Updated": 1579412175672069392,
         "Products": {
-            "B07K3BHGL3": {
-                "Sku": "B07K3BHGL3",
+            "B07K3BHGL4": {
+                "Sku": "B07K3BHGL4",
                 "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
                 "GroupID": "MSLAPS2",
                 "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-                "RegularPrice": 2700,
-                "PromotionPrice": 2500,
+                "RegularPrice": 2799,
+                "PromotionPrice": 2600,
                 "Images": [
                     "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
                     "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
@@ -1319,16 +1324,16 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
                     "Microsoft",
                     "Surface"
                 ],
-                "Quantity": 500,
+                "Quantity": 200,
                 "Category": [
                     "Computers & Tablets>Laptops"
                 ],
                 "Color": "Black",
-                "Brand": "Microsoft",
+                "Brand": "Microsoft xxx yyy",
                 "Size": "13.5 inches",
                 "Active": true,
                 "Attributes": {
-                    "ASIN": "B07K3BHGL3",
+                    "ASIN": "B07K3BHGL4",
                     "Batteries": "1",
                     "Color": "Black",
                     "Date First Available": "Nov. 4 2018",
@@ -1348,12 +1353,12 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
                 },
                 "IsMain": true,
                 "Currency": "CDN",
-                "Updated": 0
+                "Updated": 1579412175670350481
             }
         },
         "Attributes": {
             "ASIN": [
-                "B07K3BHGL3"
+                "B07K3BHGL4"
             ],
             "Batteries": [
                 "1"
@@ -1403,7 +1408,9 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
             "Wireless Standard": [
                 "802.11ac"
             ]
-        }
+        },
+        "CumulativeReviewStars": 0.059042448628409,
+        "CumulativeReviewCount": 18
     }
 }
 ```
@@ -3466,6 +3473,17 @@ Use this endpoint to reset/clear the shopping cart.
 
 ## Get product reviews
 
+> Sample valid HTTP request body:
+
+```json
+{
+	"SortField" : "Time",
+	"Order" : -1,
+	"From"  : 0,
+	"To" : 100 
+}
+```
+
 > Sample valid API response:
 
 ```json
@@ -3528,6 +3546,17 @@ does not make any sense to store reviews by products which could be indeed versi
 | Parameter             |               Description                           |
 |-----------------------|-----------------------------------------------------|
 | PGID                  |  Customer identifier                                |
+
+
+### HTTP Request Body Parameters
+
+| Parameter             |               Description                           |
+|-----------------------|-----------------------------------------------------|
+| From                  | Starting index of reviews                           |
+| Count                 | Number of reviews                                   |
+| SortField             | Field on which sorting needs to be applied          |
+| Order                 | Value -1 Decending ; Value 1 Ascending              |             
+
 
 
 ### HTTP Response
