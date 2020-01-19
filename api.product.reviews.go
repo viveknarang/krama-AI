@@ -192,3 +192,37 @@ func deleteProductReview(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+func deleteProductGroupReview(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("deleteProductGroupReview() handle function invoked ...")
+
+	if !pre(w, r) {
+		return
+	}
+
+	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductReviewsExtension
+
+	pth := strings.Split(r.URL.Path, "/")
+	pgid := pth[len(pth)-1]
+
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}, &opts)
+
+	if len(results) == 0 {
+		respondWith(w, r, nil, "Reviews for Product group mentioned in request, Not Found ...", nil, http.StatusNotFound, false)
+		return
+	}
+
+	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}) != 0 {
+
+		respondWith(w, r, nil, "Reviews for product group deleted ...", nil, http.StatusOK, true)
+
+	} else {
+
+		respondWith(w, r, nil, "Reviews for product group not deleted ...", nil, http.StatusNotModified, false)
+
+	}
+
+}
