@@ -206,11 +206,9 @@ func loadSystemProperties() bool {
 		rlog.Error("loadSystemProperties() Error property file: " + PROPERTYFILE + " does not exist...")
 		return false
 
-	} else {
-
-		rlog.Debug("loadSystemProperties() loading property file: " + PROPERTYFILE)
-
 	}
+
+	rlog.Debug("loadSystemProperties() loading property file: " + PROPERTYFILE)
 
 	p := properties.MustLoadFile(PROPERTYFILE, properties.UTF8)
 
