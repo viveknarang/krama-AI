@@ -78,9 +78,9 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//if !validateReview() {
-	//	return
-	//}
+	if !validateProductReview(w, r, review) {
+		return
+	}
 
 	review.Time = time.Now().UnixNano()
 	review.ReviewID = uuid.New().String()
@@ -106,7 +106,7 @@ func deleteProductReview(w http.ResponseWriter, r *http.Request) {
 
 	results := findMongoDocument(ExternalDB, dbcol, bson.M{"ReviewID": rid})
 
-	if len(results) != 1 {
+	if len(results) == 0 {
 		respondWith(w, r, nil, "Review Not Found ...", nil, http.StatusNotFound, false)
 		return
 	}
