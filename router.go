@@ -61,6 +61,12 @@ func routers() *mux.Router {
 
 	router.HandleFunc(ShoppingCartPath+"/cart/{CID}", getShoppingCart).Methods(http.MethodGet)
 
+	router.HandleFunc(ProductReviewsPath+"/reviews/{PGID}", getProductReviews).Methods(http.MethodGet)
+
+	router.HandleFunc(ProductReviewsPath+"/reviews", postProductReview).Methods(http.MethodPost)
+
+	router.HandleFunc(ProductReviewsPath+"/reviews/{RID}", deleteProductReview).Methods(http.MethodDelete)
+
 	rlog.Debug("Router setup complete ...")
 
 	return router

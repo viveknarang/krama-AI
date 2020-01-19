@@ -197,6 +197,15 @@ var ShoppingCartPath string
 //ShoppingCartLife shopping cart life duration
 var ShoppingCartLife string
 
+//ProductReviewsBasePath product reviews base path
+var ProductReviewsBasePath string
+
+//ProductReviewsPath product reviews path
+var ProductReviewsPath string
+
+//ProductReviewsExtension product reviews extension
+var ProductReviewsExtension string
+
 func loadSystemProperties() bool {
 
 	rlog.Debug("loadSystemProperties() handle function invoked ...")
@@ -220,6 +229,7 @@ func loadSystemProperties() bool {
 	SearchBasePath = p.GetString("pi.search.base.path", "/search/")
 	CustomersBasePath = p.GetString("api.customers.base.path", "/customers/")
 	ShoppingCartBasePath = p.GetString("api.shoppingcart.base.path", "/shoppingcart/")
+	ProductReviewsBasePath = p.GetString("api.productreviews.base.path", "/productreviews/")
 
 	APIVersion = p.GetString("api.version", "v1")
 	RedisURL = p.GetString("redis.url", "localhost")
@@ -272,12 +282,14 @@ func loadSystemProperties() bool {
 	ProductAlreadyExistsMessage = p.GetString("api.response.message.product.exists", "")
 	CustomerAlreadyExistsMessage = p.GetString("api.response.message.customers.exists", "")
 	ShoppingCartLife = p.GetString("api.shoppingcart.life", "")
+	ProductReviewsExtension = p.GetString("db.mongo.external.product.reviews.extension", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion
 	SearchPath = SearchBasePath + APIVersion
 	CustomersPath = CustomersBasePath + APIVersion
 	ShoppingCartPath = ShoppingCartBasePath + APIVersion
+	ProductReviewsPath = ProductReviewsBasePath + APIVersion
 
 	return true
 
