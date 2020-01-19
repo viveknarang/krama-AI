@@ -3,27 +3,19 @@
 
 # Krama AI - A blazing fast E-commerce AI platform
 
-# Introduction
+## Introduction
 
-This API provides you with several options to maintain your product catalog and search products in your catalog. 
+Krama AI is an ecommerce AI platform that provides a portfolio of novel and powerful features to build an online store. The headless, API-first approach allows our customers to utilize platform features to build online stores with exceptional flexibility. Using Krama AI, businesses can build online stores with user interface of their choice - be it a website, a mobile app or any other possible interface. Krama AI provides basic ecommerce platform components such as catalog, orders & shopping cart as well as advanced features such as sophisticated search capabilities using the Search API,sophisticated recommendation features to increase sales conversion and customer engagement. Krama AI also plans to provide sophisticated analytics & insights API that will give a competitive edge to businesses and will open new avenues for better customer engagement, inventory planning and price optimization and much more ... Stay tuned!
 
-With this API, you can create, update and delete products in your product catalog. The API automatically manages the product groups for you. The product group is identified by the groupID field (i.e. all the products with the same groupID are combined in a single product group). While the API allows you to get and delete product groups by groupID, the API does not allow you to directly modify the product groups. The only way to modify product groups is to use API endpoints for individual products. With this approach, the API tries to ensure that the data is not corrupted. When you delete a product group, all the products in the group are also automatically deleted. 
+A product of Canada!
 
-<aside class="notice">
-It is important to understand the concept of product groups. For search quality and other advanced features provided by our platform, products are grouped to form product groups. These product groups are essentially a product with different variations. Example: A shirt can be of multiple sizes and/or colors. So all of the variations of this shirt are grouped to form a product group.  
-</aside>
-
-The search API is fairly powerful too (Work in progress, expect great features coming up soon!). It allows features like search on a specific field or a set of fields. The search API responds with product groups where the query matches certain fields. Search API also allows you to select the standard facets to be included in the API response. In addtion to the features mentioned above, the API automatically syncs the search index with changes in products/product groups, **in real-time**. Also, for efficiency and speed, the search and GET product/productgroup endpoints are cached. Upon any updates, the cache is updated as well. 
-
-We are continuously adding new features and improving this API, if you have any suggestions please reach out to us [here](mailto:vivek.narang10@gmail.com)
-
-API Powered by
+Krama AI is powered by:
 
 - Golang            
 - Redis             
 - Elasticsearch     
-- MongoDB           
-
+- MongoDB
+- Other supporting tools           
 
 
 <aside class="success">
@@ -125,13 +117,201 @@ of the product name, images, etc ... to show up on the product page by default.
 </aside>
 
 <aside class="warning">
-Attribute field key naming has to follow specific rules. Attibute key names can only have alphanumeric characters with single spaces, "_", or "-" characters.  
+Attributes field key naming has to follow specific rules. Attibutes field key names can only have alphanumeric characters with single spaces, "_", or "-" characters.  
 </aside>
+
+
+
+
+
+
+
+## ProductGroup
+
+> Sample valid ProductGroup object:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Product Group Found ...",
+    "Time": 1579405334957973573,
+    "Response": {
+        "GroupID": "MSLAPS2",
+        "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+        "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+        "RegularPriceMin": 2799,
+        "RegularPriceMax": 2799,
+        "PromotionPriceMin": 2600,
+        "PromotionPriceMax": 2600,
+        "Skus": [
+            "B07K3BHGL4"
+        ],
+        "Images": [
+            "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+            "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+        ],
+        "SearchKeywords": [
+            "Laptop",
+            "Microsoft",
+            "Surface"
+        ],
+        "Category": [
+            "Computers & Tablets>Laptops"
+        ],
+        "Colors": [
+            "Black"
+        ],
+        "Brands": [
+            "Microsoft xxx yyy"
+        ],
+        "Sizes": [
+            "13.5 inches"
+        ],
+        "Active": true,
+        "Currency": "CDN",
+        "Updated": 1579405166692399398,
+        "Products": {
+            "B07K3BHGL4": {
+                "Sku": "B07K3BHGL4",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2799,
+                "PromotionPrice": 2600,
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "SearchKeywords": [
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
+                ],
+                "Quantity": 200,
+                "Category": [
+                    "Computers & Tablets>Laptops"
+                ],
+                "Color": "Black",
+                "Brand": "Microsoft xxx yyy",
+                "Size": "13.5 inches",
+                "Active": true,
+                "Attributes": {
+                    "ASIN": "B07K3BHGL4",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Display Size": "13.5 inches",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Memory Speed": "1 GHz",
+                    "Number of USB 2 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "RAM": "16 GB",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
+                "IsMain": true,
+                "Currency": "CDN",
+                "Updated": 1579405166691334807
+            }
+        },
+        "Attributes": {
+            "ASIN": [
+                "B07K3BHGL4"
+            ],
+            "Batteries": [
+                "1"
+            ],
+            "Color": [
+                "Black"
+            ],
+            "Date First Available": [
+                "Nov. 4 2018"
+            ],
+            "Display Size": [
+                "13.5 inches"
+            ],
+            "Flash Memory Size": [
+                "512.00"
+            ],
+            "Item Weight": [
+                "1.28 Kg"
+            ],
+            "Item dimensions L x W x H": [
+                "17.8 x 12.7 x 15.2 cm"
+            ],
+            "Item model number": [
+                "DAL-00092"
+            ],
+            "Memory Speed": [
+                "1 GHz"
+            ],
+            "Number of USB 2 Ports": [
+                "1"
+            ],
+            "Operating System": [
+                "Windows 10 Home"
+            ],
+            "Processor Count": [
+                "16"
+            ],
+            "RAM": [
+                "16 GB"
+            ],
+            "Series": [
+                "Surface Laptop 2"
+            ],
+            "Shipping Weight": [
+                "2.2 kg"
+            ],
+            "Wireless Standard": [
+                "802.11ac"
+            ]
+        }
+    }
+}
+```
+
+
+ProductGroup objects are created and maintained by the platform. These objects have a very important purpose to solve - To optimize search, recommendation and other platform features by logically and automatically grouping a set of similar products. A group of similar products in your catalog could be same product with certain variations. Example: a shirt with same style but different colors and sizes. Essentially it should be treated as one product and not different products. Krama AI platform automatically groups similar products into ProductGroup objects. The platform does it using the **GroupID** field in your product object. **Product objects with same GroupID are grouped together in a ProductGroup object** The platform does more than what you expect. It groups these Product objects into ProductGroup objects and also aggregates product specific fields. ProductObjects also have price ranges computed using the RegularPrice and PromotionPrice fields in the Product objects. Attributes field map keys are also aggregated into an array of unique values. This is especially helpful in making faceted search requests. The platform takes care of the ProductGroup objects and builds and maintain these objects using the data from the Product objects - **in real-time**. You can find details on the fields, types and contraints in the table below. 
+
+
+
+Please find the field definitions, types and constraints below:
+
+|   Field                   |   Type         |     Short Description                                                                                                |
+|---------------------------|----------------|----------------------------------------------------------------------------------------------------------------------|
+|  GroupID                  |   String       | Unique product identifier                                                                                            |
+|  Name                     |   String       | Name of the products in the group                                                                                    |
+|  Description              |   String       | Product description in the product group                                                                             |
+|  RegularPriceMin          |   Float        | Min value of the range computed of RegularPrice over the product group                                               |
+|  RegularPriceMax          |   Float        | Max value of the range computed of RegularPrice over the product group                                               |
+|  PromotionPriceMin        |   Float        | Min value of the range computed of PromotionPrice over the product group                                             |
+|  PromotionPriceMax        |   Float        | Max value of the range computed of PromotionPrice over the product group                                             |
+|  Skus                     |   String[]     | Aggregated array of product SKUs in the product group                                                                |
+|  Images                   |   String[]     | Images from the main product in the product group (product where isMain == true)                                     |
+|  SearchKeywords           |   String[]     | Aggregated array of unique search keywords from all the products in the group                                        |
+|  Category                 |   String[]     | Aggregated array of unique categories from all the products in the group                                             |
+|  Colors                   |   String[]     | Aggregated array of unique colors from all the products in the group                                                 |
+|  Brands                   |   String[]     | Aggregated array of unique brands from all the products in the group                                                 |
+|  Sizes                    |   String[]     | Aggregated array of unique sizes from all the products in the group                                                  |
+|  Active                   |   boolean      | Flag to mark the group as active. If all the products are inactive group gets inactive else it is marked as active   |
+|  Currency                 |   String       | Currency as mentioned in the product group.                                                                          |
+|  Updated                  |   Integer      | Unix timestamp of the last time when the product group was updated                                                   |
+|  Products                 |   Map{k,v}     | Map of products in the group. Key is the product SKU, value is the Product object                                    |
+|  Attributes               |   Map{k,v}     | Aggregated Map of custom product attributes. Unique values are grouped in arrays for each key                        | 
+
+
 
 
 ## Customer
 
-> Sample valid product object:
+> Sample valid customer object:
 
 ```json
 {
