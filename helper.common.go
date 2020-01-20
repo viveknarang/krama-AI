@@ -133,6 +133,30 @@ func mapDocument(w http.ResponseWriter, r *http.Request, object interface{}, doc
 
 }
 
+func mapBytes(w http.ResponseWriter, r *http.Request, object interface{}, bytes []byte) {
+
+	err1 := json.Unmarshal(bytes, &object)
+
+	if err1 != nil {
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+}
+
+func mapToBytes(w http.ResponseWriter, r *http.Request, document interface{}) []byte {
+
+	j, err0 := bson.MarshalExtJSON(document, false, false)
+
+	if err0 != nil {
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return nil
+	}
+
+	return j
+
+}
+
 func getAccessToken(r *http.Request) string {
 
 	return REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()

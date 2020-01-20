@@ -28,6 +28,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	if redisC.Err() != redis.Nil {
 
 		jx = []byte(redisC.Val())
+		mapBytes(w, r, &product, jx)
 
 	} else {
 
@@ -46,6 +47,8 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 		}
 
 		mapDocument(w, r, &product, results[0])
+
+		jx = mapToBytes(w, r, results[0])
 
 		REDISCLIENT.Set(r.URL.Path, jx, 0)
 
@@ -236,6 +239,7 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 	if redisC.Err() != redis.Nil {
 
 		jx = []byte(redisC.Val())
+		mapBytes(w, r, &productGroup, jx)
 
 	} else {
 
@@ -254,6 +258,8 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 		}
 
 		mapDocument(w, r, &productGroup, results[0])
+
+		jx = mapToBytes(w, r, results[0])
 
 		REDISCLIENT.Set(r.URL.Path, jx, 0)
 

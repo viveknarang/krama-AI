@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 	"strings"
 	"time"
@@ -22,12 +21,14 @@ func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var jx []byte
+	var order ORDER
 
 	redisC := REDISCLIENT.Get(r.URL.Path)
 
 	if redisC.Err() != redis.Nil {
 
 		jx = []byte(redisC.Val())
+		mapBytes(w, r, &order, jx)
 
 	} else {
 
@@ -45,26 +46,12 @@ func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
+		mapDocument(w, r, &order, results[0])
 
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return
-		}
+		jx = mapToBytes(w, r, results[0])
 
-		jx = j
+		REDISCLIENT.Set(r.URL.Path, jx, 0)
 
-		REDISCLIENT.Set(r.URL.Path, j, 0)
-
-	}
-
-	var order ORDER
-
-	err1 := json.Unmarshal([]byte(jx), &order)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
 	}
 
 	respondWith(w, r, nil, OrderFoundMessage, order, http.StatusOK, true)
@@ -87,6 +74,7 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 	if redisC.Err() != redis.Nil {
 
 		jx = []byte(redisC.Val())
+		mapBytes(w, r, &order, jx)
 
 	} else {
 
@@ -105,6 +93,8 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 		}
 
 		mapDocument(w, r, &order, results[0])
+
+		jx = mapToBytes(w, r, results[0])
 
 		REDISCLIENT.Set(r.URL.Path, jx, 0)
 
