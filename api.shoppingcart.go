@@ -106,7 +106,7 @@ func addProductInShoppingCart(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if productInventoryRecord.Quantity <= 0 || productInventoryRecord.Quantity-shoppingCartReq.Count <= 0 {
-		respondWith(w, r, nil, "Out of stock ...", nil, http.StatusNotFound, false)
+		respondWith(w, r, nil, "Product with SKU: "+productInventoryRecord.Sku+" is either out of stock or not enough stock to meet your need (for now) ...", nil, http.StatusNotFound, false)
 		return
 	}
 
