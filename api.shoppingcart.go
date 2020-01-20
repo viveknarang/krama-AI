@@ -214,6 +214,15 @@ func removeProductFromShoppingCart(w http.ResponseWriter, r *http.Request) {
 		shoppingCart.CustomerID = shoppingCartReq.CustomerID
 	}
 
+	_, exists := shoppingCart.Products[shoppingCartReq.SKU]
+
+	if !exists {
+
+		respondWith(w, r, nil, "Shopping cart does not have a product with SKU: "+shoppingCartReq.SKU, nil, http.StatusBadRequest, false)
+		return
+
+	}
+
 	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 	picol := csx + ProductInventoryExtension
 	var opts options.FindOptions
