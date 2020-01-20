@@ -80,6 +80,7 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var jx []byte
+	var order ORDER
 
 	redisC := REDISCLIENT.Get(r.URL.Path)
 
@@ -103,26 +104,10 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
+		mapDocument(w, r, &order, results[0])
 
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return
-		}
+		REDISCLIENT.Set(r.URL.Path, jx, 0)
 
-		jx = j
-
-		REDISCLIENT.Set(r.URL.Path, j, 0)
-
-	}
-
-	var order ORDER
-
-	err1 := json.Unmarshal([]byte(jx), &order)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
 	}
 
 	respondWith(w, r, nil, OrderFoundMessage, order, http.StatusOK, true)
@@ -139,12 +124,7 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 
 	var order ORDER
 
-	err := json.NewDecoder(r.Body).Decode(&order)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &order)
 
 	order.OrderCreationDate = time.Now().UnixNano()
 
@@ -173,12 +153,7 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 
 	var order ORDER
 
-	err := json.NewDecoder(r.Body).Decode(&order)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &order)
 
 	order.OrderCreationDate = time.Now().UnixNano()
 	order.OrderID = oid
@@ -226,21 +201,9 @@ func deleteOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
-
 	var order ORDER
 
-	err1 := json.Unmarshal([]byte(j), &order)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
+	mapDocument(w, r, &order, results[0])
 
 	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"OrderID": oid}) == 1 {
 

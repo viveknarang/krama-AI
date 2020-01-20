@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 	"time"
 
@@ -20,14 +19,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	var rx LOGIN
 
-	err := json.NewDecoder(r.Body).Decode(&rx)
-
-	if err != nil {
-
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-
-	}
+	mapInput(w, r, &rx)
 
 	if !areCoreServicesUp() {
 
@@ -48,19 +40,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 		var customer PLATFORMCUSTOMER
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return
-		}
-
-		err1 := json.Unmarshal([]byte(j), &customer)
-
-		if err1 != nil {
-			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return
-		}
+		mapDocument(w, r, &customer, results[0])
 
 		currentTime := time.Now().Unix()
 

@@ -4,12 +4,14 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"net/url"
 	"os"
 	"reflect"
 	"regexp"
 
 	"github.com/romana/rlog"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func isValidJSON(s string) bool {
@@ -96,6 +98,37 @@ func resetCustomerCacheKeys(customer *CUSTOMER) {
 
 	if customer != nil {
 		REDISCLIENT.Del(CustomersPath + "/customers/" + customer.CustomerID)
+	}
+
+}
+
+func mapInput(w http.ResponseWriter, r *http.Request, object interface{}) {
+
+	err := json.NewDecoder(r.Body).Decode(&object)
+
+	if err != nil {
+
+		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
+		return
+
+	}
+
+}
+
+func mapDocument(w http.ResponseWriter, r *http.Request, object interface{}, document interface{}) {
+
+	j, err0 := bson.MarshalExtJSON(document, false, false)
+
+	if err0 != nil {
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	err1 := json.Unmarshal([]byte(j), &object)
+
+	if err1 != nil {
+		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
 	}
 
 }

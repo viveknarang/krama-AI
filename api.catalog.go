@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 	"strings"
 	"time"
@@ -21,6 +20,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var jx []byte
+	var product PRODUCT
 
 	redisC := REDISCLIENT.Get(r.URL.Path)
 	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
@@ -45,26 +45,10 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
+		mapDocument(w, r, &product, results[0])
 
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return
-		}
+		REDISCLIENT.Set(r.URL.Path, jx, 0)
 
-		jx = j
-
-		REDISCLIENT.Set(r.URL.Path, j, 0)
-
-	}
-
-	var product PRODUCT
-
-	err1 := json.Unmarshal([]byte(jx), &product)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
 	}
 
 	picol := csx + ProductInventoryExtension
@@ -77,21 +61,9 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
-
 	var inventory INVENTORY
 
-	err3 := json.Unmarshal([]byte(j), &inventory)
-
-	if err3 != nil {
-		respondWith(w, r, err3, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
+	mapDocument(w, r, &inventory, results[0])
 
 	product.Quantity = inventory.Quantity
 
@@ -113,12 +85,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	var p PRODUCT
 
-	err := json.NewDecoder(r.Body).Decode(&p)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &p)
 
 	var opts options.FindOptions
 
@@ -169,12 +136,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	var p PRODUCT
 
-	err := json.NewDecoder(r.Body).Decode(&p)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &p)
 
 	if !validateProduct(w, r, p) {
 		return
@@ -233,21 +195,9 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
-
 	var product PRODUCT
 
-	err1 := json.Unmarshal([]byte(j), &product)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
+	mapDocument(w, r, &product, results[0])
 
 	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}) == 1 {
 
@@ -279,6 +229,7 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var jx []byte
+	var productGroup PRODUCTGROUP
 
 	redisC := REDISCLIENT.Get(r.URL.Path)
 
@@ -302,26 +253,10 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
+		mapDocument(w, r, &productGroup, results[0])
 
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return
-		}
+		REDISCLIENT.Set(r.URL.Path, jx, 0)
 
-		jx = j
-
-		REDISCLIENT.Set(r.URL.Path, j, 0)
-
-	}
-
-	var productGroup PRODUCTGROUP
-
-	err1 := json.Unmarshal([]byte(jx), &productGroup)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
 	}
 
 	respondWith(w, r, nil, ProductGroupFoundMessage, productGroup, http.StatusOK, true)
@@ -354,21 +289,9 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
-
 	var productGroup PRODUCTGROUP
 
-	err1 := json.Unmarshal([]byte(j), &productGroup)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
+	mapDocument(w, r, &productGroup, results[0])
 
 	for _, sku := range productGroup.Skus {
 		deleteMongoDocument(ExternalDB, pcol, bson.M{"Sku": sku})
@@ -398,16 +321,11 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 
 	var prices PRICEUPDATEREQUEST
 
-	err := json.NewDecoder(r.Body).Decode(&prices)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &prices)
 
 	for sku, price := range prices.Prices {
 		if price.RegularPrice < 0 || price.PromotionPrice < 0 {
-			respondWith(w, r, err, "Price for sku: "+sku+" is negative. Prices cannot be negative ...", nil, http.StatusBadRequest, false)
+			respondWith(w, r, nil, "Price for sku: "+sku+" is negative. Prices cannot be negative ...", nil, http.StatusBadRequest, false)
 			return
 		}
 	}
@@ -454,16 +372,11 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	var quantities INVENTORYUPDATEREQUEST
 
-	err := json.NewDecoder(r.Body).Decode(&quantities)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &quantities)
 
 	for sku, quantity := range quantities.Quantity {
 		if quantity < 0 {
-			respondWith(w, r, err, "Inventory for sku: "+sku+" is negative. Quantity field cannot be negative ...", nil, http.StatusBadRequest, false)
+			respondWith(w, r, nil, "Inventory for sku: "+sku+" is negative. Quantity field cannot be negative ...", nil, http.StatusBadRequest, false)
 			return
 		}
 	}

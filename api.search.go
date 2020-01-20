@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/romana/rlog"
@@ -17,12 +16,7 @@ func quickSearch(w http.ResponseWriter, r *http.Request) {
 
 	var sq SEARCHREQUEST
 
-	err := json.NewDecoder(r.Body).Decode(&sq)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &sq)
 
 	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 	index := cidb + ProductGroupExtension + SearchIndexExtension
@@ -53,12 +47,7 @@ func fullpageSearch(w http.ResponseWriter, r *http.Request) {
 
 	var sq SEARCHREQUEST
 
-	err := json.NewDecoder(r.Body).Decode(&sq)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &sq)
 
 	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 	index := cidb + ProductGroupExtension + SearchIndexExtension

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 	"strings"
 	"time"
@@ -22,6 +21,7 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var jx []byte
+	var customer CUSTOMER
 
 	redisC := REDISCLIENT.Get(r.URL.Path)
 
@@ -45,26 +45,10 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
+		mapDocument(w, r, &customer, results[0])
 
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return
-		}
+		REDISCLIENT.Set(r.URL.Path, jx, 0)
 
-		jx = j
-
-		REDISCLIENT.Set(r.URL.Path, j, 0)
-
-	}
-
-	var customer CUSTOMER
-
-	err1 := json.Unmarshal([]byte(jx), &customer)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
 	}
 
 	respondWith(w, r, nil, CustomersFoundMessage, customer, http.StatusOK, false)
@@ -81,14 +65,9 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 
 	var customer CUSTOMER
 
+	mapInput(w, r, &customer)
+
 	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
-
-	err := json.NewDecoder(r.Body).Decode(&customer)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
 
 	var opts options.FindOptions
 
@@ -131,12 +110,7 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 
 	var customer CUSTOMER
 
-	err := json.NewDecoder(r.Body).Decode(&customer)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &customer)
 
 	if !validateCustomer(w, r, customer) {
 		return
@@ -190,21 +164,9 @@ func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
-
 	var customer CUSTOMER
 
-	err1 := json.Unmarshal([]byte(j), &customer)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
+	mapDocument(w, r, &customer, results[0])
 
 	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid}) == 1 {
 

@@ -55,12 +55,7 @@ func addProductInShoppingCart(w http.ResponseWriter, r *http.Request) {
 
 	var shoppingCartReq SHOPPINGCARTREQ
 
-	err := json.NewDecoder(r.Body).Decode(&shoppingCartReq)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &shoppingCartReq)
 
 	shoppingCartO := REDISCLIENT.Get(shoppingCartReq.CartID)
 	var shoppingCart SHOPPINGCART
@@ -89,21 +84,9 @@ func addProductInShoppingCart(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
-
 	var productInventoryRecord INVENTORY
 
-	err3 := json.Unmarshal([]byte(j), &productInventoryRecord)
-
-	if err3 != nil {
-		respondWith(w, r, err3, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
+	mapDocument(w, r, &productInventoryRecord, results[0])
 
 	if productInventoryRecord.Quantity <= 0 || productInventoryRecord.Quantity-shoppingCartReq.Count <= 0 {
 		respondWith(w, r, nil, "Product with SKU: "+productInventoryRecord.Sku+" is either out of stock or not enough stock to meet your need (for now) ...", nil, http.StatusNotFound, false)
@@ -174,12 +157,7 @@ func removeProductFromShoppingCart(w http.ResponseWriter, r *http.Request) {
 
 	var shoppingCartReq SHOPPINGCARTREQ
 
-	err := json.NewDecoder(r.Body).Decode(&shoppingCartReq)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &shoppingCartReq)
 
 	shoppingCartO := REDISCLIENT.Get(shoppingCartReq.CartID)
 	var shoppingCart SHOPPINGCART
@@ -242,21 +220,9 @@ func removeProductFromShoppingCart(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
-
 	var productInventoryRecord INVENTORY
 
-	err3 := json.Unmarshal([]byte(j), &productInventoryRecord)
-
-	if err3 != nil {
-		respondWith(w, r, err3, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
+	mapDocument(w, r, &productInventoryRecord, results[0])
 
 	productInventoryRecord.Quantity = productInventoryRecord.Quantity + shoppingCartReq.Count
 	productInventoryRecord.Updated = time.Now().UnixNano()

@@ -22,14 +22,7 @@ func getProductReviews(w http.ResponseWriter, r *http.Request) {
 
 	var prr PRODREVIEWREQ
 
-	err := json.NewDecoder(r.Body).Decode(&prr)
-
-	if err != nil {
-
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-
-	}
+	mapInput(w, r, &prr)
 
 	if !validateProductReviewRequest(w, r, prr) {
 		return
@@ -96,12 +89,7 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 	prdbcol := csx + ProductReviewsExtension
 	pgdbcol := csx + ProductGroupExtension
 
-	err := json.NewDecoder(r.Body).Decode(&review)
-
-	if err != nil {
-		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
-	}
+	mapInput(w, r, &review)
 
 	if !validateProductReview(w, r, review) {
 		return
@@ -121,21 +109,9 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-	if err0 != nil {
-		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
-
 	var productGroup PRODUCTGROUP
 
-	err1 := json.Unmarshal([]byte(j), &productGroup)
-
-	if err1 != nil {
-		respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		return
-	}
+	mapDocument(w, r, &productGroup, results[0])
 
 	newReviewCount := productGroup.CumulativeReviewCount + 1
 	newReviewStars := (productGroup.CumulativeReviewStars + review.Stars) / float64(newReviewCount)
