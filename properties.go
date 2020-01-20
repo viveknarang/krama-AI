@@ -206,6 +206,9 @@ var ProductReviewsPath string
 //ProductReviewsExtension product reviews extension
 var ProductReviewsExtension string
 
+//ProductInventoryExtension product inventory extension
+var ProductInventoryExtension string
+
 func loadSystemProperties() bool {
 
 	rlog.Debug("loadSystemProperties() handle function invoked ...")
@@ -283,6 +286,7 @@ func loadSystemProperties() bool {
 	CustomerAlreadyExistsMessage = p.GetString("api.response.message.customers.exists", "")
 	ShoppingCartLife = p.GetString("api.shoppingcart.life", "")
 	ProductReviewsExtension = p.GetString("db.mongo.external.product.reviews.extension", "")
+	ProductInventoryExtension = p.GetString("db.mongo.external.product.inventory.extention", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion

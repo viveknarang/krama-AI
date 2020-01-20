@@ -23,6 +23,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	var jx []byte
 
 	redisC := REDISCLIENT.Get(r.URL.Path)
+	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 
 	if redisC.Err() != redis.Nil {
 
@@ -33,7 +34,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		sku := pth[len(pth)-1]
 
-		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+		dbcol := csx + ProductExtension
 
 		var opts options.FindOptions
 
@@ -66,6 +67,34 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	picol := csx + ProductInventoryExtension
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, picol, bson.M{"Sku": product.Sku}, &opts)
+
+	if len(results) != 1 {
+		respondWith(w, r, nil, "Inventory Record Not found ...", nil, http.StatusNotFound, false)
+		return
+	}
+
+	j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+	if err0 != nil {
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	var inventory INVENTORY
+
+	err3 := json.Unmarshal([]byte(j), &inventory)
+
+	if err3 != nil {
+		respondWith(w, r, err3, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	product.Quantity = inventory.Quantity
+
 	respondWith(w, r, nil, ProductFoundMessage, product, http.StatusOK, false)
 
 }
@@ -78,7 +107,9 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	dbcol := csx + ProductExtension
+	picol := csx + ProductInventoryExtension
 
 	var p PRODUCT
 
@@ -107,6 +138,12 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 	p.Updated = time.Now().UnixNano()
 
 	insertMongoDocument(ExternalDB, dbcol, p)
+
+	var productInventoryRecord INVENTORY
+	productInventoryRecord.Sku = p.Sku
+	productInventoryRecord.Quantity = p.Quantity
+	productInventoryRecord.Updated = time.Now().UnixNano()
+	insertMongoDocument(ExternalDB, picol, productInventoryRecord)
 
 	if syncProductGroup(w, r, p) {
 
@@ -431,7 +468,7 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+	picol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductInventoryExtension
 
 	var quantityUpdated []string
 	var quantityNotUpdated []string
@@ -439,7 +476,7 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	for sku, quantity := range quantities.Quantity {
 
-		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}, bson.M{"$set": bson.M{"Quantity": quantity}})
+		result := updateMongoDocument(ExternalDB, picol, bson.M{"Sku": sku}, bson.M{"$set": bson.M{"Quantity": quantity}})
 
 		if result[0] == 1 && result[1] == 1 {
 			quantityUpdated = append(quantityUpdated, sku)

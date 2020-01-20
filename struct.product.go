@@ -10,7 +10,7 @@ type PRODUCT struct {
 	PromotionPrice float64                `json:"PromotionPrice" bson:"PromotionPrice"`
 	Images         []string               `json:"Images" bson:"Images"`
 	SearchKeywords []string               `json:"SearchKeywords" bson:"SearchKeywords"`
-	Quantity       int64                  `json:"Quantity" bson:"Quantity"`
+	Quantity       int64                  `json:"Quantity" bson:"-"`
 	Category       []string               `json:"Category" bson:"Category"`
 	Color          string                 `json:"Color" bson:"Color"`
 	Brand          string                 `json:"Brand" bson:"Brand"`
