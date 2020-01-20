@@ -214,9 +214,17 @@ func removeProductFromShoppingCart(w http.ResponseWriter, r *http.Request) {
 		shoppingCart.CustomerID = shoppingCartReq.CustomerID
 	}
 
-	_, exists := shoppingCart.Products[shoppingCartReq.SKU]
+	_, exists := shoppingCart.ProductsCount[shoppingCartReq.SKU]
 
-	if !exists {
+	if exists && shoppingCartReq.Count > shoppingCart.ProductsCount[shoppingCartReq.SKU] {
+
+		shoppingCartReq.Count = shoppingCart.ProductsCount[shoppingCartReq.SKU]
+
+	}
+
+	_, exists2 := shoppingCart.Products[shoppingCartReq.SKU]
+
+	if !exists2 {
 
 		respondWith(w, r, nil, "Shopping cart does not have a product with SKU: "+shoppingCartReq.SKU, nil, http.StatusBadRequest, false)
 		return
