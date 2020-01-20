@@ -8,6 +8,8 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/romana/rlog"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func getShoppingCart(w http.ResponseWriter, r *http.Request) {
@@ -74,6 +76,48 @@ func addProductInShoppingCart(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+	}
+
+	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	picol := csx + ProductInventoryExtension
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, picol, bson.M{"Sku": shoppingCartReq.Product.Sku}, &opts)
+
+	if len(results) != 1 {
+		respondWith(w, r, nil, "Inventory Record Not found ...", nil, http.StatusNotFound, false)
+		return
+	}
+
+	j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+	if err0 != nil {
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	var productInventoryRecord INVENTORY
+
+	err3 := json.Unmarshal([]byte(j), &productInventoryRecord)
+
+	if err3 != nil {
+		respondWith(w, r, err3, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	if productInventoryRecord.Quantity <= 0 || productInventoryRecord.Quantity-shoppingCartReq.Count <= 0 {
+		respondWith(w, r, nil, "Out of stock ...", nil, http.StatusNotFound, false)
+		return
+	}
+
+	productInventoryRecord.Quantity = productInventoryRecord.Quantity - shoppingCartReq.Count
+	productInventoryRecord.Updated = time.Now().UnixNano()
+
+	result := updateMongoDocument(ExternalDB, picol, bson.M{"Sku": productInventoryRecord.Sku}, bson.M{"$set": productInventoryRecord})
+
+	if result[1] == 0 {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
 	}
 
 	if shoppingCartReq.CartID == "" {
@@ -168,6 +212,43 @@ func removeProductFromShoppingCart(w http.ResponseWriter, r *http.Request) {
 
 	if shoppingCartReq.CustomerID != "" {
 		shoppingCart.CustomerID = shoppingCartReq.CustomerID
+	}
+
+	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	picol := csx + ProductInventoryExtension
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, picol, bson.M{"Sku": shoppingCartReq.SKU}, &opts)
+
+	if len(results) != 1 {
+		respondWith(w, r, nil, "Inventory Record Not found ...", nil, http.StatusNotFound, false)
+		return
+	}
+
+	j, err0 := bson.MarshalExtJSON(results[0], false, false)
+
+	if err0 != nil {
+		respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	var productInventoryRecord INVENTORY
+
+	err3 := json.Unmarshal([]byte(j), &productInventoryRecord)
+
+	if err3 != nil {
+		respondWith(w, r, err3, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
+	productInventoryRecord.Quantity = productInventoryRecord.Quantity + shoppingCartReq.Count
+	productInventoryRecord.Updated = time.Now().UnixNano()
+
+	result := updateMongoDocument(ExternalDB, picol, bson.M{"Sku": productInventoryRecord.Sku}, bson.M{"$set": productInventoryRecord})
+
+	if result[1] == 0 {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
 	}
 
 	shoppingCart.ProductsCount[shoppingCartReq.SKU] -= shoppingCartReq.Count
