@@ -18,7 +18,7 @@ func quickSearch(w http.ResponseWriter, r *http.Request) {
 
 	mapInput(w, r, &sq)
 
-	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	cidb := getAccessToken(r)
 	index := cidb + ProductGroupExtension + SearchIndexExtension
 
 	searchResponse := basicSearch(index, sq.From, sq.To, sq.Query, sq.QueryFields, sq.ResponseFields)
@@ -49,7 +49,7 @@ func fullpageSearch(w http.ResponseWriter, r *http.Request) {
 
 	mapInput(w, r, &sq)
 
-	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	cidb := getAccessToken(r)
 	index := cidb + ProductGroupExtension + SearchIndexExtension
 
 	searchResponse := facetedSearch(index, sq.From, sq.To, sq.Query, sq.QueryFields, sq.ResponseFields, sq.TermFacetFields, sq.RangeFacetFields)

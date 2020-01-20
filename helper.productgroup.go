@@ -17,7 +17,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 	var response bool
 
-	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	cidb := getAccessToken(r)
 
 	pgcol := cidb + ProductGroupExtension
 
@@ -471,7 +471,7 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 	rlog.Debug("syncProductGroupFromProducts() handle function invoked ...")
 
-	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	cidb := getAccessToken(r)
 
 	pgcol := cidb + ProductGroupExtension
 

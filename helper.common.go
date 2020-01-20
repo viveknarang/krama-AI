@@ -132,3 +132,9 @@ func mapDocument(w http.ResponseWriter, r *http.Request, object interface{}, doc
 	}
 
 }
+
+func getAccessToken(r *http.Request) string {
+
+	return REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+
+}

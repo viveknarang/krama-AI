@@ -34,7 +34,7 @@ func getOrderByOrderID(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		oid := pth[len(pth)-1]
 
-		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
+		dbcol := getAccessToken(r) + OrdersExtension
 
 		var opts options.FindOptions
 
@@ -93,7 +93,7 @@ func getOrderByCustomerID(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		cid := pth[len(pth)-1]
 
-		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
+		dbcol := getAccessToken(r) + OrdersExtension
 
 		var opts options.FindOptions
 
@@ -132,7 +132,7 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 		order.OrderID = uuid.New().String()
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
+	dbcol := getAccessToken(r) + OrdersExtension
 
 	insertMongoDocument(ExternalDB, dbcol, order)
 
@@ -158,7 +158,7 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 	order.OrderCreationDate = time.Now().UnixNano()
 	order.OrderID = oid
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
+	dbcol := getAccessToken(r) + OrdersExtension
 
 	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"OrderID": order.OrderID}, bson.M{"$set": order})
 
@@ -187,7 +187,7 @@ func deleteOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + OrdersExtension
+	dbcol := getAccessToken(r) + OrdersExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	oid := pth[len(pth)-1]

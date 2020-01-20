@@ -31,7 +31,7 @@ func getProductReviews(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductReviewsExtension
+	dbcol := getAccessToken(r) + ProductReviewsExtension
 
 	var opts options.FindOptions
 
@@ -84,7 +84,7 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 
 	var review PRODUCTREVIEW
 
-	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	csx := getAccessToken(r)
 
 	prdbcol := csx + ProductReviewsExtension
 	pgdbcol := csx + ProductGroupExtension
@@ -143,7 +143,7 @@ func deleteProductReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductReviewsExtension
+	dbcol := getAccessToken(r) + ProductReviewsExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	rid := pth[len(pth)-1]
@@ -177,7 +177,7 @@ func deleteProductGroupReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductReviewsExtension
+	dbcol := getAccessToken(r) + ProductReviewsExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]

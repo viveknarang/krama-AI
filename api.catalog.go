@@ -23,7 +23,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	var product PRODUCT
 
 	redisC := REDISCLIENT.Get(r.URL.Path)
-	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	csx := getAccessToken(r)
 
 	if redisC.Err() != redis.Nil {
 
@@ -79,7 +79,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	csx := getAccessToken(r)
 	dbcol := csx + ProductExtension
 	picol := csx + ProductInventoryExtension
 
@@ -144,7 +144,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	groomProductData(&p)
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+	dbcol := getAccessToken(r) + ProductExtension
 
 	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, bson.M{"$set": p})
 
@@ -181,7 +181,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+	dbcol := getAccessToken(r) + ProductExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	sku := pth[len(pth)-1]
@@ -239,7 +239,7 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductGroupExtension
+		dbcol := getAccessToken(r) + ProductGroupExtension
 
 		pth := strings.Split(r.URL.Path, "/")
 		pgid := pth[len(pth)-1]
@@ -271,7 +271,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cidb := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	cidb := getAccessToken(r)
 
 	pgcol := cidb + ProductGroupExtension
 	pcol := cidb + ProductExtension
@@ -330,7 +330,7 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductExtension
+	dbcol := getAccessToken(r) + ProductExtension
 
 	var priceUpdated []string
 	var priceNotUpdated []string
@@ -381,7 +381,7 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	picol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + ProductInventoryExtension
+	picol := getAccessToken(r) + ProductInventoryExtension
 
 	var quantityUpdated []string
 	var quantityNotUpdated []string

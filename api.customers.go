@@ -34,7 +34,7 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 		pth := strings.Split(r.URL.Path, "/")
 		cid := pth[len(pth)-1]
 
-		dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
+		dbcol := getAccessToken(r) + CustomersCollectionExtension
 
 		var opts options.FindOptions
 
@@ -67,7 +67,7 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 
 	mapInput(w, r, &customer)
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
+	dbcol := getAccessToken(r) + CustomersCollectionExtension
 
 	var opts options.FindOptions
 
@@ -121,7 +121,7 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 	customer.Updated = time.Now().UnixNano()
 	customer.CustomerID = cid
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
+	dbcol := getAccessToken(r) + CustomersCollectionExtension
 
 	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": customer.CustomerID}, bson.M{"$set": customer})
 
@@ -150,7 +150,7 @@ func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val() + CustomersCollectionExtension
+	dbcol := getAccessToken(r) + CustomersCollectionExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	cid := pth[len(pth)-1]

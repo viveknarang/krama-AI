@@ -73,7 +73,7 @@ func addProductInShoppingCart(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	csx := getAccessToken(r)
 	picol := csx + ProductInventoryExtension
 	var opts options.FindOptions
 
@@ -209,7 +209,7 @@ func removeProductFromShoppingCart(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	csx := REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	csx := getAccessToken(r)
 	picol := csx + ProductInventoryExtension
 	var opts options.FindOptions
 
