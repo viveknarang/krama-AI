@@ -1,7 +1,5 @@
 
-[![Build Status](https://travis-ci.org/viveknarang/krama-AI.svg?branch=master)](https://travis-ci.org/viveknarang/krama-AI)
-
-[![Go Report Card](https://goreportcard.com/badge/github.com/viveknarang/krama-AI)](https://goreportcard.com/report/github.com/viveknarang/krama-AI)
+[![Build Status](https://travis-ci.org/viveknarang/krama-AI.svg?branch=master)](https://travis-ci.org/viveknarang/krama-AI)  [![Go Report Card](https://goreportcard.com/badge/github.com/viveknarang/krama-AI)](https://goreportcard.com/report/github.com/viveknarang/krama-AI)
 
 # Krama AI - A blazing fast E-commerce AI platform
 
