@@ -395,7 +395,7 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	for sku, quantity := range quantities.Quantity {
 
-		result := updateMongoDocument(ExternalDB, picol, bson.M{"Sku": sku}, bson.M{"$set": bson.M{"Quantity": quantity}})
+		result := updateInventory(w, r, picol, "INCR", sku, quantity, true)
 
 		if result[0] == 1 && result[1] == 1 {
 			quantityUpdated = append(quantityUpdated, sku)

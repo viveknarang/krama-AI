@@ -9,18 +9,29 @@ import (
 )
 
 // Synchronized function to keep inventory levels consistent...
-func updateInventory(w http.ResponseWriter, r *http.Request, collection string, iodi string, Sku string, count int64) {
+func updateInventory(w http.ResponseWriter, r *http.Request, collection string, iodi string, Sku string, count int64, ignoreMessageForNotFound bool) [2]int64 {
 
 	mutex.Lock()
+	var fr [2]int64
+	fr[0] = -1
+	fr[1] = -1
 
 	var opts options.FindOptions
 
 	results := findMongoDocument(ExternalDB, collection, bson.M{"Sku": Sku}, &opts)
 
 	if len(results) != 1 {
-		respondWith(w, r, nil, "Inventory Record Not found ...", nil, http.StatusNotFound, false)
+
+		if !ignoreMessageForNotFound {
+			respondWith(w, r, nil, "Inventory Record Not found ...", nil, http.StatusNotFound, false)
+		}
+
 		mutex.Unlock()
-		return
+
+		fr[0] = 0
+		fr[1] = 0
+
+		return fr
 	}
 
 	var productInventoryRecord INVENTORY
@@ -32,7 +43,7 @@ func updateInventory(w http.ResponseWriter, r *http.Request, collection string, 
 		if productInventoryRecord.Quantity <= 0 || productInventoryRecord.Quantity-count <= 0 {
 			respondWith(w, r, nil, "Product with SKU: "+productInventoryRecord.Sku+" is either out of stock or not enough stock for fulfilling your order ...", nil, http.StatusNotFound, false)
 			mutex.Unlock()
-			return
+			return fr
 		}
 
 		productInventoryRecord.Quantity = productInventoryRecord.Quantity - count
@@ -47,12 +58,8 @@ func updateInventory(w http.ResponseWriter, r *http.Request, collection string, 
 
 	result := updateMongoDocument(ExternalDB, collection, bson.M{"Sku": productInventoryRecord.Sku}, bson.M{"$set": productInventoryRecord})
 
-	if result[1] == 0 {
-		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-		mutex.Unlock()
-		return
-	}
-
 	mutex.Unlock()
+
+	return result
 
 }
