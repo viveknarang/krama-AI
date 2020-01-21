@@ -162,3 +162,21 @@ func getAccessToken(r *http.Request) string {
 	return REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
 
 }
+
+func logDebugMessage(message string) {
+
+	rlog.Debug(message)
+
+}
+
+func logErrorMessage(message string) {
+
+	rlog.Error(message)
+
+}
+
+func logInfoMessage(message string) {
+
+	rlog.Info(message)
+
+}
