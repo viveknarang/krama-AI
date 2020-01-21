@@ -81,6 +81,10 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if customer.CustomerID == "" {
+		customer.CustomerID = uuid.New().String()
+	}
+
 	if !validateCustomer(w, r, customer) {
 		return
 	}
@@ -89,10 +93,6 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 
 	customer.Password = hashString(customer.Password)
 	customer.Updated = time.Now().UnixNano()
-
-	if customer.CustomerID == "" {
-		customer.CustomerID = uuid.New().String()
-	}
 
 	insertMongoDocument(ExternalDB, dbcol, customer)
 
@@ -115,6 +115,8 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 
 	mapInput(w, r, &customer)
 
+	customer.CustomerID = cid
+
 	if !validateCustomer(w, r, customer) {
 		return
 	}
@@ -122,7 +124,6 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 	groomCustomerData(&customer)
 
 	customer.Updated = time.Now().UnixNano()
-	customer.CustomerID = cid
 
 	dbcol := getAccessToken(r) + CustomersCollectionExtension
 
