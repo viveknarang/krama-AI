@@ -21,6 +21,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	mapInput(w, r, &rx)
 
+	if !validateLoginRequest(w, r, rx) {
+		return
+	}
+
 	if !areCoreServicesUp() {
 
 		respondWith(w, r, nil, ServiceDownMessage, nil, http.StatusServiceUnavailable, false)
