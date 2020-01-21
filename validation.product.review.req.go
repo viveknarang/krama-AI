@@ -2,20 +2,17 @@ package main
 
 import (
 	"net/http"
+
+	"github.com/go-validator/validator"
 )
 
-func validateProductReviewRequest(w http.ResponseWriter, r *http.Request, req PRODREVIEWREQ) bool {
+func validateProductReviewRequest(w http.ResponseWriter, r *http.Request, reviewRq PRODREVIEWREQ) bool {
 
-	if len(req.SortField) == 0 || len(req.SortField) > 100 {
+	validator.SetValidationFunc("isValidSortOrder", customValidatorForSortOrder)
 
-		respondWith(w, r, nil, "SortField field cannot be empty or greater than 100 characters long", nil, http.StatusBadRequest, false)
-		return false
+	if errs := validator.Validate(reviewRq); errs != nil {
 
-	}
-
-	if !(req.Order == -1 || req.Order == 1) {
-
-		respondWith(w, r, nil, "Order field can only have either -1 (decending) or 1 (ascending) as a value", nil, http.StatusBadRequest, false)
+		respondWith(w, r, nil, "Error(s) found in the review data: "+errs.Error(), nil, http.StatusBadRequest, false)
 		return false
 
 	}

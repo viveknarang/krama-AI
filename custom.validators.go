@@ -86,3 +86,14 @@ func customValidatorForStarRating(v interface{}, param string) error {
 
 	return nil
 }
+
+func customValidatorForSortOrder(v interface{}, param string) error {
+
+	st := reflect.ValueOf(v)
+
+	if !(st.Int() == -1 || st.Int() == 1) {
+		return errors.New("field can only have either -1 (decending) or 1 (ascending) as a value")
+	}
+
+	return nil
+}
