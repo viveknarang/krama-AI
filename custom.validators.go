@@ -75,3 +75,14 @@ func customValidatorForAllowedCurrencies(v interface{}, param string) error {
 
 	return nil
 }
+
+func customValidatorForStarRating(v interface{}, param string) error {
+
+	st := reflect.ValueOf(v)
+
+	if st.Float() <= 0.0 || st.Float() > 5.0 {
+		return errors.New("field needs to have value between 1.0 and 5.0 (inclusive)")
+	}
+
+	return nil
+}

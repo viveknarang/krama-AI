@@ -91,14 +91,13 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 
 	mapInput(w, r, &review)
 
+	review.ReviewID = uuid.New().String()
+
 	if !validateProductReview(w, r, review) {
 		return
 	}
 
 	review.Time = time.Now().UnixNano()
-	review.ReviewID = uuid.New().String()
-
-	insertMongoDocument(ExternalDB, prdbcol, review)
 
 	var opts options.FindOptions
 
@@ -108,6 +107,8 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 		respondWith(w, r, nil, "Product Review Insertion Failed! Reason:"+ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
 		return
 	}
+
+	insertMongoDocument(ExternalDB, prdbcol, review)
 
 	var productGroup PRODUCTGROUP
 
