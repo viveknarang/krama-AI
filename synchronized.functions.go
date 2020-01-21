@@ -2,16 +2,20 @@ package main
 
 import (
 	"net/http"
+	"sync"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+var mutex sync.Mutex
+
 // Synchronized function to keep inventory levels consistent...
 func updateInventory(w http.ResponseWriter, r *http.Request, collection string, iodi string, Sku string, count int64, ignoreMessageForNotFound bool) [2]int64 {
 
 	mutex.Lock()
+
 	var fr [2]int64
 	fr[0] = -1
 	fr[1] = -1

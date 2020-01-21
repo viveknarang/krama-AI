@@ -4,14 +4,11 @@ import (
 	"encoding/json"
 	"net/http"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/romana/rlog"
 )
-
-var mutex sync.Mutex
 
 func getShoppingCart(w http.ResponseWriter, r *http.Request) {
 
