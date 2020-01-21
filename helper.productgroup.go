@@ -492,21 +492,9 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 			return false
 		}
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return false
-		}
-
 		var product PRODUCT
 
-		err1 := json.Unmarshal([]byte(j), &product)
-
-		if err1 != nil {
-			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return false
-		}
+		mapDocument(w, r, &product, results[0])
 
 		result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, bson.M{"$set": bson.M{"Products." + product.Sku: product}})
 
@@ -518,19 +506,7 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 			var productGroup PRODUCTGROUP
 
-			j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-			if err0 != nil {
-				respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-				return false
-			}
-
-			err1 := json.Unmarshal([]byte(j), &productGroup)
-
-			if err1 != nil {
-				respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-				return false
-			}
+			mapDocument(w, r, &productGroup, results[0])
 
 			if isPriceUpdate {
 
@@ -566,19 +542,7 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 					var productGroup PRODUCTGROUP
 
-					j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-					if err0 != nil {
-						respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-						return false
-					}
-
-					err1 := json.Unmarshal([]byte(j), &productGroup)
-
-					if err1 != nil {
-						respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-						return false
-					}
+					mapDocument(w, r, &productGroup, results[0])
 
 					productGroup.Products = nil
 					response = response && indexES(pgindex, PGMapping, productGroup, productGroup.GroupID)
