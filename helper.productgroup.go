@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"math"
 	"net/http"
 	"time"
@@ -93,19 +92,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			var productGroup PRODUCTGROUP
 
-			j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-			if err0 != nil {
-				respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-				return false
-			}
-
-			err1 := json.Unmarshal([]byte(j), &productGroup)
-
-			if err1 != nil {
-				respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-				return false
-			}
+			mapDocument(w, r, &productGroup, results[0])
 
 			setInit()
 			addAllInSet(p.SearchKeywords)
@@ -134,28 +121,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			productGroup.Products[p.Sku] = p
 
-			nrpmin := math.MaxFloat64
-			var nrpmax float64
-			nppmin := math.MaxFloat64
-			var nppmax float64
 			active := false
 
 			setInit()
 
 			for key, value := range productGroup.Products {
-
-				if value.RegularPrice < nrpmin {
-					nrpmin = value.RegularPrice
-				}
-				if value.RegularPrice > nrpmax {
-					nrpmax = value.RegularPrice
-				}
-				if value.PromotionPrice < nppmin {
-					nppmin = value.PromotionPrice
-				}
-				if value.PromotionPrice > nppmax {
-					nppmax = value.PromotionPrice
-				}
 
 				if value.IsMain {
 					productGroup.Name = value.Name
@@ -167,6 +137,8 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 				addInSet(key)
 
 			}
+
+			prices := computePriceRange(&productGroup)
 
 			for key, value := range p.Attributes {
 
@@ -187,10 +159,10 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			productGroup.Skus = append(productGroup.Skus, p.Sku)
 
-			productGroup.RegularPriceMin = nrpmin
-			productGroup.RegularPriceMax = nrpmax
-			productGroup.PromotionPriceMin = nppmin
-			productGroup.PromotionPriceMax = nppmax
+			productGroup.RegularPriceMin = prices[0]
+			productGroup.RegularPriceMax = prices[1]
+			productGroup.PromotionPriceMin = prices[2]
+			productGroup.PromotionPriceMax = prices[3]
 			productGroup.Active = active
 			productGroup.Skus = toArrayFromSet()
 
@@ -209,19 +181,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		var productGroup PRODUCTGROUP
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return false
-		}
-
-		err1 := json.Unmarshal([]byte(j), &productGroup)
-
-		if err1 != nil {
-			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return false
-		}
+		mapDocument(w, r, &productGroup, results[0])
 
 		setInit()
 		addAllInSet(p.SearchKeywords)
@@ -250,28 +210,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		productGroup.Products[p.Sku] = p
 
-		nrpmin := math.MaxFloat64
-		var nrpmax float64
-		nppmin := math.MaxFloat64
-		var nppmax float64
 		active := false
 
 		setInit()
 
 		for key, value := range productGroup.Products {
-
-			if value.RegularPrice < nrpmin {
-				nrpmin = value.RegularPrice
-			}
-			if value.RegularPrice > nrpmax {
-				nrpmax = value.RegularPrice
-			}
-			if value.PromotionPrice < nppmin {
-				nppmin = value.PromotionPrice
-			}
-			if value.PromotionPrice > nppmax {
-				nppmax = value.PromotionPrice
-			}
 
 			if value.IsMain {
 				productGroup.Name = value.Name
@@ -283,6 +226,8 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			addInSet(key)
 
 		}
+
+		prices := computePriceRange(&productGroup)
 
 		updpg := make(map[string][]interface{})
 		for _, valueP := range productGroup.Products {
@@ -308,10 +253,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		productGroup.Skus = append(productGroup.Skus, p.Sku)
 
-		productGroup.RegularPriceMin = nrpmin
-		productGroup.RegularPriceMax = nrpmax
-		productGroup.PromotionPriceMin = nppmin
-		productGroup.PromotionPriceMax = nppmax
+		productGroup.RegularPriceMin = prices[0]
+		productGroup.RegularPriceMax = prices[1]
+		productGroup.PromotionPriceMin = prices[2]
+		productGroup.PromotionPriceMax = prices[3]
+
 		productGroup.Active = active
 		productGroup.Skus = toArrayFromSet()
 
@@ -328,19 +274,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		var productGroup PRODUCTGROUP
 
-		j, err0 := bson.MarshalExtJSON(results[0], false, false)
-
-		if err0 != nil {
-			respondWith(w, r, err0, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return false
-		}
-
-		err1 := json.Unmarshal([]byte(j), &productGroup)
-
-		if err1 != nil {
-			respondWith(w, r, err1, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
-			return false
-		}
+		mapDocument(w, r, &productGroup, results[0])
 
 		if len(productGroup.Products) == 1 {
 
@@ -356,28 +290,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			delete(productGroup.Products, p.Sku)
 
-			nrpmin := math.MaxFloat64
-			var nrpmax float64
-			nppmin := math.MaxFloat64
-			var nppmax float64
 			active := false
 
 			setInit()
 
 			for key, value := range productGroup.Products {
-
-				if value.RegularPrice < nrpmin {
-					nrpmin = value.RegularPrice
-				}
-				if value.RegularPrice > nrpmax {
-					nrpmax = value.RegularPrice
-				}
-				if value.PromotionPrice < nppmin {
-					nppmin = value.PromotionPrice
-				}
-				if value.PromotionPrice > nppmax {
-					nppmax = value.PromotionPrice
-				}
 
 				if value.IsMain {
 					productGroup.Name = value.Name
@@ -389,6 +306,8 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 				addInSet(key)
 
 			}
+
+			prices := computePriceRange(&productGroup)
 
 			updpg := make(map[string][]interface{})
 			for _, valueP := range productGroup.Products {
@@ -414,10 +333,10 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			productGroup.Skus = append(productGroup.Skus, p.Sku)
 
-			productGroup.RegularPriceMin = nrpmin
-			productGroup.RegularPriceMax = nrpmax
-			productGroup.PromotionPriceMin = nppmin
-			productGroup.PromotionPriceMax = nppmax
+			productGroup.RegularPriceMin = prices[0]
+			productGroup.RegularPriceMax = prices[1]
+			productGroup.PromotionPriceMin = prices[2]
+			productGroup.PromotionPriceMax = prices[3]
 			productGroup.Active = active
 			productGroup.Skus = toArrayFromSet()
 
@@ -510,29 +429,9 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 			if isPriceUpdate {
 
-				nrpmin := math.MaxFloat64
-				var nrpmax float64
-				nppmin := math.MaxFloat64
-				var nppmax float64
+				prices := computePriceRange(&productGroup)
 
-				for _, value := range productGroup.Products {
-
-					if value.RegularPrice < nrpmin {
-						nrpmin = value.RegularPrice
-					}
-					if value.RegularPrice > nrpmax {
-						nrpmax = value.RegularPrice
-					}
-					if value.PromotionPrice < nppmin {
-						nppmin = value.PromotionPrice
-					}
-					if value.PromotionPrice > nppmax {
-						nppmax = value.PromotionPrice
-					}
-
-				}
-
-				result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, bson.M{"$set": bson.M{"RegularPriceMin": nrpmin, "RegularPriceMax": nrpmax, "PromotionPriceMin": nppmin, "PromotionPriceMax": nppmax}})
+				result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, bson.M{"$set": bson.M{"RegularPriceMin": prices[0], "RegularPriceMax": prices[1], "PromotionPriceMin": prices[2], "PromotionPriceMax": prices[3]}})
 
 				if result[0] == 1 && result[1] == 1 {
 
@@ -563,4 +462,34 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 	}
 
 	return response
+}
+
+func computePriceRange(productGroup *PRODUCTGROUP) [4]float64 {
+
+	var result [4]float64
+
+	result[0] = math.MaxFloat64
+	result[1] = 0.0
+	result[2] = math.MaxFloat64
+	result[3] = 0.0
+
+	for _, value := range productGroup.Products {
+
+		if value.RegularPrice < result[0] {
+			result[0] = value.RegularPrice
+		}
+		if value.RegularPrice > result[1] {
+			result[1] = value.RegularPrice
+		}
+		if value.PromotionPrice < result[2] {
+			result[2] = value.PromotionPrice
+		}
+		if value.PromotionPrice > result[3] {
+			result[3] = value.PromotionPrice
+		}
+
+	}
+
+	return result
+
 }
