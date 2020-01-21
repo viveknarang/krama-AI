@@ -1,38 +1,10 @@
 package main
 
 import (
-	"errors"
 	"net/http"
-	"reflect"
-	"strconv"
 
 	"github.com/go-validator/validator"
 )
-
-func customValidatorForEmail(v interface{}, param string) error {
-
-	st := reflect.ValueOf(v)
-
-	if !isValidEmail(st.String()) {
-		return errors.New("field is not a valid email address")
-	}
-
-	return nil
-}
-
-func customValidatorForTypeArrayLengths(v interface{}, param string) error {
-
-	st := reflect.ValueOf(v)
-
-	iparam, _ := strconv.Atoi(param)
-
-	if st.Len() > int(iparam) {
-		return errors.New("field has more than " + param + " entries")
-	}
-
-	return nil
-
-}
 
 func validateCustomer(w http.ResponseWriter, r *http.Request, customer CUSTOMER) bool {
 
