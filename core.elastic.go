@@ -132,9 +132,9 @@ func facetedSearch(index string, from int, to int, q string, queryFields []strin
 	m0 := make(map[string]interface{})
 	m1 := make(map[string]map[string]interface{})
 	m2 := make(map[string]map[string]interface{})
-	m3 := make(map[string]interface{})
+	var m3 map[string]interface{}
 	var m4 []interface{}
-	m5 := make(map[string]interface{})
+	var m5 map[string]interface{}
 
 	// Range Aggregation for rangeFacetFields parameter
 	for _, rangeF := range rangeFacetFields {
