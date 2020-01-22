@@ -203,3 +203,14 @@ func containsInArray(array []string, value string) bool {
 
 	return false
 }
+
+func containsInCategoryNodes(array []CATEGORYTREENODE, value string) bool {
+
+	for _, k := range array {
+		if k.Name == value {
+			return true
+		}
+	}
+
+	return false
+}

@@ -105,13 +105,15 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	groomProductData(&p)
 
+	for _, cat := range p.Category {
+		if !insertIntoTree(w, r, csx+CategoryTreeExtension, cat, p.Sku) {
+			return
+		}
+	}
+
 	p.Updated = time.Now().UnixNano()
 
 	insertMongoDocument(ExternalDB, dbcol, p)
-
-	for _, cat := range p.Category {
-		insertIntoTree(w, r, csx+CategoryTreeExtension, cat, p.Sku)
-	}
 
 	var productInventoryRecord INVENTORY
 	productInventoryRecord.Sku = p.Sku

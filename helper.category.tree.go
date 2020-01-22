@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -45,12 +46,21 @@ func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection st
 
 }
 
-func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection string, path string, sku string) {
+func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection string, path string, sku string) bool {
 
 	rlog.Debug("insertIntoTree() handle function invoked ...")
 
 	catPath := parseCategoryPath(path, ">")
 	pathLength := len(catPath)
+
+	node := getCategoryNode(w, r, catPath[0], treeCollection)
+
+	fmt.Printf("%+v", node)
+
+	if node != nil && node.Parent != "" {
+		respondWith(w, r, nil, "Root node in the category path is an existing child node in the tree", nil, http.StatusBadRequest, false)
+		return false
+	}
 
 	for i := 0; i < pathLength; i++ {
 
@@ -60,18 +70,18 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 			if !containsInArray(node.SKUs, sku) {
 				node.SKUs = append(node.SKUs, sku)
 
-				if node.ParentCategory == "" && i-1 > 0 {
-					node.ParentCategory = catPath[i-1]
+				if node.Parent == "" && i-1 > 0 {
+					node.Parent = catPath[i-1]
 				}
 
 				updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
 			}
 		} else if node != nil && i < pathLength-1 {
-			if !containsInArray(node.ChildCategory, catPath[i+1]) {
-				node.ChildCategory = append(node.ChildCategory, catPath[i+1])
+			if !containsInArray(node.Children, catPath[i+1]) {
+				node.Children = append(node.Children, catPath[i+1])
 
-				if node.ParentCategory == "" && i-1 > 0 {
-					node.ParentCategory = catPath[i-1]
+				if node.Parent == "" && i-1 > 0 {
+					node.Parent = catPath[i-1]
 				}
 
 				updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
@@ -80,11 +90,11 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 			var nCN CATEGORYTREENODE
 			nCN.CategoryID = uuid.New().String()
-			nCN.CategoryName = catPath[i]
+			nCN.Name = catPath[i]
 			nCN.SKUs = append(nCN.SKUs, sku)
 
 			if i-1 >= 0 {
-				nCN.ParentCategory = catPath[i-1]
+				nCN.Parent = catPath[i-1]
 			}
 
 			createCategoryNode(w, r, treeCollection, &nCN)
@@ -93,11 +103,11 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 			var nCN CATEGORYTREENODE
 			nCN.CategoryID = uuid.New().String()
-			nCN.CategoryName = catPath[i]
-			nCN.ChildCategory = append(nCN.ChildCategory, catPath[i+1])
+			nCN.Name = catPath[i]
+			nCN.Children = append(nCN.Children, catPath[i+1])
 
 			if i-1 >= 0 {
-				nCN.ParentCategory = catPath[i-1]
+				nCN.Parent = catPath[i-1]
 			}
 
 			createCategoryNode(w, r, treeCollection, &nCN)
@@ -106,13 +116,15 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 	}
 
+	return true
+
 }
 
 func getCategoryNode(w http.ResponseWriter, r *http.Request, category string, collection string) *CATEGORYTREENODE {
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, collection, bson.M{"CategoryName": category}, &opts)
+	results := findMongoDocument(ExternalDB, collection, bson.M{"Name": category}, &opts)
 
 	if len(results) == 1 {
 
@@ -139,7 +151,7 @@ func createCategoryNode(w http.ResponseWriter, r *http.Request, collection strin
 
 }
 
-func getRootCategories(w http.ResponseWriter, r *http.Request, collection string) *[]CATEGORYTREENODE {
+func getRootCategories(w http.ResponseWriter, r *http.Request, collection string) []CATEGORYTREENODE {
 
 	var opts options.FindOptions
 
@@ -157,6 +169,6 @@ func getRootCategories(w http.ResponseWriter, r *http.Request, collection string
 
 	}
 
-	return &treeNode
+	return treeNode
 
 }
