@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -80,8 +79,6 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 	pathLength := len(catPath)
 
 	node := getCategoryNode(w, r, catPath[0], treeCollection)
-
-	fmt.Printf("%+v", node)
 
 	if node != nil && node.Parent != "" {
 		respondWith(w, r, nil, "Root node in the category path is an existing child node in the tree", nil, http.StatusBadRequest, false)
