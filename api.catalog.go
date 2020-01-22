@@ -109,6 +109,10 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	insertMongoDocument(ExternalDB, dbcol, p)
 
+	for _, cat := range p.Category {
+		insertIntoTree(w, r, csx+CategoryTreeExtension, cat, p.Sku)
+	}
+
 	var productInventoryRecord INVENTORY
 	productInventoryRecord.Sku = p.Sku
 	productInventoryRecord.Quantity = p.Quantity

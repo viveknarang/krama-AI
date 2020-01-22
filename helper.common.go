@@ -192,3 +192,14 @@ func contains(arr [6]string, str string) bool {
 	return false
 
 }
+
+func containsInArray(array []string, value string) bool {
+
+	for _, k := range array {
+		if k == value {
+			return true
+		}
+	}
+
+	return false
+}

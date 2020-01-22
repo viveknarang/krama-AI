@@ -209,6 +209,9 @@ var ProductReviewsExtension string
 //ProductInventoryExtension product inventory extension
 var ProductInventoryExtension string
 
+//CategoryTreeExtension category tree extension
+var CategoryTreeExtension string
+
 func loadSystemProperties() bool {
 
 	rlog.Debug("loadSystemProperties() handle function invoked ...")
@@ -287,6 +290,7 @@ func loadSystemProperties() bool {
 	ShoppingCartLife = p.GetString("api.shoppingcart.life", "")
 	ProductReviewsExtension = p.GetString("db.mongo.external.product.reviews.extension", "")
 	ProductInventoryExtension = p.GetString("db.mongo.external.product.inventory.extention", "")
+	CategoryTreeExtension = p.GetString("db.mongo.external.category.tree.extension", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion
