@@ -25,7 +25,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 	for i := 0; i < pathLength; i++ {
 
-		node := existsCategory(w, r, catPath[i], treeCollection)
+		node := getCategoryNode(w, r, catPath[i], treeCollection)
 
 		if node != nil && i == pathLength-1 {
 			if !containsInArray(node.SKUs, sku) {
@@ -69,7 +69,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 }
 
-func existsCategory(w http.ResponseWriter, r *http.Request, category string, collection string) *CATEGORYTREENODE {
+func getCategoryNode(w http.ResponseWriter, r *http.Request, category string, collection string) *CATEGORYTREENODE {
 
 	var opts options.FindOptions
 
@@ -97,5 +97,24 @@ func updateCategoryNode(w http.ResponseWriter, r *http.Request, categoryID strin
 func createCategoryNode(w http.ResponseWriter, r *http.Request, collection string, node *CATEGORYTREENODE) {
 
 	insertMongoDocument(ExternalDB, collection, node)
+
+}
+
+func getRootCategories(w http.ResponseWriter, r *http.Request, collection string) *CATEGORYTREENODE {
+
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, collection, bson.M{"Parent": ""}, &opts)
+
+	if len(results) == 1 {
+
+		var treeNode CATEGORYTREENODE
+
+		mapDocument(w, r, &treeNode, results[0])
+
+		return &treeNode
+	}
+
+	return nil
 
 }
