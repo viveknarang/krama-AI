@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -70,8 +69,6 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	mapDocument(w, r, &inventory, results[0])
 
 	product.Quantity = inventory.Quantity
-
-	fmt.Printf("%+v", getSKUsInTheCategoryPath(w, r, product.Category[0], csx+CategoryTreeExtension, true))
 
 	respondWith(w, r, nil, ProductFoundMessage, product, http.StatusOK, false)
 
