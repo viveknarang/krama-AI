@@ -59,11 +59,21 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 		if node != nil && i == pathLength-1 {
 			if !containsInArray(node.SKUs, sku) {
 				node.SKUs = append(node.SKUs, sku)
+
+				if node.ParentCategory == "" && i-1 > 0 {
+					node.ParentCategory = catPath[i-1]
+				}
+
 				updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
 			}
 		} else if node != nil && i < pathLength-1 {
 			if !containsInArray(node.ChildCategory, catPath[i+1]) {
 				node.ChildCategory = append(node.ChildCategory, catPath[i+1])
+
+				if node.ParentCategory == "" && i-1 > 0 {
+					node.ParentCategory = catPath[i-1]
+				}
+
 				updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
 			}
 		} else if node == nil && i == pathLength-1 {
@@ -129,21 +139,24 @@ func createCategoryNode(w http.ResponseWriter, r *http.Request, collection strin
 
 }
 
-func getRootCategories(w http.ResponseWriter, r *http.Request, collection string) *CATEGORYTREENODE {
+func getRootCategories(w http.ResponseWriter, r *http.Request, collection string) *[]CATEGORYTREENODE {
 
 	var opts options.FindOptions
 
 	results := findMongoDocument(ExternalDB, collection, bson.M{"Parent": ""}, &opts)
 
-	if len(results) == 1 {
+	var treeNode []CATEGORYTREENODE
 
-		var treeNode CATEGORYTREENODE
+	for _, result := range results {
 
-		mapDocument(w, r, &treeNode, results[0])
+		var node CATEGORYTREENODE
 
-		return &treeNode
+		mapDocument(w, r, &node, result)
+
+		treeNode = append(treeNode, node)
+
 	}
 
-	return nil
+	return &treeNode
 
 }
