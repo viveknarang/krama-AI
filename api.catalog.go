@@ -153,11 +153,47 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	groomProductData(&p)
 
-	dbcol := getAccessToken(r) + ProductExtension
+	csx := getAccessToken(r)
+	dbcol := csx + ProductExtension
+	ctcol := csx + CategoryTreeExtension
+
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, &opts)
+
+	if len(results) != 1 {
+		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
+		return
+	}
+
+	var rp PRODUCT
+
+	mapDocument(w, r, &rp, results[0])
+
+	for _, cat := range rp.Category {
+		deleteSKUFromTree(w, r, ctcol, cat, rp.Sku)
+	}
 
 	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, bson.M{"$set": p})
 
 	if result[0] == 1 && result[1] == 1 {
+
+		results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, &opts)
+
+		if len(results) != 1 {
+			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
+			return
+		}
+
+		var rp PRODUCT
+
+		mapDocument(w, r, &rp, results[0])
+
+		for _, cat := range p.Category {
+			if !insertIntoTree(w, r, csx+CategoryTreeExtension, cat, p.Sku) {
+				return
+			}
+		}
 
 		if syncProductGroup(w, r, p) {
 
