@@ -191,6 +191,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	csx := getAccessToken(r)
 	dbcol := csx + ProductExtension
 	picol := csx + ProductInventoryExtension
+	ctcol := csx + CategoryTreeExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	sku := pth[len(pth)-1]
@@ -211,6 +212,10 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}) == 1 {
 
 		deleteMongoDocument(ExternalDB, picol, bson.M{"Sku": sku})
+
+		for _, cat := range product.Category {
+			deleteSKUFromTree(w, r, ctcol, cat, product.Sku)
+		}
 
 		if syncProductGroup(w, r, product) {
 
@@ -291,6 +296,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 	pcol := cidb + ProductExtension
 	pgindex := cidb + ProductGroupExtension + SearchIndexExtension
 	picol := cidb + ProductInventoryExtension
+	ctcol := cidb + CategoryTreeExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
@@ -308,9 +314,15 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 
 	mapDocument(w, r, &productGroup, results[0])
 
-	for _, sku := range productGroup.Skus {
-		deleteMongoDocument(ExternalDB, pcol, bson.M{"Sku": sku})
-		deleteMongoDocument(ExternalDB, picol, bson.M{"Sku": sku})
+	for _, product := range productGroup.Products {
+
+		deleteMongoDocument(ExternalDB, pcol, bson.M{"Sku": product.Sku})
+		deleteMongoDocument(ExternalDB, picol, bson.M{"Sku": product.Sku})
+
+		for _, cat := range product.Category {
+			deleteSKUFromTree(w, r, ctcol, cat, product.Sku)
+		}
+
 	}
 
 	if deleteMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": pgid}) == 1 {

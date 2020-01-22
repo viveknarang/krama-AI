@@ -16,6 +16,35 @@ func parseCategoryPath(path string, separator string) []string {
 
 }
 
+func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection string, path string, sku string) {
+
+	rlog.Debug("deleteSKUFromTree() handle function invoked ...")
+
+	catPath := parseCategoryPath(path, ">")
+	pathLength := len(catPath)
+
+	for i := 0; i < pathLength; i++ {
+
+		node := getCategoryNode(w, r, catPath[i], treeCollection)
+
+		if containsInArray(node.SKUs, sku) {
+
+			var fSKUs []string
+
+			for _, v := range node.SKUs {
+				if v != sku {
+					fSKUs = append(fSKUs, v)
+				}
+			}
+
+			node.SKUs = fSKUs
+			updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
+		}
+
+	}
+
+}
+
 func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection string, path string, sku string) {
 
 	rlog.Debug("insertIntoTree() handle function invoked ...")
