@@ -122,6 +122,8 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 func getCategoryNode(w http.ResponseWriter, r *http.Request, category string, collection string) *CATEGORYTREENODE {
 
+	rlog.Debug("getCategoryNode() handle function invoked ...")
+
 	var opts options.FindOptions
 
 	results := findMongoDocument(ExternalDB, collection, bson.M{"Name": category}, &opts)
@@ -153,6 +155,8 @@ func createCategoryNode(w http.ResponseWriter, r *http.Request, collection strin
 
 func getRootCategories(w http.ResponseWriter, r *http.Request, collection string) []CATEGORYTREENODE {
 
+	rlog.Debug("getRootCategories() handle function invoked ...")
+
 	var opts options.FindOptions
 
 	results := findMongoDocument(ExternalDB, collection, bson.M{"Parent": ""}, &opts)
@@ -170,5 +174,41 @@ func getRootCategories(w http.ResponseWriter, r *http.Request, collection string
 	}
 
 	return treeNode
+
+}
+
+func getSKUsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path string, collection string, onlyLeafSKUs bool) []string {
+
+	rlog.Debug("getSKUsInTheCategoryPath() handle function invoked ...")
+
+	catPath := parseCategoryPath(path, ">")
+	pathLength := len(catPath)
+
+	if pathLength == 0 {
+		rlog.Error("getSKUsInTheCategoryPath() path seems empty! ...")
+		return nil
+	}
+
+	var SKUs []string
+
+	if !onlyLeafSKUs {
+
+		for i := 0; i < pathLength; i++ {
+
+			node := getCategoryNode(w, r, catPath[i], collection)
+
+			if len(node.SKUs) != 0 {
+				SKUs = append(SKUs, node.SKUs...)
+			}
+		}
+
+	} else {
+
+		node := getCategoryNode(w, r, catPath[pathLength-1], collection)
+		SKUs = append(SKUs, node.SKUs...)
+
+	}
+
+	return SKUs
 
 }
