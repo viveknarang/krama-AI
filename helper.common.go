@@ -214,3 +214,21 @@ func containsInCategoryNodes(array []CATEGORYTREENODE, value string) bool {
 
 	return false
 }
+
+func removeElementsFromArray(array []string, remove []string) []string {
+
+loop:
+	for i := 0; i < len(array); i++ {
+		element := array[i]
+		for _, rem := range remove {
+			if element == rem {
+				array = append(array[:i], array[i+1:]...)
+				i--
+				continue loop
+			}
+		}
+	}
+
+	return array
+
+}

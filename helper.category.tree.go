@@ -11,6 +11,9 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+//PATHSEPARATOR category path separator
+const PATHSEPARATOR = ">"
+
 func parseCategoryPath(path string, separator string) []string {
 
 	return strings.Split(path, separator)
@@ -21,7 +24,7 @@ func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection st
 
 	rlog.Debug("deleteSKUFromTree() handle function invoked ...")
 
-	catPath := parseCategoryPath(path, ">")
+	catPath := parseCategoryPath(path, PATHSEPARATOR)
 	pathLength := len(catPath)
 
 	for i := 0; i < pathLength; i++ {
@@ -30,16 +33,39 @@ func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection st
 
 		if containsInArray(node.SKUs, sku) {
 
-			var fSKUs []string
+			if len(node.SKUs) == 1 && (node.Children == nil || len(node.Children) == 0) {
 
-			for _, v := range node.SKUs {
-				if v != sku {
-					fSKUs = append(fSKUs, v)
+				node.SKUs = nil
+
+				// Backtrack and keep on removing up until you hit a node with more than 1 children and/or SKUs in the node
+				for node != nil && len(node.SKUs) == 0 && len(node.Children) == 0 {
+
+					var names []string
+					var delNodeName = node.Name
+					deleteMongoDocument(ExternalDB, treeCollection, bson.M{"CategoryID": node.CategoryID})
+					node = getCategoryNode(w, r, node.Parent, treeCollection)
+
+					if node != nil {
+						node.Children = removeElementsFromArray(node.Children, append(names, delNodeName))
+						updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
+						node = getCategoryNode(w, r, node.Name, treeCollection)
+					}
 				}
-			}
 
-			node.SKUs = fSKUs
-			updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
+			} else {
+
+				var fSKUs []string
+
+				for _, v := range node.SKUs {
+					if v != sku {
+						fSKUs = append(fSKUs, v)
+					}
+				}
+
+				node.SKUs = fSKUs
+				updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
+
+			}
 		}
 
 	}
@@ -50,7 +76,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 	rlog.Debug("insertIntoTree() handle function invoked ...")
 
-	catPath := parseCategoryPath(path, ">")
+	catPath := parseCategoryPath(path, PATHSEPARATOR)
 	pathLength := len(catPath)
 
 	node := getCategoryNode(w, r, catPath[0], treeCollection)
@@ -181,7 +207,7 @@ func getSKUsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path strin
 
 	rlog.Debug("getSKUsInTheCategoryPath() handle function invoked ...")
 
-	catPath := parseCategoryPath(path, ">")
+	catPath := parseCategoryPath(path, PATHSEPARATOR)
 	pathLength := len(catPath)
 
 	if pathLength == 0 {
