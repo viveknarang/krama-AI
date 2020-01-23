@@ -182,18 +182,6 @@ func logInfoMessage(message string) {
 
 }
 
-func contains(arr [6]string, str string) bool {
-
-	for _, a := range arr {
-		if a == str {
-			return true
-		}
-	}
-
-	return false
-
-}
-
 func containsInArray(array []string, value string) bool {
 
 	for _, k := range array {

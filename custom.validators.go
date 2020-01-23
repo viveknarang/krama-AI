@@ -59,7 +59,7 @@ func customValidatorForAllowedCurrencies(v interface{}, param string) error {
 
 	st := reflect.ValueOf(v)
 
-	var currency [6]string
+	var currency []string
 
 	//This list will add more values in the near future
 	currency[0] = "USD"
@@ -69,7 +69,7 @@ func customValidatorForAllowedCurrencies(v interface{}, param string) error {
 	currency[4] = "INR"
 	currency[5] = "GBP"
 
-	if !contains(currency, st.String()) {
+	if !containsInArray(currency, st.String()) {
 		return errors.New("field value " + st.String() + " not an acceptable currency")
 	}
 
