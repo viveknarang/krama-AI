@@ -361,17 +361,36 @@
               </ul>
           </li>
           <li>
+            <a href="#category-api" class="toc-h1 toc-link" data-title="Category API">Category API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-category-products" class="toc-h2 toc-link" data-title="Get category products">Get category products</a>
+                  </li>
+                  <li>
+                    <a href="#get-root-categories" class="toc-h2 toc-link" data-title="Get root categories">Get root categories</a>
+                  </li>
+                  <li>
+                    <a href="#get-sub-categories" class="toc-h2 toc-link" data-title="Get sub categories">Get sub categories</a>
+                  </li>
+                  <li>
+                    <a href="#get-parent-category" class="toc-h2 toc-link" data-title="Get parent category">Get parent category</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#response-codes" class="toc-h1 toc-link" data-title="Response Codes">Response Codes</a>
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 3.8.1</span><br/><br/></li>
+            <li><span>API documentation version 3.9.0</span><br/><br/></li>
             <li><a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/></li>
             <li><a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/></li>
             <li><a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/></li>
             <li><a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a><br/><br/></li>
             <li><span>Development Branch Status:</span><br/></li>
-            <li><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'/><br/><br/><br/></li>
+            <li><a href="https://travis-ci.org/viveknarang/krama-AI" target="_blank"><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'/></a><br/><br/></li>
+            <li><span>Codebase quality:</span></li>
+            <li><a href="https://goreportcard.com/report/github.com/viveknarang/krama-AI" target="_blank"><img src='https://goreportcard.com/badge/github.com/viveknarang/krama-AI'/></a><br/><br/></li>
             <li><img src='images/canada-b771debf.png' width='50px' height='25px'/></li>
         </ul>
     </div>
@@ -5429,6 +5448,345 @@ does not make any sense to store reviews by products which could be indeed versi
 </tr>
 </tbody></table>
 <h3 id='http-response-28'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h1 id='category-api'>Category API</h1><h2 id='get-category-products'>Get category products</h2>
+<blockquote>
+<p>Sample valid HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Path"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Electronics&gt;Computers&gt;Laptops"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Products in category path ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579752116485856444</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Electronics&gt;Computers&gt;Laptops"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"B07K3BHGL3"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category path does not exit ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579753925588641431</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to get product SKUs in the category.</p>
+<h3 id='http-request-url-26'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/gategories/{API version}/products</code></p>
+<h3 id='http-request-header-28'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-11'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Path</td>
+<td>Valid category path - Example: &quot;Electronics&gt;Computers&gt;Laptop&quot;</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-29'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='get-root-categories'>Get root categories</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Root categories ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579754001879780149</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Electronics"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Clothes"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to get all the root categories. </p>
+<h3 id='http-request-url-27'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/gategories/{API version}/root</code></p>
+<h3 id='http-request-header-29'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-30'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='get-sub-categories'>Get sub categories</h2>
+<blockquote>
+<p>Sample valid HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Category"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Electronics"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Immediate Sub categories ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579754123461121424</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Computers"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category Laptops does not have a sub category ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579754183920349803</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to get immediate sub categories of a category. </p>
+<h3 id='http-request-url-28'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/gategories/{API version}/sub</code></p>
+<h3 id='http-request-header-30'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-12'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Path</td>
+<td>Valid category path - Example: &quot;Electronics&gt;Computers&gt;Laptop&quot;</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>Valid category name - Example: &quot;Computers&quot;</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-31'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+</tbody></table>
+<h2 id='get-parent-category'>Get parent category</h2>
+<blockquote>
+<p>Sample valid HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Category"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Computers"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category parent ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579754248936370320</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Electronics"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category Electronics does not have a parent ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579754265682142471</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this endpoint to get the name of the parent category of a given category. </p>
+<h3 id='http-request-url-29'>HTTP Request URL</h3>
+<p><code>GET https://api.krama.ai/gategories/{API version}/parent</code></p>
+<h3 id='http-request-header-31'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-13'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Path</td>
+<td>Valid category path - Example: &quot;Electronics&gt;Computers&gt;Laptop&quot;</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>Valid category name - Example: &quot;Computers&quot;</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-32'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>

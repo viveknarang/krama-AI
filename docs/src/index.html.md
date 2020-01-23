@@ -5,15 +5,16 @@ language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.8.1</span><br/><br/>
+  - <span>API documentation version 3.9.0</span><br/><br/>
   - <a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/>
   - <a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/>
   - <a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/>
   - <a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a><br/><br/>
   - <span>Development Branch Status:</span><br/>
-  - <img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'/><br/><br/><br/>
+  - <a href="https://travis-ci.org/viveknarang/krama-AI" target="_blank"><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'/></a><br/><br/>
+  - <span>Codebase quality:</span>
+  - <a href="https://goreportcard.com/report/github.com/viveknarang/krama-AI" target="_blank"><img src='https://goreportcard.com/badge/github.com/viveknarang/krama-AI'/></a><br/><br/>
   - <img src='/images/canada.png' width='50px' height='25px'/>
-
 
 includes:
 ##  - errors
@@ -3783,6 +3784,277 @@ Use this endpoint to remove all the reviews for a product group using the produc
 | Message           | Message for additional information                                            |
 | Time              | Unix timestamp of the response                                                |
 | Response          | Response object containing response information                               |
+
+
+
+# Category API
+
+
+## Get category products
+
+> Sample valid HTTP request body:
+
+```json
+{
+	"Path" : "Electronics>Computers>Laptops"
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Products in category path ...",
+    "Time": 1579752116485856444,
+    "Response": {
+        "Electronics>Computers>Laptops": [
+            "B07K3BHGL3"
+        ]
+    }
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 400,
+    "Success": false,
+    "Message": "Category path does not exit ...",
+    "Time": 1579753925588641431,
+    "Response": null
+}
+```
+
+
+Use this endpoint to get product SKUs in the category.
+
+
+### HTTP Request URL
+
+`GET https://api.krama.ai/gategories/{API version}/products`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter             |               Description                                                                       |
+|-----------------------|-------------------------------------------------------------------------------------------------|
+| Path                  |  Valid category path - Example: "Electronics>Computers>Laptop"                                  |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+## Get root categories
+
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Root categories ...",
+    "Time": 1579754001879780149,
+    "Response": [
+        "Electronics",
+        "Clothes"
+    ]
+}
+```
+
+
+Use this endpoint to get all the root categories. 
+
+
+### HTTP Request URL
+
+`GET https://api.krama.ai/gategories/{API version}/root`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+
+## Get sub categories
+
+> Sample valid HTTP request body:
+
+```json
+{
+	"Category" : "Electronics"
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Immediate Sub categories ...",
+    "Time": 1579754123461121424,
+    "Response": [
+        "Computers"
+    ]
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Category Laptops does not have a sub category ...",
+    "Time": 1579754183920349803,
+    "Response": null
+}
+```
+
+
+Use this endpoint to get immediate sub categories of a category. 
+
+
+### HTTP Request URL
+
+`GET https://api.krama.ai/gategories/{API version}/sub`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter             |               Description                                                                       |
+|-----------------------|-------------------------------------------------------------------------------------------------|
+| Path                  |  Valid category path - Example: "Electronics>Computers>Laptop"                                  |
+| Category              |  Valid category name - Example: "Computers"                                                     |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
+
+
+
+
+## Get parent category
+
+> Sample valid HTTP request body:
+
+```json
+{
+	"Category" : "Computers"
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": true,
+    "Message": "Category parent ...",
+    "Time": 1579754248936370320,
+    "Response": "Electronics"
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Category Electronics does not have a parent ...",
+    "Time": 1579754265682142471,
+    "Response": null
+}
+```
+
+
+Use this endpoint to get the name of the parent category of a given category. 
+
+
+### HTTP Request URL
+
+`GET https://api.krama.ai/gategories/{API version}/parent`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter             |               Description                                                                       |
+|-----------------------|-------------------------------------------------------------------------------------------------|
+| Path                  |  Valid category path - Example: "Electronics>Computers>Laptop"                                  |
+| Category              |  Valid category name - Example: "Computers"                                                     |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+
+
 
 
 
