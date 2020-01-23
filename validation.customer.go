@@ -9,7 +9,7 @@ import (
 func validateCustomer(w http.ResponseWriter, r *http.Request, customer CUSTOMER) bool {
 
 	validator.SetValidationFunc("validateEmail", customValidatorForEmail)
-	validator.SetValidationFunc("validateTypeArrayLength", customValidatorForTypeArrayLengths)
+	validator.SetValidationFunc("validateTypeArrayLength", customValidatorForSize)
 
 	if errs := validator.Validate(customer); errs != nil {
 

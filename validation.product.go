@@ -9,7 +9,7 @@ import (
 
 func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bool {
 
-	validator.SetValidationFunc("validateTypeArrayLength", customValidatorForTypeArrayLengths)
+	validator.SetValidationFunc("size", customValidatorForSize)
 	validator.SetValidationFunc("hasNoSpaces", customValidatorForNoSpaces)
 	validator.SetValidationFunc("checkMaxFloat", customValidatorForMaxFloat)
 	validator.SetValidationFunc("isValidCurrency", customValidatorForAllowedCurrencies)

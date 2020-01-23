@@ -78,9 +78,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			addAllInSet(p.Category)
 			npg.Category = toArrayFromSet()
 
-			setInit()
-			addAllInSet(p.Images)
-			npg.Images = toArrayFromSet()
+			npg.Images = p.Images
 
 			npg.Updated = time.Now().UnixNano()
 

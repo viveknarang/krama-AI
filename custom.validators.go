@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func customValidatorForTypeArrayLengths(v interface{}, param string) error {
+func customValidatorForSize(v interface{}, param string) error {
 
 	st := reflect.ValueOf(v)
 
@@ -62,12 +62,12 @@ func customValidatorForAllowedCurrencies(v interface{}, param string) error {
 	var currency []string
 
 	//This list will add more values in the near future
-	currency[0] = "USD"
-	currency[1] = "CAD"
-	currency[2] = "CDN"
-	currency[3] = "EUR"
-	currency[4] = "INR"
-	currency[5] = "GBP"
+	currency = append(currency, "USD")
+	currency = append(currency, "CAD")
+	currency = append(currency, "CDN")
+	currency = append(currency, "EUR")
+	currency = append(currency, "INR")
+	currency = append(currency, "GBP")
 
 	if !containsInArray(currency, st.String()) {
 		return errors.New("field value " + st.String() + " not an acceptable currency")

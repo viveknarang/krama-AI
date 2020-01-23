@@ -10,7 +10,7 @@ type PRODUCTGROUP struct {
 	PromotionPriceMin     float64                  `json:"PromotionPriceMin" bson:"PromotionPriceMin"`
 	PromotionPriceMax     float64                  `json:"PromotionPriceMax" bson:"PromotionPriceMax"`
 	Skus                  []string                 `json:"Skus" bson:"Skus"`
-	Images                []string                 `json:"Images" bson:"Images"`
+	Images                map[string]string        `json:"Images" bson:"Images"`
 	SearchKeywords        []string                 `json:"SearchKeywords" bson:"SearchKeywords"`
 	Category              []string                 `json:"Category" bson:"Category"`
 	Colors                []string                 `json:"Colors" bson:"Colors"`
