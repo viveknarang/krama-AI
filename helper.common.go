@@ -9,6 +9,7 @@ import (
 	"os"
 	"reflect"
 	"regexp"
+	"strings"
 
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
@@ -230,5 +231,30 @@ loop:
 	}
 
 	return array
+
+}
+
+func cleanCategoryPath(path string) string {
+
+	path = strings.TrimSpace(path)
+	path = strings.Join(strings.Fields(strings.TrimSpace(path)), " ")
+	path = strings.Trim(path, ">")
+
+	if strings.Contains(path, ">") {
+		splits := strings.Split(path, ">")
+		var cleanerCategoryPath string
+		for _, val := range splits {
+
+			if val == "" {
+				continue
+			}
+
+			val = strings.TrimSpace(val)
+			cleanerCategoryPath += val + ">"
+		}
+		path = cleanerCategoryPath[:len(cleanerCategoryPath)-1]
+	}
+
+	return path
 
 }

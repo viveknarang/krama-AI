@@ -212,6 +212,12 @@ var ProductInventoryExtension string
 //CategoryTreeExtension category tree extension
 var CategoryTreeExtension string
 
+//CategoriesBasePath category base path
+var CategoriesBasePath string
+
+//CategoriesPath category path
+var CategoriesPath string
+
 func loadSystemProperties() bool {
 
 	rlog.Debug("loadSystemProperties() handle function invoked ...")
@@ -236,6 +242,7 @@ func loadSystemProperties() bool {
 	CustomersBasePath = p.GetString("api.customers.base.path", "/customers/")
 	ShoppingCartBasePath = p.GetString("api.shoppingcart.base.path", "/shoppingcart/")
 	ProductReviewsBasePath = p.GetString("api.productreviews.base.path", "/productreviews/")
+	CategoriesBasePath = p.GetString("api.categories.base.path", "/categories/")
 
 	APIVersion = p.GetString("api.version", "v1")
 	RedisURL = p.GetString("redis.url", "localhost")
@@ -298,6 +305,7 @@ func loadSystemProperties() bool {
 	CustomersPath = CustomersBasePath + APIVersion
 	ShoppingCartPath = ShoppingCartBasePath + APIVersion
 	ProductReviewsPath = ProductReviewsBasePath + APIVersion
+	CategoriesPath = CategoriesBasePath + APIVersion
 
 	return true
 

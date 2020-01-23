@@ -29,24 +29,7 @@ func groomProductData(product *PRODUCT) {
 
 	for i, val := range product.Category {
 
-		product.Category[i] = strings.TrimSpace(val)
-		product.Category[i] = strings.Join(strings.Fields(strings.TrimSpace(product.Category[i])), " ")
-		product.Category[i] = strings.Trim(product.Category[i], ">")
-
-		if strings.Contains(product.Category[i], ">") {
-			splits := strings.Split(product.Category[i], ">")
-			var cleanerCategoryPath string
-			for _, val := range splits {
-
-				if val == "" {
-					continue
-				}
-
-				val = strings.TrimSpace(val)
-				cleanerCategoryPath += val + ">"
-			}
-			product.Category[i] = cleanerCategoryPath[:len(cleanerCategoryPath)-1]
-		}
+		product.Category[i] = cleanCategoryPath(val)
 
 	}
 
