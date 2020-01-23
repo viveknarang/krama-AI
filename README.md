@@ -3815,7 +3815,7 @@ Use this endpoint to get product SKUs in the category.
 
 ### HTTP Request URL
 
-`GET https://api.krama.ai/gategories/{API version}/products`
+`GET https://api.krama.ai/categories/{API version}/products`
 
 ### HTTP Request Header
 
@@ -3869,7 +3869,7 @@ Use this endpoint to get all the root categories.
 
 ### HTTP Request URL
 
-`GET https://api.krama.ai/gategories/{API version}/root`
+`GET https://api.krama.ai/categories/{API version}/root`
 
 ### HTTP Request Header
 
@@ -3934,7 +3934,7 @@ Use this endpoint to get immediate sub categories of a category.
 
 ### HTTP Request URL
 
-`GET https://api.krama.ai/gategories/{API version}/sub`
+`GET https://api.krama.ai/categories/{API version}/sub`
 
 ### HTTP Request Header
 
@@ -4007,7 +4007,7 @@ Use this endpoint to get the name of the parent category of a given category.
 
 ### HTTP Request URL
 
-`GET https://api.krama.ai/gategories/{API version}/parent`
+`GET https://api.krama.ai/categories/{API version}/parent`
 
 ### HTTP Request Header
 
