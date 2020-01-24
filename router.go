@@ -17,6 +17,8 @@ func routers() *mux.Router {
 
 	router.HandleFunc(CatalogPath+"/products/{SKU}", getProduct).Methods(http.MethodGet)
 
+	router.HandleFunc(CatalogPath+"/bulk/products", getProducts).Methods(http.MethodGet)
+
 	router.HandleFunc(CatalogPath+"/products", postProduct).Methods(http.MethodPost)
 
 	router.HandleFunc(CatalogPath+"/products/{SKU}", putProduct).Methods(http.MethodPut)
@@ -28,6 +30,8 @@ func routers() *mux.Router {
 	router.HandleFunc(CatalogPath+"/products/inventory/update", updateProductsInventory).Methods(http.MethodPut)
 
 	router.HandleFunc(CatalogPath+"/productgroups/{PGID}", getProductGroup).Methods(http.MethodGet)
+
+	router.HandleFunc(CatalogPath+"/bulk/productgroups", getProductGroups).Methods(http.MethodGet)
 
 	router.HandleFunc(CatalogPath+"/productgroups/{PGID}", deleteProductGroup).Methods(http.MethodDelete)
 

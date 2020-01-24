@@ -21,7 +21,7 @@ func main() {
 	connectRedis()
 	connectElastic()
 
-	rlog.Info("Base components - [ELASTIC, REDIS, MONGO] connected ...")
+	rlog.Debug("Base components - [ELASTIC, REDIS, MONGO] connected ...")
 
 	log.Fatal(http.ListenAndServe(":"+APIPort, routers()))
 

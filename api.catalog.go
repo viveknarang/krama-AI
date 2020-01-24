@@ -74,6 +74,96 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func getProducts(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("getProducts() handle function invoked ...")
+
+	if !pre(w, r) {
+		return
+	}
+
+	var prq PRQ
+
+	mapInput(w, r, &prq)
+
+	var products []PRODUCT
+
+	csx := getAccessToken(r)
+
+	dbcol := csx + ProductExtension
+
+	var opts options.FindOptions
+
+	var sx []bson.M
+
+	for _, sku := range prq.Skus {
+		sx = append(sx, bson.M{"Sku": sku})
+	}
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"$or": sx}, &opts)
+
+	if len(results) == 0 {
+		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
+		return
+	}
+
+	for _, result := range results {
+
+		var p PRODUCT
+		mapDocument(w, r, &p, result)
+		products = append(products, p)
+
+	}
+
+	respondWith(w, r, nil, ProductFoundMessage, products, http.StatusOK, false)
+
+}
+
+func getProductGroups(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("getProductGroups() handle function invoked ...")
+
+	if !pre(w, r) {
+		return
+	}
+
+	var pgrq PGRQ
+
+	mapInput(w, r, &pgrq)
+
+	var productG []PRODUCTGROUP
+
+	csx := getAccessToken(r)
+
+	dbcol := csx + ProductGroupExtension
+
+	var opts options.FindOptions
+
+	var sx []bson.M
+
+	for _, sku := range pgrq.Skus {
+		sx = append(sx, bson.M{"Skus": sku})
+	}
+
+	results := findMongoDocument(ExternalDB, dbcol, bson.M{"$or": sx}, &opts)
+
+	if len(results) == 0 {
+		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
+		return
+	}
+
+	for _, result := range results {
+
+		var pg PRODUCTGROUP
+		mapDocument(w, r, &pg, result)
+		productG = append(productG, pg)
+
+	}
+
+	respondWith(w, r, nil, ProductFoundMessage, productG, http.StatusOK, false)
+
+}
+
 func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	rlog.Debug("postProduct() handle function invoked ...")
