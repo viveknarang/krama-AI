@@ -241,11 +241,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	var p PRODUCT
 
-	if !mapInput(w, r, &p) {
-		return
-	}
-
-	if !validateProduct(w, r, p) {
+	if !(mapInput(w, r, &p) && validateProduct(w, r, p)) {
 		return
 	}
 
