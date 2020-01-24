@@ -5,11 +5,11 @@ language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.9.0</span><br/><br/>
+  - <span>API documentation version 3.9.1</span><br/><br/>
   - <a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/>
   - <a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/>
   - <a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/>
-  - <a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a><br/><br/>
+  - API Documentation Built Using <a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a><br/><br/>
   - <span>Development Branch Status:</span><br/>
   - <a href="https://travis-ci.org/viveknarang/krama-AI" target="_blank"><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'/></a><br/><br/>
   - <span>Codebase quality:</span>
@@ -884,6 +884,140 @@ When you want to get a specific product you can use this endpoint. All you need 
 
 
 
+## Get products (bulk)
+
+> Sample HTTP request body:
+
+```json
+{
+  "Skus" : ["B07K3BHGL3"]
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": false,
+    "Message": "Product Found ...",
+    "Time": 1579847245533965269,
+    "Response": [
+        {
+            "Sku": "B07K3BHGL3",
+            "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+            "GroupID": "MSLAPS2",
+            "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+            "RegularPrice": 5,
+            "PromotionPrice": 0,
+            "Images": {
+                "MAIN": "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                "THUMBNAIL": "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+            },
+            "SearchKeywords": [
+                "Laptop",
+                "Microsoft",
+                "Surface"
+            ],
+            "Quantity": 0,
+            "Category": [
+                "A",
+                "B>X"
+            ],
+            "Color": "Black",
+            "Brand": "Microsoft",
+            "Size": "13.5 inches",
+            "Active": true,
+            "Attributes": {
+                "ASIN": "B07K3BHGL3",
+                "Batteries": "1",
+                "Color": "Black",
+                "Date First Available": "Nov. 4 2018",
+                "Display Size": "13.5 inches",
+                "Flash Memory Size": "512.00",
+                "Item Weight": "1.28 Kg",
+                "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                "Item model number": "DAL-00092",
+                "Memory Speed": "1 GHz",
+                "Number of USB 2 Ports": "1",
+                "Operating System": "Windows 10 Home",
+                "Processor Count": "16",
+                "RAM": "16 GB",
+                "Series": "Surface Laptop 2",
+                "Shipping Weight": "2.2 kg",
+                "Wireless Standard": "802.11ac"
+            },
+            "IsMain": true,
+            "Currency": "CDN",
+            "Updated": 1579819094896598884
+        }
+    ]
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Product Not Found ...",
+    "Time": 1579846902585974734,
+    "Response": null
+}
+```
+
+Use this API endpoint to get an array of products by passing an array of SKUs. 
+
+
+### HTTP Request URL
+
+`PUT https://api.krama.ai/catalog/{API version}/bulk/products`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter     | Description                                      |
+|---------------|--------------------------------------------------|
+| Skus          | string[] - An array of product SKUs              |
+
+
+### HTTP Response
+
+|  Key              |    Description                                                                |
+|-------------------|-------------------------------------------------------------------------------|
+| Code              | Response code for the request                                                 |
+| Success           | Flag that tells if the request was successful                                 |
+| Message           | Message for additional information                                            |
+| Time              | Unix timestamp of the response                                                |
+| Response          | Response object containing response information                               |
+| Sku               | The SKU of the product                                                        |
+| Name              | The name of the product                                                       |
+| Description       | The description of the product                                                |   
+| GroupID           | The product group ID                                                          |
+| RegularPrice      | Everyday price                                                                |
+| PromotionPrice    | On-sale price                                                                 |
+| Images            | Product images                                                                |
+| SearchKeywords    | Keywords that you want this product to be searched with                       |
+| Quantity          | Inventory stock quantity                                                      |
+| Category          | Category breadcrumbs                                                          |
+| Color             | Product color                                                                 |
+| Brand             | Product brand                                                                 |
+| Size              | Product size                                                                  |
+| Active            | Is product available for sale?                                                |
+| IsMain            | Is the product main product in the group?                                     |
+| Attributes        | Field to define additional product attributes                                 |
+
+
+
+
 ## Update a product
 
 > Sample HTTP request body:
@@ -1492,6 +1626,288 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 | Active                |  Active flag to indicate if the product is available for sale                 |
 | Products              |  List of all the product objects for reference                                |
 | Attributes            |  Field that maps additional attributes to the product group                   |
+
+
+
+
+
+## Get product groups (bulk)
+
+> Sample HTTP request body:
+
+```json
+{
+  "Skus" : ["B07K3BHGL3"]
+}
+```
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 200,
+    "Success": false,
+    "Message": "Product Found ...",
+    "Time": 1579847155010745182,
+    "Response": [
+        {
+            "GroupID": "MSLAPS2",
+            "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+            "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+            "RegularPriceMin": 5,
+            "RegularPriceMax": 5,
+            "PromotionPriceMin": 0,
+            "PromotionPriceMax": 0,
+            "Skus": [
+                "B07K3BHGL2",
+                "B07K3BHGL3"
+            ],
+            "Images": {
+                "MAIN": "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                "THUMBNAIL": "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+            },
+            "SearchKeywords": [
+                "Laptop",
+                "Microsoft",
+                "Surface"
+            ],
+            "Category": [
+                "A",
+                "B>X"
+            ],
+            "Colors": [
+                "Black"
+            ],
+            "Brands": [
+                "Microsoft"
+            ],
+            "Sizes": [
+                "13.5 inches"
+            ],
+            "Active": true,
+            "Currency": "CDN",
+            "Updated": 1579811098654049573,
+            "Products": {
+                "B07K3BHGL2": {
+                    "Sku": "B07K3BHGL2",
+                    "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                    "GroupID": "MSLAPS2",
+                    "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                    "RegularPrice": 5,
+                    "PromotionPrice": 0,
+                    "Images": {
+                        "MAIN": "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                        "THUMBNAIL": "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                    },
+                    "SearchKeywords": [
+                        "Laptop",
+                        "Microsoft",
+                        "Surface"
+                    ],
+                    "Quantity": 0,
+                    "Category": [
+                        "A",
+                        "B>X"
+                    ],
+                    "Color": "Black",
+                    "Brand": "Microsoft",
+                    "Size": "13.5 inches",
+                    "Active": true,
+                    "Attributes": {
+                        "ASIN": "B07K3BHGL2",
+                        "Batteries": "1",
+                        "Color": "Black",
+                        "Date First Available": "Nov. 4 2018",
+                        "Display Size": "13.5 inches",
+                        "Flash Memory Size": "512.00",
+                        "Item Weight": "1.28 Kg",
+                        "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                        "Item model number": "DAL-00092",
+                        "Memory Speed": "1 GHz",
+                        "Number of USB 2 Ports": "1",
+                        "Operating System": "Windows 10 Home",
+                        "Processor Count": "16",
+                        "RAM": "16 GB",
+                        "Series": "Surface Laptop 2",
+                        "Shipping Weight": "2.2 kg",
+                        "Wireless Standard": "802.11ac"
+                    },
+                    "IsMain": true,
+                    "Currency": "CDN",
+                    "Updated": 1579811098652293499
+                },
+                "B07K3BHGL3": {
+                    "Sku": "B07K3BHGL3",
+                    "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                    "GroupID": "MSLAPS2",
+                    "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                    "RegularPrice": 5,
+                    "PromotionPrice": 0,
+                    "Images": {
+                        "MAIN": "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                        "THUMBNAIL": "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                    },
+                    "SearchKeywords": [
+                        "Laptop",
+                        "Microsoft",
+                        "Surface"
+                    ],
+                    "Quantity": 0,
+                    "Category": [
+                        "A",
+                        "B>X"
+                    ],
+                    "Color": "Black",
+                    "Brand": "Microsoft",
+                    "Size": "13.5 inches",
+                    "Active": true,
+                    "Attributes": {
+                        "ASIN": "B07K3BHGL3",
+                        "Batteries": "1",
+                        "Color": "Black",
+                        "Date First Available": "Nov. 4 2018",
+                        "Display Size": "13.5 inches",
+                        "Flash Memory Size": "512.00",
+                        "Item Weight": "1.28 Kg",
+                        "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                        "Item model number": "DAL-00092",
+                        "Memory Speed": "1 GHz",
+                        "Number of USB 2 Ports": "1",
+                        "Operating System": "Windows 10 Home",
+                        "Processor Count": "16",
+                        "RAM": "16 GB",
+                        "Series": "Surface Laptop 2",
+                        "Shipping Weight": "2.2 kg",
+                        "Wireless Standard": "802.11ac"
+                    },
+                    "IsMain": true,
+                    "Currency": "CDN",
+                    "Updated": 1579819094896598884
+                }
+            },
+            "Attributes": {
+                "ASIN": [
+                    "B07K3BHGL2",
+                    "B07K3BHGL3"
+                ],
+                "Batteries": [
+                    "1"
+                ],
+                "Color": [
+                    "Black"
+                ],
+                "Date First Available": [
+                    "Nov. 4 2018"
+                ],
+                "Display Size": [
+                    "13.5 inches"
+                ],
+                "Flash Memory Size": [
+                    "512.00"
+                ],
+                "Item Weight": [
+                    "1.28 Kg"
+                ],
+                "Item dimensions L x W x H": [
+                    "17.8 x 12.7 x 15.2 cm"
+                ],
+                "Item model number": [
+                    "DAL-00092"
+                ],
+                "Memory Speed": [
+                    "1 GHz"
+                ],
+                "Number of USB 2 Ports": [
+                    "1"
+                ],
+                "Operating System": [
+                    "Windows 10 Home"
+                ],
+                "Processor Count": [
+                    "16"
+                ],
+                "RAM": [
+                    "16 GB"
+                ],
+                "Series": [
+                    "Surface Laptop 2"
+                ],
+                "Shipping Weight": [
+                    "2.2 kg"
+                ],
+                "Wireless Standard": [
+                    "802.11ac"
+                ]
+            },
+            "CumulativeReviewStars": 0,
+            "CumulativeReviewCount": 0
+        }
+    ]
+}
+```
+
+> Sample invalid API response:
+
+```json
+{
+    "Code": 404,
+    "Success": false,
+    "Message": "Product Group Not Found ...",
+    "Time": 1579847199233752534,
+    "Response": null
+}
+```
+
+Use this API endpoint to get an array of product group objects by passing an array of SKUs. 
+
+
+### HTTP Request URL
+
+`PUT https://api.krama.ai/catalog/{API version}/bulk/productgroups`
+
+### HTTP Request Header
+
+| Key               |                Value                         |
+|-------------------|----------------------------------------------|
+|x-access-token     | The access token that you receive upon login |
+|Content-Type       | application/json                             |
+
+
+### HTTP Request Body Parameters
+
+| Parameter     | Description                                      |
+|---------------|--------------------------------------------------|
+| Skus          | string[] - An array of product SKUs              |
+
+
+### HTTP Response
+
+|  Key                  |    Description                                                                |
+|-----------------------|-------------------------------------------------------------------------------|
+| Code                  |  Response code for the request                                                |
+| Success               |  Flag that tells if the request was successful                                |
+| Message               |  Message for additional information                                           |
+| Time                  |  Unix timestamp of the response                                               |
+| Response              |  Response object containing response information                              |
+| Skus                  |  A list of SKUs of all the products in the group                              |
+| Colors                |  A list of all the colors from all the products in the group                  |
+| Brands                |  A list of all the brands from all the products in the group                  |
+| Sizes                 |  A list of all the sizes from all the products in the group                   |
+| Images                |  A list of all the images from the main product in the group                  |
+| SearchKeywords        |  A list of all the searchKeywords from all the products in the group          |
+| Category              |  Category from the main product in the group                                  |
+| GroupID               |  Product group ID to uniquely identify this product group                     |
+| Name                  |  Name from the main product in the group                                      |
+| Description           |  Product description                                                          |
+| RegularPriceMin       |  Minimum regular price computed in the group                                  |
+| RegularPriceMax       |  Maximum regular price computed in the group                                  |
+| PromotionPriceMin     |  Minimum promotion price computed in the group                                |
+| PromotionPriceMax     |  Maximum promotion price computed in the group                                |
+| Active                |  Active flag to indicate if the product is available for sale                 |
+| Products              |  List of all the product objects for reference                                |
+| Attributes            |  Field that maps additional attributes to the product group                   |
+
+
 
 
 

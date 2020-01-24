@@ -259,6 +259,9 @@
                     <a href="#get-a-specific-product" class="toc-h2 toc-link" data-title="Get a specific product">Get a specific product</a>
                   </li>
                   <li>
+                    <a href="#get-products-bulk" class="toc-h2 toc-link" data-title="Get products (bulk)">Get products (bulk)</a>
+                  </li>
+                  <li>
                     <a href="#update-a-product" class="toc-h2 toc-link" data-title="Update a product">Update a product</a>
                   </li>
                   <li>
@@ -272,6 +275,9 @@
                   </li>
                   <li>
                     <a href="#get-a-product-group" class="toc-h2 toc-link" data-title="Get a product group">Get a product group</a>
+                  </li>
+                  <li>
+                    <a href="#get-product-groups-bulk" class="toc-h2 toc-link" data-title="Get product groups (bulk)">Get product groups (bulk)</a>
                   </li>
                   <li>
                     <a href="#delete-a-product-group" class="toc-h2 toc-link" data-title="Delete a product group">Delete a product group</a>
@@ -382,11 +388,11 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 3.9.0</span><br/><br/></li>
+            <li><span>API documentation version 3.9.1</span><br/><br/></li>
             <li><a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/></li>
             <li><a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/></li>
             <li><a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/></li>
-            <li><a href='https://github.com/slatedocs/slate' target='_blank'><u>API Documentation Built Using Slate</u></a><br/><br/></li>
+            <li>API Documentation Built Using <a href='https://github.com/slatedocs/slate' target='_blank'><u>Slate</u></a><br/><br/></li>
             <li><span>Development Branch Status:</span><br/></li>
             <li><a href="https://travis-ci.org/viveknarang/krama-AI" target="_blank"><img src='https://travis-ci.org/viveknarang/krama-AI.svg?branch=master'/></a><br/><br/></li>
             <li><span>Codebase quality:</span></li>
@@ -1775,6 +1781,208 @@ With the field validForSeconds in response, you can calculate the time after wit
 <td>Field to define additional product attributes</td>
 </tr>
 </tbody></table>
+<h2 id='get-products-bulk'>Get products (bulk)</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"Skus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"B07K3BHGL3"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579847245533965269</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"MAIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"THUMBNAIL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Surface"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"B&gt;X"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nov. 4 2018"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.28 Kg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2 kg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579819094896598884</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579846902585974734</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to get an array of products by passing an array of SKUs. </p>
+<h3 id='http-request-url-4'>HTTP Request URL</h3>
+<p><code>PUT https://api.krama.ai/catalog/{API version}/bulk/products</code></p>
+<h3 id='http-request-header-4'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-3'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Skus</td>
+<td>string[] - An array of product SKUs</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-4'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+<tr>
+<td>Sku</td>
+<td>The SKU of the product</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>The name of the product</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>The description of the product</td>
+</tr>
+<tr>
+<td>GroupID</td>
+<td>The product group ID</td>
+</tr>
+<tr>
+<td>RegularPrice</td>
+<td>Everyday price</td>
+</tr>
+<tr>
+<td>PromotionPrice</td>
+<td>On-sale price</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>Product images</td>
+</tr>
+<tr>
+<td>SearchKeywords</td>
+<td>Keywords that you want this product to be searched with</td>
+</tr>
+<tr>
+<td>Quantity</td>
+<td>Inventory stock quantity</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>Category breadcrumbs</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>Product color</td>
+</tr>
+<tr>
+<td>Brand</td>
+<td>Product brand</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>Product size</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>Is product available for sale?</td>
+</tr>
+<tr>
+<td>IsMain</td>
+<td>Is the product main product in the group?</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Field to define additional product attributes</td>
+</tr>
+</tbody></table>
 <h2 id='update-a-product'>Update a product</h2>
 <blockquote>
 <p>Sample HTTP request body:</p>
@@ -1895,9 +2103,9 @@ With the field validForSeconds in response, you can calculate the time after wit
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this API endpoint to update your product information in the catalog. For now you need to pass the entire product object with updated parts (this functionality will be improved very soon). When you hit this endpoint, the data in the products collection gets updated, product group data also gets updated automatically, search index is also updated and the cache entry is removed first and updated on the next GET call. </p>
-<h3 id='http-request-url-4'>HTTP Request URL</h3>
+<h3 id='http-request-url-5'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/catalog/{API version}/products/{SKU}</code></p>
-<h3 id='http-request-header-4'>HTTP Request Header</h3>
+<h3 id='http-request-header-5'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -1913,7 +2121,7 @@ With the field validForSeconds in response, you can calculate the time after wit
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-3'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-4'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2025,7 +2233,7 @@ With the field validForSeconds in response, you can calculate the time after wit
 <td>keys should be strings and values either: int, float, string or boolean</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-4'>HTTP Response</h3>
+<h3 id='http-response-5'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2158,9 +2366,9 @@ is associated with the regular and the promotion prices. The new prices cannot n
 ensuring that the product groups and the search index are synced as well. The response object contains three lists - the list of updated skus 
 (essentially the skus for which the prices were updated), a list of skus which were not updated (most likely that you submitted same old prices), and
 finally a list of skus that were not found. You can use this information to check if your update request was executed as per your expectations. </p>
-<h3 id='http-request-url-5'>HTTP Request URL</h3>
+<h3 id='http-request-url-6'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/catalog/{API version}/products/price/update</code></p>
-<h3 id='http-request-header-5'>HTTP Request Header</h3>
+<h3 id='http-request-header-6'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2200,7 +2408,7 @@ finally a list of skus that were not found. You can use this information to chec
 <td>The regular price associated with the sku</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-5'>HTTP Response</h3>
+<h3 id='http-response-6'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2261,9 +2469,9 @@ finally a list of skus that were not found. You can use this information to chec
 <p>Use this API endpoint to update your product quantity. You can use this endpoint to updates inventory for multiple products. Please find the API request details below. The API updates product groups as well as search index. The response object contains three lists - a list that gives you the skus of those
 products where the product quantities were updated. The response object also provides you with list of those skus where there was no change and also
 those skus which were not found in the catalog. </p>
-<h3 id='http-request-url-6'>HTTP Request URL</h3>
+<h3 id='http-request-url-7'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/catalog/{API version}/products/inventory/update</code></p>
-<h3 id='http-request-header-6'>HTTP Request Header</h3>
+<h3 id='http-request-header-7'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2298,7 +2506,7 @@ those skus which were not found in the catalog. </p>
 <td>sku-quantity mappings in the Quantity object</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-6'>HTTP Response</h3>
+<h3 id='http-response-7'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2350,9 +2558,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this API endpoint to remove a product from the catalog. When you hit this endpoint with a valid request, the product in the products collection gets removed, the productgroups collection is also automatically updated and the cache and search index is also updated. If there was only one product in the product group the product group object is also removed from the productgroups collection. </p>
-<h3 id='http-request-url-7'>HTTP Request URL</h3>
+<h3 id='http-request-url-8'>HTTP Request URL</h3>
 <p><code>DELETE https://api.krama.ai/catalog/{API version}/products/{SKU}</code></p>
-<h3 id='http-request-header-7'>HTTP Request Header</h3>
+<h3 id='http-request-header-8'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2376,7 +2584,7 @@ those skus which were not found in the catalog. </p>
 <td>The product SKU</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-7'>HTTP Response</h3>
+<h3 id='http-response-8'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2567,7 +2775,7 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This API endpoint gets a specific product group by product group ID. This endpoint is cached for efficiency and speed. </p>
-<h3 id='http-request-url-8'>HTTP Request URL</h3>
+<h3 id='http-request-url-9'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/catalog/{API version}/productgroups/{PGID}</code></p>
 <h3 id='http-requesr-header'>HTTP Requesr Header</h3>
 <table><thead>
@@ -2593,7 +2801,357 @@ those skus which were not found in the catalog. </p>
 <td>The product Group ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-8'>HTTP Response</h3>
+<h3 id='http-response-9'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Code</td>
+<td>Response code for the request</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Flag that tells if the request was successful</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Message for additional information</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Unix timestamp of the response</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Response object containing response information</td>
+</tr>
+<tr>
+<td>Skus</td>
+<td>A list of SKUs of all the products in the group</td>
+</tr>
+<tr>
+<td>Colors</td>
+<td>A list of all the colors from all the products in the group</td>
+</tr>
+<tr>
+<td>Brands</td>
+<td>A list of all the brands from all the products in the group</td>
+</tr>
+<tr>
+<td>Sizes</td>
+<td>A list of all the sizes from all the products in the group</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>A list of all the images from the main product in the group</td>
+</tr>
+<tr>
+<td>SearchKeywords</td>
+<td>A list of all the searchKeywords from all the products in the group</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>Category from the main product in the group</td>
+</tr>
+<tr>
+<td>GroupID</td>
+<td>Product group ID to uniquely identify this product group</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Name from the main product in the group</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Product description</td>
+</tr>
+<tr>
+<td>RegularPriceMin</td>
+<td>Minimum regular price computed in the group</td>
+</tr>
+<tr>
+<td>RegularPriceMax</td>
+<td>Maximum regular price computed in the group</td>
+</tr>
+<tr>
+<td>PromotionPriceMin</td>
+<td>Minimum promotion price computed in the group</td>
+</tr>
+<tr>
+<td>PromotionPriceMax</td>
+<td>Maximum promotion price computed in the group</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>Active flag to indicate if the product is available for sale</td>
+</tr>
+<tr>
+<td>Products</td>
+<td>List of all the product objects for reference</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Field that maps additional attributes to the product group</td>
+</tr>
+</tbody></table>
+<h2 id='get-product-groups-bulk'>Get product groups (bulk)</h2>
+<blockquote>
+<p>Sample HTTP request body:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"Skus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"B07K3BHGL3"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579847155010745182</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RegularPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RegularPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PromotionPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PromotionPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Skus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"B07K3BHGL2"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"B07K3BHGL3"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"MAIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"THUMBNAIL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Surface"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"B&gt;X"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Colors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Black"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Brands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Microsoft"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Sizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"13.5 inches"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579811098654049573</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"B07K3BHGL2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"MAIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"THUMBNAIL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Surface"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"B&gt;X"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL2"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nov. 4 2018"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.00"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.28 Kg"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2 kg"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579811098652293499</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"B07K3BHGL3"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"Sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"GroupID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSLAPS2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RegularPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PromotionPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Images"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"MAIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"THUMBNAIL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"SearchKeywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"Laptop"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Surface"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"B&gt;X"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Brand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07K3BHGL3"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nov. 4 2018"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.5 inches"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.00"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.28 Kg"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAL-00092"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 GHz"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Windows 10 Home"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16 GB"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surface Laptop 2"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2 kg"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="s2">"802.11ac"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"IsMain"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CDN"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579819094896598884</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"Attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"ASIN"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"B07K3BHGL2"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"B07K3BHGL3"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Batteries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"1"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Color"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Black"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Date First Available"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Nov. 4 2018"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Display Size"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"13.5 inches"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Flash Memory Size"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"512.00"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Item Weight"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"1.28 Kg"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Item dimensions L x W x H"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"17.8 x 12.7 x 15.2 cm"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Item model number"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"DAL-00092"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Memory Speed"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"1 GHz"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Number of USB 2 Ports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"1"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Operating System"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Windows 10 Home"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Processor Count"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"16"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"RAM"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"16 GB"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Series"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Surface Laptop 2"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Shipping Weight"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"2.2 kg"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Wireless Standard"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"802.11ac"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"CumulativeReviewStars"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"CumulativeReviewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sample invalid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Group Not Found ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579847199233752534</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this API endpoint to get an array of product group objects by passing an array of SKUs. </p>
+<h3 id='http-request-url-10'>HTTP Request URL</h3>
+<p><code>PUT https://api.krama.ai/catalog/{API version}/bulk/productgroups</code></p>
+<h3 id='http-request-header-9'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-access-token</td>
+<td>The access token that you receive upon login</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-body-parameters-5'>HTTP Request Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Skus</td>
+<td>string[] - An array of product SKUs</td>
+</tr>
+</tbody></table>
+<h3 id='http-response-10'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2713,9 +3271,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this API endpoint to remove a product group from the productgroups collection in the database. This call also updates the search index. When a product group is deleted, entries of related products in the products collection are also removed. </p>
-<h3 id='http-request-url-9'>HTTP Request URL</h3>
+<h3 id='http-request-url-11'>HTTP Request URL</h3>
 <p><code>DELETE https://api.krama.ai/catalog/{API version}/productgroups/{PGID}</code></p>
-<h3 id='http-request-header-8'>HTTP Request Header</h3>
+<h3 id='http-request-header-10'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2739,7 +3297,7 @@ those skus which were not found in the catalog. </p>
 <td>The product Group ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-9'>HTTP Response</h3>
+<h3 id='http-response-11'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -2926,9 +3484,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to create an order entry in the database. Details on the fields and the constraints is listed below. </p>
-<h3 id='http-request-url-10'>HTTP Request URL</h3>
+<h3 id='http-request-url-12'>HTTP Request URL</h3>
 <p><code>POST https://api.krama.ai/orders/{API version}/orders</code></p>
-<h3 id='http-request-header-9'>HTTP Request Header</h3>
+<h3 id='http-request-header-11'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3016,7 +3574,7 @@ those skus which were not found in the catalog. </p>
 <td>Map[SKU]=&gt;Quantity, Integer, product quantity map</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-10'>HTTP Response</h3>
+<h3 id='http-response-12'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3140,9 +3698,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get all the orders associated with a customer using the customer ID. </p>
-<h3 id='http-request-url-11'>HTTP Request URL</h3>
+<h3 id='http-request-url-13'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/orders/{API version}/orders/customer/{CID}</code></p>
-<h3 id='http-request-header-10'>HTTP Request Header</h3>
+<h3 id='http-request-header-12'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3166,7 +3724,7 @@ those skus which were not found in the catalog. </p>
 <td>The Customer ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-11'>HTTP Response</h3>
+<h3 id='http-response-13'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3290,9 +3848,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get all the orders associated with a customer using the customer ID. </p>
-<h3 id='http-request-url-12'>HTTP Request URL</h3>
+<h3 id='http-request-url-14'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/orders/{API version}/orders/{OID}</code></p>
-<h3 id='http-request-header-11'>HTTP Request Header</h3>
+<h3 id='http-request-header-13'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3316,7 +3874,7 @@ those skus which were not found in the catalog. </p>
 <td>The Order ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-12'>HTTP Response</h3>
+<h3 id='http-response-14'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3514,9 +4072,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to update the order object. </p>
-<h3 id='http-request-url-13'>HTTP Request URL</h3>
+<h3 id='http-request-url-15'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/orders/{API version}/orders/{ID}</code></p>
-<h3 id='http-request-header-12'>HTTP Request Header</h3>
+<h3 id='http-request-header-14'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3544,7 +4102,7 @@ those skus which were not found in the catalog. </p>
 <td>Order ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-13'>HTTP Response</h3>
+<h3 id='http-response-15'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3598,7 +4156,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this endpoint to delete an order using the order ID. Recommended to use this endpoint carefully. </p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>DELETE https://api.krama.ai/orders/{API version}/orders/{ID}</code></p>
-<h3 id='http-request-header-13'>HTTP Request Header</h3>
+<h3 id='http-request-header-15'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3622,7 +4180,7 @@ those skus which were not found in the catalog. </p>
 <td>The Order ID</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-14'>HTTP Response</h3>
+<h3 id='http-response-16'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3697,7 +4255,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this API endpoint to search products in the search index. Use of this endpoint is recommended for quick search feature. </p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST https://api.krama.ai/search/{API version}/quick</code></p>
-<h3 id='http-request-header-14'>HTTP Request Header</h3>
+<h3 id='http-request-header-16'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3713,7 +4271,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-4'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-6'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3741,7 +4299,7 @@ those skus which were not found in the catalog. </p>
 <td>Integer, used for pagination returning products in range</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-15'>HTTP Response</h3>
+<h3 id='http-response-17'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3883,7 +4441,7 @@ those skus which were not found in the catalog. </p>
 <p>Use this API endpoint to search products in the search index. Use of this endpoint is recommended for full-page search. </p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://api.krama.ai/search/{API version}/fullpage</code></p>
-<h3 id='http-request-header-15'>HTTP Request Header</h3>
+<h3 id='http-request-header-17'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -3899,7 +4457,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-5'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-7'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3935,7 +4493,7 @@ those skus which were not found in the catalog. </p>
 <td>Complex,  Typically used for a numeric field like price</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-16'>HTTP Response</h3>
+<h3 id='http-response-18'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4030,9 +4588,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get the customer object from the database. </p>
-<h3 id='http-request-url-14'>HTTP Request URL</h3>
+<h3 id='http-request-url-16'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/customers/{API version}/customers/{CID}</code></p>
-<h3 id='http-request-header-16'>HTTP Request Header</h3>
+<h3 id='http-request-header-18'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4056,7 +4614,7 @@ those skus which were not found in the catalog. </p>
 <td>Customer identifier</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-17'>HTTP Response</h3>
+<h3 id='http-response-19'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4188,9 +4746,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to add a customer into the database. </p>
-<h3 id='http-request-url-15'>HTTP Request URL</h3>
+<h3 id='http-request-url-17'>HTTP Request URL</h3>
 <p><code>POST https://api.krama.ai/customers/{API version}/</code></p>
-<h3 id='http-request-header-17'>HTTP Request Header</h3>
+<h3 id='http-request-header-19'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4206,7 +4764,7 @@ those skus which were not found in the catalog. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-6'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-8'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4218,7 +4776,7 @@ those skus which were not found in the catalog. </p>
 <td>Customer identifier</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-18'>HTTP Response</h3>
+<h3 id='http-response-20'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4359,9 +4917,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this information to update a customer&#39;s information. In the example shown in this section there is a request to remove one product sku from the customer&#39;s wishlist.</p>
-<h3 id='http-request-url-16'>HTTP Request URL</h3>
+<h3 id='http-request-url-18'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/customers/{API version}/customers/{CID}</code></p>
-<h3 id='http-request-header-18'>HTTP Request Header</h3>
+<h3 id='http-request-header-20'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4389,7 +4947,7 @@ those skus which were not found in the catalog. </p>
 <td>Customer identifier</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-19'>HTTP Response</h3>
+<h3 id='http-response-21'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4441,9 +4999,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to delete the customer object from the database. </p>
-<h3 id='http-request-url-17'>HTTP Request URL</h3>
+<h3 id='http-request-url-19'>HTTP Request URL</h3>
 <p><code>DELETE https://api.krama.ai/customers/{API version}/customers/{CID}</code></p>
-<h3 id='http-request-header-19'>HTTP Request Header</h3>
+<h3 id='http-request-header-21'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4467,7 +5025,7 @@ those skus which were not found in the catalog. </p>
 <td>Customer identifier</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-20'>HTTP Response</h3>
+<h3 id='http-response-22'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4580,9 +5138,9 @@ those skus which were not found in the catalog. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get the shopping cart object using the cart ID. </p>
-<h3 id='http-request-url-18'>HTTP Request URL</h3>
+<h3 id='http-request-url-20'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/shoppingcart/{API version}/cart/{CID}</code></p>
-<h3 id='http-request-header-20'>HTTP Request Header</h3>
+<h3 id='http-request-header-22'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4606,7 +5164,7 @@ those skus which were not found in the catalog. </p>
 <td>Shopping cart identifier</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-21'>HTTP Response</h3>
+<h3 id='http-response-23'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4768,9 +5326,9 @@ those skus which were not found in the catalog. </p>
 <p>Use this endpoint to add a product in the shopping cart. If the mentioned product already exists in the cart, the quantity is incremented and the total is updated accordingly.
 If a cart ID is not passed in the request the API creates a new unique cart ID - essentially a new shopping cart! So to create a shopping cart you need to make sure to NOT pass
 a cart ID in your request. </p>
-<h3 id='http-request-url-19'>HTTP Request URL</h3>
+<h3 id='http-request-url-21'>HTTP Request URL</h3>
 <p><code>POST https://api.krama.ai/shoppingcart/{API version}/cart/addproduct</code></p>
-<h3 id='http-request-header-21'>HTTP Request Header</h3>
+<h3 id='http-request-header-23'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4786,7 +5344,7 @@ a cart ID in your request. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-7'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-9'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4810,7 +5368,7 @@ a cart ID in your request. </p>
 <td>Integer, the quantity of the added product</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-22'>HTTP Response</h3>
+<h3 id='http-response-24'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4941,9 +5499,9 @@ a cart ID in your request. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to remove the product or adjust the product quantity in the shopping cart. </p>
-<h3 id='http-request-url-20'>HTTP Request URL</h3>
+<h3 id='http-request-url-22'>HTTP Request URL</h3>
 <p><code>POST https://api.krama.ai/shoppingcart/{API version}/cart/removeproduct</code></p>
-<h3 id='http-request-header-22'>HTTP Request Header</h3>
+<h3 id='http-request-header-24'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -4959,7 +5517,7 @@ a cart ID in your request. </p>
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-8'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-10'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4983,7 +5541,7 @@ a cart ID in your request. </p>
 <td>The quantity to be subtracted from cart</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-23'>HTTP Response</h3>
+<h3 id='http-response-25'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5035,9 +5593,9 @@ a cart ID in your request. </p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to reset/clear the shopping cart. </p>
-<h3 id='http-request-url-21'>HTTP Request URL</h3>
+<h3 id='http-request-url-23'>HTTP Request URL</h3>
 <p><code>DELETE https://api.krama.ai/shoppingcart/{API version}/cart/clear/{CID}</code></p>
-<h3 id='http-request-header-23'>HTTP Request Header</h3>
+<h3 id='http-request-header-25'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5061,7 +5619,7 @@ a cart ID in your request. </p>
 <td>Customer identifier</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-24'>HTTP Response</h3>
+<h3 id='http-response-26'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5141,9 +5699,9 @@ a cart ID in your request. </p>
 </span></code></pre>
 <p>Use this endpoint to product reviews for a product group. It must be noted that the reviews are stored and retrieved in context with product groups and not individual products as it 
 does not make any sense to store reviews by products which could be indeed versions of other products.  </p>
-<h3 id='http-request-url-22'>HTTP Request URL</h3>
+<h3 id='http-request-url-24'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/productreviews/{API version}/reviews/{PGID}</code></p>
-<h3 id='http-request-header-24'>HTTP Request Header</h3>
+<h3 id='http-request-header-26'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5167,7 +5725,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>Customer identifier</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-9'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-11'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5191,7 +5749,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>Value -1 Decending ; Value 1 Ascending</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-25'>HTTP Response</h3>
+<h3 id='http-response-27'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5249,9 +5807,9 @@ does not make any sense to store reviews by products which could be indeed versi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to post a review for a product group. </p>
-<h3 id='http-request-url-23'>HTTP Request URL</h3>
+<h3 id='http-request-url-25'>HTTP Request URL</h3>
 <p><code>POST https://api.krama.ai/productreviews/{API version}/reviews</code></p>
-<h3 id='http-request-header-25'>HTTP Request Header</h3>
+<h3 id='http-request-header-27'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5267,7 +5825,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-10'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-12'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5291,7 +5849,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>String, description in the review. Less than 10240 characters</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-26'>HTTP Response</h3>
+<h3 id='http-response-28'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5343,9 +5901,9 @@ does not make any sense to store reviews by products which could be indeed versi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to delete a review for a product group using the unique ReviewID. </p>
-<h3 id='http-request-url-24'>HTTP Request URL</h3>
+<h3 id='http-request-url-26'>HTTP Request URL</h3>
 <p><code>DELETE https://api.krama.ai/productreviews/{API version}/reviews/{RID}</code></p>
-<h3 id='http-request-header-26'>HTTP Request Header</h3>
+<h3 id='http-request-header-28'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5369,7 +5927,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>Review ID of the review to be deleted</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-27'>HTTP Response</h3>
+<h3 id='http-response-29'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5421,9 +5979,9 @@ does not make any sense to store reviews by products which could be indeed versi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to remove all the reviews for a product group using the product GroupID. </p>
-<h3 id='http-request-url-25'>HTTP Request URL</h3>
+<h3 id='http-request-url-27'>HTTP Request URL</h3>
 <p><code>DELETE https://api.krama.ai/productreviews/{API version}/reviews/productgroup/{PGID}</code></p>
-<h3 id='http-request-header-27'>HTTP Request Header</h3>
+<h3 id='http-request-header-29'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5447,7 +6005,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>Product GroupID of the product group for which the reviews are expected to be deleted</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-28'>HTTP Response</h3>
+<h3 id='http-response-30'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5510,9 +6068,9 @@ does not make any sense to store reviews by products which could be indeed versi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get product SKUs in the category.</p>
-<h3 id='http-request-url-26'>HTTP Request URL</h3>
+<h3 id='http-request-url-28'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/categories/{API version}/products</code></p>
-<h3 id='http-request-header-28'>HTTP Request Header</h3>
+<h3 id='http-request-header-30'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5528,7 +6086,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-11'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-13'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5540,7 +6098,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>Valid category path - Example: &quot;Electronics&gt;Computers&gt;Laptop&quot;</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-29'>HTTP Response</h3>
+<h3 id='http-response-31'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5584,9 +6142,9 @@ does not make any sense to store reviews by products which could be indeed versi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get all the root categories. </p>
-<h3 id='http-request-url-27'>HTTP Request URL</h3>
+<h3 id='http-request-url-29'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/categories/{API version}/root</code></p>
-<h3 id='http-request-header-29'>HTTP Request Header</h3>
+<h3 id='http-request-header-31'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5598,7 +6156,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>The access token that you receive upon login</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-30'>HTTP Response</h3>
+<h3 id='http-response-32'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5659,9 +6217,9 @@ does not make any sense to store reviews by products which could be indeed versi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get immediate sub categories of a category. </p>
-<h3 id='http-request-url-28'>HTTP Request URL</h3>
+<h3 id='http-request-url-30'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/categories/{API version}/sub</code></p>
-<h3 id='http-request-header-30'>HTTP Request Header</h3>
+<h3 id='http-request-header-32'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5677,7 +6235,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-12'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-14'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5693,7 +6251,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>Valid category name - Example: &quot;Computers&quot;</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-31'>HTTP Response</h3>
+<h3 id='http-response-33'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5752,9 +6310,9 @@ does not make any sense to store reviews by products which could be indeed versi
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Use this endpoint to get the name of the parent category of a given category. </p>
-<h3 id='http-request-url-29'>HTTP Request URL</h3>
+<h3 id='http-request-url-31'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/categories/{API version}/parent</code></p>
-<h3 id='http-request-header-31'>HTTP Request Header</h3>
+<h3 id='http-request-header-33'>HTTP Request Header</h3>
 <table><thead>
 <tr>
 <th>Key</th>
@@ -5770,7 +6328,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>application/json</td>
 </tr>
 </tbody></table>
-<h3 id='http-request-body-parameters-13'>HTTP Request Body Parameters</h3>
+<h3 id='http-request-body-parameters-15'>HTTP Request Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5786,7 +6344,7 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>Valid category name - Example: &quot;Computers&quot;</td>
 </tr>
 </tbody></table>
-<h3 id='http-response-32'>HTTP Response</h3>
+<h3 id='http-response-34'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Key</th>
