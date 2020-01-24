@@ -68,7 +68,9 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 
 	var customer CUSTOMER
 
-	mapInput(w, r, &customer)
+	if !mapInput(w, r, &customer) {
+		return
+	}
 
 	dbcol := getAccessToken(r) + CustomersCollectionExtension
 
@@ -113,7 +115,9 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 
 	var customer CUSTOMER
 
-	mapInput(w, r, &customer)
+	if !mapInput(w, r, &customer) {
+		return
+	}
 
 	customer.CustomerID = cid
 

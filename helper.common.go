@@ -103,16 +103,18 @@ func resetCustomerCacheKeys(customer *CUSTOMER) {
 
 }
 
-func mapInput(w http.ResponseWriter, r *http.Request, object interface{}) {
+func mapInput(w http.ResponseWriter, r *http.Request, object interface{}) bool {
 
 	err := json.NewDecoder(r.Body).Decode(&object)
 
 	if err != nil {
 
 		respondWith(w, r, err, HTTPBadRequestMessage, nil, http.StatusBadRequest, false)
-		return
+		return false
 
 	}
+
+	return true
 
 }
 

@@ -20,7 +20,9 @@ func getProductsInCategory(w http.ResponseWriter, r *http.Request) {
 
 	var ctrq CATEGORYREQUEST
 
-	mapInput(w, r, &ctrq)
+	if !mapInput(w, r, &ctrq) {
+		return
+	}
 
 	path := cleanCategoryPath(ctrq.Path)
 
@@ -65,7 +67,9 @@ func getImmediateSubCategories(w http.ResponseWriter, r *http.Request) {
 
 	var ctrq CATEGORYREQUEST
 
-	mapInput(w, r, &ctrq)
+	if !mapInput(w, r, &ctrq) {
+		return
+	}
 
 	catNode := getCategoryNode(w, r, ctrq.Category, ctcol)
 
@@ -93,7 +97,9 @@ func getParentCategory(w http.ResponseWriter, r *http.Request) {
 
 	var ctrq CATEGORYREQUEST
 
-	mapInput(w, r, &ctrq)
+	if !mapInput(w, r, &ctrq) {
+		return
+	}
 
 	catNode := getCategoryNode(w, r, ctrq.Category, ctcol)
 

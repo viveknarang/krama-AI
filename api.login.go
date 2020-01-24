@@ -19,7 +19,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	var rx LOGIN
 
-	mapInput(w, r, &rx)
+	if !mapInput(w, r, &rx) {
+		return
+	}
 
 	if !validateLoginRequest(w, r, rx) {
 		return

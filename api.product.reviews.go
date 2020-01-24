@@ -22,7 +22,9 @@ func getProductReviews(w http.ResponseWriter, r *http.Request) {
 
 	var prr PRODREVIEWREQ
 
-	mapInput(w, r, &prr)
+	if !mapInput(w, r, &prr) {
+		return
+	}
 
 	if !validateProductReviewRequest(w, r, prr) {
 		return
@@ -89,7 +91,9 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 	prdbcol := csx + ProductReviewsExtension
 	pgdbcol := csx + ProductGroupExtension
 
-	mapInput(w, r, &review)
+	if !mapInput(w, r, &review) {
+		return
+	}
 
 	review.ReviewID = uuid.New().String()
 

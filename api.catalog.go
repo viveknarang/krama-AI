@@ -84,7 +84,9 @@ func getProducts(w http.ResponseWriter, r *http.Request) {
 
 	var prq PRQ
 
-	mapInput(w, r, &prq)
+	if !mapInput(w, r, &prq) {
+		return
+	}
 
 	var products []PRODUCT
 
@@ -129,7 +131,9 @@ func getProductGroups(w http.ResponseWriter, r *http.Request) {
 
 	var pgrq PGRQ
 
-	mapInput(w, r, &pgrq)
+	if !mapInput(w, r, &pgrq) {
+		return
+	}
 
 	var productG []PRODUCTGROUP
 
@@ -178,7 +182,9 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	var p PRODUCT
 
-	mapInput(w, r, &p)
+	if !mapInput(w, r, &p) {
+		return
+	}
 
 	var opts options.FindOptions
 
@@ -235,7 +241,9 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	var p PRODUCT
 
-	mapInput(w, r, &p)
+	if !mapInput(w, r, &p) {
+		return
+	}
 
 	if !validateProduct(w, r, p) {
 		return
@@ -477,7 +485,9 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 
 	var prices PRICEUPDATEREQUEST
 
-	mapInput(w, r, &prices)
+	if !mapInput(w, r, &prices) {
+		return
+	}
 
 	for sku, price := range prices.Prices {
 		if price.RegularPrice < 0 || price.PromotionPrice < 0 {
@@ -528,7 +538,9 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	var quantities INVENTORYUPDATEREQUEST
 
-	mapInput(w, r, &quantities)
+	if !mapInput(w, r, &quantities) {
+		return
+	}
 
 	for sku, quantity := range quantities.Quantity {
 		if quantity < 0 {

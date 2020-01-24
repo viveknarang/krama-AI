@@ -16,7 +16,9 @@ func quickSearch(w http.ResponseWriter, r *http.Request) {
 
 	var sq SEARCHREQUEST
 
-	mapInput(w, r, &sq)
+	if !mapInput(w, r, &sq) {
+		return
+	}
 
 	cidb := getAccessToken(r)
 	index := cidb + ProductGroupExtension + SearchIndexExtension
@@ -47,7 +49,9 @@ func fullpageSearch(w http.ResponseWriter, r *http.Request) {
 
 	var sq SEARCHREQUEST
 
-	mapInput(w, r, &sq)
+	if !mapInput(w, r, &sq) {
+		return
+	}
 
 	cidb := getAccessToken(r)
 	index := cidb + ProductGroupExtension + SearchIndexExtension

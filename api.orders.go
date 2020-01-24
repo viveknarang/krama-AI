@@ -114,7 +114,9 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 
 	var order ORDER
 
-	mapInput(w, r, &order)
+	if !mapInput(w, r, &order) {
+		return
+	}
 
 	order.OrderCreationDate = time.Now().UnixNano()
 
@@ -143,7 +145,9 @@ func putOrder(w http.ResponseWriter, r *http.Request) {
 
 	var order ORDER
 
-	mapInput(w, r, &order)
+	if !mapInput(w, r, &order) {
+		return
+	}
 
 	order.OrderCreationDate = time.Now().UnixNano()
 	order.OrderID = oid

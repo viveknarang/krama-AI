@@ -53,7 +53,9 @@ func addProductInShoppingCart(w http.ResponseWriter, r *http.Request) {
 
 	var shoppingCartReq SHOPPINGCARTREQ
 
-	mapInput(w, r, &shoppingCartReq)
+	if !mapInput(w, r, &shoppingCartReq) {
+		return
+	}
 
 	shoppingCartO := REDISCLIENT.Get(shoppingCartReq.CartID)
 	var shoppingCart SHOPPINGCART
@@ -130,7 +132,9 @@ func removeProductFromShoppingCart(w http.ResponseWriter, r *http.Request) {
 
 	var shoppingCartReq SHOPPINGCARTREQ
 
-	mapInput(w, r, &shoppingCartReq)
+	if !mapInput(w, r, &shoppingCartReq) {
+		return
+	}
 
 	shoppingCartO := REDISCLIENT.Get(shoppingCartReq.CartID)
 	var shoppingCart SHOPPINGCART
