@@ -81,6 +81,8 @@ func routers() *mux.Router {
 
 	router.HandleFunc(CategoriesPath+"/parent", getParentCategory).Methods(http.MethodGet)
 
+	router.HandleFunc(RecommendationsPath+"/similarproducts", getSimilarProducts).Methods(http.MethodGet)
+
 	rlog.Debug("Router setup complete ...")
 
 	return router

@@ -218,6 +218,12 @@ var CategoriesBasePath string
 //CategoriesPath category path
 var CategoriesPath string
 
+//RecommendationsBasePath recommendations base path
+var RecommendationsBasePath string
+
+//RecommendationsPath recommendations base path
+var RecommendationsPath string
+
 func loadSystemProperties() bool {
 
 	rlog.Debug("loadSystemProperties() handle function invoked ...")
@@ -243,6 +249,7 @@ func loadSystemProperties() bool {
 	ShoppingCartBasePath = p.GetString("api.shoppingcart.base.path", "/shoppingcart/")
 	ProductReviewsBasePath = p.GetString("api.productreviews.base.path", "/productreviews/")
 	CategoriesBasePath = p.GetString("api.categories.base.path", "/categories/")
+	RecommendationsBasePath = p.GetString("api.recommendations.base.path", "/recommendations/")
 
 	APIVersion = p.GetString("api.version", "v1")
 	RedisURL = p.GetString("redis.url", "localhost")
@@ -306,6 +313,7 @@ func loadSystemProperties() bool {
 	ShoppingCartPath = ShoppingCartBasePath + APIVersion
 	ProductReviewsPath = ProductReviewsBasePath + APIVersion
 	CategoriesPath = CategoriesBasePath + APIVersion
+	RecommendationsPath = RecommendationsBasePath + APIVersion
 
 	return true
 
