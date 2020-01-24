@@ -105,7 +105,7 @@ func getProducts(w http.ResponseWriter, r *http.Request) {
 	results := findMongoDocument(ExternalDB, dbcol, bson.M{"$or": sx}, &opts)
 
 	if len(results) == 0 {
-		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
+		respondWith(w, r, nil, ProductsNotFoundMessage, nil, http.StatusNotFound, false)
 		return
 	}
 
@@ -117,7 +117,7 @@ func getProducts(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	respondWith(w, r, nil, ProductFoundMessage, products, http.StatusOK, false)
+	respondWith(w, r, nil, ProductsFoundMessage, products, http.StatusOK, false)
 
 }
 
@@ -152,7 +152,7 @@ func getProductGroups(w http.ResponseWriter, r *http.Request) {
 	results := findMongoDocument(ExternalDB, dbcol, bson.M{"$or": sx}, &opts)
 
 	if len(results) == 0 {
-		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
+		respondWith(w, r, nil, ProductGroupsNotFoundMessage, nil, http.StatusNotFound, false)
 		return
 	}
 
@@ -164,7 +164,7 @@ func getProductGroups(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	respondWith(w, r, nil, ProductFoundMessage, productG, http.StatusOK, false)
+	respondWith(w, r, nil, ProductGroupsFoundMessage, productG, http.StatusOK, false)
 
 }
 
@@ -186,16 +186,16 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if !validateProduct(w, r, p) {
+		return
+	}
+
 	var opts options.FindOptions
 
 	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, &opts)
 
 	if len(results) != 0 {
 		respondWith(w, r, nil, ProductAlreadyExistsMessage, nil, http.StatusConflict, false)
-		return
-	}
-
-	if !validateProduct(w, r, p) {
 		return
 	}
 

@@ -5,6 +5,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -13,6 +14,8 @@ var mutex sync.Mutex
 
 // Synchronized function to keep inventory levels consistent...
 func updateInventory(w http.ResponseWriter, r *http.Request, collection string, iodi string, Sku string, count int64, ignoreMessageForNotFound bool) [2]int64 {
+
+	rlog.Debug("updateInventory() handle function invoked ...")
 
 	mutex.Lock()
 

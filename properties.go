@@ -77,8 +77,14 @@ var CustomersDB string
 //ProductFoundMessage product found message
 var ProductFoundMessage string
 
+//ProductsFoundMessage product found message
+var ProductsFoundMessage string
+
 //ProductNotFoundMessage product not found message
 var ProductNotFoundMessage string
+
+//ProductsNotFoundMessage product not found message
+var ProductsNotFoundMessage string
 
 //ProductUpdatedMessage product updated message
 var ProductUpdatedMessage string
@@ -95,8 +101,14 @@ var ProductGroupDeletedMessage string
 //ProductGroupFoundMessage product found message
 var ProductGroupFoundMessage string
 
+//ProductGroupsFoundMessage product found message
+var ProductGroupsFoundMessage string
+
 //ProductGroupNotFoundMessage product not found message
 var ProductGroupNotFoundMessage string
+
+//ProductGroupsNotFoundMessage product not found message
+var ProductGroupsNotFoundMessage string
 
 //ProductNotAddedMessage product not added message
 var ProductNotAddedMessage string
@@ -268,13 +280,17 @@ func loadSystemProperties() bool {
 	ProductGroupExtension = p.GetString("db.mongo.external.productgroup.extension", "")
 	CustomersDB = p.GetString("db.mongo.internal.customers.collection", "")
 	ProductFoundMessage = p.GetString("api.response.message.product.found", "")
+	ProductsFoundMessage = p.GetString("api.response.message.products.found", "")
 	ProductNotFoundMessage = p.GetString("api.response.message.product.notfound", "")
+	ProductsNotFoundMessage = p.GetString("api.response.message.products.notfound", "")
 	ProductUpdatedMessage = p.GetString("api.response.message.product.updated", "")
 	ProductNotUpdatedMessage = p.GetString("api.response.message.product.notupdated", "")
 	ProductDeletedMessage = p.GetString("api.response.message.product.deleted", "")
 	ProductGroupDeletedMessage = p.GetString("api.response.message.productgroup.deleted", "")
 	ProductGroupFoundMessage = p.GetString("api.response.message.productgroup.found", "")
+	ProductGroupsFoundMessage = p.GetString("api.response.message.productgroups.found", "")
 	ProductGroupNotFoundMessage = p.GetString("api.response.message.productgroup.notfound", "")
+	ProductGroupsNotFoundMessage = p.GetString("api.response.message.productgroups.notfound", "")
 	ProductNotAddedMessage = p.GetString("api.response.message.product.notadded", "")
 	ProductNotDeletedMessage = p.GetString("api.response.message.product.notdeleted", "")
 	OrdersExtension = p.GetString("db.mongo.external.orders.extension", "")
