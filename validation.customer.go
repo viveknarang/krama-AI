@@ -8,9 +8,6 @@ import (
 
 func validateCustomer(w http.ResponseWriter, r *http.Request, customer CUSTOMER) bool {
 
-	validator.SetValidationFunc("validateEmail", customValidatorForEmail)
-	validator.SetValidationFunc("validateTypeArrayLength", customValidatorForSize)
-
 	if errs := validator.Validate(customer); errs != nil {
 
 		respondWith(w, r, nil, "Error(s) found in the customer data: "+errs.Error(), nil, http.StatusBadRequest, false)

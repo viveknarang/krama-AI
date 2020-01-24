@@ -20,6 +20,7 @@ func main() {
 	connectDB()
 	connectRedis()
 	connectElastic()
+	setCustomValidators()
 
 	rlog.Debug("Base components - [ELASTIC, REDIS, MONGO] connected ...")
 

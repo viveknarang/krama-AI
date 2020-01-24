@@ -6,7 +6,22 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+
+	"github.com/go-validator/validator"
 )
+
+func setCustomValidators() {
+
+	validator.SetValidationFunc("size", customValidatorForSize)
+	validator.SetValidationFunc("hasNoSpaces", customValidatorForNoSpaces)
+	validator.SetValidationFunc("checkMaxFloat", customValidatorForMaxFloat)
+	validator.SetValidationFunc("isValidCurrency", customValidatorForAllowedCurrencies)
+	validator.SetValidationFunc("validateEmail", customValidatorForEmail)
+	validator.SetValidationFunc("validateTypeArrayLength", customValidatorForSize)
+	validator.SetValidationFunc("validStarRating", customValidatorForStarRating)
+	validator.SetValidationFunc("isValidSortOrder", customValidatorForSortOrder)
+
+}
 
 func customValidatorForSize(v interface{}, param string) error {
 

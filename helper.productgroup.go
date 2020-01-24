@@ -54,29 +54,29 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			pm[p.Sku] = p
 			npg.Products = pm
 
-			setInit()
-			addAllInSet(p.SearchKeywords)
-			npg.SearchKeywords = toArrayFromSet()
+			m0 := make(map[string]bool)
+			addAllInSet(p.SearchKeywords, m0)
+			npg.SearchKeywords = toArrayFromSet(m0)
 
-			setInit()
-			addInSet(p.Size)
-			npg.Sizes = toArrayFromSet()
+			m1 := make(map[string]bool)
+			addInSet(p.Size, m1)
+			npg.Sizes = toArrayFromSet(m1)
 
-			setInit()
-			addInSet(p.Color)
-			npg.Colors = toArrayFromSet()
+			m2 := make(map[string]bool)
+			addInSet(p.Color, m2)
+			npg.Colors = toArrayFromSet(m2)
 
-			setInit()
-			addInSet(p.Brand)
-			npg.Brands = toArrayFromSet()
+			m3 := make(map[string]bool)
+			addInSet(p.Brand, m3)
+			npg.Brands = toArrayFromSet(m3)
 
-			setInit()
-			addInSet(p.Sku)
-			npg.Skus = toArrayFromSet()
+			m4 := make(map[string]bool)
+			addInSet(p.Sku, m4)
+			npg.Skus = toArrayFromSet(m4)
 
-			setInit()
-			addAllInSet(p.Category)
-			npg.Category = toArrayFromSet()
+			m5 := make(map[string]bool)
+			addAllInSet(p.Category, m5)
+			npg.Category = toArrayFromSet(m5)
 
 			npg.Images = p.Images
 
@@ -92,36 +92,36 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			mapDocument(w, r, &productGroup, results[0])
 
-			setInit()
-			addAllInSet(p.SearchKeywords)
-			addAllInSet(productGroup.SearchKeywords)
-			productGroup.SearchKeywords = toArrayFromSet()
+			m6 := make(map[string]bool)
+			addAllInSet(p.SearchKeywords, m6)
+			addAllInSet(productGroup.SearchKeywords, m6)
+			productGroup.SearchKeywords = toArrayFromSet(m6)
 
-			setInit()
-			addInSet(p.Size)
-			addAllInSet(productGroup.Sizes)
-			productGroup.Sizes = toArrayFromSet()
+			m7 := make(map[string]bool)
+			addInSet(p.Size, m7)
+			addAllInSet(productGroup.Sizes, m7)
+			productGroup.Sizes = toArrayFromSet(m7)
 
-			setInit()
-			addInSet(p.Color)
-			addAllInSet(productGroup.Colors)
-			productGroup.Colors = toArrayFromSet()
+			m8 := make(map[string]bool)
+			addInSet(p.Color, m8)
+			addAllInSet(productGroup.Colors, m8)
+			productGroup.Colors = toArrayFromSet(m8)
 
-			setInit()
-			addInSet(p.Brand)
-			addAllInSet(productGroup.Brands)
-			productGroup.Brands = toArrayFromSet()
+			m9 := make(map[string]bool)
+			addInSet(p.Brand, m9)
+			addAllInSet(productGroup.Brands, m9)
+			productGroup.Brands = toArrayFromSet(m9)
 
-			setInit()
-			addAllInSet(p.Category)
-			addAllInSet(productGroup.Category)
-			productGroup.Category = toArrayFromSet()
+			m10 := make(map[string]bool)
+			addAllInSet(p.Category, m10)
+			addAllInSet(productGroup.Category, m10)
+			productGroup.Category = toArrayFromSet(m10)
 
 			productGroup.Products[p.Sku] = p
 
 			active := false
 
-			setInit()
+			m11 := make(map[string]bool)
 
 			for key, value := range productGroup.Products {
 
@@ -132,7 +132,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 				}
 
 				active = active || value.Active
-				addInSet(key)
+				addInSet(key, m11)
 
 			}
 
@@ -162,7 +162,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			productGroup.PromotionPriceMin = prices[2]
 			productGroup.PromotionPriceMax = prices[3]
 			productGroup.Active = active
-			productGroup.Skus = toArrayFromSet()
+			productGroup.Skus = toArrayFromSet(m11)
 
 			result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
 
@@ -181,36 +181,36 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		mapDocument(w, r, &productGroup, results[0])
 
-		setInit()
-		addAllInSet(p.SearchKeywords)
-		addAllInSet(productGroup.SearchKeywords)
-		productGroup.SearchKeywords = toArrayFromSet()
+		m12 := make(map[string]bool)
+		addAllInSet(p.SearchKeywords, m12)
+		addAllInSet(productGroup.SearchKeywords, m12)
+		productGroup.SearchKeywords = toArrayFromSet(m12)
 
-		setInit()
-		addInSet(p.Size)
-		addAllInSet(productGroup.Sizes)
-		productGroup.Sizes = toArrayFromSet()
+		m13 := make(map[string]bool)
+		addInSet(p.Size, m13)
+		addAllInSet(productGroup.Sizes, m13)
+		productGroup.Sizes = toArrayFromSet(m13)
 
-		setInit()
-		addInSet(p.Color)
-		addAllInSet(productGroup.Colors)
-		productGroup.Colors = toArrayFromSet()
+		m14 := make(map[string]bool)
+		addInSet(p.Color, m14)
+		addAllInSet(productGroup.Colors, m14)
+		productGroup.Colors = toArrayFromSet(m14)
 
-		setInit()
-		addInSet(p.Brand)
-		addAllInSet(productGroup.Brands)
-		productGroup.Brands = toArrayFromSet()
+		m15 := make(map[string]bool)
+		addInSet(p.Brand, m15)
+		addAllInSet(productGroup.Brands, m15)
+		productGroup.Brands = toArrayFromSet(m15)
 
-		setInit()
-		addAllInSet(p.Category)
-		addAllInSet(productGroup.Category)
-		productGroup.Category = toArrayFromSet()
+		m16 := make(map[string]bool)
+		addAllInSet(p.Category, m16)
+		addAllInSet(productGroup.Category, m16)
+		productGroup.Category = toArrayFromSet(m16)
 
 		productGroup.Products[p.Sku] = p
 
 		active := false
 
-		setInit()
+		m17 := make(map[string]bool)
 
 		for key, value := range productGroup.Products {
 
@@ -221,7 +221,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			}
 
 			active = active || value.Active
-			addInSet(key)
+			addInSet(key, m17)
 
 		}
 
@@ -257,7 +257,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		productGroup.PromotionPriceMax = prices[3]
 
 		productGroup.Active = active
-		productGroup.Skus = toArrayFromSet()
+		productGroup.Skus = toArrayFromSet(m17)
 
 		result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
 
@@ -290,7 +290,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			active := false
 
-			setInit()
+			m18 := make(map[string]bool)
 
 			for key, value := range productGroup.Products {
 
@@ -301,7 +301,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 				}
 
 				active = active || value.Active
-				addInSet(key)
+				addInSet(key, m18)
 
 			}
 
@@ -336,37 +336,37 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			productGroup.PromotionPriceMin = prices[2]
 			productGroup.PromotionPriceMax = prices[3]
 			productGroup.Active = active
-			productGroup.Skus = toArrayFromSet()
+			productGroup.Skus = toArrayFromSet(m18)
 
-			setInit()
+			m19 := make(map[string]bool)
 			for _, prd := range productGroup.Products {
-				addAllInSet(prd.SearchKeywords)
+				addAllInSet(prd.SearchKeywords, m19)
 			}
-			productGroup.SearchKeywords = toArrayFromSet()
+			productGroup.SearchKeywords = toArrayFromSet(m19)
 
-			setInit()
+			m20 := make(map[string]bool)
 			for _, prd := range productGroup.Products {
-				addInSet(prd.Size)
+				addInSet(prd.Size, m20)
 			}
-			productGroup.Sizes = toArrayFromSet()
+			productGroup.Sizes = toArrayFromSet(m20)
 
-			setInit()
+			m21 := make(map[string]bool)
 			for _, prd := range productGroup.Products {
-				addInSet(prd.Color)
+				addInSet(prd.Color, m21)
 			}
-			productGroup.Colors = toArrayFromSet()
+			productGroup.Colors = toArrayFromSet(m21)
 
-			setInit()
+			m22 := make(map[string]bool)
 			for _, prd := range productGroup.Products {
-				addInSet(prd.Brand)
+				addInSet(prd.Brand, m22)
 			}
-			productGroup.Brands = toArrayFromSet()
+			productGroup.Brands = toArrayFromSet(m22)
 
-			setInit()
+			m23 := make(map[string]bool)
 			for _, prd := range productGroup.Products {
-				addAllInSet(prd.Category)
+				addAllInSet(prd.Category, m23)
 			}
-			productGroup.Category = toArrayFromSet()
+			productGroup.Category = toArrayFromSet(m23)
 
 			result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
 

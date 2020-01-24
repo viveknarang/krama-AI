@@ -4,9 +4,7 @@ import (
 	"reflect"
 )
 
-var mp = make(map[string]bool)
-
-func addInSet(s string) {
+func addInSet(s string, mp map[string]bool) {
 
 	if mp[s] {
 		return
@@ -15,19 +13,19 @@ func addInSet(s string) {
 
 }
 
-func addAllInSet(arr []string) {
+func addAllInSet(arr []string, mp map[string]bool) {
 
 	for i := 0; i < len(arr); i++ {
-		addInSet(arr[i])
+		addInSet(arr[i], mp)
 	}
 
 }
 
-func existsInSet(s string) bool {
+func existsInSet(s string, mp map[string]bool) bool {
 	return mp[s]
 }
 
-func toArrayFromSet() []string {
+func toArrayFromSet(mp map[string]bool) []string {
 
 	keys := reflect.ValueOf(mp).MapKeys()
 
@@ -38,8 +36,4 @@ func toArrayFromSet() []string {
 
 	return strkeys
 
-}
-
-func setInit() {
-	mp = make(map[string]bool)
 }

@@ -9,11 +9,6 @@ import (
 
 func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bool {
 
-	validator.SetValidationFunc("size", customValidatorForSize)
-	validator.SetValidationFunc("hasNoSpaces", customValidatorForNoSpaces)
-	validator.SetValidationFunc("checkMaxFloat", customValidatorForMaxFloat)
-	validator.SetValidationFunc("isValidCurrency", customValidatorForAllowedCurrencies)
-
 	if errs := validator.Validate(product); errs != nil {
 
 		respondWith(w, r, nil, "Error(s) found in the product data: "+errs.Error(), nil, http.StatusBadRequest, false)
@@ -24,7 +19,7 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 	for key, img := range product.Images {
 
 		if !isValidURL(img) {
-			respondWith(w, r, nil, "Image URL: "+img+" with key: " + key + " is not a valid URL", nil, http.StatusBadRequest, false)
+			respondWith(w, r, nil, "Image URL: "+img+" with key: "+key+" is not a valid URL", nil, http.StatusBadRequest, false)
 			return false
 		}
 
