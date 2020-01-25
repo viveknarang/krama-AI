@@ -25,6 +25,11 @@ func quickSearch(w http.ResponseWriter, r *http.Request) {
 
 	searchResponse := basicSearch(index, sq.From, sq.To, sq.Query, sq.QueryFields, sq.ResponseFields)
 
+	if searchResponse == nil {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
+
 	hits := make(map[int]interface{})
 	results := make(map[string]interface{})
 
@@ -57,6 +62,11 @@ func fullpageSearch(w http.ResponseWriter, r *http.Request) {
 	index := cidb + ProductGroupExtension + SearchIndexExtension
 
 	searchResponse := facetedSearch(index, sq.From, sq.To, sq.Query, sq.QueryFields, sq.ResponseFields, sq.TermFacetFields, sq.RangeFacetFields)
+
+	if searchResponse == nil {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
 
 	results := make(map[string]interface{})
 

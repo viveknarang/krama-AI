@@ -119,6 +119,7 @@ func basicSearch(index string, from int, to int, query string, queryFields []str
 
 	if err != nil {
 		rlog.Error("basicSearch() Error: " + err.Error())
+		return nil
 	}
 
 	return searchResult.Hits
@@ -205,6 +206,7 @@ func facetedSearch(index string, from int, to int, q string, queryFields []strin
 
 	if err != nil {
 		rlog.Error("facetedSearch() Error: " + err.Error())
+		return nil
 	}
 
 	return searchResult
