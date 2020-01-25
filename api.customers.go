@@ -34,12 +34,12 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 
 		pth := strings.Split(r.URL.Path, "/")
 		cid := pth[len(pth)-1]
-
-		dbcol := getAccessToken(r) + CustomersCollectionExtension
+		csx := getAccessToken(r)
+		dbcol := csx + CustomersCollectionExtension
 
 		var opts options.FindOptions
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid}, &opts)
+		results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"CustomerID": cid}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, CustomersNotFoundMessage, nil, http.StatusNotFound, false)
@@ -72,11 +72,12 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := getAccessToken(r) + CustomersCollectionExtension
+	csx := getAccessToken(r)
+	dbcol := csx + CustomersCollectionExtension
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Email": customer.Email}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"Email": customer.Email}, &opts)
 
 	if len(results) != 0 {
 		respondWith(w, r, nil, CustomerAlreadyExistsMessage, nil, http.StatusConflict, false)
@@ -96,7 +97,7 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 	customer.Password = hashString(customer.Password)
 	customer.Updated = time.Now().UnixNano()
 
-	insertMongoDocument(ExternalDB, dbcol, customer)
+	insertMongoDocument(ExternalDB+csx, dbcol, customer)
 
 	respondWith(w, r, nil, CustomersAddedMessage, customer, http.StatusCreated, true)
 
@@ -129,9 +130,10 @@ func putCustomer(w http.ResponseWriter, r *http.Request) {
 
 	customer.Updated = time.Now().UnixNano()
 
-	dbcol := getAccessToken(r) + CustomersCollectionExtension
+	csx := getAccessToken(r)
+	dbcol := csx + CustomersCollectionExtension
 
-	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": customer.CustomerID}, bson.M{"$set": customer})
+	result := updateMongoDocument(ExternalDB+csx, dbcol, bson.M{"CustomerID": customer.CustomerID}, bson.M{"$set": customer})
 
 	if result[0] == 1 && result[1] == 1 {
 
@@ -158,14 +160,15 @@ func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := getAccessToken(r) + CustomersCollectionExtension
+	csx := getAccessToken(r)
+	dbcol := csx + CustomersCollectionExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	cid := pth[len(pth)-1]
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"CustomerID": cid}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, CustomersNotFoundMessage, nil, http.StatusNotFound, false)
@@ -176,7 +179,7 @@ func deleteCustomer(w http.ResponseWriter, r *http.Request) {
 
 	mapDocument(w, r, &customer, results[0])
 
-	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"CustomerID": cid}) == 1 {
+	if deleteMongoDocument(ExternalDB+csx, dbcol, bson.M{"CustomerID": cid}) == 1 {
 
 		resetCustomerCacheKeys(&customer)
 		respondWith(w, r, nil, CustomersDeletedMessage, nil, http.StatusOK, true)

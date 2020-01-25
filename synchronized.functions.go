@@ -13,7 +13,7 @@ import (
 var mutex sync.Mutex
 
 // Synchronized function to keep inventory levels consistent...
-func updateInventory(w http.ResponseWriter, r *http.Request, collection string, iodi string, Sku string, count int64, ignoreMessageForNotFound bool) [2]int64 {
+func updateInventory(w http.ResponseWriter, r *http.Request, db string, collection string, iodi string, Sku string, count int64, ignoreMessageForNotFound bool) [2]int64 {
 
 	rlog.Debug("updateInventory() handle function invoked ...")
 
@@ -25,7 +25,7 @@ func updateInventory(w http.ResponseWriter, r *http.Request, collection string, 
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, collection, bson.M{"Sku": Sku}, &opts)
+	results := findMongoDocument(db, collection, bson.M{"Sku": Sku}, &opts)
 
 	if len(results) != 1 {
 
@@ -63,7 +63,7 @@ func updateInventory(w http.ResponseWriter, r *http.Request, collection string, 
 
 	productInventoryRecord.Updated = time.Now().UnixNano()
 
-	result := updateMongoDocument(ExternalDB, collection, bson.M{"Sku": productInventoryRecord.Sku}, bson.M{"$set": productInventoryRecord})
+	result := updateMongoDocument(db, collection, bson.M{"Sku": productInventoryRecord.Sku}, bson.M{"$set": productInventoryRecord})
 
 	mutex.Unlock()
 

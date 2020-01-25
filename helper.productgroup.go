@@ -24,7 +24,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID}, &opts)
+	results := findMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": p.GroupID}, &opts)
 
 	if r.Method == http.MethodPost {
 
@@ -82,7 +82,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			npg.Updated = time.Now().UnixNano()
 
-			insertMongoDocument(ExternalDB, pgcol, npg)
+			insertMongoDocument(ExternalDB+cidb, pgcol, npg)
 			npg.Products = nil
 			response = indexES(pgindex, PGMapping, npg, npg.GroupID)
 
@@ -164,7 +164,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			productGroup.Active = active
 			productGroup.Skus = toArrayFromSet(m11)
 
-			result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
+			result := updateMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
 				productGroup.Products = nil
@@ -259,7 +259,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 		productGroup.Active = active
 		productGroup.Skus = toArrayFromSet(m17)
 
-		result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
+		result := updateMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
 
 		if result[0] == 1 && result[1] == 1 {
 			productGroup.Products = nil
@@ -276,7 +276,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		if len(productGroup.Products) == 1 {
 
-			delr := deleteMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID})
+			delr := deleteMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": p.GroupID})
 
 			if delr == 1 {
 				response = deleteESDocumentByID(pgindex, p.GroupID)
@@ -368,7 +368,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			}
 			productGroup.Category = toArrayFromSet(m23)
 
-			result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
+			result := updateMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": p.GroupID}, bson.M{"$set": productGroup})
 
 			if result[0] == 1 && result[1] == 1 {
 				productGroup.Products = nil
@@ -402,7 +402,7 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 		var opts options.FindOptions
 
-		results := findMongoDocument(ExternalDB, pcol, bson.M{"Sku": sku}, &opts)
+		results := findMongoDocument(ExternalDB+cidb, pcol, bson.M{"Sku": sku}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -413,13 +413,13 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 		mapDocument(w, r, &product, results[0])
 
-		result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, bson.M{"$set": bson.M{"Products." + product.Sku: product}})
+		result := updateMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": product.GroupID}, bson.M{"$set": bson.M{"Products." + product.Sku: product}})
 
 		if result[0] == 1 && result[1] == 1 {
 
 			var opts options.FindOptions
 
-			results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, &opts)
+			results := findMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": product.GroupID}, &opts)
 
 			var productGroup PRODUCTGROUP
 
@@ -429,13 +429,13 @@ func syncProductGroupFromProducts(w http.ResponseWriter, r *http.Request, skus [
 
 				prices := computePriceRange(&productGroup)
 
-				result := updateMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, bson.M{"$set": bson.M{"RegularPriceMin": prices[0], "RegularPriceMax": prices[1], "PromotionPriceMin": prices[2], "PromotionPriceMax": prices[3]}})
+				result := updateMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": product.GroupID}, bson.M{"$set": bson.M{"RegularPriceMin": prices[0], "RegularPriceMax": prices[1], "PromotionPriceMin": prices[2], "PromotionPriceMax": prices[3]}})
 
 				if result[0] == 1 && result[1] == 1 {
 
 					var opts options.FindOptions
 
-					results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": product.GroupID}, &opts)
+					results := findMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": product.GroupID}, &opts)
 
 					var productGroup PRODUCTGROUP
 

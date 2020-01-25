@@ -33,7 +33,8 @@ func getProductReviews(w http.ResponseWriter, r *http.Request) {
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
-	dbcol := getAccessToken(r) + ProductReviewsExtension
+	csx := getAccessToken(r)
+	dbcol := csx + ProductReviewsExtension
 
 	var opts options.FindOptions
 
@@ -41,7 +42,7 @@ func getProductReviews(w http.ResponseWriter, r *http.Request) {
 	opts.SetSkip(prr.From)
 	opts.SetLimit(prr.To)
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"GroupID": pgid}, &opts)
 
 	if len(results) == 0 {
 		respondWith(w, r, nil, "Reviews Not found ...", nil, http.StatusNotFound, false)
@@ -105,14 +106,14 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, pgdbcol, bson.M{"GroupID": review.GroupID}, &opts)
+	results := findMongoDocument(ExternalDB+csx, pgdbcol, bson.M{"GroupID": review.GroupID}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, "Product Review Insertion Failed! Reason:"+ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
 		return
 	}
 
-	insertMongoDocument(ExternalDB, prdbcol, review)
+	insertMongoDocument(ExternalDB+csx, prdbcol, review)
 
 	var productGroup PRODUCTGROUP
 
@@ -121,7 +122,7 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 	newReviewCount := productGroup.CumulativeReviewCount + 1
 	newReviewStars := (productGroup.CumulativeReviewStars + review.Stars) / float64(newReviewCount)
 
-	updateResult := updateMongoDocument(ExternalDB, pgdbcol, bson.M{"GroupID": review.GroupID}, bson.M{"$set": bson.M{"CumulativeReviewStars": newReviewStars, "CumulativeReviewCount": newReviewCount}})
+	updateResult := updateMongoDocument(ExternalDB+csx, pgdbcol, bson.M{"GroupID": review.GroupID}, bson.M{"$set": bson.M{"CumulativeReviewStars": newReviewStars, "CumulativeReviewCount": newReviewCount}})
 
 	if updateResult[0] == 1 && updateResult[1] == 1 {
 
@@ -148,21 +149,22 @@ func deleteProductReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := getAccessToken(r) + ProductReviewsExtension
+	csx := getAccessToken(r)
+	dbcol := csx + ProductReviewsExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	rid := pth[len(pth)-1]
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"ReviewID": rid}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"ReviewID": rid}, &opts)
 
 	if len(results) == 0 {
 		respondWith(w, r, nil, "Review Not Found ...", nil, http.StatusNotFound, false)
 		return
 	}
 
-	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"ReviewID": rid}) == 1 {
+	if deleteMongoDocument(ExternalDB+csx, dbcol, bson.M{"ReviewID": rid}) == 1 {
 
 		respondWith(w, r, nil, "Review deleted ...", nil, http.StatusOK, true)
 
@@ -182,21 +184,22 @@ func deleteProductGroupReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dbcol := getAccessToken(r) + ProductReviewsExtension
+	csx := getAccessToken(r)
+	dbcol := csx + ProductReviewsExtension
 
 	pth := strings.Split(r.URL.Path, "/")
 	pgid := pth[len(pth)-1]
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"GroupID": pgid}, &opts)
 
 	if len(results) == 0 {
 		respondWith(w, r, nil, "Reviews for Product group mentioned in request, Not Found ...", nil, http.StatusNotFound, false)
 		return
 	}
 
-	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}) != 0 {
+	if deleteMongoDocument(ExternalDB+csx, dbcol, bson.M{"GroupID": pgid}) != 0 {
 
 		respondWith(w, r, nil, "Reviews for product group deleted ...", nil, http.StatusOK, true)
 

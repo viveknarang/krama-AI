@@ -19,7 +19,7 @@ func parseCategoryPath(path string, separator string) []string {
 
 }
 
-func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection string, path string, sku string) {
+func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, db string, treeCollection string, path string, sku string) {
 
 	rlog.Debug("deleteSKUFromTree() handle function invoked ...")
 
@@ -28,7 +28,7 @@ func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection st
 
 	for i := 0; i < pathLength; i++ {
 
-		node := getCategoryNode(w, r, catPath[i], treeCollection)
+		node := getCategoryNode(w, r, catPath[i], db, treeCollection)
 
 		if containsInArray(node.SKUs, sku) {
 
@@ -41,13 +41,13 @@ func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection st
 
 					var names []string
 					var delNodeName = node.Name
-					deleteMongoDocument(ExternalDB, treeCollection, bson.M{"CategoryID": node.CategoryID})
-					node = getCategoryNode(w, r, node.Parent, treeCollection)
+					deleteMongoDocument(db, treeCollection, bson.M{"CategoryID": node.CategoryID})
+					node = getCategoryNode(w, r, node.Parent, db, treeCollection)
 
 					if node != nil {
 						node.Children = removeElementsFromArray(node.Children, append(names, delNodeName))
-						updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
-						node = getCategoryNode(w, r, node.Name, treeCollection)
+						updateCategoryNode(w, r, node.CategoryID, db, treeCollection, node)
+						node = getCategoryNode(w, r, node.Name, db, treeCollection)
 					}
 				}
 
@@ -62,7 +62,7 @@ func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection st
 				}
 
 				node.SKUs = fSKUs
-				updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
+				updateCategoryNode(w, r, node.CategoryID, db, treeCollection, node)
 
 			}
 		}
@@ -71,14 +71,14 @@ func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, treeCollection st
 
 }
 
-func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection string, path string, sku string) bool {
+func insertIntoTree(w http.ResponseWriter, r *http.Request, db string, treeCollection string, path string, sku string) bool {
 
 	rlog.Debug("insertIntoTree() handle function invoked ...")
 
 	catPath := parseCategoryPath(path, PATHSEPARATOR)
 	pathLength := len(catPath)
 
-	node := getCategoryNode(w, r, catPath[0], treeCollection)
+	node := getCategoryNode(w, r, catPath[0], db, treeCollection)
 
 	if node != nil && node.Parent != "" {
 		respondWith(w, r, nil, "Root node in the category path is an existing child node in the tree", nil, http.StatusBadRequest, false)
@@ -87,7 +87,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 	for i := 0; i < pathLength; i++ {
 
-		node := getCategoryNode(w, r, catPath[i], treeCollection)
+		node := getCategoryNode(w, r, catPath[i], db, treeCollection)
 
 		if node != nil && i == pathLength-1 {
 			if !containsInArray(node.SKUs, sku) {
@@ -97,7 +97,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 					node.Parent = catPath[i-1]
 				}
 
-				updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
+				updateCategoryNode(w, r, node.CategoryID, db, treeCollection, node)
 			}
 		} else if node != nil && i < pathLength-1 {
 			if !containsInArray(node.Children, catPath[i+1]) {
@@ -107,7 +107,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 					node.Parent = catPath[i-1]
 				}
 
-				updateCategoryNode(w, r, node.CategoryID, treeCollection, node)
+				updateCategoryNode(w, r, node.CategoryID, db, treeCollection, node)
 			}
 		} else if node == nil && i == pathLength-1 {
 
@@ -120,7 +120,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 				nCN.Parent = catPath[i-1]
 			}
 
-			createCategoryNode(w, r, treeCollection, &nCN)
+			createCategoryNode(w, r, db, treeCollection, &nCN)
 
 		} else if node == nil && i < pathLength-1 {
 
@@ -133,7 +133,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 				nCN.Parent = catPath[i-1]
 			}
 
-			createCategoryNode(w, r, treeCollection, &nCN)
+			createCategoryNode(w, r, db, treeCollection, &nCN)
 
 		}
 
@@ -143,13 +143,13 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, treeCollection strin
 
 }
 
-func getCategoryNode(w http.ResponseWriter, r *http.Request, category string, collection string) *CATEGORYTREENODE {
+func getCategoryNode(w http.ResponseWriter, r *http.Request, category string, db string, collection string) *CATEGORYTREENODE {
 
 	rlog.Debug("getCategoryNode() handle function invoked ...")
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, collection, bson.M{"Name": category}, &opts)
+	results := findMongoDocument(db, collection, bson.M{"Name": category}, &opts)
 
 	if len(results) == 1 {
 
@@ -164,25 +164,25 @@ func getCategoryNode(w http.ResponseWriter, r *http.Request, category string, co
 
 }
 
-func updateCategoryNode(w http.ResponseWriter, r *http.Request, categoryID string, collection string, node *CATEGORYTREENODE) [2]int64 {
+func updateCategoryNode(w http.ResponseWriter, r *http.Request, categoryID string, db string, collection string, node *CATEGORYTREENODE) [2]int64 {
 
-	return updateMongoDocument(ExternalDB, collection, bson.M{"CategoryID": categoryID}, bson.M{"$set": node})
-
-}
-
-func createCategoryNode(w http.ResponseWriter, r *http.Request, collection string, node *CATEGORYTREENODE) {
-
-	insertMongoDocument(ExternalDB, collection, node)
+	return updateMongoDocument(db, collection, bson.M{"CategoryID": categoryID}, bson.M{"$set": node})
 
 }
 
-func getRootCategories(w http.ResponseWriter, r *http.Request, collection string) []string {
+func createCategoryNode(w http.ResponseWriter, r *http.Request, db string, collection string, node *CATEGORYTREENODE) {
+
+	insertMongoDocument(db, collection, node)
+
+}
+
+func getRootCategories(w http.ResponseWriter, r *http.Request, db string, collection string) []string {
 
 	rlog.Debug("getRootCategories() handle function invoked ...")
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, collection, bson.M{"Parent": ""}, &opts)
+	results := findMongoDocument(db, collection, bson.M{"Parent": ""}, &opts)
 
 	var cats []string
 
@@ -200,7 +200,7 @@ func getRootCategories(w http.ResponseWriter, r *http.Request, collection string
 
 }
 
-func pathExists(w http.ResponseWriter, r *http.Request, path string, collection string) bool {
+func pathExists(w http.ResponseWriter, r *http.Request, path string, db string, collection string) bool {
 
 	rlog.Debug("pathExists() handle function invoked ...")
 
@@ -214,7 +214,7 @@ func pathExists(w http.ResponseWriter, r *http.Request, path string, collection 
 
 	for i := 0; i < pathLength; i++ {
 
-		node := getCategoryNode(w, r, catPath[i], collection)
+		node := getCategoryNode(w, r, catPath[i], db, collection)
 
 		if node == nil {
 			return false
@@ -225,7 +225,7 @@ func pathExists(w http.ResponseWriter, r *http.Request, path string, collection 
 	return true
 }
 
-func getSKUsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path string, collection string, onlyLeafSKUs bool) []string {
+func getSKUsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path string, db string, collection string, onlyLeafSKUs bool) []string {
 
 	rlog.Debug("getSKUsInTheCategoryPath() handle function invoked ...")
 
@@ -243,7 +243,7 @@ func getSKUsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path strin
 
 		for i := 0; i < pathLength; i++ {
 
-			node := getCategoryNode(w, r, catPath[i], collection)
+			node := getCategoryNode(w, r, catPath[i], db, collection)
 
 			if len(node.SKUs) != 0 {
 				SKUs = append(SKUs, node.SKUs...)
@@ -252,7 +252,7 @@ func getSKUsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path strin
 
 	} else {
 
-		node := getCategoryNode(w, r, catPath[pathLength-1], collection)
+		node := getCategoryNode(w, r, catPath[pathLength-1], db, collection)
 		SKUs = append(SKUs, node.SKUs...)
 
 	}

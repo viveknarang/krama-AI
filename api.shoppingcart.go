@@ -76,7 +76,7 @@ func addProductInShoppingCart(w http.ResponseWriter, r *http.Request) {
 	csx := getAccessToken(r)
 	picol := csx + ProductInventoryExtension
 
-	updateInventory(w, r, picol, "DECR", shoppingCartReq.Product.Sku, shoppingCartReq.Count, false)
+	updateInventory(w, r, ExternalDB+csx, picol, "DECR", shoppingCartReq.Product.Sku, shoppingCartReq.Count, false)
 
 	if shoppingCartReq.CartID == "" {
 		shoppingCart.CartID = uuid.New().String()
@@ -189,7 +189,7 @@ func removeProductFromShoppingCart(w http.ResponseWriter, r *http.Request) {
 	csx := getAccessToken(r)
 	picol := csx + ProductInventoryExtension
 
-	updateInventory(w, r, picol, "INCR", shoppingCartReq.SKU, shoppingCartReq.Count, false)
+	updateInventory(w, r, ExternalDB+csx, picol, "INCR", shoppingCartReq.SKU, shoppingCartReq.Count, false)
 
 	shoppingCart.ProductsCount[shoppingCartReq.SKU] -= shoppingCartReq.Count
 

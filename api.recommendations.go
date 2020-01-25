@@ -28,12 +28,12 @@ func getSimilarProducts(w http.ResponseWriter, r *http.Request) {
 	pgcol := csx + ProductGroupExtension
 	path := cleanCategoryPath(sirq.CategoryPath)
 
-	if !pathExists(w, r, path, ctcol) {
+	if !pathExists(w, r, path, ExternalDB+csx, ctcol) {
 		respondWith(w, r, nil, "Category path does not exit ...", nil, http.StatusBadRequest, false)
 		return
 	}
 
-	SKUs := getSKUsInTheCategoryPath(w, r, path, ctcol, true)
+	SKUs := getSKUsInTheCategoryPath(w, r, path, ExternalDB+csx, ctcol, true)
 
 	fmt.Printf("%+v", SKUs)
 
@@ -47,7 +47,7 @@ func getSimilarProducts(w http.ResponseWriter, r *http.Request) {
 		sx = append(sx, bson.M{"Skus": sku})
 	}
 
-	results := findMongoDocument(ExternalDB, pgcol, bson.M{"$or": sx}, &opts)
+	results := findMongoDocument(ExternalDB+csx, pgcol, bson.M{"$or": sx}, &opts)
 
 	if len(results) == 0 {
 		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)

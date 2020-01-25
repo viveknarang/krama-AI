@@ -26,12 +26,12 @@ func getProductsInCategory(w http.ResponseWriter, r *http.Request) {
 
 	path := cleanCategoryPath(ctrq.Path)
 
-	if !pathExists(w, r, path, ctcol) {
+	if !pathExists(w, r, path, ExternalDB+csx, ctcol) {
 		respondWith(w, r, nil, "Category path does not exit ...", nil, http.StatusBadRequest, false)
 		return
 	}
 
-	SKUs := getSKUsInTheCategoryPath(w, r, path, ctcol, true)
+	SKUs := getSKUsInTheCategoryPath(w, r, path, ExternalDB+csx, ctcol, true)
 
 	respondWith(w, r, nil, "Products in category path ...", bson.M{path: SKUs}, http.StatusOK, true)
 
@@ -48,7 +48,7 @@ func getRootCategory(w http.ResponseWriter, r *http.Request) {
 	csx := getAccessToken(r)
 	ctcol := csx + CategoryTreeExtension
 
-	cats := getRootCategories(w, r, ctcol)
+	cats := getRootCategories(w, r, ExternalDB+csx, ctcol)
 
 	respondWith(w, r, nil, "Root categories ...", cats, http.StatusOK, true)
 
@@ -71,7 +71,7 @@ func getImmediateSubCategories(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	catNode := getCategoryNode(w, r, ctrq.Category, ctcol)
+	catNode := getCategoryNode(w, r, ctrq.Category, ExternalDB+csx, ctcol)
 
 	if catNode.Children == nil {
 
@@ -101,7 +101,7 @@ func getParentCategory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	catNode := getCategoryNode(w, r, ctrq.Category, ctcol)
+	catNode := getCategoryNode(w, r, ctrq.Category, ExternalDB+csx, ctcol)
 
 	if catNode.Parent == "" {
 

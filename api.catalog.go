@@ -39,7 +39,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 
 		var opts options.FindOptions
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}, &opts)
+		results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"Sku": sku}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -57,7 +57,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	picol := csx + ProductInventoryExtension
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, picol, bson.M{"Sku": product.Sku}, &opts)
+	results := findMongoDocument(ExternalDB+csx, picol, bson.M{"Sku": product.Sku}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, "Inventory Record Not found ...", nil, http.StatusNotFound, false)
@@ -102,7 +102,7 @@ func getProducts(w http.ResponseWriter, r *http.Request) {
 		sx = append(sx, bson.M{"Sku": sku})
 	}
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"$or": sx}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"$or": sx}, &opts)
 
 	if len(results) == 0 {
 		respondWith(w, r, nil, ProductsNotFoundMessage, nil, http.StatusNotFound, false)
@@ -149,7 +149,7 @@ func getProductGroups(w http.ResponseWriter, r *http.Request) {
 		sx = append(sx, bson.M{"Skus": sku})
 	}
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"$or": sx}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"$or": sx}, &opts)
 
 	if len(results) == 0 {
 		respondWith(w, r, nil, ProductGroupsNotFoundMessage, nil, http.StatusNotFound, false)
@@ -192,7 +192,7 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"Sku": p.Sku}, &opts)
 
 	if len(results) != 0 {
 		respondWith(w, r, nil, ProductAlreadyExistsMessage, nil, http.StatusConflict, false)
@@ -202,20 +202,20 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 	groomProductData(&p)
 
 	for _, cat := range p.Category {
-		if !insertIntoTree(w, r, csx+CategoryTreeExtension, cat, p.Sku) {
+		if !insertIntoTree(w, r, ExternalDB+csx, csx+CategoryTreeExtension, cat, p.Sku) {
 			return
 		}
 	}
 
 	p.Updated = time.Now().UnixNano()
 
-	insertMongoDocument(ExternalDB, dbcol, p)
+	insertMongoDocument(ExternalDB+csx, dbcol, p)
 
 	var productInventoryRecord INVENTORY
 	productInventoryRecord.Sku = p.Sku
 	productInventoryRecord.Quantity = p.Quantity
 	productInventoryRecord.Updated = time.Now().UnixNano()
-	insertMongoDocument(ExternalDB, picol, productInventoryRecord)
+	insertMongoDocument(ExternalDB+csx, picol, productInventoryRecord)
 
 	if syncProductGroup(w, r, p) {
 
@@ -253,7 +253,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"Sku": p.Sku}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -265,14 +265,14 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 	mapDocument(w, r, &rp, results[0])
 
 	for _, cat := range rp.Category {
-		deleteSKUFromTree(w, r, ctcol, cat, rp.Sku)
+		deleteSKUFromTree(w, r, ExternalDB+csx, ctcol, cat, rp.Sku)
 	}
 
-	result := updateMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, bson.M{"$set": p})
+	result := updateMongoDocument(ExternalDB+csx, dbcol, bson.M{"Sku": p.Sku}, bson.M{"$set": p})
 
 	if result[0] == 1 && result[1] == 1 {
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": p.Sku}, &opts)
+		results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"Sku": p.Sku}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -284,7 +284,7 @@ func putProduct(w http.ResponseWriter, r *http.Request) {
 		mapDocument(w, r, &rp, results[0])
 
 		for _, cat := range p.Category {
-			if !insertIntoTree(w, r, csx+CategoryTreeExtension, cat, p.Sku) {
+			if !insertIntoTree(w, r, ExternalDB+csx, csx+CategoryTreeExtension, cat, p.Sku) {
 				return
 			}
 		}
@@ -330,7 +330,7 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}, &opts)
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"Sku": sku}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, ProductNotFoundMessage, nil, http.StatusNotFound, false)
@@ -341,12 +341,12 @@ func deleteProduct(w http.ResponseWriter, r *http.Request) {
 
 	mapDocument(w, r, &product, results[0])
 
-	if deleteMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}) == 1 {
+	if deleteMongoDocument(ExternalDB+csx, dbcol, bson.M{"Sku": sku}) == 1 {
 
-		deleteMongoDocument(ExternalDB, picol, bson.M{"Sku": sku})
+		deleteMongoDocument(ExternalDB+csx, picol, bson.M{"Sku": sku})
 
 		for _, cat := range product.Category {
-			deleteSKUFromTree(w, r, ctcol, cat, product.Sku)
+			deleteSKUFromTree(w, r, ExternalDB+csx, ctcol, cat, product.Sku)
 		}
 
 		if syncProductGroup(w, r, product) {
@@ -388,14 +388,15 @@ func getProductGroup(w http.ResponseWriter, r *http.Request) {
 
 	} else {
 
-		dbcol := getAccessToken(r) + ProductGroupExtension
+		csx := getAccessToken(r)
+		dbcol := csx + ProductGroupExtension
 
 		pth := strings.Split(r.URL.Path, "/")
 		pgid := pth[len(pth)-1]
 
 		var opts options.FindOptions
 
-		results := findMongoDocument(ExternalDB, dbcol, bson.M{"GroupID": pgid}, &opts)
+		results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"GroupID": pgid}, &opts)
 
 		if len(results) != 1 {
 			respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
@@ -435,7 +436,7 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 
 	var opts options.FindOptions
 
-	results := findMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": pgid}, &opts)
+	results := findMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": pgid}, &opts)
 
 	if len(results) != 1 {
 		respondWith(w, r, nil, ProductGroupNotFoundMessage, nil, http.StatusNotFound, false)
@@ -448,16 +449,16 @@ func deleteProductGroup(w http.ResponseWriter, r *http.Request) {
 
 	for _, product := range productGroup.Products {
 
-		deleteMongoDocument(ExternalDB, pcol, bson.M{"Sku": product.Sku})
-		deleteMongoDocument(ExternalDB, picol, bson.M{"Sku": product.Sku})
+		deleteMongoDocument(ExternalDB+cidb, pcol, bson.M{"Sku": product.Sku})
+		deleteMongoDocument(ExternalDB+cidb, picol, bson.M{"Sku": product.Sku})
 
 		for _, cat := range product.Category {
-			deleteSKUFromTree(w, r, ctcol, cat, product.Sku)
+			deleteSKUFromTree(w, r, ExternalDB+cidb, ctcol, cat, product.Sku)
 		}
 
 	}
 
-	if deleteMongoDocument(ExternalDB, pgcol, bson.M{"GroupID": pgid}) == 1 {
+	if deleteMongoDocument(ExternalDB+cidb, pgcol, bson.M{"GroupID": pgid}) == 1 {
 
 		resetProductCacheKeys(nil, &productGroup)
 
@@ -492,7 +493,8 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	dbcol := getAccessToken(r) + ProductExtension
+	csx := getAccessToken(r)
+	dbcol := csx + ProductExtension
 
 	var priceUpdated []string
 	var priceNotUpdated []string
@@ -500,7 +502,7 @@ func updateProductsPrice(w http.ResponseWriter, r *http.Request) {
 
 	for sku, price := range prices.Prices {
 
-		result := updateMongoDocument(ExternalDB, dbcol, bson.M{"Sku": sku}, bson.M{"$set": bson.M{"RegularPrice": price.RegularPrice, "PromotionPrice": price.PromotionPrice}})
+		result := updateMongoDocument(ExternalDB+csx, dbcol, bson.M{"Sku": sku}, bson.M{"$set": bson.M{"RegularPrice": price.RegularPrice, "PromotionPrice": price.PromotionPrice}})
 
 		if result[0] == 1 && result[1] == 1 {
 			priceUpdated = append(priceUpdated, sku)
@@ -545,7 +547,8 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	picol := getAccessToken(r) + ProductInventoryExtension
+	csx := getAccessToken(r)
+	picol := csx + ProductInventoryExtension
 
 	var skusUpdated = make(map[string]int64)
 	var skusNotUpdated []string
@@ -553,7 +556,7 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	for sku, quantity := range quantities.Quantity {
 
-		result := updateInventory(w, r, picol, "INCR", sku, quantity, true)
+		result := updateInventory(w, r, ExternalDB+csx, picol, "INCR", sku, quantity, true)
 
 		if result[0] == 1 && result[1] == 1 {
 			skusUpdated[sku] = quantities.Quantity[sku]
