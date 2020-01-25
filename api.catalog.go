@@ -547,32 +547,24 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	picol := getAccessToken(r) + ProductInventoryExtension
 
-	var quantityUpdated []string
-	var quantityNotUpdated []string
-	var quantityNotFound []string
+	var skusUpdated = make(map[string]int64)
+	var skusNotUpdated []string
+	var skusNotFound []string
 
 	for sku, quantity := range quantities.Quantity {
 
 		result := updateInventory(w, r, picol, "INCR", sku, quantity, true)
 
 		if result[0] == 1 && result[1] == 1 {
-			quantityUpdated = append(quantityUpdated, sku)
+			skusUpdated[sku] = quantities.Quantity[sku]
 		} else if result[0] == 1 && result[1] == 0 {
-			quantityNotUpdated = append(quantityNotUpdated, sku)
+			skusNotUpdated = append(skusNotUpdated, sku)
 		} else if result[0] == 0 && result[1] == 0 {
-			quantityNotFound = append(quantityNotFound, sku)
+			skusNotFound = append(skusNotFound, sku)
 		}
 
 	}
 
-	if syncProductGroupFromProducts(w, r, quantityUpdated, false) {
-
-		respondWith(w, r, nil, "Inventory Updated ...", bson.M{"Products Updated": quantityUpdated, "Products Not Updated": quantityNotUpdated, "Products Not Found": quantityNotFound}, http.StatusOK, true)
-
-	} else {
-
-		respondWith(w, r, nil, "Inventory Not updated ...", nil, http.StatusNotModified, false)
-
-	}
+	respondWith(w, r, nil, "Inventory Update Status ...", bson.M{"Products Updated": skusUpdated, "Products Not Updated": skusNotUpdated, "Products Not Found": skusNotFound}, http.StatusOK, true)
 
 }
