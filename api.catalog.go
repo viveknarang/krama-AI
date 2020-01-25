@@ -209,13 +209,20 @@ func postProduct(w http.ResponseWriter, r *http.Request) {
 
 	p.Updated = time.Now().UnixNano()
 
-	insertMongoDocument(ExternalDB+csx, dbcol, p)
+	if !insertMongoDocument(ExternalDB+csx, dbcol, p) {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
 
 	var productInventoryRecord INVENTORY
 	productInventoryRecord.Sku = p.Sku
 	productInventoryRecord.Quantity = p.Quantity
 	productInventoryRecord.Updated = time.Now().UnixNano()
-	insertMongoDocument(ExternalDB+csx, picol, productInventoryRecord)
+
+	if !insertMongoDocument(ExternalDB+csx, picol, productInventoryRecord) {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
 
 	if syncProductGroup(w, r, p) {
 

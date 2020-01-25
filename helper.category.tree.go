@@ -170,10 +170,14 @@ func updateCategoryNode(w http.ResponseWriter, r *http.Request, categoryID strin
 
 }
 
-func createCategoryNode(w http.ResponseWriter, r *http.Request, db string, collection string, node *CATEGORYTREENODE) {
+func createCategoryNode(w http.ResponseWriter, r *http.Request, db string, collection string, node *CATEGORYTREENODE) bool {
 
-	insertMongoDocument(db, collection, node)
+	if !insertMongoDocument(db, collection, node) {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return false
+	}
 
+	return true
 }
 
 func getRootCategories(w http.ResponseWriter, r *http.Request, db string, collection string) []string {

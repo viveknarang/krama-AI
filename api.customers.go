@@ -97,7 +97,10 @@ func postCustomer(w http.ResponseWriter, r *http.Request) {
 	customer.Password = hashString(customer.Password)
 	customer.Updated = time.Now().UnixNano()
 
-	insertMongoDocument(ExternalDB+csx, dbcol, customer)
+	if !insertMongoDocument(ExternalDB+csx, dbcol, customer) {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
 
 	respondWith(w, r, nil, CustomersAddedMessage, customer, http.StatusCreated, true)
 

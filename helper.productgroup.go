@@ -82,7 +82,11 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			npg.Updated = time.Now().UnixNano()
 
-			insertMongoDocument(ExternalDB+cidb, pgcol, npg)
+			if !insertMongoDocument(ExternalDB+cidb, pgcol, npg) {
+				respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+				return false
+			}
+
 			npg.Products = nil
 			response = indexES(pgindex, PGMapping, npg, npg.GroupID)
 

@@ -113,7 +113,10 @@ func postProductReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	insertMongoDocument(ExternalDB+csx, prdbcol, review)
+	if !insertMongoDocument(ExternalDB+csx, prdbcol, review) {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
 
 	var productGroup PRODUCTGROUP
 

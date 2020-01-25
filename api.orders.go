@@ -129,7 +129,10 @@ func postOrder(w http.ResponseWriter, r *http.Request) {
 	csx := getAccessToken(r)
 	dbcol := csx + OrdersExtension
 
-	insertMongoDocument(ExternalDB+csx, dbcol, order)
+	if !insertMongoDocument(ExternalDB+csx, dbcol, order) {
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
+		return
+	}
 
 	respondWith(w, r, nil, OrderCreatedMessage, order, http.StatusCreated, true)
 
