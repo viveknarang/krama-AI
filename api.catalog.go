@@ -581,6 +581,6 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	respondWith(w, r, nil, "Inventory Update Status ...", bson.M{"Products Updated": skusUpdated, "Products Not Updated": skusNotUpdated, "Products Not Found": skusNotFound}, http.StatusOK, true)
+	respondWith(w, r, nil, "Inventory Update Status ...", bson.M{"Products Updated (Quantity mentioned below is incremented for each SKU)": skusUpdated, "Products Not Updated": skusNotUpdated, "Products Not Found": skusNotFound}, http.StatusOK, true)
 
 }
