@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 
@@ -544,6 +545,11 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 	var quantities INVENTORYUPDATEREQUEST
 
 	if !mapInput(w, r, &quantities) {
+		return
+	}
+
+	if len(quantities.Quantity) > InventoryUpdateBatchSize {
+		respondWith(w, r, nil, "Inventory update batch size cannot be more than "+strconv.Itoa(InventoryUpdateBatchSize)+" per request ...", nil, http.StatusBadRequest, false)
 		return
 	}
 

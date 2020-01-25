@@ -236,6 +236,9 @@ var RecommendationsBasePath string
 //RecommendationsPath recommendations base path
 var RecommendationsPath string
 
+//InventoryUpdateBatchSize inventory update batch size
+var InventoryUpdateBatchSize int
+
 func loadSystemProperties() bool {
 
 	rlog.Debug("loadSystemProperties() handle function invoked ...")
@@ -321,6 +324,7 @@ func loadSystemProperties() bool {
 	ProductReviewsExtension = p.GetString("db.mongo.external.product.reviews.extension", "")
 	ProductInventoryExtension = p.GetString("db.mongo.external.product.inventory.extention", "")
 	CategoryTreeExtension = p.GetString("db.mongo.external.category.tree.extension", "")
+	InventoryUpdateBatchSize = p.GetInt("api.catalog.inventory.update.batch.size", 100)
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion
