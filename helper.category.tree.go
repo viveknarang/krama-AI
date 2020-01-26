@@ -10,8 +10,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-//PATHSEPARATOR category path separator
-const PATHSEPARATOR = ">"
+//pathSeparator category path separator
+const pathSeparator = ">"
 
 func parseCategoryPath(path string, separator string) []string {
 
@@ -23,7 +23,7 @@ func deleteSKUFromTree(w http.ResponseWriter, r *http.Request, db string, treeCo
 
 	rlog.Debug("deleteSKUFromTree() handle function invoked ...")
 
-	catPath := parseCategoryPath(path, PATHSEPARATOR)
+	catPath := parseCategoryPath(path, pathSeparator)
 	pathLength := len(catPath)
 
 	for i := 0; i < pathLength; i++ {
@@ -75,7 +75,7 @@ func insertIntoTree(w http.ResponseWriter, r *http.Request, db string, treeColle
 
 	rlog.Debug("insertIntoTree() handle function invoked ...")
 
-	catPath := parseCategoryPath(path, PATHSEPARATOR)
+	catPath := parseCategoryPath(path, pathSeparator)
 	pathLength := len(catPath)
 
 	node := getCategoryNode(w, r, catPath[0], db, treeCollection)
@@ -208,7 +208,7 @@ func pathExists(w http.ResponseWriter, r *http.Request, path string, db string, 
 
 	rlog.Debug("pathExists() handle function invoked ...")
 
-	catPath := parseCategoryPath(path, PATHSEPARATOR)
+	catPath := parseCategoryPath(path, pathSeparator)
 	pathLength := len(catPath)
 
 	if pathLength == 0 {
@@ -233,7 +233,7 @@ func getSKUsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path strin
 
 	rlog.Debug("getSKUsInTheCategoryPath() handle function invoked ...")
 
-	catPath := parseCategoryPath(path, PATHSEPARATOR)
+	catPath := parseCategoryPath(path, pathSeparator)
 	pathLength := len(catPath)
 
 	if pathLength == 0 {
