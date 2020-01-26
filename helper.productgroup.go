@@ -78,6 +78,10 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			addAllInSet(p.Category, m5)
 			npg.Category = toArrayFromSet(m5)
 
+			m51 := make(map[string]bool)
+			addAllInSet(p.ComplementaryProducts, m51)
+			npg.ComplementaryProducts = toArrayFromSet(m51)
+
 			npg.Images = p.Images
 
 			npg.Updated = time.Now().UnixNano()
@@ -133,6 +137,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 					productGroup.Name = value.Name
 					productGroup.Description = value.Description
 					productGroup.Images = value.Images
+					productGroup.ComplementaryProducts = value.ComplementaryProducts
 				}
 
 				active = active || value.Active
@@ -222,6 +227,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 				productGroup.Name = value.Name
 				productGroup.Description = value.Description
 				productGroup.Images = value.Images
+				productGroup.ComplementaryProducts = value.ComplementaryProducts
 			}
 
 			active = active || value.Active
@@ -302,6 +308,7 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 					productGroup.Name = value.Name
 					productGroup.Description = value.Description
 					productGroup.Images = value.Images
+					productGroup.ComplementaryProducts = value.ComplementaryProducts
 				}
 
 				active = active || value.Active
