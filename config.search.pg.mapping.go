@@ -53,6 +53,9 @@ const PGMapping = `
 		"Currency": {
 		  "type": "keyword"
 		},
+		"MainProductSKU": {
+			"type": "keyword"
+   	    },
 		"Updated": {
 		  "type": "long"
 		}
