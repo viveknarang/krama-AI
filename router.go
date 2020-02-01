@@ -19,6 +19,8 @@ func routers() *mux.Router {
 
 	router.HandleFunc(CatalogPath+"/bulk/products", getProducts).Methods(http.MethodGet)
 
+	router.HandleFunc(CatalogPath+"/inventory/products/{SKU}", getProductInventory).Methods(http.MethodGet)
+
 	router.HandleFunc(CatalogPath+"/products", postProduct).Methods(http.MethodPost)
 
 	router.HandleFunc(CatalogPath+"/products/{SKU}", putProduct).Methods(http.MethodPut)

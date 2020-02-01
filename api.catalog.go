@@ -584,3 +584,34 @@ func updateProductsInventory(w http.ResponseWriter, r *http.Request) {
 	respondWith(w, r, nil, "Inventory Update Status ...", bson.M{"Products Updated (Quantity mentioned below is incremented for each SKU)": skusUpdated, "Products Not Updated": skusNotUpdated, "Products Not Found": skusNotFound}, http.StatusOK, true)
 
 }
+
+func getProductInventory(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("getProductInventory() handle function invoked ...")
+
+	if !pre(w, r) {
+		return
+	}
+
+	csx := getAccessToken(r)
+
+	pth := strings.Split(r.URL.Path, "/")
+	sku := pth[len(pth)-1]
+
+	picol := csx + ProductInventoryExtension
+	var opts options.FindOptions
+
+	results := findMongoDocument(ExternalDB+csx, picol, bson.M{"Sku": sku}, &opts)
+
+	if len(results) != 1 {
+		respondWith(w, r, nil, "Inventory Record Not found ...", nil, http.StatusNotFound, false)
+		return
+	}
+
+	var inventory INVENTORY
+
+	mapDocument(w, r, &inventory, results[0])
+
+	respondWith(w, r, nil, ProductFoundMessage, inventory, http.StatusOK, false)
+
+}
