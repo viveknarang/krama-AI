@@ -15,7 +15,7 @@ func loadEnvironmentVariables() {
 
 	PROPERTYFILE = os.Getenv("KRAMA_AI_PROPERTY_FILE")
 
-	//If the environment variable is not set then loading from default location
+	//If the environment variable is not set then attempting to load from default location
 	if PROPERTYFILE == "" {
 		PROPERTYFILE = "/krama-AI.properties"
 	}

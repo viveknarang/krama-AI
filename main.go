@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/romana/rlog"
 )
 
@@ -24,6 +25,10 @@ func main() {
 
 	rlog.Debug("Base components - [ELASTIC, REDIS, MONGO] connected ...")
 
-	log.Fatal(http.ListenAndServe(":"+APIPort, routers()))
+	headers := handlers.AllowedHeaders([]string{"x-access-token", "X-Requested-With", "Content-Type", "Authorization"})
+	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"})
+	origins := handlers.AllowedOrigins([]string{"*"})
+
+	log.Fatal(http.ListenAndServe(":"+APIPort, handlers.CORS(headers, methods, origins)(routers())))
 
 }
