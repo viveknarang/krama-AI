@@ -24,7 +24,7 @@ const PGMapping = `
 		  "type": "keyword"
 		},
 		"Images": {
-		  "type": "object"
+		  "type": "text"
 		},
 		"Name": {
 		  "type": "text"
