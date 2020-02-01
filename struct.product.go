@@ -8,7 +8,7 @@ type PRODUCT struct {
 	Description           string                 `json:"Description" bson:"Description" validate:"max=1024"`
 	RegularPrice          float64                `json:"RegularPrice" bson:"RegularPrice" validate:"min=0.0, checkMaxFloat"`
 	PromotionPrice        float64                `json:"PromotionPrice" bson:"PromotionPrice" validate:"min=0.0, checkMaxFloat"`
-	Images                map[string]string      `json:"Images" bson:"Images" validate:"size=100"`
+	Images                []string               `json:"Images" bson:"Images" validate:"size=100"`
 	SearchKeywords        []string               `json:"SearchKeywords" bson:"SearchKeywords" validate:"size=100"`
 	Quantity              int64                  `json:"Quantity" bson:"-" validate:"min=0"`
 	Category              []string               `json:"Category" bson:"Category"`

@@ -16,10 +16,10 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 
 	}
 
-	for key, img := range product.Images {
+	for _, img := range product.Images {
 
 		if !isValidURL(img) {
-			respondWith(w, r, nil, "Image URL: "+img+" with key: "+key+" is not a valid URL", nil, http.StatusBadRequest, false)
+			respondWith(w, r, nil, "Image URL: "+img+" is not a valid URL", nil, http.StatusBadRequest, false)
 			return false
 		}
 
