@@ -50,6 +50,15 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			}
 
+			npg.Selectors = make(map[string][]interface{})
+			for key, value := range p.Selectors {
+
+				var r []interface{}
+				r = append(r, value)
+				npg.Selectors[key] = r
+
+			}
+
 			pm := make(map[string]PRODUCT)
 			pm[p.Sku] = p
 			npg.Products = pm
@@ -166,6 +175,23 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 			}
 
+			for key, value := range p.Selectors {
+
+				var x []interface{}
+
+				if productGroup.Selectors[key] != nil {
+					x = append(x, productGroup.Selectors[key]...)
+				}
+
+				productGroup.Selectors[key] = append(x, value)
+
+				gsetInit()
+				addAllInGSet(productGroup.Selectors[key])
+				productGroup.Selectors[key] = nil
+				productGroup.Selectors[key] = toArrayFromGSet()
+
+			}
+
 			productGroup.Skus = append(productGroup.Skus, p.Sku)
 
 			productGroup.RegularPriceMin = prices[0]
@@ -262,6 +288,28 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 
 		productGroup.Attributes = updpg
 
+		updpgs := make(map[string][]interface{})
+		for _, valueP := range productGroup.Products {
+
+			for key, value := range valueP.Selectors {
+
+				updpgs[key] = append(updpgs[key], value)
+
+			}
+
+		}
+
+		for key := range updpgs {
+
+			gsetInit()
+			addAllInGSet(updpgs[key])
+			updpgs[key] = nil
+			updpgs[key] = toArrayFromGSet()
+
+		}
+
+		productGroup.Selectors = updpgs
+
 		productGroup.Skus = append(productGroup.Skus, p.Sku)
 
 		productGroup.RegularPriceMin = prices[0]
@@ -343,6 +391,28 @@ func syncProductGroup(w http.ResponseWriter, r *http.Request, p PRODUCT) bool {
 			}
 
 			productGroup.Attributes = updpg
+
+			updpgs := make(map[string][]interface{})
+			for _, valueP := range productGroup.Products {
+
+				for key, value := range valueP.Selectors {
+
+					updpgs[key] = append(updpgs[key], value)
+
+				}
+
+			}
+
+			for key := range updpgs {
+
+				gsetInit()
+				addAllInGSet(updpgs[key])
+				updpgs[key] = nil
+				updpgs[key] = toArrayFromGSet()
+
+			}
+
+			productGroup.Selectors = updpgs
 
 			productGroup.Skus = append(productGroup.Skus, p.Sku)
 

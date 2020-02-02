@@ -105,6 +105,51 @@ const PGMapping = `
 				"type": "double"
 			  }
 		  }
+		},
+		{
+			"Selectors_text": {
+				"path_match":   "Selectors.*",
+				"match_mapping_type": "string",
+				"mapping": {
+				  "type": "keyword"
+				}
+			}
+		},
+		{
+		  "Selectors_long": {
+			  "path_match":   "Selectors.*",
+			  "match_mapping_type": "long",
+			  "mapping": {
+				"type": "long"
+			  }
+		  }
+		},
+		{
+		  "Selectors_boolean": {
+			  "path_match":   "Selectors.*",
+			  "match_mapping_type": "boolean",
+			  "mapping": {
+				"type": "boolean"
+			  }
+		  }
+		},
+		{
+		  "Selectors_date": {
+			  "path_match":   "Selectors.*",
+			  "match_mapping_type": "date",
+			  "mapping": {
+				"type": "date"
+			  }
+		  }
+		},
+		{
+		  "Selectors_double": {
+			  "path_match":   "Selectors.*",
+			  "match_mapping_type": "double",
+			  "mapping": {
+				"type": "double"
+			  }
+		  }
 		}
 	  ]
 	}

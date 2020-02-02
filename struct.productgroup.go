@@ -20,6 +20,7 @@ type PRODUCTGROUP struct {
 	Currency              string                   `json:"Currency" bson:"Currency"`
 	Updated               int64                    `json:"Updated" bson:"Updated"`
 	Products              map[string]PRODUCT       `json:"Products" bson:"Products"`
+	Selectors             map[string][]interface{} `json:"Selectors" bson:"Selectors" validate:"size=500"`
 	Attributes            map[string][]interface{} `json:"Attributes" bson:"Attributes"`
 	MainProductSKU        string                   `json:"MainProductSKU" bson:"MainProductSKU"`
 	ComplementaryProducts []string                 `json:"ComplementaryProducts" bson:"ComplementaryProducts" validate:"size=100"`

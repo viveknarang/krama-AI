@@ -16,6 +16,7 @@ type PRODUCT struct {
 	Brand                 string                 `json:"Brand" bson:"Brand" validate:"size=100"`
 	Size                  string                 `json:"Size" bson:"Size" validate:"size=100"`
 	Active                bool                   `json:"Active" bson:"Active"`
+	Selectors             map[string]interface{} `json:"Selectors" bson:"Selectors" validate:"size=500"`
 	Attributes            map[string]interface{} `json:"Attributes" bson:"Attributes" validate:"size=500"`
 	IsMain                bool                   `json:"IsMain" bson:"IsMain"`
 	Currency              string                 `json:"Currency" bson:"Currency" validate:"isValidCurrency"`
