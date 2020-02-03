@@ -1,7 +1,7 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper'; 
-import Tabs from '@material-ui/core/Tabs'; 
-import Tab from '@material-ui/core/Tab'; 
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 class Footer extends React.Component {
 
@@ -14,7 +14,7 @@ class Footer extends React.Component {
             textColor="primary"
             aria-label="disabled tabs example"
           >
-            <Tab label="Company Name " disabled/>
+            <Tab label="Company Name " disabled />
             <Tab label="Legal" />
             <Tab label="Return Policy" />
           </Tabs>

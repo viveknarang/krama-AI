@@ -23,11 +23,9 @@ class App extends React.Component {
         <div className="App">
           <Header />
           <Navigator />
-
-              <Switch>
-                <Route path='/products/:PGID' render={(props) => (<Product {...props} APIKey={key} />)} />
-              </Switch>
-
+          <Switch>
+            <Route path='/products/:PGID' render={(props) => (<Product {...props} APIKey={key} />)} />
+          </Switch>
           <Footer />
         </div>
       </BrowserRouter>
