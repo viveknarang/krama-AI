@@ -132,25 +132,29 @@ class Product extends React.Component {
 
         Object.entries(this.state.selectors).forEach(([key, val]) => {
 
-            var values = [];
-            for (var i = 0; i < val.length; i++) {
+            if (val.length > 1) {
 
-                if (filter[key] === val[i]) {
-                    values.push(<option key={i} value={val[i]} selected>{val[i]}</option>);
-                } else {
-                    values.push(<option key={i} value={val[i]}>{val[i]}</option>);
+                var values = [];
+                for (var i = 0; i < val.length; i++) {
+
+                    if (filter[key] === val[i]) {
+                        values.push(<option key={i} value={val[i]} selected>{val[i]}</option>);
+                    } else {
+                        values.push(<option key={i} value={val[i]}>{val[i]}</option>);
+                    }
+
                 }
 
-            }
+                selectors.push(
+                    <FormControl key={key} className="Selector">
+                        <InputLabel>{key}</InputLabel>
+                        <Select native name={key} onChange={handleChange}>
+                            {values}
+                        </Select>
+                    </FormControl>
+                );
 
-            selectors.push(
-                <FormControl key={key} className="Selector">
-                    <InputLabel>{key}</InputLabel>
-                    <Select native name={key} onChange={handleChange}>
-                        {values}
-                    </Select>
-                </FormControl>
-            );
+            }
 
         });
 
