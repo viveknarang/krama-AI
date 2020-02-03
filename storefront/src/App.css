@@ -1,0 +1,98 @@
+.App {
+  text-align: center;
+}
+
+.BodyGrid {
+  border: 1px solid #f0f0f0;
+  width:96%;
+  padding: 50px;
+}
+
+.ProductImage{
+  float: right;
+}
+
+.ProductDetails{
+  text-align: left;
+  padding: 25px;
+}
+
+.ProductRating{
+  text-align: right;
+  padding-top: 25px;
+}
+
+.ProductDescription{
+  word-wrap: normal;
+  padding: 20px;
+  text-align: left;
+}
+
+.PriceDiscount {
+  color: green;
+}
+
+.Test {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.AddToWishListButton{
+
+  text-align: right;
+  float: right;
+  padding-top: 20px;
+
+}
+
+.AddToBagButton{
+
+  text-align: center;
+  float: center;
+  padding-top: 20px;
+
+}
+
+.Selector {
+  width: 125px;
+  margin: 10px !important;
+}
+
+.Header {
+  height:auto;
+}
+
+.HeaderCheckout {
+  padding: 10px;
+}
+
+.HeaderCheckoutButton {
+  float: right;
+  margin: 30px !important;
+}
+
+.HeaderTitle {
+  float: left;
+  padding: 30px;
+}
+
+.Centered {
+  height: 600px;
+  top: 50%;
+}
+
+.SelectorContainer {
+  padding:20px;
+}
+
+.QuantitySelector {
+  width: 150px;
+}
+
+.Test {
+  border: 1px solid black;
+}
+
+.Rating {
+  float: right;
+}
