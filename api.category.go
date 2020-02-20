@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func getProductsInCategory(w http.ResponseWriter, r *http.Request) {
+func getProductSkusInCategory(w http.ResponseWriter, r *http.Request) {
 
 	rlog.Debug("getProductsInCategory() handle function invoked ...")
 
@@ -34,6 +34,36 @@ func getProductsInCategory(w http.ResponseWriter, r *http.Request) {
 	SKUs := getSKUsInTheCategoryPath(w, r, path, ExternalDB+csx, ctcol, true)
 
 	respondWith(w, r, nil, "Products in category path ...", bson.M{path: SKUs}, http.StatusOK, true)
+
+}
+
+func getProductsInCategory(w http.ResponseWriter, r *http.Request) {
+
+	rlog.Debug("getProductsInCategory() handle function invoked ...")
+
+	if !pre(w, r) {
+		return
+	}
+
+	csx := getAccessToken(r)
+	ctcol := csx + CategoryTreeExtension
+
+	var ctrq CATEGORYREQUEST
+
+	if !mapInput(w, r, &ctrq) {
+		return
+	}
+
+	path := cleanCategoryPath(ctrq.Path)
+
+	if !pathExists(w, r, path, ExternalDB+csx, ctcol) {
+		respondWith(w, r, nil, "Category path does not exit ...", nil, http.StatusBadRequest, false)
+		return
+	}
+
+	products := getProductsInTheCategoryPath(w, r, path, ExternalDB+csx, ctcol, true, csx)
+
+	respondWith(w, r, nil, "Products in category path ...", bson.M{path: products}, http.StatusOK, true)
 
 }
 

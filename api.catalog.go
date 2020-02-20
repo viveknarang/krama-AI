@@ -138,31 +138,10 @@ func getProductGroups(w http.ResponseWriter, r *http.Request) {
 
 	var productG []PRODUCTGROUP
 
-	csx := getAccessToken(r)
+	productG = getProductGroupsForCategoryPath(w, r, getAccessToken(r), pgrq.Skus)
 
-	dbcol := csx + ProductGroupExtension
-
-	var opts options.FindOptions
-
-	var sx []bson.M
-
-	for _, sku := range pgrq.Skus {
-		sx = append(sx, bson.M{"Skus": sku})
-	}
-
-	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"$or": sx}, &opts)
-
-	if len(results) == 0 {
-		respondWith(w, r, nil, ProductGroupsNotFoundMessage, nil, http.StatusNotFound, false)
+	if productG == nil || len(productG) == 0 {
 		return
-	}
-
-	for _, result := range results {
-
-		var pg PRODUCTGROUP
-		mapDocument(w, r, &pg, result)
-		productG = append(productG, pg)
-
 	}
 
 	respondWith(w, r, nil, ProductGroupsFoundMessage, productG, http.StatusOK, false)

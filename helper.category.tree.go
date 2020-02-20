@@ -264,3 +264,73 @@ func getSKUsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path strin
 	return SKUs
 
 }
+
+func getProductsInTheCategoryPath(w http.ResponseWriter, r *http.Request, path string, db string, collection string, onlyLeafSKUs bool, csx string) []PRODUCTGROUP {
+
+	rlog.Debug("getProductsInTheCategoryPath() handle function invoked ...")
+
+	catPath := parseCategoryPath(path, pathSeparator)
+	pathLength := len(catPath)
+
+	if pathLength == 0 {
+		rlog.Error("getProductsInTheCategoryPath() path seems empty! ...")
+		return nil
+	}
+
+	var products []PRODUCTGROUP
+
+	if !onlyLeafSKUs {
+
+		for i := 0; i < pathLength; i++ {
+
+			node := getCategoryNode(w, r, catPath[i], db, collection)
+			productGs := getProductGroupsForCategoryPath(w, r, csx, node.SKUs)
+			if len(node.SKUs) != 0 {
+				products = append(products, productGs...)
+			}
+		}
+
+	} else {
+
+		node := getCategoryNode(w, r, catPath[pathLength-1], db, collection)
+		productGs := getProductGroupsForCategoryPath(w, r, csx, node.SKUs)
+		products = append(products, productGs...)
+
+	}
+
+	return products
+
+}
+
+func getProductGroupsForCategoryPath(w http.ResponseWriter, r *http.Request, csx string, skus []string) []PRODUCTGROUP {
+
+	var productG []PRODUCTGROUP
+
+	dbcol := csx + ProductGroupExtension
+
+	var opts options.FindOptions
+
+	var sx []bson.M
+
+	for _, sku := range skus {
+		sx = append(sx, bson.M{"Skus": sku})
+	}
+
+	results := findMongoDocument(ExternalDB+csx, dbcol, bson.M{"$or": sx}, &opts)
+
+	if len(results) == 0 {
+		respondWith(w, r, nil, ProductGroupsNotFoundMessage, nil, http.StatusNotFound, false)
+		return nil
+	}
+
+	for _, result := range results {
+
+		var pg PRODUCTGROUP
+		mapDocument(w, r, &pg, result)
+		productG = append(productG, pg)
+
+	}
+
+	return productG
+
+}
