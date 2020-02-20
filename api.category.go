@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"strings"
 
+	b64 "encoding/base64"
+
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
 )
@@ -49,13 +51,12 @@ func getProductsInCategory(w http.ResponseWriter, r *http.Request) {
 	csx := getAccessToken(r)
 	ctcol := csx + CategoryTreeExtension
 
-	var ctrq CATEGORYREQUEST
+	pth := strings.Split(r.URL.Path, "/")
+	cid := pth[len(pth)-1]
 
-	if !mapInput(w, r, &ctrq) {
-		return
-	}
+	pathx, _ := b64.StdEncoding.DecodeString(cid)
 
-	path := cleanCategoryPath(ctrq.Path)
+	path := cleanCategoryPath(string(pathx))
 
 	if !pathExists(w, r, path, ExternalDB+csx, ctcol) {
 		respondWith(w, r, nil, "Category path does not exit ...", nil, http.StatusBadRequest, false)

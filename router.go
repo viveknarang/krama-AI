@@ -77,7 +77,7 @@ func routers() *mux.Router {
 
 	router.HandleFunc(CategoriesPath+"/product-skus", getProductSkusInCategory).Methods(http.MethodGet)
 
-	router.HandleFunc(CategoriesPath+"/products", getProductsInCategory).Methods(http.MethodGet)
+	router.HandleFunc(CategoriesPath+"/products/{PATH}", getProductsInCategory).Methods(http.MethodGet)
 
 	router.HandleFunc(CategoriesPath+"/root", getRootCategory).Methods(http.MethodGet)
 
