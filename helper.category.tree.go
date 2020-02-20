@@ -180,7 +180,7 @@ func createCategoryNode(w http.ResponseWriter, r *http.Request, db string, colle
 	return true
 }
 
-func getRootCategories(w http.ResponseWriter, r *http.Request, db string, collection string) []string {
+func getRootCategories(w http.ResponseWriter, r *http.Request, db string, collection string) []CATEGORYTREENODE {
 
 	rlog.Debug("getRootCategories() handle function invoked ...")
 
@@ -188,7 +188,7 @@ func getRootCategories(w http.ResponseWriter, r *http.Request, db string, collec
 
 	results := findMongoDocument(db, collection, bson.M{"Parent": ""}, &opts)
 
-	var cats []string
+	var cats []CATEGORYTREENODE
 
 	for _, result := range results {
 
@@ -196,7 +196,7 @@ func getRootCategories(w http.ResponseWriter, r *http.Request, db string, collec
 
 		mapDocument(w, r, &node, result)
 
-		cats = append(cats, node.Name)
+		cats = append(cats, node)
 
 	}
 

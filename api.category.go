@@ -102,6 +102,7 @@ func getImmediateSubCategories(w http.ResponseWriter, r *http.Request) {
 	}
 
 	catNode := getCategoryNode(w, r, ctrq.Category, ExternalDB+csx, ctcol)
+	var childNodes []*CATEGORYTREENODE
 
 	if catNode.Children == nil {
 
@@ -110,7 +111,11 @@ func getImmediateSubCategories(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	respondWith(w, r, nil, "Immediate Sub categories ...", catNode.Children, http.StatusOK, true)
+	for _, child := range catNode.Children {
+		childNodes = append(childNodes, getCategoryNode(w, r, child, ExternalDB+csx, ctcol))
+	}
+
+	respondWith(w, r, nil, "Immediate Sub categories ...", childNodes, http.StatusOK, true)
 
 }
 
@@ -132,14 +137,19 @@ func getParentCategory(w http.ResponseWriter, r *http.Request) {
 	}
 
 	catNode := getCategoryNode(w, r, ctrq.Category, ExternalDB+csx, ctcol)
+	var parentNode *CATEGORYTREENODE
 
 	if catNode.Parent == "" {
 
 		respondWith(w, r, nil, "Category "+ctrq.Category+" does not have a parent ...", nil, http.StatusNotFound, false)
 		return
 
+	} else {
+
+		parentNode = getCategoryNode(w, r, catNode.Parent, ExternalDB+csx, ctcol)
+
 	}
 
-	respondWith(w, r, nil, "Category parent ...", catNode.Parent, http.StatusOK, true)
+	respondWith(w, r, nil, "Category parent ...", parentNode, http.StatusOK, true)
 
 }
