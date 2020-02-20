@@ -164,6 +164,27 @@ func getCategoryNode(w http.ResponseWriter, r *http.Request, category string, db
 
 }
 
+func getCategoryNodeByID(w http.ResponseWriter, r *http.Request, ID string, db string, collection string) *CATEGORYTREENODE {
+
+	rlog.Debug("getCategoryNode() handle function invoked ...")
+
+	var opts options.FindOptions
+
+	results := findMongoDocument(db, collection, bson.M{"CategoryID": ID}, &opts)
+
+	if len(results) == 1 {
+
+		var treeNode CATEGORYTREENODE
+
+		mapDocument(w, r, &treeNode, results[0])
+
+		return &treeNode
+	}
+
+	return nil
+
+}
+
 func updateCategoryNode(w http.ResponseWriter, r *http.Request, categoryID string, db string, collection string, node *CATEGORYTREENODE) [2]int64 {
 
 	return updateMongoDocument(db, collection, bson.M{"CategoryID": categoryID}, bson.M{"$set": node})

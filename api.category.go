@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/romana/rlog"
 	"go.mongodb.org/mongo-driver/bson"
@@ -95,18 +96,15 @@ func getImmediateSubCategories(w http.ResponseWriter, r *http.Request) {
 	csx := getAccessToken(r)
 	ctcol := csx + CategoryTreeExtension
 
-	var ctrq CATEGORYREQUEST
+	pth := strings.Split(r.URL.Path, "/")
+	cid := pth[len(pth)-1]
 
-	if !mapInput(w, r, &ctrq) {
-		return
-	}
-
-	catNode := getCategoryNode(w, r, ctrq.Category, ExternalDB+csx, ctcol)
+	catNode := getCategoryNodeByID(w, r, cid, ExternalDB+csx, ctcol)
 	var childNodes []*CATEGORYTREENODE
 
 	if catNode.Children == nil {
 
-		respondWith(w, r, nil, "Category "+ctrq.Category+" does not have a sub category ...", nil, http.StatusNotFound, false)
+		respondWith(w, r, nil, "Category with ID: "+cid+" does not have a sub category ...", nil, http.StatusNotFound, false)
 		return
 
 	}
@@ -130,25 +128,20 @@ func getParentCategory(w http.ResponseWriter, r *http.Request) {
 	csx := getAccessToken(r)
 	ctcol := csx + CategoryTreeExtension
 
-	var ctrq CATEGORYREQUEST
+	pth := strings.Split(r.URL.Path, "/")
+	cid := pth[len(pth)-1]
 
-	if !mapInput(w, r, &ctrq) {
-		return
-	}
-
-	catNode := getCategoryNode(w, r, ctrq.Category, ExternalDB+csx, ctcol)
+	catNode := getCategoryNodeByID(w, r, cid, ExternalDB+csx, ctcol)
 	var parentNode *CATEGORYTREENODE
 
 	if catNode.Parent == "" {
 
-		respondWith(w, r, nil, "Category "+ctrq.Category+" does not have a parent ...", nil, http.StatusNotFound, false)
+		respondWith(w, r, nil, "Category "+cid+" does not have a parent ...", nil, http.StatusNotFound, false)
 		return
 
-	} else {
-
-		parentNode = getCategoryNode(w, r, catNode.Parent, ExternalDB+csx, ctcol)
-
 	}
+
+	parentNode = getCategoryNode(w, r, catNode.Parent, ExternalDB+csx, ctcol)
 
 	respondWith(w, r, nil, "Category parent ...", parentNode, http.StatusOK, true)
 

@@ -81,9 +81,9 @@ func routers() *mux.Router {
 
 	router.HandleFunc(CategoriesPath+"/root", getRootCategory).Methods(http.MethodGet)
 
-	router.HandleFunc(CategoriesPath+"/sub", getImmediateSubCategories).Methods(http.MethodGet)
+	router.HandleFunc(CategoriesPath+"/sub/{CID}", getImmediateSubCategories).Methods(http.MethodGet)
 
-	router.HandleFunc(CategoriesPath+"/parent", getParentCategory).Methods(http.MethodGet)
+	router.HandleFunc(CategoriesPath+"/parent/{CID}", getParentCategory).Methods(http.MethodGet)
 
 	router.HandleFunc(RecommendationsPath+"/similarproducts", getSimilarProducts).Methods(http.MethodGet)
 
