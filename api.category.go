@@ -65,7 +65,7 @@ func getProductsInCategory(w http.ResponseWriter, r *http.Request) {
 
 	products := getProductsInTheCategoryPath(w, r, path, ExternalDB+csx, ctcol, true, csx)
 
-	respondWith(w, r, nil, "Products in category path ...", bson.M{path: products}, http.StatusOK, true)
+	respondWith(w, r, nil, "Products in category path ...", products, http.StatusOK, true)
 
 }
 
