@@ -12,6 +12,7 @@ import (
 func respondWith(w http.ResponseWriter, r *http.Request, err error, message string, response interface{}, code int, success bool) {
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Status", strconv.Itoa(code))
 
 	var resp RESPONSE
 
