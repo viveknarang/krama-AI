@@ -162,7 +162,11 @@ func mapToBytes(w http.ResponseWriter, r *http.Request, document interface{}) []
 
 func getAccessToken(r *http.Request) string {
 
-	return REDISCLIENT.Get(r.Header.Get("x-access-token")).Val()
+	authToken := r.Header.Get("Authorization")
+	splitToken := strings.Split(authToken, "Bearer ")
+	authToken = splitToken[1]
+
+	return REDISCLIENT.Get(authToken).Val()
 
 }
 

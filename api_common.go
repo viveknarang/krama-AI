@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/romana/rlog"
 )
@@ -16,7 +17,28 @@ func pre(w http.ResponseWriter, r *http.Request) bool {
 
 	}
 
-	if r.Header.Get("x-access-token") == "" {
+	authToken := r.Header.Get("Authorization")
+
+	if len(authToken) == 0 {
+
+		rlog.Debug("pre(): Missing authorization in the header ...")
+		respondWith(w, r, nil, "Missing authorization in the HTTP request header", nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
+	if !strings.Contains(authToken, "Bearer") {
+
+		rlog.Debug("pre(): Malformed authorization in the header ...")
+		respondWith(w, r, nil, "Malformed authorization in the HTTP request header", nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
+	splitToken := strings.Split(authToken, "Bearer ")
+	authToken = splitToken[1]
+
+	if authToken == "" {
 
 		rlog.Debug("pre(): Missing access token ...")
 		respondWith(w, r, nil, MissingAccessToken, nil, http.StatusBadRequest, false)
@@ -32,7 +54,7 @@ func pre(w http.ResponseWriter, r *http.Request) bool {
 
 	}
 
-	if !authenticate(r.Header.Get("x-access-token")) {
+	if !authenticate(authToken) {
 
 		rlog.Debug("pre(): Authentication failed ...")
 		respondWith(w, r, nil, InvalidSessionMessage, nil, http.StatusUnauthorized, false)
