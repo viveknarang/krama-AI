@@ -239,6 +239,12 @@ var RecommendationsPath string
 //InventoryUpdateBatchSize inventory update batch size
 var InventoryUpdateBatchSize int
 
+//MissingAuthRequestHeader error message
+var MissingAuthRequestHeader string
+
+//MalformedAuthRequestHeader error message
+var MalformedAuthRequestHeader string
+
 func loadSystemProperties() bool {
 
 	rlog.Debug("loadSystemProperties() handle function invoked ...")
@@ -325,6 +331,8 @@ func loadSystemProperties() bool {
 	ProductInventoryExtension = p.GetString("db.mongo.external.product.inventory.extention", "")
 	CategoryTreeExtension = p.GetString("db.mongo.external.category.tree.extension", "")
 	InventoryUpdateBatchSize = p.GetInt("api.catalog.inventory.update.batch.size", 100)
+	MissingAuthRequestHeader = p.GetString("api.response.message.login.missingAuthorization", "")
+	MalformedAuthRequestHeader = p.GetString("api.response.message.login.malformedAuthorization", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion

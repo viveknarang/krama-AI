@@ -22,7 +22,7 @@ func pre(w http.ResponseWriter, r *http.Request) bool {
 	if len(authToken) == 0 {
 
 		rlog.Debug("pre(): Missing authorization in the header ...")
-		respondWith(w, r, nil, "Missing authorization in the HTTP request header", nil, http.StatusBadRequest, false)
+		respondWith(w, r, nil, MissingAuthRequestHeader, nil, http.StatusBadRequest, false)
 		return false
 
 	}
@@ -30,7 +30,7 @@ func pre(w http.ResponseWriter, r *http.Request) bool {
 	if !strings.Contains(authToken, "Bearer") {
 
 		rlog.Debug("pre(): Malformed authorization in the header ...")
-		respondWith(w, r, nil, "Malformed authorization in the HTTP request header", nil, http.StatusBadRequest, false)
+		respondWith(w, r, nil, MalformedAuthRequestHeader, nil, http.StatusBadRequest, false)
 		return false
 
 	}
