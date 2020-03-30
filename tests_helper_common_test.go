@@ -37,3 +37,21 @@ func TestIsValidEmail(t *testing.T) {
 	}
 
 }
+
+func TestIsValidJSON(t *testing.T) {
+
+	t.Log("Testing the isValidJSON function ...")
+
+	validJSON := isValidJSON("{ \"a\":\"b\" }")
+
+	if !validJSON {
+		t.Errorf("isValidJSON:: A valid JSON is returning false")
+	}
+
+	invalidJSON := isValidJSON("{ kjkldjfkldjdkljd $#VFGGGF }")
+
+	if invalidJSON {
+		t.Errorf("isValidJSON:: An invalid JSON is returning true")
+	}
+
+}
