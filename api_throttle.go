@@ -15,6 +15,11 @@ func throttleCheck(w http.ResponseWriter, r *http.Request, authToken string) boo
 
 		throttleRate, _ := strconv.Atoi(REDISCLIENT.Get(authToken + "_rxt").Val())
 
+		// To avoid any throttling, the rate for the customer should be set to -1
+		if throttleRate == -1 {
+			return true
+		}
+
 		currentMinute := time.Now().Unix() / 60
 
 		rateKey := authToken + ":" + strconv.FormatInt(currentMinute, 10)
@@ -29,7 +34,7 @@ func throttleCheck(w http.ResponseWriter, r *http.Request, authToken string) boo
 
 				//Return Error
 				rlog.Debug("pre()/throttle check: Request rate capacity is reached for this customer ...")
-				respondWith(w, r, nil, "Request rate capacity of "+strconv.Itoa(throttleRate)+" requests per minute is reached for this customer ...", nil, http.StatusTooManyRequests, false)
+				respondWith(w, r, nil, "Rate capacity of "+strconv.Itoa(throttleRate)+" requests per minute is reached for this customer ...", nil, http.StatusTooManyRequests, false)
 				return false
 
 			}
