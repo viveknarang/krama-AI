@@ -5,7 +5,9 @@
 
 # Introduction
 
-Krama AI is an ecommerce AI platform that provides a portfolio of novel and powerful features to build an online store. The headless, API-first approach allows our customers to utilize platform features to build online stores with exceptional flexibility. Using Krama AI, businesses can build online stores with user interface of their choice - be it a website, a mobile app or any other possible interface. Krama AI provides basic ecommerce platform components such as catalog, orders & shopping cart as well as advanced features such as sophisticated search capabilities using the Search API,sophisticated recommendation features to increase sales conversion and customer engagement. Krama AI also plans to provide sophisticated analytics & insights API that will give a competitive edge to businesses and will open new avenues for better customer engagement, inventory planning and price optimization and much more ... Stay tuned!
+Krama AI is an e-commerce AI platform that provides a portfolio of novel and powerful features to build an online e-commerce store. The headless, API-first approach allows our customers to utilize platform features to build online stores with exceptional flexibility. Using Krama AI, individuals and businesses can build online e-commerce stores with user interface of their choice - be it a website, a mobile app or any other possible interface. Krama AI provides basic e-commerce platform components such as catalog, orders & shopping cart as well as advanced features such as sophisticated search capabilities, recommendation features to increase sales conversion rates and customer engagement. Krama AI also plans to provide sophisticated analytics & insights API that will give a competitive edge to businesses and will open new avenues for better customer engagement, inventory planning and price optimization and much more ... Stay tuned!
+
+Krama AI is using state-of-art open-source software platforms and technologies to provide you with the best performance, better than any other SaaS platform in the market today. 
 
 Krama AI is powered by:
 
@@ -13,6 +15,9 @@ Krama AI is powered by:
 - Redis             
 - Elasticsearch     
 - MongoDB
+- Kafka (upcoming)
+- TensorFlow (upcoming)
+- Kubernetes
 - Other supporting tools           
 
 
@@ -78,15 +83,14 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
 }
 ```
 
-At the heart of this API lies the product and so it is very important to understand the concept of product, its data structure and the rules around it. 
-The product data structure provides a skeleton of an individual product. This skeleton is very powerful and allowes this API to store most real-world 
-products. The skeleton essentially consists of some most common fields that define a product. Many of these fields are mandatory and some are optional.
+At the heart of that SaaS platform lies the concept of product. Product is the most basic unit of data on this platform. The product data structure provides you with a skeleton to model your inventory products for this platform. The product data structure provide a flexible way to allow the modelling of any kind of product that you may have in your inventory. The data structure comes with some mandatory fields, some optional fields and some flexible fields. Mandatory fields are those fields in the data structure that expects you to pass in relevant information following certain rules (as mentioned in the table below). Optional fields are those fields that are not necessary for the system but are good to have. 
 
-Among all of the fields in the product skeleton, the one field that we would particularly like to disucss here is the Attributes field. the attributes field make the product skeleton very flexible. It allows defining of custom product attributes that are unique to your product definition. Attributes field accepts a map of key value pairs. Keys in the Attributes are the custom attribute names and are strings. The values are only allowed to be either
-strings, integers, floats or boolean values. 
+The two most important fields that are needed to be discussed in detail are the Attributes and Selectors fields. These two fields in the data structure provide immense power as it allows the modelling of any type of real-world product. Attributes field is a key-value field that allows you to mention any other field that has not been included already. The attributes field is optional - use it if you need it. Selectors field is another optional key-value field that allows you to define all those product attributes that you think are crucial in helping identify a variation of the product in the product group. As a general thumb of rule, you should not define a product attribute more than once in the data-structure. 
+
+The product data structure provides with all essential product attributes that are useful in modelling your product for this platform. Please feel have a look in the table below to find more details on each field and its constraints. 
 
 <aside class="warning">
-The API will reject product addition and change requests if the constraints are not met! 
+To ensure that the platform has clean data, the API is strict and will decline malformed data objects. It is essential for you to follow these rules for the API to normally accept your requests. 
 </aside>
 
 Please find the field definitions, types and constraints below:
@@ -114,15 +118,9 @@ Please find the field definitions, types and constraints below:
 
 
 <aside class="notice">
-The isMain field in the product data structure essentially marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
+The isMain field in the product data structure marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
 of the product name, images, etc ... to show up on the product page by default.  
 </aside>
-
-<aside class="warning">
-Attributes field key naming has to follow specific rules. Attibutes field key names can only have alphanumeric characters with single spaces, "_", or "-" characters.  
-</aside>
-
-
 
 
 
@@ -395,11 +393,12 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
 ```
 
 
-ProductGroup objects are created and maintained by the platform. These objects have a very important purpose to solve - To optimize search, recommendation and other platform features by logically and automatically grouping a set of similar products. A group of similar products in your catalog could be same product with certain variations. Example: a shirt with same style but different colors and sizes. Essentially it should be treated as one product and not different products. Krama AI platform automatically groups similar products into ProductGroup objects. The platform does it using the **GroupID** field in your product object. **Product objects with same GroupID are grouped together in a ProductGroup object** The platform does more than what you expect. It groups these Product objects into ProductGroup objects and also aggregates product specific fields. ProductObjects also have price ranges computed using the RegularPrice and PromotionPrice fields in the Product objects. Attributes field map keys are also aggregated into an array of unique values. This is especially helpful in making faceted search requests. The platform takes care of the ProductGroup objects and builds and maintain these objects using the data from the Product objects - **in real-time**. You can find details on the fields, types and contraints in the table below. 
+ProductGroup objects are created and maintained by the platform. These objects have a very important purpose to solve - To optimize search, recommendation and other platform features by logically and automatically grouping a set of similar products. A group of similar products in your catalog could be same product with certain variations. Example: A shirt with same style but different colors and sizes logically forms a product group. Krama AI platform automatically groups similar products into ProductGroup objects. The platform does it using the **GroupID** field in your product object. **Product objects with same GroupID are grouped together in a ProductGroup object** 
 
+The platform does more than what you expect. It groups these Product objects into ProductGroup objects and also aggregates product specific fields. ProductObjects also have price ranges computed using the RegularPrice and PromotionPrice fields in the Product objects. Attributes field map keys are also aggregated into an array of unique values. This is especially helpful in making faceted search requests. The platform takes care of the ProductGroup objects and builds and maintain these objects using the data from the Product objects - **in real-time**. 
 
+Please find the field definitions, types, and constraints below:
 
-Please find the field definitions, types and constraints below:
 
 |   Field                   |   Type         |     Short Description                                                                                                |
 |---------------------------|----------------|----------------------------------------------------------------------------------------------------------------------|
@@ -422,6 +421,7 @@ Please find the field definitions, types and constraints below:
 |  Updated                  |   Integer      | Unix timestamp of the last time when the product group was updated                                                   |
 |  Products                 |   Map{k,v}     | Map of products in the group. Key is the product SKU, value is the Product object                                    |
 |  Attributes               |   Map{k,v}     | Aggregated Map of custom product attributes. Unique values are grouped in arrays for each key                        |
+|  Selectors                |   Map{k,v}     | All those fields that help in identification of a specific variation of a product in the group                       |
 |  CumulativeReviewStars    |   Float        | Cumulative Average of star rating of the product group                                                               |
 |  CumulativeReviewCount    |   Integer      | Cumulative count of the reviews on the product group                                                                 | 
 
@@ -595,9 +595,10 @@ PaymentOption object fields, definitions, and constraints below:
 
 Every request to this API gets a standard response object. Details on the fields of the response object is elaborated in the table below.
 
+
 |  Key              |    Description                                                                        |
 |-------------------|---------------------------------------------------------------------------------------|
-| Code              | Response code for the request                                                         |
+| Code              | [HTTP Response code](#response-codes) for the request                                 |
 | Success           | Flag that tells if the request was successful or not                                  |
 | Message           | Message for additional information                                                    |
 | Time              | Unix timestamp of the response                                                        |
@@ -626,7 +627,7 @@ Every request to this API gets a standard response object. Details on the fields
     "Message": "Login Successful ...",
     "Time": 1579026954047130825,
     "Response": {
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJDb250ZUFtZXJpY2EiLCJleHAiOjE1NzkxMDY5NTQsImlhdCI6MTU3OTAyNjk1NCwibmJmIjoxNTc5MDI2ODU0LCJ1aWQiOiIwMjQ0Zjg1NS1jMWQ3LTQyNGYtOWI5OS04NGZmYWNiYzYwOGUifQ.6IhX3X321NlZFtSSf3JUPisD7fTxqeVrCpHQ6WDDgIk",
+        "Token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJDb250ZUFtZXJpY2EiLCJleHAiOjE1NzkxMDY5NTQsImlhdCI6MTU3OTAyNjk1NCwibmJmIjoxNTc5MDI2ODU0LCJ1aWQiOiIwMjQ0Zjg1NS1jMWQ3LTQyNGYtOWI5OS04NGZmYWNiYzYwOGUifQ.6IhX3X321NlZFtSSf3JUPisD7fTxqeVrCpHQ6WDDgIk",
         "ValidForSeconds": 80000
     }
 }
@@ -656,7 +657,7 @@ Every request to this API gets a standard response object. Details on the fields
 }
 ```
 
-This endpoint gets you your API access token. You need to send your customer ID and the API key that we provided you for using our platform. Upon receiving your valid credentials, the API will respond with a token with additional information including the validFor key which tells you how long this access token is valid for. Please set **Authorization** field in the HTTP request header to the **token** in your API calls. 
+This endpoint gets you your API access token. You need to send your customer ID and the API key that we provided you for using our platform. Upon receiving your valid credentials, the API will respond with a token with additional information including the **ValidForSeconds** key which tells you how long this access token is valid for. Please set **Authorization** field in the HTTP request header to the **token** in your API calls. 
 
 
 ### HTTP Request URL
@@ -677,7 +678,7 @@ This endpoint gets you your API access token. You need to send your customer ID 
 | APIKey            | The API key that is sent by us  |
 
 <aside class="warning">
-You do not need to invoke login too often. Please include the token that you receive upon a successful login in your subsequent API calls until the token expires.
+You do not need to invoke login too often. Please include the token that you receive upon a successful login in your subsequent API calls until the token expires. You can keep a track of token expiry using the ValidForSeconds field in the response. 
 </aside>
 
 ### HTTP Response
@@ -691,11 +692,6 @@ You do not need to invoke login too often. Please include the token that you rec
 | Response          | Response object containing response information                               |
 | Token             | Included in response object that should be included in subsequent API calls   |
 | ValidForSeconds   | Included in response object that tells the validity of access token in seconds|
-
-
-<aside class="notice">
-With the field validForSeconds in response, you can calculate the time after with your servers need to login again to get a new token.
-</aside>
 
 
 # Catalog API
@@ -816,7 +812,7 @@ With the field validForSeconds in response, you can calculate the time after wit
 }
 ```
 
-Use this API endpoint to add a new product in the products collection. When a product is added in the products collection, this product is also added in product group collection. If the product group with the matching groupID is missing, a new product group is formed. Search index and the cache are also automatically updated with a valid call to this endpoint. 
+Use this API endpoint to add a new product in the products collection. When a product is added in the products collection it also gest added in product group collection. If the product group with the matching groupID is missing, a new product group is formed. Search index and the cache are also automatically updated with a valid call to this API endpoint. 
 
 
 ### HTTP Request URL
@@ -941,7 +937,7 @@ Use this API endpoint to add a new product in the products collection. When a pr
 }
 ```
 
-When you want to get a specific product you can use this endpoint. All you need to pass is your access token and the SKU. This endpoint is cached for efficiency but also ensures that updated product data is served when applicable. 
+When you want to get a specific product you can use this endpoint. All you need to pass is your access token and the SKU. This endpoint is cached for efficiency but also ensures that updated product data is served when the product update is invoked for this product. 
 
 
 ### HTTP Request URL
@@ -1253,7 +1249,7 @@ Use this API endpoint to get an array of products by passing an array of SKUs.
 }
 ```
 
-Use this API endpoint to update your product information in the catalog. For now you need to pass the entire product object with updated parts (this functionality will be improved very soon). When you hit this endpoint, the data in the products collection gets updated, product group data also gets updated automatically, search index is also updated and the cache entry is removed first and updated on the next GET call. 
+Use this API endpoint to update your product information in the catalog. For now you need to pass the entire product object with updated parts (this functionality will be improved very soon). When you hit this API endpoint, the data in the products collection gets updated, product group data also gets updated automatically, search index is also updated and the cache entry for this product is removed first and updated on the next GET call. 
 
 
 ### HTTP Request URL
@@ -1360,9 +1356,9 @@ Use this API endpoint to update your product information in the catalog. For now
 
 Use this API endpoint to update your product prices in the catalog. You can use this endpoint to submit a map of skus of prices. Each sku in the map
 is associated with the regular and the promotion prices. The new prices cannot not be negative values. As with other features the API takes care of 
-ensuring that the product groups and the search index are synced as well. The response object contains three lists - the list of updated skus 
-(essentially the skus for which the prices were updated), a list of skus which were not updated (most likely that you submitted same old prices), and
-finally a list of skus that were not found. You can use this information to check if your update request was executed as per your expectations. 
+ensuring that the product groups and the search index are synced as well in real-time. The response object contains three lists - the list of updated skus 
+(essentially all the skus for which the prices were updated), a list of skus which were not updated (most likely that you submitted same old prices), and
+finally a list of skus that were not found. You can use this information to check if your update request was executed as per your expectations or not. 
 
 
 ### HTTP Request URL
@@ -1395,8 +1391,6 @@ finally a list of skus that were not found. You can use this information to chec
 | Message           | Message for additional information                                            |
 | Time              | Unix timestamp of the response                                                |
 | Response          | Response object containing response information                               |
-
-
 
 
 
@@ -1433,9 +1427,9 @@ finally a list of skus that were not found. You can use this information to chec
 }
 ```
 
-Use this API endpoint to update your product quantity. You can use this endpoint to updates inventory for multiple products. Please find the API request details below. The API updates product groups as well as search index. The response object contains three lists - a list that gives you the skus of those
+Use this API endpoint to update your product quantity. You can use this endpoint to update inventory for multiple products. Please find the API request details below. The API updates product groups as well as search index. The response object contains three lists - a list that gives you the skus of those
 products where the product quantities were updated. The response object also provides you with list of those skus where there was no change and also
-those skus which were not found in the catalog. 
+those skus which were not found in the catalog. You can use the information from the response to verify that the changes were done as per your expectation. 
 
 
 ### HTTP Request URL
@@ -1455,7 +1449,7 @@ those skus which were not found in the catalog.
 |    Parameter    |          Constraints                    |        Description                                           |
 |-----------------|-----------------------------------------|--------------------------------------------------------------|
 |Quantity         |                                         |  The map containing skus-quantity mappings                   |
-|{sku : quantity} | {unique identifier, float non-negative} |  sku-quantity mappings in the Quantity object                |
+|{sku : quantity} | {unique identifier, int non-negative}   |  sku-quantity mappings in the Quantity object                |
 
 
 ### HTTP Response
@@ -2191,7 +2185,7 @@ Use this API endpoint to get an array of product group objects by passing an arr
 | Active                |  Active flag to indicate if the product is available for sale                 |
 | Products              |  List of all the product objects for reference                                |
 | Attributes            |  Field that maps additional attributes to the product group                   |
-| Selectors             | All those product attributes which help choose a specific product variation   |
+| Selectors             |  All those product attributes which help choose a specific product variation  |
 
 
 ## Delete a product group
@@ -2416,7 +2410,7 @@ Use this API endpoint to remove a product group from the productgroups collectio
 }
 ```
 
-Use this endpoint to create an order entry in the database. Details on the fields and the constraints is listed below. 
+Use this endpoint to create an order entry in the database. Details on the fields and the constraints are listed below. 
 
 
 ### HTTP Request URL
@@ -4772,5 +4766,25 @@ This API uses the following HTTP Response codes:
 | 401  **StatusUnauthorized**        | The API request is not authorized. Please check your access credentials             |
 | 404  **StatusNotFound**            | The requested/referenced resource was not found                                     |
 | 409  **StatusConflict**            | Code that is returned when, for example, product with same SKU already exists       |
+| 429  **StatusTooManyRequests**     | Your servers are sending more API requests per minute than allowed                  |  
 | 500  **StatusInternalServerError** | Something went wrong on our server                                                  |
-| 503  **StatusServiceUnavailable**  | The API service is down                                                             |
+| 503  **StatusServiceUnavailable**  | The API servers are down for some internal reasons                                  |
+
+
+# Non-functional Features
+
+## API Rate Limit
+
+> Sample valid API response:
+
+```json
+{
+    "Code": 429,
+    "Success": false,
+    "Message": "Rate capacity of 10 requests per minute is reached for this customer ...",
+    "Time": 1585673070784773975,
+    "Response": null
+}
+```
+
+This SaaS platform enforces API rate limiting for each customer. API rate limiting is helpful in ensuring that no single enterprise customer unfairly consumes more resources than any other enterprise customer. Rate limiting also adds a level of security to the platform. This scheme is also allows the rationing of the API endpoints in the time of need. The API rate limiting unit of measurement is number of requests per minute. Once the rate limit is reached for the customer, all API requests are responded with an HTTP response code of 429. This throttling is implemented using Redis. To know more about the implementation approach please check <a href="https://redislabs.com/redis-best-practices/basic-rate-limiting/" target="_blank">this Redislabs blog</a>

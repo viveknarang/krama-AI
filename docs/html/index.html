@@ -386,9 +386,17 @@
           <li>
             <a href="#response-codes" class="toc-h1 toc-link" data-title="Response Codes">Response Codes</a>
           </li>
+          <li>
+            <a href="#non-functional-features" class="toc-h1 toc-link" data-title="Non-functional Features">Non-functional Features</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#api-rate-limit" class="toc-h2 toc-link" data-title="API Rate Limit">API Rate Limit</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
-            <li><span>API documentation version 4.0.0</span><br/><br/></li>
+            <li><span>API documentation version 4.1.0</span><br/><br/></li>
             <li><a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/></li>
             <li><a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/></li>
             <li><a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/></li>
@@ -404,7 +412,9 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Krama AI is an ecommerce AI platform that provides a portfolio of novel and powerful features to build an online store. The headless, API-first approach allows our customers to utilize platform features to build online stores with exceptional flexibility. Using Krama AI, businesses can build online stores with user interface of their choice - be it a website, a mobile app or any other possible interface. Krama AI provides basic ecommerce platform components such as catalog, orders &amp; shopping cart as well as advanced features such as sophisticated search capabilities using the Search API,sophisticated recommendation features to increase sales conversion and customer engagement. Krama AI also plans to provide sophisticated analytics &amp; insights API that will give a competitive edge to businesses and will open new avenues for better customer engagement, inventory planning and price optimization and much more ... Stay tuned!</p>
+<p>Krama AI is an e-commerce AI platform that provides a portfolio of novel and powerful features to build an online e-commerce store. The headless, API-first approach allows our customers to utilize platform features to build online stores with exceptional flexibility. Using Krama AI, individuals and businesses can build online e-commerce stores with user interface of their choice - be it a website, a mobile app or any other possible interface. Krama AI provides basic e-commerce platform components such as catalog, orders &amp; shopping cart as well as advanced features such as sophisticated search capabilities, recommendation features to increase sales conversion rates and customer engagement. Krama AI also plans to provide sophisticated analytics &amp; insights API that will give a competitive edge to businesses and will open new avenues for better customer engagement, inventory planning and price optimization and much more ... Stay tuned!</p>
+
+<p>Krama AI is using state-of-art open-source software platforms and technologies to provide you with the best performance, better than any other SaaS platform in the market today. </p>
 
 <p>Krama AI is powered by:</p>
 
@@ -413,6 +423,9 @@
 <li>Redis<br></li>
 <li>Elasticsearch<br></li>
 <li>MongoDB</li>
+<li>Kafka (upcoming)</li>
+<li>TensorFlow (upcoming)</li>
+<li>Kubernetes</li>
 <li>Other supporting tools<br></li>
 </ul>
 
@@ -472,15 +485,14 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>At the heart of this API lies the product and so it is very important to understand the concept of product, its data structure and the rules around it. 
-The product data structure provides a skeleton of an individual product. This skeleton is very powerful and allowes this API to store most real-world 
-products. The skeleton essentially consists of some most common fields that define a product. Many of these fields are mandatory and some are optional.</p>
+<p>At the heart of that SaaS platform lies the concept of product. Product is the most basic unit of data on this platform. The product data structure provides you with a skeleton to model your inventory products for this platform. The product data structure provide a flexible way to allow the modelling of any kind of product that you may have in your inventory. The data structure comes with some mandatory fields, some optional fields and some flexible fields. Mandatory fields are those fields in the data structure that expects you to pass in relevant information following certain rules (as mentioned in the table below). Optional fields are those fields that are not necessary for the system but are good to have. </p>
 
-<p>Among all of the fields in the product skeleton, the one field that we would particularly like to disucss here is the Attributes field. the attributes field make the product skeleton very flexible. It allows defining of custom product attributes that are unique to your product definition. Attributes field accepts a map of key value pairs. Keys in the Attributes are the custom attribute names and are strings. The values are only allowed to be either
-strings, integers, floats or boolean values. </p>
+<p>The two most important fields that are needed to be discussed in detail are the Attributes and Selectors fields. These two fields in the data structure provide immense power as it allows the modelling of any type of real-world product. Attributes field is a key-value field that allows you to mention any other field that has not been included already. The attributes field is optional - use it if you need it. Selectors field is another optional key-value field that allows you to define all those product attributes that you think are crucial in helping identify a variation of the product in the product group. As a general thumb of rule, you should not define a product attribute more than once in the data-structure. </p>
+
+<p>The product data structure provides with all essential product attributes that are useful in modelling your product for this platform. Please feel have a look in the table below to find more details on each field and its constraints. </p>
 
 <aside class="warning">
-The API will reject product addition and change requests if the constraints are not met! 
+To ensure that the platform has clean data, the API is strict and will decline malformed data objects. It is essential for you to follow these rules for the API to normally accept your requests. 
 </aside>
 
 <p>Please find the field definitions, types and constraints below:</p>
@@ -604,12 +616,8 @@ The API will reject product addition and change requests if the constraints are 
 </tbody></table>
 
 <aside class="notice">
-The isMain field in the product data structure essentially marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
+The isMain field in the product data structure marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
 of the product name, images, etc ... to show up on the product page by default.  
-</aside>
-
-<aside class="warning">
-Attributes field key naming has to follow specific rules. Attibutes field key names can only have alphanumeric characters with single spaces, "_", or "-" characters.  
 </aside>
 <h2 id='productgroup'>ProductGroup</h2>
 <blockquote>
@@ -876,9 +884,11 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>ProductGroup objects are created and maintained by the platform. These objects have a very important purpose to solve - To optimize search, recommendation and other platform features by logically and automatically grouping a set of similar products. A group of similar products in your catalog could be same product with certain variations. Example: a shirt with same style but different colors and sizes. Essentially it should be treated as one product and not different products. Krama AI platform automatically groups similar products into ProductGroup objects. The platform does it using the <strong>GroupID</strong> field in your product object. <strong>Product objects with same GroupID are grouped together in a ProductGroup object</strong> The platform does more than what you expect. It groups these Product objects into ProductGroup objects and also aggregates product specific fields. ProductObjects also have price ranges computed using the RegularPrice and PromotionPrice fields in the Product objects. Attributes field map keys are also aggregated into an array of unique values. This is especially helpful in making faceted search requests. The platform takes care of the ProductGroup objects and builds and maintain these objects using the data from the Product objects - <strong>in real-time</strong>. You can find details on the fields, types and contraints in the table below. </p>
+<p>ProductGroup objects are created and maintained by the platform. These objects have a very important purpose to solve - To optimize search, recommendation and other platform features by logically and automatically grouping a set of similar products. A group of similar products in your catalog could be same product with certain variations. Example: A shirt with same style but different colors and sizes logically forms a product group. Krama AI platform automatically groups similar products into ProductGroup objects. The platform does it using the <strong>GroupID</strong> field in your product object. <strong>Product objects with same GroupID are grouped together in a ProductGroup object</strong> </p>
 
-<p>Please find the field definitions, types and constraints below:</p>
+<p>The platform does more than what you expect. It groups these Product objects into ProductGroup objects and also aggregates product specific fields. ProductObjects also have price ranges computed using the RegularPrice and PromotionPrice fields in the Product objects. Attributes field map keys are also aggregated into an array of unique values. This is especially helpful in making faceted search requests. The platform takes care of the ProductGroup objects and builds and maintain these objects using the data from the Product objects - <strong>in real-time</strong>. </p>
+
+<p>Please find the field definitions, types, and constraints below:</p>
 
 <table><thead>
 <tr>
@@ -981,6 +991,11 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
 <td>Attributes</td>
 <td>Map{k,v}</td>
 <td>Aggregated Map of custom product attributes. Unique values are grouped in arrays for each key</td>
+</tr>
+<tr>
+<td>Selectors</td>
+<td>Map{k,v}</td>
+<td>All those fields that help in identification of a specific variation of a product in the group</td>
 </tr>
 <tr>
 <td>CumulativeReviewStars</td>
@@ -1309,7 +1324,7 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
 </thead><tbody>
 <tr>
 <td>Code</td>
-<td>Response code for the request</td>
+<td><a href="#response-codes">HTTP Response code</a> for the request</td>
 </tr>
 <tr>
 <td>Success</td>
@@ -1346,7 +1361,7 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
     </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Login Successful ..."</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1579026954047130825</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJDb250ZUFtZXJpY2EiLCJleHAiOjE1NzkxMDY5NTQsImlhdCI6MTU3OTAyNjk1NCwibmJmIjoxNTc5MDI2ODU0LCJ1aWQiOiIwMjQ0Zjg1NS1jMWQ3LTQyNGYtOWI5OS04NGZmYWNiYzYwOGUifQ.6IhX3X321NlZFtSSf3JUPisD7fTxqeVrCpHQ6WDDgIk"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJDb250ZUFtZXJpY2EiLCJleHAiOjE1NzkxMDY5NTQsImlhdCI6MTU3OTAyNjk1NCwibmJmIjoxNTc5MDI2ODU0LCJ1aWQiOiIwMjQ0Zjg1NS1jMWQ3LTQyNGYtOWI5OS04NGZmYWNiYzYwOGUifQ.6IhX3X321NlZFtSSf3JUPisD7fTxqeVrCpHQ6WDDgIk"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"ValidForSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1373,7 +1388,7 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
     </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint gets you your API access token. You need to send your customer ID and the API key that we provided you for using our platform. Upon receiving your valid credentials, the API will respond with a token with additional information including the validFor key which tells you how long this access token is valid for. Please set <strong>Authorization</strong> field in the HTTP request header to the <strong>token</strong> in your API calls. </p>
+<p>This endpoint gets you your API access token. You need to send your customer ID and the API key that we provided you for using our platform. Upon receiving your valid credentials, the API will respond with a token with additional information including the <strong>ValidForSeconds</strong> key which tells you how long this access token is valid for. Please set <strong>Authorization</strong> field in the HTTP request header to the <strong>token</strong> in your API calls. </p>
 <h3 id='http-request-url'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/customers/{API version}/login</code></p>
 <h3 id='http-request-header'>HTTP Request Header</h3>
@@ -1406,7 +1421,7 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
 </tbody></table>
 
 <aside class="warning">
-You do not need to invoke login too often. Please include the token that you receive upon a successful login in your subsequent API calls until the token expires.
+You do not need to invoke login too often. Please include the token that you receive upon a successful login in your subsequent API calls until the token expires. You can keep a track of token expiry using the ValidForSeconds field in the response. 
 </aside>
 <h3 id='http-response'>HTTP Response</h3>
 <table><thead>
@@ -1444,10 +1459,6 @@ You do not need to invoke login too often. Please include the token that you rec
 <td>Included in response object that tells the validity of access token in seconds</td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-With the field validForSeconds in response, you can calculate the time after with your servers need to login again to get a new token.
-</aside>
 <h1 id='catalog-api'>Catalog API</h1><h2 id='add-a-new-product'>Add a new product</h2>
 <blockquote>
 <p>Sample HTTP request body:</p>
@@ -1561,7 +1572,7 @@ With the field validForSeconds in response, you can calculate the time after wit
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Use this API endpoint to add a new product in the products collection. When a product is added in the products collection, this product is also added in product group collection. If the product group with the matching groupID is missing, a new product group is formed. Search index and the cache are also automatically updated with a valid call to this endpoint. </p>
+<p>Use this API endpoint to add a new product in the products collection. When a product is added in the products collection it also gest added in product group collection. If the product group with the matching groupID is missing, a new product group is formed. Search index and the cache are also automatically updated with a valid call to this API endpoint. </p>
 <h3 id='http-request-url-2'>HTTP Request URL</h3>
 <p><code>POST https://api.krama.ai/catalog/{API version}/products</code></p>
 <h3 id='http-request-header-2'>HTTP Request Header</h3>
@@ -1798,7 +1809,7 @@ With the field validForSeconds in response, you can calculate the time after wit
     </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>When you want to get a specific product you can use this endpoint. All you need to pass is your access token and the SKU. This endpoint is cached for efficiency but also ensures that updated product data is served when applicable. </p>
+<p>When you want to get a specific product you can use this endpoint. All you need to pass is your access token and the SKU. This endpoint is cached for efficiency but also ensures that updated product data is served when the product update is invoked for this product. </p>
 <h3 id='http-request-url-3'>HTTP Request URL</h3>
 <p><code>GET https://api.krama.ai/catalog/{API version}/products/{SKU}</code></p>
 <h3 id='http-request-header-3'>HTTP Request Header</h3>
@@ -2255,7 +2266,7 @@ With the field validForSeconds in response, you can calculate the time after wit
     </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Use this API endpoint to update your product information in the catalog. For now you need to pass the entire product object with updated parts (this functionality will be improved very soon). When you hit this endpoint, the data in the products collection gets updated, product group data also gets updated automatically, search index is also updated and the cache entry is removed first and updated on the next GET call. </p>
+<p>Use this API endpoint to update your product information in the catalog. For now you need to pass the entire product object with updated parts (this functionality will be improved very soon). When you hit this API endpoint, the data in the products collection gets updated, product group data also gets updated automatically, search index is also updated and the cache entry for this product is removed first and updated on the next GET call. </p>
 <h3 id='http-request-url-5'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/catalog/{API version}/products/{SKU}</code></p>
 <h3 id='http-request-header-5'>HTTP Request Header</h3>
@@ -2526,9 +2537,9 @@ With the field validForSeconds in response, you can calculate the time after wit
 </span></code></pre>
 <p>Use this API endpoint to update your product prices in the catalog. You can use this endpoint to submit a map of skus of prices. Each sku in the map
 is associated with the regular and the promotion prices. The new prices cannot not be negative values. As with other features the API takes care of 
-ensuring that the product groups and the search index are synced as well. The response object contains three lists - the list of updated skus 
-(essentially the skus for which the prices were updated), a list of skus which were not updated (most likely that you submitted same old prices), and
-finally a list of skus that were not found. You can use this information to check if your update request was executed as per your expectations. </p>
+ensuring that the product groups and the search index are synced as well in real-time. The response object contains three lists - the list of updated skus 
+(essentially all the skus for which the prices were updated), a list of skus which were not updated (most likely that you submitted same old prices), and
+finally a list of skus that were not found. You can use this information to check if your update request was executed as per your expectations or not. </p>
 <h3 id='http-request-url-6'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/catalog/{API version}/products/price/update</code></p>
 <h3 id='http-request-header-6'>HTTP Request Header</h3>
@@ -2629,9 +2640,9 @@ finally a list of skus that were not found. You can use this information to chec
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Use this API endpoint to update your product quantity. You can use this endpoint to updates inventory for multiple products. Please find the API request details below. The API updates product groups as well as search index. The response object contains three lists - a list that gives you the skus of those
+<p>Use this API endpoint to update your product quantity. You can use this endpoint to update inventory for multiple products. Please find the API request details below. The API updates product groups as well as search index. The response object contains three lists - a list that gives you the skus of those
 products where the product quantities were updated. The response object also provides you with list of those skus where there was no change and also
-those skus which were not found in the catalog. </p>
+those skus which were not found in the catalog. You can use the information from the response to verify that the changes were done as per your expectation. </p>
 <h3 id='http-request-url-7'>HTTP Request URL</h3>
 <p><code>PUT https://api.krama.ai/catalog/{API version}/products/inventory/update</code></p>
 <h3 id='http-request-header-7'>HTTP Request Header</h3>
@@ -2665,7 +2676,7 @@ those skus which were not found in the catalog. </p>
 </tr>
 <tr>
 <td>{sku : quantity}</td>
-<td>{unique identifier, float non-negative}</td>
+<td>{unique identifier, int non-negative}</td>
 <td>sku-quantity mappings in the Quantity object</td>
 </tr>
 </tbody></table>
@@ -3830,7 +3841,7 @@ those skus which were not found in the catalog. </p>
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Use this endpoint to create an order entry in the database. Details on the fields and the constraints is listed below. </p>
+<p>Use this endpoint to create an order entry in the database. Details on the fields and the constraints are listed below. </p>
 <h3 id='http-request-url-12'>HTTP Request URL</h3>
 <p><code>POST https://api.krama.ai/orders/{API version}/orders</code></p>
 <h3 id='http-request-header-11'>HTTP Request Header</h3>
@@ -6761,14 +6772,31 @@ does not make any sense to store reviews by products which could be indeed versi
 <td>Code that is returned when, for example, product with same SKU already exists</td>
 </tr>
 <tr>
+<td>429  <strong>StatusTooManyRequests</strong></td>
+<td>Your servers are sending more API requests per minute than allowed</td>
+</tr>
+<tr>
 <td>500  <strong>StatusInternalServerError</strong></td>
 <td>Something went wrong on our server</td>
 </tr>
 <tr>
 <td>503  <strong>StatusServiceUnavailable</strong></td>
-<td>The API service is down</td>
+<td>The API servers are down for some internal reasons</td>
 </tr>
 </tbody></table>
+<h1 id='non-functional-features'>Non-functional Features</h1><h2 id='api-rate-limit'>API Rate Limit</h2>
+<blockquote>
+<p>Sample valid API response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="mi">429</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rate capacity of 10 requests per minute is reached for this customer ..."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1585673070784773975</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Response"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This SaaS platform enforces API rate limiting for each customer. API rate limiting is helpful in ensuring that no single enterprise customer unfairly consumes more resources than any other enterprise customer. Rate limiting also adds a level of security to the platform. This scheme is also allows the rationing of the API endpoints in the time of need. The API rate limiting unit of measurement is number of requests per minute. Once the rate limit is reached for the customer, all API requests are responded with an HTTP response code of 429. This throttling is implemented using Redis. To know more about the implementation approach please check <a href="https://redislabs.com/redis-best-practices/basic-rate-limiting/" target="_blank">this Redislabs blog</a></p>
 
       </div>
       <div class="dark-box">
