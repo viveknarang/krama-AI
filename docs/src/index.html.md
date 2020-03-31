@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 ##  - javascript  
 
 toc_footers:
-  - <span>API documentation version 3.9.1</span><br/><br/>
+  - <span>API documentation version 4.0.0</span><br/><br/>
   - <a href='mailto:vivek.narang10@gmail.com'><u>Contribute</u></a><br/>
   - <a href='https://github.com/viveknarang/krama-AI' target='_blank'><u>Source Code</u></a><br/>
   - <a href='https://translate.google.com/#view=home&op=translate&sl=be&tl=en&text=%D0%9A%D1%80%D0%B0%D0%BC%D0%B0' target='_blank'><u>Meaning of Krama</u></a><br/>
@@ -48,7 +48,7 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
 
 ```json
 {
-  "Sku": "B07K3BHGL3",
+  "Sku": "B07K3BHGL5",
   "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
   "Images": [
     "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
@@ -61,8 +61,8 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
     "Microsoft",
     "Surface"
   ],
-  "RegularPrice": 2799,
-  "PromotionPrice": 2600,
+  "RegularPrice": 3300,
+  "PromotionPrice": 3000,
   "Currency": "CDN",
   "IsMain": true,
   "Quantity": 200,
@@ -73,10 +73,12 @@ The current API version is: v1 Please replace {API version} with v1 in your API 
     "Computers & Tablets>Laptops"
   ],
   "Active": true,
+  "Selectors": {
+    "RAM": "64 GB",
+    "Display Size": "15 inches",
+    "Memory Speed": "2.88 GHz"
+  },
   "Attributes": {
-    "Display Size": "13.5 inches",
-    "RAM": "16 GB",
-    "Memory Speed": "1 GHz",
     "Wireless Standard": "802.11ac",
     "Number of USB 2 Ports": "1",
     "Series": "Surface Laptop 2",
@@ -126,7 +128,9 @@ Please find the field definitions, types and constraints below:
 |  Active          |   Boolean      | Field to mark product available for sale                      | Boolean - either true or false                                          |
 |  IsMain          |   Boolean      | Field to mark the product as a main product in the group      | Boolean - either true of false                                          |
 |  Currency        |   String       | Product purchase currency                                     | Either - "USD", "CAD", "CDN", "INR", "GBP" or "EUR" (for now!)          |
-|  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | Keys should be strings (alphanumeric with single space and "-" or "_") and values either: Int, Float, String or Boolean |                      
+|  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | Keys should be strings (alphanumeric with single space and "-" or "_") and values either: Int, Float, String or Boolean |
+|  Selectors       |   Map{k,v}     | Those attributes that are used to identify a variation of a product in the group | Keys should be strings (alphanumeric with single space and "-" or "_") and values either: Int, Float, String or Boolean |
+
 
 <aside class="notice">
 The isMain field in the product data structure essentially marks a product as the main product in the group. This is particularly useful if you want to ensure a specific version
@@ -136,8 +140,6 @@ of the product name, images, etc ... to show up on the product page by default.
 <aside class="warning">
 Attributes field key naming has to follow specific rules. Attibutes field key names can only have alphanumeric characters with single spaces, "_", or "-" characters.  
 </aside>
-
-
 
 
 
@@ -153,17 +155,19 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
     "Code": 200,
     "Success": true,
     "Message": "Product Group Found ...",
-    "Time": 1579467238021475003,
+    "Time": 1585609244627387726,
     "Response": {
         "GroupID": "MSLAPS2",
         "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
         "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-        "RegularPriceMin": 2799,
-        "RegularPriceMax": 2799,
-        "PromotionPriceMin": 2600,
-        "PromotionPriceMax": 2600,
+        "RegularPriceMin": 2000,
+        "RegularPriceMax": 5000,
+        "PromotionPriceMin": 1500,
+        "PromotionPriceMax": 3000,
         "Skus": [
-            "B07K3BHGL4"
+            "B07K3BHGL3",
+            "B07K3BHGL4",
+            "B07K3BHGL5"
         ],
         "Images": [
             "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
@@ -181,21 +185,21 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
             "Black"
         ],
         "Brands": [
-            "Microsoft xxx yyy"
+            "Microsoft"
         ],
         "Sizes": [
             "13.5 inches"
         ],
         "Active": true,
         "Currency": "CDN",
-        "Updated": 1579412175672069392,
+        "Updated": 1585602487817024375,
         "Products": {
-            "B07K3BHGL4": {
-                "Sku": "B07K3BHGL4",
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
                 "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
                 "GroupID": "MSLAPS2",
                 "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-                "RegularPrice": 2799,
+                "RegularPrice": 5000,
                 "PromotionPrice": 2600,
                 "Images": [
                     "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
@@ -206,41 +210,160 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
                     "Microsoft",
                     "Surface"
                 ],
-                "Quantity": 200,
+                "Quantity": 0,
                 "Category": [
                     "Computers & Tablets>Laptops"
                 ],
                 "Color": "Black",
-                "Brand": "Microsoft xxx yyy",
+                "Brand": "Microsoft",
                 "Size": "13.5 inches",
                 "Active": true,
+                "Selectors": {
+                    "Display Size": "13.5 inches",
+                    "Memory Speed": "1 GHz",
+                    "RAM": "16 GB"
+                },
                 "Attributes": {
-                    "ASIN": "B07K3BHGL4",
+                    "ASIN": "B07K3BHGL3",
                     "Batteries": "1",
                     "Color": "Black",
                     "Date First Available": "Nov. 4 2018",
-                    "Display Size": "13.5 inches",
                     "Flash Memory Size": "512.00",
                     "Item Weight": "1.28 Kg",
                     "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                     "Item model number": "DAL-00092",
-                    "Memory Speed": "1 GHz",
                     "Number of USB 2 Ports": "1",
                     "Operating System": "Windows 10 Home",
                     "Processor Count": "16",
-                    "RAM": "16 GB",
                     "Series": "Surface Laptop 2",
                     "Shipping Weight": "2.2 kg",
                     "Wireless Standard": "802.11ac"
                 },
                 "IsMain": true,
                 "Currency": "CDN",
-                "Updated": 1579412175670350481
+                "ComplementaryProducts": null,
+                "Updated": 1585602487747404715
+            },
+            "B07K3BHGL4": {
+                "Sku": "B07K3BHGL4",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2000,
+                "PromotionPrice": 1500,
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "SearchKeywords": [
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
+                ],
+                "Quantity": 0,
+                "Category": [
+                    "Computers & Tablets>Laptops"
+                ],
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
+                "Active": true,
+                "Selectors": {
+                    "Display Size": "15 inches",
+                    "Memory Speed": "4 GHz",
+                    "RAM": "32 GB"
+                },
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Number of USB 2 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
+                "IsMain": true,
+                "Currency": "CDN",
+                "ComplementaryProducts": null,
+                "Updated": 1585602582118590850
+            },
+            "B07K3BHGL5": {
+                "Sku": "B07K3BHGL5",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 3300,
+                "PromotionPrice": 3000,
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "SearchKeywords": [
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
+                ],
+                "Quantity": 0,
+                "Category": [
+                    "Computers & Tablets>Laptops"
+                ],
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
+                "Active": true,
+                "Selectors": {
+                    "Display Size": "15 inches",
+                    "Memory Speed": "2.88 GHz",
+                    "RAM": "64 GB"
+                },
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Number of USB 2 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
+                "IsMain": true,
+                "Currency": "CDN",
+                "ComplementaryProducts": null,
+                "Updated": 1585607727430437732
             }
+        },
+        "Selectors": {
+            "Display Size": [
+                "13.5 inches",
+                "15 inches"
+            ],
+            "Memory Speed": [
+                "1 GHz",
+                "4 GHz",
+                "2.88 GHz"
+            ],
+            "RAM": [
+                "16 GB",
+                "32 GB",
+                "64 GB"
+            ]
         },
         "Attributes": {
             "ASIN": [
-                "B07K3BHGL4"
+                "B07K3BHGL3"
             ],
             "Batteries": [
                 "1"
@@ -250,9 +373,6 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
             ],
             "Date First Available": [
                 "Nov. 4 2018"
-            ],
-            "Display Size": [
-                "13.5 inches"
             ],
             "Flash Memory Size": [
                 "512.00"
@@ -266,9 +386,6 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
             "Item model number": [
                 "DAL-00092"
             ],
-            "Memory Speed": [
-                "1 GHz"
-            ],
             "Number of USB 2 Ports": [
                 "1"
             ],
@@ -277,9 +394,6 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
             ],
             "Processor Count": [
                 "16"
-            ],
-            "RAM": [
-                "16 GB"
             ],
             "Series": [
                 "Surface Laptop 2"
@@ -291,8 +405,10 @@ Attributes field key naming has to follow specific rules. Attibutes field key na
                 "802.11ac"
             ]
         },
-        "CumulativeReviewStars": 0.059042448628409,
-        "CumulativeReviewCount": 18
+        "MainProductSKU": "B07K3BHGL3",
+        "ComplementaryProducts": null,
+        "CumulativeReviewStars": 0,
+        "CumulativeReviewCount": 0
     }
 }
 ```
@@ -530,7 +646,7 @@ Every request to this API gets a standard response object. Details on the fields
     "Time": 1579026954047130825,
     "Response": {
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJDb250ZUFtZXJpY2EiLCJleHAiOjE1NzkxMDY5NTQsImlhdCI6MTU3OTAyNjk1NCwibmJmIjoxNTc5MDI2ODU0LCJ1aWQiOiIwMjQ0Zjg1NS1jMWQ3LTQyNGYtOWI5OS04NGZmYWNiYzYwOGUifQ.6IhX3X321NlZFtSSf3JUPisD7fTxqeVrCpHQ6WDDgIk",
-        "validForSeconds": 80000
+        "ValidForSeconds": 80000
     }
 }
 ```
@@ -559,7 +675,7 @@ Every request to this API gets a standard response object. Details on the fields
 }
 ```
 
-This endpoint gets you your API access token. You need to send your customer ID and the API key that we provided you for using our platform. Upon receiving your valid credentials, the API will respond with a token with additional information including the validFor key which tells you how long this access token is valid for. Please set **x-access-token** to the value of the **token**, in the header of your subsequent API calls. 
+This endpoint gets you your API access token. You need to send your customer ID and the API key that we provided you for using our platform. Upon receiving your valid credentials, the API will respond with a token with additional information including the validFor key which tells you how long this access token is valid for. Please set **Authorization** field in the HTTP request header to the **token** in your API calls. 
 
 
 ### HTTP Request URL
@@ -580,7 +696,7 @@ This endpoint gets you your API access token. You need to send your customer ID 
 | APIKey            | The API key that is sent by us  |
 
 <aside class="warning">
-You do not need to invoke login too often. Please include the token that you receive upon a successful login in your subsequent API calls, until the token expires.
+You do not need to invoke login too often. Please include the token that you receive upon a successful login in your subsequent API calls until the token expires.
 </aside>
 
 ### HTTP Response
@@ -592,8 +708,8 @@ You do not need to invoke login too often. Please include the token that you rec
 | Message           | Message for additional information                                            |
 | Time              | Unix timestamp of the response                                                |
 | Response          | Response object containing response information                               |
-| token             | Included in response object that should be included in subsequent API calls   |
-| validForSeconds   | Included in response object that tells the validity of access token in seconds|
+| Token             | Included in response object that should be included in subsequent API calls   |
+| ValidForSeconds   | Included in response object that tells the validity of access token in seconds|
 
 
 <aside class="notice">
@@ -609,7 +725,7 @@ With the field validForSeconds in response, you can calculate the time after wit
 
 ```json
 {
-  "Sku": "B07K3BHGL3",
+  "Sku": "B07K3BHGL5",
   "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
   "Images": [
     "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
@@ -622,8 +738,8 @@ With the field validForSeconds in response, you can calculate the time after wit
     "Microsoft",
     "Surface"
   ],
-  "RegularPrice": 2799,
-  "PromotionPrice": 2600,
+  "RegularPrice": 3300,
+  "PromotionPrice": 3000,
   "Currency": "CDN",
   "IsMain": true,
   "Quantity": 200,
@@ -634,10 +750,12 @@ With the field validForSeconds in response, you can calculate the time after wit
     "Computers & Tablets>Laptops"
   ],
   "Active": true,
+  "Selectors": {
+    "RAM": "64 GB",
+    "Display Size": "15 inches",
+    "Memory Speed": "2.88 GHz"
+  },
   "Attributes": {
-    "Display Size": "13.5 inches",
-    "RAM": "16 GB",
-    "Memory Speed": "1 GHz",
     "Wireless Standard": "802.11ac",
     "Number of USB 2 Ports": "1",
     "Series": "Surface Laptop 2",
@@ -663,14 +781,14 @@ With the field validForSeconds in response, you can calculate the time after wit
     "Code": 201,
     "Success": true,
     "Message": "Product Added ...",
-    "Time": 1579028967992159981,
+    "Time": 1585607727604209821,
     "Response": {
-        "Sku": "B07K3BHGL3",
+        "Sku": "B07K3BHGL5",
         "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
         "GroupID": "MSLAPS2",
         "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-        "RegularPrice": 2799,
-        "PromotionPrice": 2600,
+        "RegularPrice": 3300,
+        "PromotionPrice": 3000,
         "Images": [
             "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
             "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
@@ -688,28 +806,31 @@ With the field validForSeconds in response, you can calculate the time after wit
         "Brand": "Microsoft",
         "Size": "13.5 inches",
         "Active": true,
+        "Selectors": {
+            "Display Size": "15 inches",
+            "Memory Speed": "2.88 GHz",
+            "RAM": "64 GB"
+        },
         "Attributes": {
             "ASIN": "B07K3BHGL3",
             "Batteries": "1",
             "Color": "Black",
             "Date First Available": "Nov. 4 2018",
-            "Display Size": "13.5 inches",
             "Flash Memory Size": "512.00",
             "Item Weight": "1.28 Kg",
             "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
             "Item model number": "DAL-00092",
-            "Memory Speed": "1 GHz",
             "Number of USB 2 Ports": "1",
             "Operating System": "Windows 10 Home",
             "Processor Count": "16",
-            "RAM": "16 GB",
             "Series": "Surface Laptop 2",
             "Shipping Weight": "2.2 kg",
             "Wireless Standard": "802.11ac"
         },
         "IsMain": true,
         "Currency": "CDN",
-        "Updated": 1579028967412667337
+        "ComplementaryProducts": null,
+        "Updated": 1585607727430437732
     }
 }
 ```
@@ -725,7 +846,7 @@ Use this API endpoint to add a new product in the products collection. When a pr
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 ### HTTP Request Body Parameters
@@ -749,7 +870,7 @@ Use this API endpoint to add a new product in the products collection. When a pr
 |  IsMain          |   Boolean      | Field to mark the product as a main product in the group      | Boolean - either true of false                                          |
 |  Currency        |   String       | Product purchase currency                                     | Either - "USD", "CAD", "CDN", "INR", "GBP" or "EUR" (for now!)          |
 |  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | keys should be strings and values either: int, float, string or boolean |  
-
+|  Selectors       |   Map{k,v}     | Those attributes that are used to identify a variation of a product in the group | Keys should be strings (alphanumeric with single space and "-" or "_") and values either: Int, Float, String or Boolean |
 
 ### HTTP Response
 
@@ -773,7 +894,7 @@ Use this API endpoint to add a new product in the products collection. When a pr
     "Code": 200,
     "Success": false,
     "Message": "Product Found ...",
-    "Time": 1579029290287576701,
+    "Time": 1585608587275689785,
     "Response": {
         "Sku": "B07K3BHGL3",
         "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
@@ -798,28 +919,31 @@ Use this API endpoint to add a new product in the products collection. When a pr
         "Brand": "Microsoft",
         "Size": "13.5 inches",
         "Active": true,
+        "Selectors": {
+            "Display Size": "13.5 inches",
+            "Memory Speed": "1 GHz",
+            "RAM": "16 GB"
+        },
         "Attributes": {
             "ASIN": "B07K3BHGL3",
             "Batteries": "1",
             "Color": "Black",
             "Date First Available": "Nov. 4 2018",
-            "Display Size": "13.5 inches",
             "Flash Memory Size": "512.00",
             "Item Weight": "1.28 Kg",
             "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
             "Item model number": "DAL-00092",
-            "Memory Speed": "1 GHz",
             "Number of USB 2 Ports": "1",
             "Operating System": "Windows 10 Home",
             "Processor Count": "16",
-            "RAM": "16 GB",
             "Series": "Surface Laptop 2",
             "Shipping Weight": "2.2 kg",
             "Wireless Standard": "802.11ac"
         },
         "IsMain": true,
         "Currency": "CDN",
-        "Updated": 1579028967412667337
+        "ComplementaryProducts": null,
+        "Updated": 1585602487747404715
     }
 }
 ```
@@ -847,7 +971,7 @@ When you want to get a specific product you can use this endpoint. All you need 
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 ### HTTP Request URL Parameters
 
@@ -880,8 +1004,7 @@ When you want to get a specific product you can use this endpoint. All you need 
 | Active            | Is product available for sale?                                                |
 | IsMain            | Is the product main product in the group?                                     |
 | Attributes        | Field to define additional product attributes                                 |
-
-
+| Selectors         | All those product attributes which help choose a specific product variation   |
 
 
 ## Get products (bulk)
@@ -900,20 +1023,20 @@ When you want to get a specific product you can use this endpoint. All you need 
 {
     "Code": 200,
     "Success": false,
-    "Message": "Product Found ...",
-    "Time": 1579847245533965269,
+    "Message": "Products Found ...",
+    "Time": 1585608824004904929,
     "Response": [
         {
             "Sku": "B07K3BHGL3",
             "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
             "GroupID": "MSLAPS2",
             "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-            "RegularPrice": 5,
-            "PromotionPrice": 0,
-            "Images": {
-                "MAIN": "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
-                "THUMBNAIL": "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
-            },
+            "RegularPrice": 2799,
+            "PromotionPrice": 2600,
+            "Images": [
+                "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+            ],
             "SearchKeywords": [
                 "Laptop",
                 "Microsoft",
@@ -921,35 +1044,37 @@ When you want to get a specific product you can use this endpoint. All you need 
             ],
             "Quantity": 0,
             "Category": [
-                "A",
-                "B>X"
+                "Computers & Tablets>Laptops"
             ],
             "Color": "Black",
             "Brand": "Microsoft",
             "Size": "13.5 inches",
             "Active": true,
+            "Selectors": {
+                "Display Size": "13.5 inches",
+                "Memory Speed": "1 GHz",
+                "RAM": "16 GB"
+            },
             "Attributes": {
                 "ASIN": "B07K3BHGL3",
                 "Batteries": "1",
                 "Color": "Black",
                 "Date First Available": "Nov. 4 2018",
-                "Display Size": "13.5 inches",
                 "Flash Memory Size": "512.00",
                 "Item Weight": "1.28 Kg",
                 "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                 "Item model number": "DAL-00092",
-                "Memory Speed": "1 GHz",
                 "Number of USB 2 Ports": "1",
                 "Operating System": "Windows 10 Home",
                 "Processor Count": "16",
-                "RAM": "16 GB",
                 "Series": "Surface Laptop 2",
                 "Shipping Weight": "2.2 kg",
                 "Wireless Standard": "802.11ac"
             },
             "IsMain": true,
             "Currency": "CDN",
-            "Updated": 1579819094896598884
+            "ComplementaryProducts": null,
+            "Updated": 1585602487747404715
         }
     ]
 }
@@ -978,7 +1103,7 @@ Use this API endpoint to get an array of products by passing an array of SKUs.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -1014,8 +1139,7 @@ Use this API endpoint to get an array of products by passing an array of SKUs.
 | Active            | Is product available for sale?                                                |
 | IsMain            | Is the product main product in the group?                                     |
 | Attributes        | Field to define additional product attributes                                 |
-
-
+| Selectors         | All those product attributes which help choose a specific product variation   |
 
 
 ## Update a product
@@ -1024,50 +1148,54 @@ Use this API endpoint to get an array of products by passing an array of SKUs.
 
 ```json
 {
-  "Sku": "B07K3BHGL3",
-  "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
-  "Images": [
-    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
-    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
-  ],
-  "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-  "GroupID": "MSLAPS2",
-  "SearchKeywords": [
-    "Laptop",
-    "Microsoft",
-    "Surface"
-  ],
-  "RegularPrice": 2999,
-  "PromotionPrice": 2600,
-  "Currency": "CDN",
-  "IsMain": true,
-  "Quantity": 200,
-  "Size": "13.5 inches",
-  "Brand": "Microsoft",
-  "Color": "Black",
-  "Category": [
-    "Computers & Tablets>Laptops"
-  ],
-  "Active": true,
-  "Attributes": {
-    "Display Size": "13.5 inches",
-    "RAM": "16 GB",
-    "Memory Speed": "1 GHz",
-    "Wireless Standard": "802.11ac",
-    "Number of USB 2 Ports": "1",
-    "Series": "Surface Laptop 2",
-    "Item model number": "DAL-00092",
-    "Operating System": "Windows 10 Home",
-    "Item Weight": "1.28 Kg",
-    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+    "Sku": "B07K3BHGL3",
+    "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+    "GroupID": "MSLAPS2",
+    "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+    "RegularPrice": 5000,
+    "PromotionPrice": 2600,
+    "Images": [
+        "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+        "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+    ],
+    "SearchKeywords": [
+        "Laptop",
+        "Microsoft",
+        "Surface"
+    ],
+    "Quantity": 0,
+    "Category": [
+        "Computers & Tablets>Laptops"
+    ],
     "Color": "Black",
-    "Processor Count": "16",
-    "Flash Memory Size": "512.00",
-    "Batteries": "1",
-    "ASIN": "B07K3BHGL3",
-    "Shipping Weight": "2.2 kg",
-    "Date First Available": "Nov. 4 2018"
-  }
+    "Brand": "Microsoft",
+    "Size": "13.5 inches",
+    "Active": true,
+    "Selectors": {
+        "Display Size": "13.5 inches",
+        "Memory Speed": "1 GHz",
+        "RAM": "16 GB"
+    },
+    "Attributes": {
+        "ASIN": "B07K3BHGL3",
+        "Batteries": "1",
+        "Color": "Black",
+        "Date First Available": "Nov. 4 2018",
+        "Flash Memory Size": "512.00",
+        "Item Weight": "1.28 Kg",
+        "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+        "Item model number": "DAL-00092",
+        "Number of USB 2 Ports": "1",
+        "Operating System": "Windows 10 Home",
+        "Processor Count": "16",
+        "Series": "Surface Laptop 2",
+        "Shipping Weight": "2.2 kg",
+        "Wireless Standard": "802.11ac"
+    },
+    "IsMain": true,
+    "Currency": "CDN",
+    "ComplementaryProducts": null,
+    "Updated": 1585602487747404715
 }
 ```
 
@@ -1078,13 +1206,13 @@ Use this API endpoint to get an array of products by passing an array of SKUs.
     "Code": 202,
     "Success": true,
     "Message": "Product Updated ...",
-    "Time": 1579029475468110631,
+    "Time": 1585608990922156125,
     "Response": {
         "Sku": "B07K3BHGL3",
         "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
         "GroupID": "MSLAPS2",
         "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-        "RegularPrice": 2999,
+        "RegularPrice": 5000,
         "PromotionPrice": 2600,
         "Images": [
             "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
@@ -1095,7 +1223,7 @@ Use this API endpoint to get an array of products by passing an array of SKUs.
             "Microsoft",
             "Surface"
         ],
-        "Quantity": 200,
+        "Quantity": 0,
         "Category": [
             "Computers & Tablets>Laptops"
         ],
@@ -1103,28 +1231,31 @@ Use this API endpoint to get an array of products by passing an array of SKUs.
         "Brand": "Microsoft",
         "Size": "13.5 inches",
         "Active": true,
+        "Selectors": {
+            "Display Size": "13.5 inches",
+            "Memory Speed": "1 GHz",
+            "RAM": "16 GB"
+        },
         "Attributes": {
             "ASIN": "B07K3BHGL3",
             "Batteries": "1",
             "Color": "Black",
             "Date First Available": "Nov. 4 2018",
-            "Display Size": "13.5 inches",
             "Flash Memory Size": "512.00",
             "Item Weight": "1.28 Kg",
             "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
             "Item model number": "DAL-00092",
-            "Memory Speed": "1 GHz",
             "Number of USB 2 Ports": "1",
             "Operating System": "Windows 10 Home",
             "Processor Count": "16",
-            "RAM": "16 GB",
             "Series": "Surface Laptop 2",
             "Shipping Weight": "2.2 kg",
             "Wireless Standard": "802.11ac"
         },
         "IsMain": true,
         "Currency": "CDN",
-        "Updated": 0
+        "ComplementaryProducts": null,
+        "Updated": 1585602487747404715
     }
 }
 ```
@@ -1152,7 +1283,7 @@ Use this API endpoint to update your product information in the catalog. For now
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -1177,7 +1308,7 @@ Use this API endpoint to update your product information in the catalog. For now
 |  IsMain          |   Boolean      | Field to mark the product as a main product in the group      | Boolean - either true of false                                          |
 |  Currency        |   String       | Product purchase currency                                     | Either - "USD", "CAD", "CDN", "INR", "GBP" or "EUR" (for now!)          |
 |  Attributes      |   Map{k,v}     | Product custom attributes that fit your needs                 | keys should be strings and values either: int, float, string or boolean |  
-
+|  Selectors       |   Map{k,v}     | Those attributes that are used to identify a variation of a product in the group | Keys should be strings (alphanumeric with single space and "-" or "_") and values either: Int, Float, String or Boolean |
 
 ### HTTP Response
 
@@ -1204,8 +1335,7 @@ Use this API endpoint to update your product information in the catalog. For now
 | Active            | Is product available for sale?                                                |
 | IsMain            | Is the product main product in the group?                                     |
 | Attributes        | Field to define additional product attributes                                 |
-
-
+| Selectors         | All those product attributes which help choose a specific product variation   |
 
 
 ## Update product price (Bulk)
@@ -1262,7 +1392,7 @@ finally a list of skus that were not found. You can use this information to chec
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -1335,7 +1465,7 @@ those skus which were not found in the catalog.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -1396,7 +1526,7 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 ### HTTP Request URL Parameters
 
@@ -1424,17 +1554,19 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
     "Code": 200,
     "Success": true,
     "Message": "Product Group Found ...",
-    "Time": 1579467238021475003,
+    "Time": 1585609244627387726,
     "Response": {
         "GroupID": "MSLAPS2",
         "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
         "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-        "RegularPriceMin": 2799,
-        "RegularPriceMax": 2799,
-        "PromotionPriceMin": 2600,
-        "PromotionPriceMax": 2600,
+        "RegularPriceMin": 2000,
+        "RegularPriceMax": 5000,
+        "PromotionPriceMin": 1500,
+        "PromotionPriceMax": 3000,
         "Skus": [
-            "B07K3BHGL4"
+            "B07K3BHGL3",
+            "B07K3BHGL4",
+            "B07K3BHGL5"
         ],
         "Images": [
             "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
@@ -1452,21 +1584,21 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
             "Black"
         ],
         "Brands": [
-            "Microsoft xxx yyy"
+            "Microsoft"
         ],
         "Sizes": [
             "13.5 inches"
         ],
         "Active": true,
         "Currency": "CDN",
-        "Updated": 1579412175672069392,
+        "Updated": 1585602487817024375,
         "Products": {
-            "B07K3BHGL4": {
-                "Sku": "B07K3BHGL4",
+            "B07K3BHGL3": {
+                "Sku": "B07K3BHGL3",
                 "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
                 "GroupID": "MSLAPS2",
                 "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-                "RegularPrice": 2799,
+                "RegularPrice": 5000,
                 "PromotionPrice": 2600,
                 "Images": [
                     "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
@@ -1477,41 +1609,160 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
                     "Microsoft",
                     "Surface"
                 ],
-                "Quantity": 200,
+                "Quantity": 0,
                 "Category": [
                     "Computers & Tablets>Laptops"
                 ],
                 "Color": "Black",
-                "Brand": "Microsoft xxx yyy",
+                "Brand": "Microsoft",
                 "Size": "13.5 inches",
                 "Active": true,
+                "Selectors": {
+                    "Display Size": "13.5 inches",
+                    "Memory Speed": "1 GHz",
+                    "RAM": "16 GB"
+                },
                 "Attributes": {
-                    "ASIN": "B07K3BHGL4",
+                    "ASIN": "B07K3BHGL3",
                     "Batteries": "1",
                     "Color": "Black",
                     "Date First Available": "Nov. 4 2018",
-                    "Display Size": "13.5 inches",
                     "Flash Memory Size": "512.00",
                     "Item Weight": "1.28 Kg",
                     "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                     "Item model number": "DAL-00092",
-                    "Memory Speed": "1 GHz",
                     "Number of USB 2 Ports": "1",
                     "Operating System": "Windows 10 Home",
                     "Processor Count": "16",
-                    "RAM": "16 GB",
                     "Series": "Surface Laptop 2",
                     "Shipping Weight": "2.2 kg",
                     "Wireless Standard": "802.11ac"
                 },
                 "IsMain": true,
                 "Currency": "CDN",
-                "Updated": 1579412175670350481
+                "ComplementaryProducts": null,
+                "Updated": 1585602487747404715
+            },
+            "B07K3BHGL4": {
+                "Sku": "B07K3BHGL4",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 2000,
+                "PromotionPrice": 1500,
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "SearchKeywords": [
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
+                ],
+                "Quantity": 0,
+                "Category": [
+                    "Computers & Tablets>Laptops"
+                ],
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
+                "Active": true,
+                "Selectors": {
+                    "Display Size": "15 inches",
+                    "Memory Speed": "4 GHz",
+                    "RAM": "32 GB"
+                },
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Number of USB 2 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
+                "IsMain": true,
+                "Currency": "CDN",
+                "ComplementaryProducts": null,
+                "Updated": 1585602582118590850
+            },
+            "B07K3BHGL5": {
+                "Sku": "B07K3BHGL5",
+                "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                "GroupID": "MSLAPS2",
+                "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                "RegularPrice": 3300,
+                "PromotionPrice": 3000,
+                "Images": [
+                    "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                    "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                ],
+                "SearchKeywords": [
+                    "Laptop",
+                    "Microsoft",
+                    "Surface"
+                ],
+                "Quantity": 0,
+                "Category": [
+                    "Computers & Tablets>Laptops"
+                ],
+                "Color": "Black",
+                "Brand": "Microsoft",
+                "Size": "13.5 inches",
+                "Active": true,
+                "Selectors": {
+                    "Display Size": "15 inches",
+                    "Memory Speed": "2.88 GHz",
+                    "RAM": "64 GB"
+                },
+                "Attributes": {
+                    "ASIN": "B07K3BHGL3",
+                    "Batteries": "1",
+                    "Color": "Black",
+                    "Date First Available": "Nov. 4 2018",
+                    "Flash Memory Size": "512.00",
+                    "Item Weight": "1.28 Kg",
+                    "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                    "Item model number": "DAL-00092",
+                    "Number of USB 2 Ports": "1",
+                    "Operating System": "Windows 10 Home",
+                    "Processor Count": "16",
+                    "Series": "Surface Laptop 2",
+                    "Shipping Weight": "2.2 kg",
+                    "Wireless Standard": "802.11ac"
+                },
+                "IsMain": true,
+                "Currency": "CDN",
+                "ComplementaryProducts": null,
+                "Updated": 1585607727430437732
             }
+        },
+        "Selectors": {
+            "Display Size": [
+                "13.5 inches",
+                "15 inches"
+            ],
+            "Memory Speed": [
+                "1 GHz",
+                "4 GHz",
+                "2.88 GHz"
+            ],
+            "RAM": [
+                "16 GB",
+                "32 GB",
+                "64 GB"
+            ]
         },
         "Attributes": {
             "ASIN": [
-                "B07K3BHGL4"
+                "B07K3BHGL3"
             ],
             "Batteries": [
                 "1"
@@ -1521,9 +1772,6 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
             ],
             "Date First Available": [
                 "Nov. 4 2018"
-            ],
-            "Display Size": [
-                "13.5 inches"
             ],
             "Flash Memory Size": [
                 "512.00"
@@ -1537,9 +1785,6 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
             "Item model number": [
                 "DAL-00092"
             ],
-            "Memory Speed": [
-                "1 GHz"
-            ],
             "Number of USB 2 Ports": [
                 "1"
             ],
@@ -1548,9 +1793,6 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
             ],
             "Processor Count": [
                 "16"
-            ],
-            "RAM": [
-                "16 GB"
             ],
             "Series": [
                 "Surface Laptop 2"
@@ -1562,8 +1804,10 @@ Use this API endpoint to remove a product from the catalog. When you hit this en
                 "802.11ac"
             ]
         },
-        "CumulativeReviewStars": 0.059042448628409,
-        "CumulativeReviewCount": 18
+        "MainProductSKU": "B07K3BHGL3",
+        "ComplementaryProducts": null,
+        "CumulativeReviewStars": 0,
+        "CumulativeReviewCount": 0
     }
 }
 ```
@@ -1592,7 +1836,7 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 ### HTTP Request URL Parameters
 
@@ -1626,9 +1870,7 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 | Active                |  Active flag to indicate if the product is available for sale                 |
 | Products              |  List of all the product objects for reference                                |
 | Attributes            |  Field that maps additional attributes to the product group                   |
-
-
-
+| Selectors             |  All those product attributes which help choose a specific product variation  |
 
 
 ## Get product groups (bulk)
@@ -1647,33 +1889,33 @@ This API endpoint gets a specific product group by product group ID. This endpoi
 {
     "Code": 200,
     "Success": false,
-    "Message": "Product Found ...",
-    "Time": 1579847155010745182,
+    "Message": "Product Groups Found ...",
+    "Time": 1585611290280810346,
     "Response": [
         {
             "GroupID": "MSLAPS2",
             "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
             "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-            "RegularPriceMin": 5,
-            "RegularPriceMax": 5,
-            "PromotionPriceMin": 0,
-            "PromotionPriceMax": 0,
+            "RegularPriceMin": 2000,
+            "RegularPriceMax": 5000,
+            "PromotionPriceMin": 1500,
+            "PromotionPriceMax": 3000,
             "Skus": [
-                "B07K3BHGL2",
-                "B07K3BHGL3"
+                "B07K3BHGL3",
+                "B07K3BHGL4",
+                "B07K3BHGL5"
             ],
-            "Images": {
-                "MAIN": "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
-                "THUMBNAIL": "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
-            },
+            "Images": [
+                "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+            ],
             "SearchKeywords": [
                 "Laptop",
                 "Microsoft",
                 "Surface"
             ],
             "Category": [
-                "A",
-                "B>X"
+                "Computers & Tablets>Laptops"
             ],
             "Colors": [
                 "Black"
@@ -1686,67 +1928,19 @@ This API endpoint gets a specific product group by product group ID. This endpoi
             ],
             "Active": true,
             "Currency": "CDN",
-            "Updated": 1579811098654049573,
+            "Updated": 1585602487817024375,
             "Products": {
-                "B07K3BHGL2": {
-                    "Sku": "B07K3BHGL2",
-                    "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
-                    "GroupID": "MSLAPS2",
-                    "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-                    "RegularPrice": 5,
-                    "PromotionPrice": 0,
-                    "Images": {
-                        "MAIN": "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
-                        "THUMBNAIL": "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
-                    },
-                    "SearchKeywords": [
-                        "Laptop",
-                        "Microsoft",
-                        "Surface"
-                    ],
-                    "Quantity": 0,
-                    "Category": [
-                        "A",
-                        "B>X"
-                    ],
-                    "Color": "Black",
-                    "Brand": "Microsoft",
-                    "Size": "13.5 inches",
-                    "Active": true,
-                    "Attributes": {
-                        "ASIN": "B07K3BHGL2",
-                        "Batteries": "1",
-                        "Color": "Black",
-                        "Date First Available": "Nov. 4 2018",
-                        "Display Size": "13.5 inches",
-                        "Flash Memory Size": "512.00",
-                        "Item Weight": "1.28 Kg",
-                        "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
-                        "Item model number": "DAL-00092",
-                        "Memory Speed": "1 GHz",
-                        "Number of USB 2 Ports": "1",
-                        "Operating System": "Windows 10 Home",
-                        "Processor Count": "16",
-                        "RAM": "16 GB",
-                        "Series": "Surface Laptop 2",
-                        "Shipping Weight": "2.2 kg",
-                        "Wireless Standard": "802.11ac"
-                    },
-                    "IsMain": true,
-                    "Currency": "CDN",
-                    "Updated": 1579811098652293499
-                },
                 "B07K3BHGL3": {
                     "Sku": "B07K3BHGL3",
                     "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
                     "GroupID": "MSLAPS2",
                     "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
-                    "RegularPrice": 5,
-                    "PromotionPrice": 0,
-                    "Images": {
-                        "MAIN": "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
-                        "THUMBNAIL": "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
-                    },
+                    "RegularPrice": 5000,
+                    "PromotionPrice": 2600,
+                    "Images": [
+                        "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                        "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                    ],
                     "SearchKeywords": [
                         "Laptop",
                         "Microsoft",
@@ -1754,40 +1948,157 @@ This API endpoint gets a specific product group by product group ID. This endpoi
                     ],
                     "Quantity": 0,
                     "Category": [
-                        "A",
-                        "B>X"
+                        "Computers & Tablets>Laptops"
                     ],
                     "Color": "Black",
                     "Brand": "Microsoft",
                     "Size": "13.5 inches",
                     "Active": true,
+                    "Selectors": {
+                        "Display Size": "13.5 inches",
+                        "Memory Speed": "1 GHz",
+                        "RAM": "16 GB"
+                    },
                     "Attributes": {
                         "ASIN": "B07K3BHGL3",
                         "Batteries": "1",
                         "Color": "Black",
                         "Date First Available": "Nov. 4 2018",
-                        "Display Size": "13.5 inches",
                         "Flash Memory Size": "512.00",
                         "Item Weight": "1.28 Kg",
                         "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
                         "Item model number": "DAL-00092",
-                        "Memory Speed": "1 GHz",
                         "Number of USB 2 Ports": "1",
                         "Operating System": "Windows 10 Home",
                         "Processor Count": "16",
-                        "RAM": "16 GB",
                         "Series": "Surface Laptop 2",
                         "Shipping Weight": "2.2 kg",
                         "Wireless Standard": "802.11ac"
                     },
                     "IsMain": true,
                     "Currency": "CDN",
-                    "Updated": 1579819094896598884
+                    "ComplementaryProducts": null,
+                    "Updated": 1585602487747404715
+                },
+                "B07K3BHGL4": {
+                    "Sku": "B07K3BHGL4",
+                    "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                    "GroupID": "MSLAPS2",
+                    "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                    "RegularPrice": 2000,
+                    "PromotionPrice": 1500,
+                    "Images": [
+                        "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                        "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                    ],
+                    "SearchKeywords": [
+                        "Laptop",
+                        "Microsoft",
+                        "Surface"
+                    ],
+                    "Quantity": 0,
+                    "Category": [
+                        "Computers & Tablets>Laptops"
+                    ],
+                    "Color": "Black",
+                    "Brand": "Microsoft",
+                    "Size": "13.5 inches",
+                    "Active": true,
+                    "Selectors": {
+                        "Display Size": "15 inches",
+                        "Memory Speed": "4 GHz",
+                        "RAM": "32 GB"
+                    },
+                    "Attributes": {
+                        "ASIN": "B07K3BHGL3",
+                        "Batteries": "1",
+                        "Color": "Black",
+                        "Date First Available": "Nov. 4 2018",
+                        "Flash Memory Size": "512.00",
+                        "Item Weight": "1.28 Kg",
+                        "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                        "Item model number": "DAL-00092",
+                        "Number of USB 2 Ports": "1",
+                        "Operating System": "Windows 10 Home",
+                        "Processor Count": "16",
+                        "Series": "Surface Laptop 2",
+                        "Shipping Weight": "2.2 kg",
+                        "Wireless Standard": "802.11ac"
+                    },
+                    "IsMain": true,
+                    "Currency": "CDN",
+                    "ComplementaryProducts": null,
+                    "Updated": 1585602582118590850
+                },
+                "B07K3BHGL5": {
+                    "Sku": "B07K3BHGL5",
+                    "Name": "Microsoft DAL-00092 Surface Laptop 2 (Intel Core i7, 16GB RAM, 512 GB) - Black (Newest Version)",
+                    "GroupID": "MSLAPS2",
+                    "Description": "Clean, elegant design — thin and light, starting at just 2.76 pounds, Surface Laptop 2 fits easily in your bag Choose from rich tone-on-tone color combinations: Platinum, Burgundy, and Cobalt Blue, plus an all-new finish in classic Matte Black Improved speed and performance to do what you want, with the latest 8th Generation Intel Core processor",
+                    "RegularPrice": 3300,
+                    "PromotionPrice": 3000,
+                    "Images": [
+                        "https://images-na.ssl-images-amazon.com/images/I/51JODZveCOL._SL1200_.jpg",
+                        "https://images-na.ssl-images-amazon.com/images/I/511Kd0b1WxL._SL1200_.jpg"
+                    ],
+                    "SearchKeywords": [
+                        "Laptop",
+                        "Microsoft",
+                        "Surface"
+                    ],
+                    "Quantity": 0,
+                    "Category": [
+                        "Computers & Tablets>Laptops"
+                    ],
+                    "Color": "Black",
+                    "Brand": "Microsoft",
+                    "Size": "13.5 inches",
+                    "Active": true,
+                    "Selectors": {
+                        "Display Size": "15 inches",
+                        "Memory Speed": "2.88 GHz",
+                        "RAM": "64 GB"
+                    },
+                    "Attributes": {
+                        "ASIN": "B07K3BHGL3",
+                        "Batteries": "1",
+                        "Color": "Black",
+                        "Date First Available": "Nov. 4 2018",
+                        "Flash Memory Size": "512.00",
+                        "Item Weight": "1.28 Kg",
+                        "Item dimensions L x W x H": "17.8 x 12.7 x 15.2 cm",
+                        "Item model number": "DAL-00092",
+                        "Number of USB 2 Ports": "1",
+                        "Operating System": "Windows 10 Home",
+                        "Processor Count": "16",
+                        "Series": "Surface Laptop 2",
+                        "Shipping Weight": "2.2 kg",
+                        "Wireless Standard": "802.11ac"
+                    },
+                    "IsMain": true,
+                    "Currency": "CDN",
+                    "ComplementaryProducts": null,
+                    "Updated": 1585607727430437732
                 }
+            },
+            "Selectors": {
+                "Display Size": [
+                    "13.5 inches",
+                    "15 inches"
+                ],
+                "Memory Speed": [
+                    "1 GHz",
+                    "4 GHz",
+                    "2.88 GHz"
+                ],
+                "RAM": [
+                    "16 GB",
+                    "32 GB",
+                    "64 GB"
+                ]
             },
             "Attributes": {
                 "ASIN": [
-                    "B07K3BHGL2",
                     "B07K3BHGL3"
                 ],
                 "Batteries": [
@@ -1798,9 +2109,6 @@ This API endpoint gets a specific product group by product group ID. This endpoi
                 ],
                 "Date First Available": [
                     "Nov. 4 2018"
-                ],
-                "Display Size": [
-                    "13.5 inches"
                 ],
                 "Flash Memory Size": [
                     "512.00"
@@ -1814,9 +2122,6 @@ This API endpoint gets a specific product group by product group ID. This endpoi
                 "Item model number": [
                     "DAL-00092"
                 ],
-                "Memory Speed": [
-                    "1 GHz"
-                ],
                 "Number of USB 2 Ports": [
                     "1"
                 ],
@@ -1825,9 +2130,6 @@ This API endpoint gets a specific product group by product group ID. This endpoi
                 ],
                 "Processor Count": [
                     "16"
-                ],
-                "RAM": [
-                    "16 GB"
                 ],
                 "Series": [
                     "Surface Laptop 2"
@@ -1839,6 +2141,8 @@ This API endpoint gets a specific product group by product group ID. This endpoi
                     "802.11ac"
                 ]
             },
+            "MainProductSKU": "B07K3BHGL3",
+            "ComplementaryProducts": null,
             "CumulativeReviewStars": 0,
             "CumulativeReviewCount": 0
         }
@@ -1869,7 +2173,7 @@ Use this API endpoint to get an array of product group objects by passing an arr
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -1906,9 +2210,7 @@ Use this API endpoint to get an array of product group objects by passing an arr
 | Active                |  Active flag to indicate if the product is available for sale                 |
 | Products              |  List of all the product objects for reference                                |
 | Attributes            |  Field that maps additional attributes to the product group                   |
-
-
-
+| Selectors             | All those product attributes which help choose a specific product variation   |
 
 
 ## Delete a product group
@@ -1948,7 +2250,7 @@ Use this API endpoint to remove a product group from the productgroups collectio
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 ### HTTP Request URL Parameters
 
@@ -2144,7 +2446,7 @@ Use this endpoint to create an order entry in the database. Details on the field
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 ### HTTP Body Request Parameters
@@ -2288,7 +2590,7 @@ Use this endpoint to get all the orders associated with a customer using the cus
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 ### HTTP Request URL Parameters
 
@@ -2416,7 +2718,7 @@ Use this endpoint to get all the orders associated with a customer using the cus
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 ### HTTP Request URL Parameters
 
@@ -2622,7 +2924,7 @@ Use this endpoint to update the order object.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -2683,7 +2985,7 @@ Use this endpoint to delete an order using the order ID. Recommended to use this
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 ### HTTP Request URL Parameters
 
@@ -2765,7 +3067,7 @@ Use this API endpoint to search products in the search index. Use of this endpoi
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -2920,7 +3222,7 @@ Use this API endpoint to search products in the search index. Use of this endpoi
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -3031,7 +3333,7 @@ Use this endpoint to get the customer object from the database.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 
 ### HTTP Request URL Parameters
@@ -3169,7 +3471,7 @@ Use this endpoint to add a customer into the database.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -3319,7 +3621,7 @@ Use this information to update a customer's information. In the example shown in
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -3382,7 +3684,7 @@ Use this endpoint to delete the customer object from the database.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 
 ### HTTP Request URL Parameters
@@ -3504,7 +3806,7 @@ Use this endpoint to get the shopping cart object using the cart ID.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 
 ### HTTP Request URL Parameters
@@ -3674,7 +3976,7 @@ a cart ID in your request.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -3817,7 +4119,7 @@ Use this endpoint to remove the product or adjust the product quantity in the sh
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -3881,7 +4183,7 @@ Use this endpoint to reset/clear the shopping cart.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 
 ### HTTP Request URL Parameters
@@ -3973,7 +4275,7 @@ does not make any sense to store reviews by products which could be indeed versi
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 
 ### HTTP Request URL Parameters
@@ -4052,7 +4354,7 @@ Use this endpoint to post a review for a product group.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -4119,7 +4421,7 @@ Use this endpoint to delete a review for a product group using the unique Review
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 
 ### HTTP Request URL Parameters
@@ -4181,7 +4483,7 @@ Use this endpoint to remove all the reviews for a product group using the produc
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 
 ### HTTP Request URL Parameters
@@ -4256,7 +4558,7 @@ Use this endpoint to get product SKUs in the category.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -4310,7 +4612,7 @@ Use this endpoint to get all the root categories.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 
 
 ### HTTP Response
@@ -4375,7 +4677,7 @@ Use this endpoint to get immediate sub categories of a category.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
@@ -4448,7 +4750,7 @@ Use this endpoint to get the name of the parent category of a given category.
 
 | Key               |                Value                         |
 |-------------------|----------------------------------------------|
-|x-access-token     | The access token that you receive upon login |
+|Authorization      | Bearer {YOUR_ACCESS_TOKEN}                   |
 |Content-Type       | application/json                             |
 
 
