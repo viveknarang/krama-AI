@@ -37,12 +37,20 @@ func authenticate(tokenString string) bool {
 			REDISCLIENT.Set(tokenString, claims["cxs"], 0)
 		}
 
+		if REDISCLIENT.Get(tokenString+"_rxt").Err() == redis.Nil {
+			REDISCLIENT.Set(tokenString+"_rxt", claims["rxt"], 0)
+		}
+
 		isValid = true
 
 	} else {
 
 		if REDISCLIENT.Get(tokenString).Err() != redis.Nil {
 			REDISCLIENT.Del(tokenString)
+		}
+
+		if REDISCLIENT.Get(tokenString+"_rxt").Err() != redis.Nil {
+			REDISCLIENT.Del(tokenString + "_rxt")
 		}
 
 		isValid = false

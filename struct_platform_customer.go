@@ -6,5 +6,6 @@ type PLATFORMCUSTOMER struct {
 	APIKey     string `json:"APIKey" bson:"APIKey"`
 	Name       string `json:"Name" bson:"Name"`
 	Secret     string `json:"Secret" bson:"Secret"`
+	Rate       int    `json:"Rate" bson:"Rate"`
 	Active     bool   `json:"Active" bson:"Active"`
 }

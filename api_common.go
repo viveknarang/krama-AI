@@ -9,14 +9,6 @@ import (
 
 func pre(w http.ResponseWriter, r *http.Request) bool {
 
-	if (r.Method == http.MethodPost || r.Method == http.MethodPut) && r.Header.Get("Content-Type") != "application/json" {
-
-		rlog.Debug("pre(): Missing content type ...")
-		respondWith(w, r, nil, MissingContentType, nil, http.StatusBadRequest, false)
-		return false
-
-	}
-
 	authToken := r.Header.Get("Authorization")
 
 	if len(authToken) == 0 {
@@ -46,18 +38,31 @@ func pre(w http.ResponseWriter, r *http.Request) bool {
 
 	}
 
-	if !areCoreServicesUp() {
-
-		rlog.Debug("pre(): Core services seems to be down ...")
-		respondWith(w, r, nil, ServiceDownMessage, nil, http.StatusServiceUnavailable, false)
-		return false
-
-	}
-
 	if !authenticate(authToken) {
 
 		rlog.Debug("pre(): Authentication failed ...")
 		respondWith(w, r, nil, InvalidSessionMessage, nil, http.StatusUnauthorized, false)
+		return false
+
+	}
+
+	if !throttleCheck(w, r, authToken) {
+		return false
+	}
+
+	if (r.Method == http.MethodPost || r.Method == http.MethodPut) && r.Header.Get("Content-Type") != "application/json" {
+
+		rlog.Debug("pre(): Missing content type ...")
+		respondWith(w, r, nil, MissingContentType, nil, http.StatusBadRequest, false)
+		return false
+
+	}
+
+	// TODO: Do we really need this ping before each call? It seems inefficient. Need discussion.
+	if !areCoreServicesUp() {
+
+		rlog.Debug("pre(): Core services seems to be down ...")
+		respondWith(w, r, nil, ServiceDownMessage, nil, http.StatusServiceUnavailable, false)
 		return false
 
 	}

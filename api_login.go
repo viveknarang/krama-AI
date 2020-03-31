@@ -52,6 +52,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"cxs": customer.Secret,
+			"rxt": customer.Rate,
 			"uid": uuid.New(),
 			"exp": currentTime + LoginSessionDuration,
 			"iat": currentTime,
@@ -62,6 +63,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 		if REDISCLIENT.Get(tokenString).Err() == redis.Nil {
 			REDISCLIENT.Set(tokenString, customer.Secret, 0)
+		}
+
+		if REDISCLIENT.Get(tokenString+"_rxt").Err() == redis.Nil {
+			REDISCLIENT.Set(tokenString+"_rxt", customer.Rate, 0)
 		}
 
 		respondWith(w, r, err, LoginSuccessMessage, bson.M{"Token": tokenString, "ValidForSeconds": LoginSessionDuration}, http.StatusOK, true)
