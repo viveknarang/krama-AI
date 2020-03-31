@@ -40,6 +40,21 @@ func validateProduct(w http.ResponseWriter, r *http.Request, product PRODUCT) bo
 
 	}
 
+	if len(product.Selectors) > 0 {
+
+		for key, value := range product.Selectors {
+			if strings.Contains(typeof(key), "interface") || strings.Contains(typeof(value), "interface") {
+				respondWith(w, r, nil, "Selectors field keys or values cannot be complex object. They need to be simple types like int, float or boolean etc ...", nil, http.StatusBadRequest, false)
+				return false
+			}
+			if !isValidAttributeKey(key) {
+				respondWith(w, r, nil, "Selectors field key: "+key+" is not following selectors attribute naming rules. Please check API documentation.", nil, http.StatusBadRequest, false)
+				return false
+			}
+		}
+
+	}
+
 	return true
 
 }
