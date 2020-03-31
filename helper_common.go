@@ -249,6 +249,6 @@ func cleanCategoryPath(path string) string {
 		path = cleanerCategoryPath[:len(cleanerCategoryPath)-1]
 	}
 
-	return path
+	return strings.TrimSpace(path)
 
 }
