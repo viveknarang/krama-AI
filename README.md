@@ -627,7 +627,7 @@ Every request to this API gets a standard response object. Details on the fields
     "Message": "Login Successful ...",
     "Time": 1579026954047130825,
     "Response": {
-        "Token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJDb250ZUFtZXJpY2EiLCJleHAiOjE1NzkxMDY5NTQsImlhdCI6MTU3OTAyNjk1NCwibmJmIjoxNTc5MDI2ODU0LCJ1aWQiOiIwMjQ0Zjg1NS1jMWQ3LTQyNGYtOWI5OS04NGZmYWNiYzYwOGUifQ.6IhX3X321NlZFtSSf3JUPisD7fTxqeVrCpHQ6WDDgIk",
+        "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjeHMiOiJDb250ZUFtZXJpY2EiLCJleHAiOjE1NzkxMDY5NTQsImlhdCI6MTU3OTAyNjk1NCwibmJmIjoxNTc5MDI2ODU0LCJ1aWQiOiIwMjQ0Zjg1NS1jMWQ3LTQyNGYtOWI5OS04NGZmYWNiYzYwOGUifQ.6IhX3X321NlZFtSSf3JUPisD7fTxqeVrCpHQ6WDDgIk",
         "ValidForSeconds": 80000
     }
 }
@@ -4787,4 +4787,4 @@ This API uses the following HTTP Response codes:
 }
 ```
 
-This SaaS platform enforces API rate limiting for each customer. API rate limiting is helpful in ensuring that no single enterprise customer unfairly consumes more resources than any other enterprise customer. Rate limiting also adds a level of security to the platform. This scheme is also allows the rationing of the API endpoints in the time of need. The API rate limiting unit of measurement is number of requests per minute. Once the rate limit is reached for the customer, all API requests are responded with an HTTP response code of 429. This throttling is implemented using Redis. To know more about the implementation approach please check <a href="https://redislabs.com/redis-best-practices/basic-rate-limiting/" target="_blank">this Redislabs blog</a>
+This SaaS platform enforces API rate limiting for each customer. API rate limiting is helpful in ensuring that no single enterprise customer unfairly consumes more resources than any other enterprise customer. Rate limiting also adds a level of security to the platform by preventing potential DoS attacks. This scheme also allows the rationing of the API endpoints in the time of need. The API rate limiting unit of measurement is number of requests per minute. Once the rate limit is reached for the customer, all API requests from the customer are responded with an HTTP response code of 429. Please see the sample response object provided on the side. This throttling is implemented using Redis. To know more about the implementation approach please check <a href="https://redislabs.com/redis-best-practices/basic-rate-limiting/" target="_blank">this Redislabs blog</a>
