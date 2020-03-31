@@ -130,3 +130,36 @@ func TestCleanCategoryPath(t *testing.T) {
 	}
 
 }
+
+func TestIsValidAttributeKey(t *testing.T) {
+
+	t.Log("Testing the isValidAttributeKey function ...")
+
+	if !isValidAttributeKey("Display Size") {
+		t.Errorf("isValidAttributeKey:: Valid attribute key is returning false")
+	}
+
+	if !isValidAttributeKey("Display-Size") {
+		t.Errorf("isValidAttributeKey:: Valid attribute key is returning false")
+	}
+
+	if !isValidAttributeKey("Display_Size") {
+		t.Errorf("isValidAttributeKey:: Valid attribute key is returning false")
+	}
+
+	if isValidAttributeKey("Display             Size") {
+		t.Errorf("isValidAttributeKey:: invalid attribute key is returning true")
+	}
+
+	if isValidAttributeKey("Display .....%%%% Size") {
+		t.Errorf("isValidAttributeKey:: invalid attribute key is returning true")
+	}
+
+	if isValidAttributeKey("Display- Size") {
+		t.Errorf("isValidAttributeKey:: invalid attribute key is returning true")
+	}
+
+	if isValidAttributeKey("             Display Size   ") {
+		t.Errorf("isValidAttributeKey:: invalid attribute key is returning true")
+	}
+}
