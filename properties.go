@@ -245,6 +245,15 @@ var MissingAuthRequestHeader string
 //MalformedAuthRequestHeader error message
 var MalformedAuthRequestHeader string
 
+//BrowsingHistoryMessage browsing history message
+var BrowsingHistoryMessage string
+
+//BrowsingHistoryLongInput long input error message
+var BrowsingHistoryLongInput string
+
+//BrowsingHistoryIntegerRanges integer ranges message
+var BrowsingHistoryIntegerRanges string
+
 func loadSystemProperties() bool {
 
 	rlog.Debug("loadSystemProperties() handle function invoked ...")
@@ -333,6 +342,9 @@ func loadSystemProperties() bool {
 	InventoryUpdateBatchSize = p.GetInt("api.catalog.inventory.update.batch.size", 100)
 	MissingAuthRequestHeader = p.GetString("api.response.message.login.missingAuthorization", "")
 	MalformedAuthRequestHeader = p.GetString("api.response.message.login.malformedAuthorization", "")
+	BrowsingHistoryIntegerRanges = p.GetString("api.response.message.customers.activity.browsing.history.integerrange", "")
+	BrowsingHistoryLongInput = p.GetString("api.response.message.customers.activity.browsing.history.longinput", "")
+	BrowsingHistoryMessage = p.GetString("api.response.message.customers.activity.browsing.history.message", "")
 
 	CatalogPath = CatalogBasePath + APIVersion
 	OrdersPath = OrdersBasePath + APIVersion

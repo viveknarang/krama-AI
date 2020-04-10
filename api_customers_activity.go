@@ -21,12 +21,13 @@ func getCustomerBrowsingHistory(w http.ResponseWriter, r *http.Request) {
 	}
 
 	pth := strings.Split(r.URL.Path, "/")
+
 	length := len(pth)
 
 	customerID := pth[len(pth)-3]
 
 	if len(customerID) > 50 || len(pth[length-2]) > 50 || len(pth[length-1]) > 50 {
-		respondWith(w, r, nil, "Bad Request", "Bad Request! Possibly too long inputs. Please don't mess with the platform!", http.StatusBadRequest, false)
+		respondWith(w, r, nil, HTTPBadRequestMessage, BrowsingHistoryLongInput, http.StatusBadRequest, false)
 		return
 	}
 
@@ -37,9 +38,9 @@ func getCustomerBrowsingHistory(w http.ResponseWriter, r *http.Request) {
 	browsingHistory := REDISCLIENT.ZRange(customerID, start, limit)
 
 	if err0 == nil && err1 == nil {
-		respondWith(w, r, nil, "Browsing History", bson.M{customerID: browsingHistory.Val()}, http.StatusOK, true)
+		respondWith(w, r, nil, BrowsingHistoryMessage, bson.M{customerID: browsingHistory.Val()}, http.StatusOK, true)
 	} else {
-		respondWith(w, r, nil, "Bad Request", "The request is malformed! Please make sure that the range attributes in the request URL are integers", http.StatusBadRequest, false)
+		respondWith(w, r, nil, HTTPBadRequestMessage, BrowsingHistoryIntegerRanges, http.StatusBadRequest, false)
 	}
 
 }
@@ -54,9 +55,16 @@ func postCustomerBrowsingHistory(w http.ResponseWriter, r *http.Request) {
 
 	pth := strings.Split(r.URL.Path, "/")
 
-	pgid := pth[len(pth)-1]
+	length := len(pth)
 
-	customerID := pth[len(pth)-2]
+	pgid := pth[length-1]
+
+	customerID := pth[length-2]
+
+	if len(customerID) > 50 || len(pgid) > 50 {
+		respondWith(w, r, nil, HTTPBadRequestMessage, BrowsingHistoryLongInput, http.StatusBadRequest, false)
+		return
+	}
 
 	time := time.Now().Unix()
 
@@ -68,8 +76,8 @@ func postCustomerBrowsingHistory(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if response.Val() == 1 {
-		respondWith(w, r, nil, "Browsing History Added", bson.M{"Product": pgid, "Customer": customerID, "Time": time}, http.StatusOK, true)
+		respondWith(w, r, nil, BrowsingHistoryMessage, bson.M{"Product": pgid, "Customer": customerID, "Time": time}, http.StatusOK, true)
 	} else {
-		respondWith(w, r, nil, "Internal Server Error", "Something went wrong!", http.StatusInternalServerError, false)
+		respondWith(w, r, nil, HTTPInternalServerErrorMessage, nil, http.StatusInternalServerError, false)
 	}
 }
