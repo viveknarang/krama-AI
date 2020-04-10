@@ -87,6 +87,10 @@ func routers() *mux.Router {
 
 	router.HandleFunc(RecommendationsPath+"/similarproducts", getSimilarProducts).Methods(http.MethodGet)
 
+	router.HandleFunc(CustomersPath+"/browsing/history/{CID}/{START}/{LIMIT}", getCustomerBrowsingHistory).Methods(http.MethodGet)
+
+	router.HandleFunc(CustomersPath+"/browsing/view/{CID}/{PGID}", postCustomerBrowsingHistory).Methods(http.MethodPost)
+
 	rlog.Debug("Router setup complete ...")
 
 	return router
