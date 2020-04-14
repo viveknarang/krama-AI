@@ -10,4 +10,6 @@ type CREDITCARD struct {
 	ZipCode         string `json:"ZipCode" bson:"ZipCode" validate:"min=1,max=10"`
 	Default         bool   `json:"Default" bson:"Default"`
 	SaveInformation bool   `json:"SaveInformation" bson:"SaveInformation"`
+	Updated         int64  `json:"Updated" bson:"Updated"`
+	Verified        bool   `json:"Verified" bson:"Verified"`
 }
