@@ -1,4 +1,5 @@
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/67133763de0b42ad917afae5b28f9bd4)](https://app.codacy.com/manual/viveknarang/krama-AI?utm_source=github.com&utm_medium=referral&utm_content=viveknarang/krama-AI&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/viveknarang/krama-AI.svg?branch=master)](https://travis-ci.org/viveknarang/krama-AI)  [![Go Report Card](https://goreportcard.com/badge/github.com/viveknarang/krama-AI)](https://goreportcard.com/report/github.com/viveknarang/krama-AI)
 
 # Krama AI - A blazing fast E-commerce AI platform
